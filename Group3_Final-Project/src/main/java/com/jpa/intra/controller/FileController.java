@@ -45,7 +45,7 @@ public class FileController {
 
     @GetMapping("/deleteFile")
     public String deleteFile(@RequestParam("path")String path) throws IOException{
-//        System.out.println(path);
+
         fileService.deleteFile(path);
 
         return "redirect:/moveDrive";
