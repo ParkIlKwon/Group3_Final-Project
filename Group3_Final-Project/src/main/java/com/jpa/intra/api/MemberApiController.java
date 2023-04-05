@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import java.beans.ConstructorProperties;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,10 +21,12 @@ public class MemberApiController {
 
 
     @PostMapping(value = "/join")
-    public AddMember add(@RequestBody @Valid ){
+    public AddMember add(@RequestBody @Valid AddCheckEffect add){
         Member member = new Member();
-        member.setId();
-
+        member.setMem_id(add.getId());
+        System.out.println(member.getId());
+       // member.setId();
+        return null;
     }
 
 
@@ -44,13 +47,15 @@ public class MemberApiController {
     }
 
     @Data
-    static class CheckEffect{
+    static class AddCheckEffect{
         @NotBlank(message = "아이디입력필수")
         private String id;
-
+        @ConstructorProperties({"id"})
+        public AddCheckEffect(String id){
+            this.id = id;
+        }
 
 
     }
-
 
 }
