@@ -2,30 +2,48 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/fragments/header :: header}">
     <title>Hello</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+
 </head>
 
 <body>
-<div class="row">
-    <div th:replace="~{/fragments/bodyHeader :: bodyHeader}" />
-</div>
 
 <div class="row">
-    <div class="col-2">
-        <div>
-            <div th:replace="/fragments/sidebar.html"></div>
-        </div>
-    </div>
-    <div class="col" style="background-color: antiquewhite">
-        <div>
-            <div> 안녕 메인 홈화면이예요</div>
-        </div>
-    </div>
+
+    <div th:replace="~{/fragments/bodyHeader :: bodyHeader}"></div>
 </div>
+
+
+
+<section style="min-height: 100vh" class="bg-light">
+    <div class="row">
+        <div class="col-2">
+            <div>
+                <div th:replace="/fragments/sidebar.html"></div>
+            </div>
+        </div>
+        <div class="col" style="background-color: antiquewhite; border: 1px solid black;">
+            <div class="" style="width: 100%;">
+                <div class="row">
+                    <div class="home-layout col-4">공지사항</div>
+                    <div class="home-layout col-4">달력</div>
+                    <div class="home-layout col-4">출퇴근</div>
+                </div>
+                <div class="row" >
+                    <div class="home-layout col-md-8">메일</div>
+                    <div class="home-layout col-6 col-md-4" >빈공간</div>
+                </div>
+                <div class="row">
+                    <div class="home-layout col-md-8">프로젝트</div>
+                    <div class="home-layout col-6 col-md-4" >업무상황</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
-<div th:replace="~{/fragments/footer :: footer}" />
+<div th:replace="~{/fragments/footer :: footer}"/>
 
-<!-- /container -->
+
 
 </body>
 </html>
