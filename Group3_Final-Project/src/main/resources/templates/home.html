@@ -3,18 +3,25 @@
 <head th:replace="~{/fragments/header :: header}">
     <title>Hello</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
 </head>
 
 <body>
-
 <div class="row">
-
     <div th:replace="~{/fragments/bodyHeader :: bodyHeader}" />
 </div>
 
-<section>
-    <div> 안녕 메인 홈화면이예요</div>
+<div class="row">
+    <div class="col-2">
+        <div>
+            <div th:replace="/fragments/sidebar.html"></div>
+        </div>
+    </div>
+    <div class="col" style="background-color: antiquewhite">
+        <div>
+            <div> 안녕 메인 홈화면이예요</div>
+        </div>
+    </div>
+</div>
 </section>
 <div th:replace="~{/fragments/footer :: footer}" />
 
