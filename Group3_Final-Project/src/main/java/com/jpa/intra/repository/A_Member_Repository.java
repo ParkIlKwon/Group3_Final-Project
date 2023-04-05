@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.swing.text.html.parser.Entity;
+import java.util.List;
 
 @Repository //따로 DAO를 implements 해오지 않아도 이미 기본적인게 만들어져 있어서 가져옴
 //이게 없으면 현재 클래스에서 엔티티매니저를 사용할 수 없고 따로 클래스를 생성해서 해줘야함 .
@@ -21,7 +22,13 @@ public class A_Member_Repository { //
         //최종적으로 DB에 적재를 해주기 위해선 @Transactional 으로 다른 클래스에서 해줌
     }
 
-    public Member findOne()
+    public Member findOneById(Long id){
+        return em.find(Member.class,id);
+    }
 
+    public List<Member>getMemberList(){
+        return em.createQuery("select m from Member m", Member.class)
+                .getResultList();
+    }
 
 }

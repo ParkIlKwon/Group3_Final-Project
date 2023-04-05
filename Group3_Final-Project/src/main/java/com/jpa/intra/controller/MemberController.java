@@ -20,14 +20,13 @@ public class MemberController {
 
         model.addAttribute("memberDTO",new MemberDTO());
         //memberDTO 형식으로 생성자 만들어서 보내줌 .
-        return "/members/joinForm";
+        return "members/joinForm";
     }
 
     @PostMapping("/addmember") //form 에서 post형식으로
                                 //받아오면 여기로 들어옴 .
     public String addAction(@Valid MemberDTO getmember){
         //DTO 클래스에서 특정 형식으로 객체를 만들어서 가져옴
-
 
         return "redirect:/"; //홈 페이지로 리디렉션.
     }
