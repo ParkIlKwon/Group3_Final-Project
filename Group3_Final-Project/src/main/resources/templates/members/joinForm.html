@@ -15,8 +15,9 @@
 <div class="row">
     <div th:replace="~{/fragments/bodyHeader :: bodyHeader}"></div>
 </div>
-<section>
-    <form action="/member" method="post">
+<section> <!--/members/addmember 로 post 형식으로 보내줌 .-->
+    <!--스크립트(ajax)로 해도 좋을것같음-->
+    <form action="/members/addmember" method="post">
 
         <div class="alert" th:if="${not #strings.isEmpty(msg)}">
             <strong th:text="${msg}"> </strong>
