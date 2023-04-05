@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/header :: header}">
+<body>
+
+<div class="row">
+  <div th:replace="~{/fragments/bodyHeader :: bodyHeader}"/></div>
+</div>
+<br>
+<div class="row mb-2">
+  <div class="col">아이디</div>
+  <div class="col">이름</div>
+  <div class="col">권한</div>
+  <div class="col">회원삭제1</div>
+  <div class="col">회원삭제2</div>
+</div>
+<th:block th:each="member :${list}">
+  <div class="row mb-2">
+    <div class="col" th:text="${member.getLoginId()}">admin</div>
+    <div class="col" th:text="${member.getName()}" >관리자</div>
+    <div class="col" th:text="${member.getRole()}">ADMIN</div>
+                                                    <!-- member/keyId=${member.getId()}-->
+    <div class="col"><a class ="mybtn" th:href="@{/member/{keyId}(keyId=${member.getId()})}">삭제1</a></div>
+    <div class="col"><button class="btn btn-dark" th:onclick="|deleteMember(${member.getId()})|">삭제2</button></div>
+  </div>
+</th:block>
+<div th:replace="~{/fragments/footer :: footer}"> </div>
+</body>
+</html>
+<script>
+  function deleteMember(id){
+    fetch('/member/'+id ,{ method: 'DELETE'} )
+            .then((response) => response.text())
+            .then((data) => refresh(data));
+  }
+
+  function refresh(data){
+    if(data=="ok"){
+      alert("회원탈퇴 성공");
+      location.href="/member/members";
+    }
+  }
+
+</script>
