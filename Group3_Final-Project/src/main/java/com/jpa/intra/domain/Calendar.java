@@ -1,9 +1,8 @@
-package com.boot.pro.domain;
+package com.jpa.intra.domain;
 
 import lombok.Getter;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
 
 @Embeddable //임베디드 객체화
 @Getter

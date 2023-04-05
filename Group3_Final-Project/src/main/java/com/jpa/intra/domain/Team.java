@@ -1,4 +1,4 @@
-package com.boot.pro.domain;
+package com.jpa.intra.domain;
 
 import lombok.Getter;
 import lombok.Setter;
