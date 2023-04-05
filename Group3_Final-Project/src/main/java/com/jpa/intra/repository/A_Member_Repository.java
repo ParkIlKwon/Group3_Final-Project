@@ -21,7 +21,7 @@ public class A_Member_Repository { //
         //최종적으로 DB에 적재를 해주기 위해선 @Transactional 으로 다른 클래스에서 해줌
     }
 
-
+    public Member findOne()
 
 
 }
