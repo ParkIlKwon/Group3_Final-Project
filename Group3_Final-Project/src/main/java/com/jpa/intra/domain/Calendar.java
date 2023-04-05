@@ -8,7 +8,7 @@ import javax.persistence.Embeddable;
 @Getter
 public class Calendar {
     private String title; //일정 제목
-    private String mem_id; //멤버아이디
+    private String login_id; //멤버아이디
     private String start_Date; //시작일
     private String end_Date; //끝일
     private String contents; //컨텐츠
@@ -19,7 +19,7 @@ public class Calendar {
 
     public Calendar(String title, String mem_id, String start_Date, String end_Date, String contents, String category) {
         this.title = title;
-        this.mem_id = mem_id;
+        this.login_id = login_id;
         this.start_Date = start_Date;
         this.end_Date = end_Date;
         this.contents = contents;
