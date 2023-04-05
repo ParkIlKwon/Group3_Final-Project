@@ -13,7 +13,7 @@ import java.util.List;
 public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long team_mum ;
+    private int team_mum ;
 
     private String team_name;
 
