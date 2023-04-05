@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a21d27b7-6876-4c98-99b4-621a616f7c83" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/sidebar.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/home/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/bodyHeader.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/bodyHeader.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/css/intra.css" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/css/intra.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/sidebar.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/members/joinForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/members/joinForm.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +106,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JavaScript 디버그.bodyHeader.html">
+  <component name="RunManager" selected="Spring Boot.Group3FinalProjectApplication">
     <configuration name="bodyHeader.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Group3_Final-Project/Group3_Final-Project/src/main/resources/templates/fragments/bodyHeader.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
@@ -140,7 +137,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1680672771339</updated>
-      <workItem from="1680672772438" duration="4125000" />
+      <workItem from="1680672772438" duration="6274000" />
     </task>
     <servers />
   </component>
