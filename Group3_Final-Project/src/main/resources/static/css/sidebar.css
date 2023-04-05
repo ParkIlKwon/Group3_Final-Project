@@ -21,9 +21,6 @@
     color:black;
 }
 
-/*.sidemenu a:hover {
-    color: #000;
-}*/
 .sidemenu ul li:hover, .sidemenu > label:hover {
     background-color: #f8f9fa;
     border-radius: 5px;
@@ -61,8 +58,13 @@
         width: 60px;
     }
 }
-@media screen and (max-width:560px) {
+/*@media screen and (max-width:560px) {
     .sidemenu #expand-menu:not(:checked) ~ ul {
+        display: none;
+    }
+}*/
+@media screen and (max-width:600px) {
+    .sideItem {
         display: none;
     }
 }

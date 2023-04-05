@@ -1,38 +1,32 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <div th:fragment="bodyHeader" class="banner">
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-lg gnb-bg">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="#"><img src="/img/m1f.png" alt="noImage" width="48px"></a>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">홈</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">프로젝트</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled">메일</a>
+                        <a class="nav-link" href="#">메일</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled">캘린더</a>
+                        <a class="nav-link" href="#">캘린더</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled">드라이브</a>
+                        <a class="nav-link" href="#">드라이브</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="/members/addmember">위키</a>
+                        <a class="nav-link" href="#">주소록</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled">주소록</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled">결재</a>
+                        <a class="nav-link" href="#">결재</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/members/addmember">테스트</a>
@@ -40,7 +34,7 @@
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <button class="btn-search" type="submit"><span class="material-icons">search</span></button>
                 </form>
             </div>
         </div>

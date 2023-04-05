@@ -5,9 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a21d27b7-6876-4c98-99b4-621a616f7c83" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/img/favi.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/img/favicon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/img/m1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/img/m1f.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/repository/A_Member_Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/repository/A_Member_Repository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/css/intra.css" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/css/intra.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/css/sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/css/sidebar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/bodyHeader.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/bodyHeader.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/header.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/sidebar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/home.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +87,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "File.Encoding",
-    "spring.configuration.checksum": "64b890e084c0c6bc39d8bf25191173fc",
+    "spring.configuration.checksum": "4b5c0d748a41a0f524bff6923aa70138",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -90,6 +99,8 @@
       <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\template" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\jh_workspace\Git\Group3_Final-Project\Group3_Final-Project\src\main\resources\static\img" />
+      <recent name="D:\jh_workspace\Git\Group3_Final-Project\Group3_Final-Project\src\main\resources\static\css" />
       <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\templates\fragments" />
       <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\static\css" />
       <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\templates" />
@@ -98,7 +109,7 @@
       <recent name="com.boot.pro.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.Group3FinalProjectApplication">
+  <component name="RunManager" selected="Spring Boot.Group3FinalProjectApplication (2)">
     <configuration name="Group3FinalProjectApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="com.example.Group3_Final-Project.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.jpa.intra.Group3FinalProjectApplication" />
@@ -112,8 +123,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Group3FinalProjectApplication (2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="Group3_Final-Project.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.jpa.intra.Group3FinalProjectApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.jpa.intra.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Group3FinalProjectApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="com.example.Group3_Final-Project.main" />
+      <module name="Group3_Final-Project" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.jpa.intra.Group3FinalProjectApplication" />
       <extension name="coverage">
         <pattern>
@@ -126,13 +150,15 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Spring Boot.Group3FinalProjectApplication (2)" />
       <item itemvalue="Spring Boot.Group3FinalProjectApplication" />
       <item itemvalue="Spring Boot.Group3FinalProjectApplication (1)" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.Group3FinalProjectApplication (1)" />
+        <item itemvalue="Spring Boot.Group3FinalProjectApplication (2)" />
         <item itemvalue="Spring Boot.Group3FinalProjectApplication" />
+        <item itemvalue="Spring Boot.Group3FinalProjectApplication (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -145,10 +171,16 @@
       <option name="presentableId" value="Default" />
       <updated>1680671644478</updated>
       <workItem from="1680671645873" duration="13660000" />
+      <workItem from="1680698657805" duration="19686000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Group3_Final_Project$Group3FinalProjectApplication__2_.ic" NAME="Group3FinalProjectApplication (2) Coverage Results" MODIFIED="1680728172114" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.jpa.intra.*</FILTER>
+    </SUITE>
   </component>
 </project>
