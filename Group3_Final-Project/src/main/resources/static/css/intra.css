@@ -2,9 +2,12 @@
 body {
     padding: 0 5px;
     margin: 0px;
+    background-color: #f8f9fa;
 }
 
-section
+section{
+    height: 100vh;
+}
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
@@ -12,13 +15,6 @@ section
     padding-left: 15px;
     padding-right: 15px;
 }
-
-/*.banner{
-    background-color: pink;
-    display: flex;
-
-}*/
-
 
 /* Custom page header */
 .header {
