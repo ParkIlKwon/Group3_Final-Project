@@ -1,24 +1,19 @@
 /* Space out content a bit */
 body {
-    padding: 0 5px;
     margin: 0px;
+    background-color: #f8f9fa;
 }
 
-section
+section{
+    padding-right: 10px;
+    height: 98vh;
+}
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
 .footer {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 5px 15px;
 }
-
-/*.banner{
-    background-color: pink;
-    display: flex;
-
-}*/
-
 
 /* Custom page header */
 .header {
@@ -30,13 +25,6 @@ section
     margin-bottom: 0;
     line-height: 40px;
     padding-bottom: 19px;
-}
-
-/* Custom page footer */
-.footer {
-    padding-top: 19px;
-    color: #777;
-    border-top: 1px solid #e5e5e5;
 }
 
 /* Customize container */
@@ -84,4 +72,10 @@ section
     .jumbotron {
         border-bottom: 0;
     }
+}
+
+.home-layout{
+    border: 10px solid #f8f9fa;
+    height: 32vh;
+    padding: 10px;
 }
