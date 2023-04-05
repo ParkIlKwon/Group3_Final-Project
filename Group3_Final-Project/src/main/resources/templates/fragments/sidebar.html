@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<div th:fragment="sidebar" class="container banner">
-    <div class="menu">
-        <label for="expand-menu"><div>메뉴</div></label><input type="checkbox" id="expand-menu" name="expand-menu">
-        <ul>
-            <li><a href="#" class="item"><div>프로필</div></a></li>
-            <li><a href="#" class="item"><div>데이터사용량</div></a></li>
-            <li><a href="#" class="item"><div>내URL</div></a></li>
-            <li><a href="#" class="item"><div>구매내역</div></a></li>
-            <li><a href="#" class="item"><div>추천목록</div></a></li>
-            <li><a href="#" class="item"><div>설정</div></a></li>
-        </ul>
-    </div>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div class="menu" id="sidebar" th:fragment="sidebar">
+    <label for="expand-menu"><div>메뉴</div></label><input type="checkbox" id="expand-menu" name="expand-menu">
+    <ul>
+        <li><a href="#" class="item"><div>새 일정등록</div></a></li>
+        <li><a href="#" class="item"><div>내 일정</div></a></li>
+        <li><a href="#" class="item"><div>팀 일정</div></a></li>
+        <li><a href="#" class="item"><div>전체 일정</div></a></li>
+        <li><a href="#" class="item"><div></div></a></li>
+        <li><a href="#" class="item"><div>설정</div></a></li>
+    </ul>
 </div>
