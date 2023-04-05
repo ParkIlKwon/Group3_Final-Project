@@ -1,7 +1,21 @@
 <!DOCTYPE HTML>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="/css/sidebar.css">
 <html xmlns:th="http://www.thymeleaf.org">
-
 <div class="sidemenu" id="sidebar" th:fragment="sidebar">
+    <label for="expand-menu"><div>메뉴</div></label>
+    <input type="checkbox" id="expand-menu" name="expand-menu">
+    <ul>
+        <li><a href="#" class="item">새 일정등록</a></li>
+        <li><a href="#" class="item"><div>내 일정</div></a></li>
+        <li><a href="#" class="item"><div>팀 일정</div></a></li>
+        <li><a href="#" class="item"><div>전체 일정</div></a></li>
+        <li><a href="#" class="item"><div></div></a></li>
+        <li><a href="#" class="item"><div>설정</div></a></li>
+    </ul>
+</div>
+
+<!--<div class="sidemenu" id="sidebar" th:fragment="sidebar">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/css/sidebar.css">
     <label for="expand-menu"><div>메뉴</div></label><input type="checkbox" id="expand-menu" name="expand-menu">
@@ -13,4 +27,4 @@
         <li><a href="#" class="item"><div></div></a></li>
         <li><a href="#" class="item"><div>설정</div></a></li>
     </ul>
-</div>
+</div>-->
