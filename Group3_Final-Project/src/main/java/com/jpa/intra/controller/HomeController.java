@@ -1,4 +1,4 @@
-package com.boot.pro.controller;
+package com.jpa.intra.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
