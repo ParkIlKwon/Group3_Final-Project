@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<head th:replace="~{/fragments/header :: header}">
+    <meta charset="UTF-8">
+
+</head>
+<body>
+<form action="/register" method="POST">
+    <label for="mem_id">아이디:</label><br>
+    <input type="text" id="mem_id" name="mem_id"><br>
+    <label for="mem_pw">비밀번호:</label><br>
+    <input type="password" id="mem_pw" name="mem_pw"><br>
+    <label for="mem_name">이름:</label><br>
+    <input type="text" id="mem_name" name="mem_name"><br>
+    <label for="mem_img">프로필 이미지:</label><br>
+    <input type="file" id="mem_img" name="mem_img"><br>
+    성별:<br>
+        <input type="radio" name="gender" id="gender_male">
+        <label class="mem_gender" for="gender_male">
+            남성
+        </label>
+        <input type="radio" name="gender" id="gender_female" checked>
+        <label class="mem_gender" for="gender_female">
+            여성
+        </label>
+    <br>
+    <label for="birthday">생일:</label><br>
+    <input type="date" id="birthday" name="birthday"><br>
+    <label for="email">이메일:</label><br>
+    <input type="email" id="email" name="email"><br>
+    <label for="tel">전화번호:</label><br>
+    <input type="tel" id="tel" name="tel"><br>
+    <label for="vacation">연차:</label><br>
+    <input type="number" id="vacation" name="vacation"><br>
+    <label for="salary">연봉:</label><br>
+    <input type="number" id="salary" name="salary"><br>
+    <label for="emp_type">직급:</label><br>
+    <select id="emp_type" name="emp_type">
+        <option value="Junior">선임</option>
+        <option value="Senior">책임</option>
+        <option value="Manager">팀장</option>
+    </select><br><br>
+    <label for="joinDate">입사일:</label><br>
+    <input type="date" id="joinDate" name="joinDate"><br>
+    <input type="submit" value="등록">
+</form>
+
+
+
+
+</body>
