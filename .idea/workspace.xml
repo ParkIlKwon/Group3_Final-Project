@@ -5,10 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a21d27b7-6876-4c98-99b4-621a616f7c83" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/members/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/HomeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/css/intra.css" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/css/intra.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/bodyHeader.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/bodyHeader.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/members/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/members/list.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +54,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -80,7 +83,10 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "File.Encoding",
+    "project.structure.last.edited": "SDK",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "spring.configuration.checksum": "4b5c0d748a41a0f524bff6923aa70138",
     "vue.rearranger.settings.migration": "true"
   }
@@ -106,8 +112,11 @@
       </set>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.Group3FinalProjectApplication">
     <configuration name="bodyHeader.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Group3_Final-Project/Group3_Final-Project/src/main/resources/templates/fragments/bodyHeader.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="home.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Group3_Final-Project/Group3_Final-Project/src/main/resources/templates/home.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <configuration name="Group3FinalProjectApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
@@ -125,6 +134,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript 디버그.home.html" />
         <item itemvalue="JavaScript 디버그.bodyHeader.html" />
         <item itemvalue="Spring Boot.Group3FinalProjectApplication" />
       </list>
@@ -137,7 +147,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1680672771339</updated>
-      <workItem from="1680672772438" duration="7170000" />
+      <workItem from="1680672772438" duration="13579000" />
     </task>
     <servers />
   </component>

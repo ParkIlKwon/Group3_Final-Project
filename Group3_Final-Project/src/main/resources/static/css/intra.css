@@ -81,3 +81,10 @@ section{
         border-bottom: 0;
     }
 }
+
+.home-layout {
+    border: 1px solid lightgray;
+    height: 200px;
+    padding: 10px;
+}
+
