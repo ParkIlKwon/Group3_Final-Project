@@ -11,12 +11,17 @@ import java.util.List;
 @Setter
 @Entity
 public class Team {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private int team_num ;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int team_num ;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="team_num")
+    private Long id;
 
     private String team_name;
 
-    @OneToMany(mappedBy = "team")
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     private List<Member> members = new ArrayList<>();
 }

@@ -23,5 +23,9 @@ public class A_Member_Repository {
 
     //public Member findOne()
 
+    public Member findById(Long id) {
+        return em.find(Member.class, id);
+    }
+
 
 }
