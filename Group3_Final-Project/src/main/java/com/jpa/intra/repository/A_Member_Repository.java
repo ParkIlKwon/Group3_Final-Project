@@ -1,6 +1,7 @@
 package com.jpa.intra.repository;
 
 import com.jpa.intra.domain.Member;
+import com.jpa.intra.domain.Team;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -37,6 +38,8 @@ public class A_Member_Repository {
             return null; //받아온 값이 없을 때 Null을 반환
         }
     }
+
+    public Member findById(Long id) {return em.find(Member.class, id);}
 
 
 }
