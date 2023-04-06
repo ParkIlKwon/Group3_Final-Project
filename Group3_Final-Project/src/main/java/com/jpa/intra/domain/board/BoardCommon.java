@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -23,7 +21,7 @@ public abstract class BoardCommon {
 
     @Lob
     private String boardContent;
-    private Date createDate;
-    private Date updateDate;
+    private String createDate;
+    private String updateDate;
 
 }
