@@ -45,6 +45,6 @@ public class Member {
     private Calendar cal; //달력정보
 
     @Embedded
-    private Address address;
+    private Address address; //주소정보 (실주소명 - 도로명)
 
 }

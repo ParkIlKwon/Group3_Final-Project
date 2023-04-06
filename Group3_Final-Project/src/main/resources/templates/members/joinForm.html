@@ -19,14 +19,15 @@
 </div>
 <section> <!--/members/addmember 로 post 형식으로 보내줌 .-->
     <!--스크립트(ajax)로 해도 좋을것같음-->
-    <form action="/members/addmember" method="post">
+    <form action="/members/addmember" method="post" th:object="${MemberDTO}">
 
         <div class="alert" th:if="${not #strings.isEmpty(msg)}">
             <strong th:text="${msg}"> </strong>
         </div>
 
         <div class="form-outline mb-4">
-            <input type="text" id="id" name="id" class="form-control form-control-lg" placeholder="ID을 입력하세요"/>
+            <input type="text" id="id" name="id" class="form-control form-control-lg" placeholder="ID을 입력하세요"
+                   />
         </div>
         <div class="form-outline mb-4">
             <input type="text" id="pw" name="pw" class="form-control form-control-lg" placeholder="PW을 입력하세요"/>
@@ -44,10 +45,11 @@
                 <th>상세 주소</th>
                 <td><input type="text" name="address_detail" /></td>
             </tr>
+
         </table>
 
-
-
+            <input type="text" id="address_name" name="address_name" hidden="hidden">
+            <input type="text" id="address_road" name="address_road" hidden="hidden">
 
         <div class="d-flex justify-content-center">
             <button type="submit"
@@ -56,6 +58,9 @@
 
     </form>
 
+    <div class="alert alert-danger" th:if="${errorMsg}">
+        <p th:text="${errorMsg}"></p>
+    </div>
 
 </section>
 <div th:replace="~{/fragments/footer :: footer}"></div>
@@ -67,7 +72,11 @@
     function popup(){
         new daum.Postcode({
             oncomplete: function(data) { //선택시 입력값 세팅
-                document.getElementById("address_kakao").value = data.address; // 주소 넣기
+                let location =  data.address; // 주소 넣기
+                let arr = location.split(' '); //주소 - 도로명 쪼깨기 . ex) 경기 시흥시 - 정왕대로 56번길
+                document.getElementById("address_name").value = arr[0]+arr[1];
+                document.getElementById("address_road").value = arr[2]+arr[3];
+                document.getElementById("address_kakao").value = data.address; // 주소 넣기 (보이는거)
                 document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
             }
         }).open();

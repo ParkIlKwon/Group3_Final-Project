@@ -7,11 +7,16 @@ import javax.validation.constraints.NotEmpty;
 @Data
 public class MemberDTO {
 
-    @NotEmpty(message = "필수입력항목입니다.")
-    private String id;
+    @NotEmpty
+    private String id; //사용자아이디
 
-    private String pw;
-    private String name;
+    @NotEmpty
+    private String pw; //사용자 비번
 
+    private String name; // 사용자 이름
+
+    private String address_name; //사용자 주소
+    
+    private String address_road; //사용자 주소 (도로명)
 
 }
