@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/header :: header}"></head>
+<body>
+<div th:replace="~{/fragments/bodyHeader :: bodyHeader}"></div>
+
+<section>
+    <div class="row">
+        <div class="col-2">
+            <div>
+                <div th:replace="/fragments/sidebar.html"></div>
+            </div>
+        </div>
+        <div class="col" style="background-color: antiquewhite;">
+            <div class="" style="width: 100%;">
+                <div class="row">
+                    <div class="home-layout col-4">공지사항</div>
+                    <div class="home-layout col-4">달력</div>
+                    <div class="home-layout col-4">출퇴근</div>
+                </div>
+                <div class="row" >
+                    <div class="home-layout col-md-8">메일</div>
+                    <div class="home-layout col-6 col-md-4" >빈공간</div>
+                </div>
+                <div class="row">
+                    <div class="home-layout col-md-8">프로젝트</div>
+                    <div class="home-layout col-6 col-md-4" >업무상황</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{/fragments/footer :: footer}"/>
+</section>
+
+
+</body>
+</html>

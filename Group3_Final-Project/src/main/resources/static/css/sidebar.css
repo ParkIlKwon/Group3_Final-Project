@@ -1,0 +1,70 @@
+.sidemenu {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 95vh;
+    transition: all 0.5s ease;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.sidemenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.sidemenu a, .sidemenu > label {
+    display: block;
+    height: 45px;
+    padding: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    color:black;
+}
+
+.sidemenu ul li:hover, .sidemenu > label:hover {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+.sidemenu div {
+    position: absolute;
+    left: 70px;
+    padding-top:5px;
+}
+
+#expand-menu {
+    display: none;
+}
+#expand-menu:checked ~ ul {
+    display: block;
+    height: auto;
+}
+
+.sidemenu ::before {
+    font-family: 'Material Icons';
+    font-size: 1.5em;
+    float: left;
+    clear: left;
+}
+.sidemenu label::before{ content: '\e5d2'; }
+.sidemenu li:nth-child(1) a::before{ content: '\f02e'; }
+.sidemenu li:nth-child(2) a::before{ content: '\e8d6'; }
+.sidemenu li:nth-child(3) a::before{ content: '\e88a'; }
+.sidemenu li:nth-child(4) a::before{ content: '\e8cc'; }
+.sidemenu li:nth-child(5) a::before{ content: '\e87d'; }
+.sidemenu li:nth-child(6) a::before{ content: '\e8b8'; }
+
+@media screen and (max-width:1023px) {
+    .sidemenu {
+        width: 60px;
+    }
+}
+/*@media screen and (max-width:560px) {
+    .sidemenu #expand-menu:not(:checked) ~ ul {
+        display: none;
+    }
+}*/
+@media screen and (max-width:600px) {
+    .sideItem {
+        display: none;
+    }
+}
