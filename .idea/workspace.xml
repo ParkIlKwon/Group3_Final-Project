@@ -5,19 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a21d27b7-6876-4c98-99b4-621a616f7c83" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/query/BoardTaskDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/board/boardFreeList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/MailController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/css/summernote/font/summernote.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/css/summernote/font/summernote.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/css/summernote/font/summernote.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/css/summernote/font/summernote.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/css/summernote/summernote-lite.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/js/summernote/lang/summernote-ko-KR.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/js/summernote/summernote-lite.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/BoardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/domain/board/BoardCommon.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/domain/board/BoardCommon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/domain/board/BoardTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/domain/board/BoardTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/query/BoardFreeDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/query/BoardFreeDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/repository/B_Board_Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/repository/B_Board_Repository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/service/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/service/BoardService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/board/boardFreeWriteForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/board/boardFreeWriteForm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/board/free/boardFreeWriteForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/board/boardTaskWriteForm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/css/intra.css" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/css/intra.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/bodyHeader.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/bodyHeader.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/mail/mailForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/mail/mailForm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/mail/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/mail/main.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,8 +63,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -78,39 +81,42 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/shopJPA&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;64b890e084c0c6bc39d8bf25191173fc&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "E:/kbj_Group3_Final-Project/Group3_Final-Project/src/main/resources/static/css/summernote",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "File.Encoding",
+    "spring.configuration.checksum": "4b5c0d748a41a0f524bff6923aa70138",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\ksyGithub\Group3_Final-Project\Group3_Final-Project\src\main\resources\templates\board" />
-      <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\static" />
-      <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\templates\fragments" />
-      <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources" />
-      <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\template" />
+      <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static\css\summernote" />
+      <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static\js\summernote" />
+      <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static\js\summernote\lang" />
+      <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static\js" />
+      <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static\css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static\js\summernote" />
+      <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static\css\summernote" />
       <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\templates\fragments" />
       <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\static\css" />
       <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\templates" />
@@ -119,9 +125,9 @@
       <recent name="com.boot.pro.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.Group3FinalProjectApplication">
-    <configuration name="Group3FinalProjectApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="com.example.Group3_Final-Project.main" />
+  <component name="RunManager">
+    <configuration name="Group3FinalProjectApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="Group3_Final-Project.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.jpa.intra.Group3FinalProjectApplication" />
       <extension name="coverage">
         <pattern>
@@ -133,26 +139,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Group3FinalProjectApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="com.example.Group3_Final-Project.main" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.jpa.intra.Group3FinalProjectApplication" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.boot.pro.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Spring Boot.Group3FinalProjectApplication" />
-      <item itemvalue="Spring Boot.Group3FinalProjectApplication (1)" />
-    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.Group3FinalProjectApplication (1)" />
         <item itemvalue="Spring Boot.Group3FinalProjectApplication" />
       </list>
     </recent_temporary>
@@ -170,6 +158,7 @@
       <workItem from="1680747756581" duration="1295000" />
       <workItem from="1680749063936" duration="10939000" />
       <workItem from="1680765609431" duration="348000" />
+      <workItem from="1680767059772" duration="5754000" />
     </task>
     <servers />
   </component>
