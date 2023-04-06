@@ -6,8 +6,8 @@ body {
     background-color: #f8f9fa;
 }
 
-a.nav-link{color:white; font-weight:bold; margin-right: 10px;}
-a.nav-link:hover{color:white; transform: scale(1.3);}
+a[class*=nav-link]{color:white; font-weight:bold; margin-right: 10px;}
+a[class*=nav-link]:hover{color:white; transform: scale(1.3);}
 
 .btn-search{
     color:white;
