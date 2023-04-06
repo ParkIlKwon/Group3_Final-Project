@@ -16,14 +16,16 @@
 
 <section>
   <div class="row">
-<!--    사이드바 -->
+<!--    사이드바
+      '메일 보내기' 추가 -->
     <div class="col-2">
       <div>
         <div th:replace="/fragments/sidebar.html"></div>
       </div>
     </div>
 
-<!--       가운데 -->
+<!--       가운데
+          체크박스 선택된 사람들에게 메일 한꺼번에 보내기 -->
     <div class="col-7" style="background-color: antiquewhite; border: 1px solid black;">
       <form action="" method="">
       <table class="table">
@@ -51,7 +53,8 @@
       </form>
     </div>
 
-<!--    오른쪽 -->
+<!--    오른쪽 : 상세정보
+       가운데 목록에서 이름 누르면 상세정보에 표기 -->
     <div class="col-3" style="background-color: antiquewhite; border: 1px solid black;">
       <table class="table" style="text-align: center; vertical-align: middle;">
         <tr>
