@@ -1,11 +1,14 @@
 package com.jpa.intra.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Embeddable;
 
 @Embeddable
-@Getter
+@Data
 public class Address {
 
     private String address_name;
