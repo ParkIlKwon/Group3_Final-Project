@@ -3,8 +3,6 @@
     overflow: hidden;
     width: 100%;
     height: 95vh;
-    background-color: #000;
-    color: #fff;
     transition: all 0.5s ease;
     padding: 10px;
     box-sizing: border-box;
@@ -16,28 +14,21 @@
 }
 .sidemenu a, .sidemenu > label {
     display: block;
-    height: 25px;
+    height: 45px;
     padding: 8px;
     cursor: pointer;
-    color: #fff;
     text-decoration: none;
+    color:black;
 }
 
-.sidemenu a:hover {
-    color: #000;
-}
 .sidemenu ul li:hover, .sidemenu > label:hover {
-    background-color: #000;
-    color: #fff;
-    border-radius: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
 }
 .sidemenu div {
     position: absolute;
-    left: 50px;
-    line-height: 1.5;
-    font-size: 1em;
-    font-family: 'Noto Sans KR';
-    padding: 0 0 0 20px;
+    left: 70px;
+    padding-top:5px;
 }
 
 #expand-menu {
@@ -67,8 +58,13 @@
         width: 60px;
     }
 }
-@media screen and (max-width:560px) {
+/*@media screen and (max-width:560px) {
     .sidemenu #expand-menu:not(:checked) ~ ul {
+        display: none;
+    }
+}*/
+@media screen and (max-width:600px) {
+    .sideItem {
         display: none;
     }
 }
