@@ -17,15 +17,15 @@ public class BoardController {
 
     private final BoardService boardService;
 
-    @GetMapping("/board/free/new")
+    @GetMapping("/board/new")
     public String callBoardFreeWriteForm(Model model) {
         model.addAttribute("boardFreeDTO", new BoardFreeDTO());
-        return "board/free/boardFreeWriteForm";
+        return "board/boardFreeWriteForm";
     }
 
-    @PostMapping("/board/free/new")
+    @PostMapping("/board/new")
     public String writeNewBoardFree(BoardFreeDTO boardFreeDTO, BindingResult rst) {
-        if(rst.hasErrors()) {return "board/free/boardFreeWriteForm";}
+        /*if(rst.hasErrors()) {return "board/free/boardFreeWriteForm";}*/
 
         BoardFree boardFree=new BoardFree();
         boardFree.setBoardTitle(boardFreeDTO.getBoardTitle());
