@@ -5,6 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.TypedQuery;
 import javax.swing.text.html.parser.Entity;
 
 @Repository //따로 DAO를 implements 해오지 않아도 이미 기본적인게 만들어져 있어서 가져옴
@@ -22,6 +25,18 @@ public class A_Member_Repository {
     }
 
     //public Member findOne()
+
+    public Member login(String id, String pw) {
+        TypedQuery<Member> query = em.createQuery( //멤버 아이디와 패스워드 동시에 일치 하면 멤버 받아오는 로직
+                "SELECT m FROM Member m WHERE m.mem_id = :id AND m.mem_pw = :password", Member.class);
+        query.setParameter("id", id);
+        query.setParameter("password", pw);
+        try {
+            return query.getSingleResult(); //성공시 하나의 Member객체 받아옴
+        } catch (NoResultException | NonUniqueResultException e) {
+            return null; //받아온 값이 없을 때 Null을 반환
+        }
+    }
 
 
 }

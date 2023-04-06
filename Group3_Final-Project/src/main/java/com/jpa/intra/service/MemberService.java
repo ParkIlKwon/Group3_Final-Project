@@ -20,4 +20,11 @@ public class MemberService {
 
 
 
+    public Member Login(String id,String pw){
+        Member m = aMemberRepository.login(id,pw); //리포지 >> 로그인 로직
+
+        return m != null ? m : null ;
+    }
+
+
 }

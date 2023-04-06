@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller //model 을 지정 , view를 반환 시켜주는 컨트롤러 역활
@@ -59,16 +61,27 @@ public class MemberController {
         return "members/loginForm";
     }
 
-    @PostMapping("/login")
-    public String LoginPro(Model model, LoginDTO logMem){
+    @PostMapping("/login") //로그인 세션 사용       ,  memberDTO 형식으로 생성자 만들어서 보내줌 .
+    public String LoginPro(HttpServletRequest request, LoginDTO logMem){
+        HttpSession session = request.getSession();
 
-        model.addAttribute("memberDTO",new MemberDTO());
-        //memberDTO 형식으로 생성자 만들어서 보내줌 .
+        Member m = service.Login(logMem.getId(),logMem.getPw());
 
-
+        //세션으로 로그인 아이디를 넘겨줌 .
+        if(m == null){
+            return "members/loginForm";
+        }
+        session.setAttribute("log",m.getMem_id());
         return "redirect:/";
+
     }
 
+    @GetMapping("/logout")
+    public String Logout(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.invalidate();
+        return "redirect:/";
+    }
 
 
 }
