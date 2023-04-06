@@ -1,16 +1,18 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="/css/sidebar.css">
 
 <div class="sidemenu" id="sidebar" th:fragment="sidebar">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="/css/sidebar.css">
-    <label for="expand-menu"><div>메뉴</div></label><input type="checkbox" id="expand-menu" name="expand-menu">
+    <div id="addFn">새 일정</div>
+    <label for="expand-menu"><div>메뉴</div></label>
+    <input type="checkbox" id="expand-menu" name="expand-menu">
     <ul>
-        <li><a href="#" class="item"><div>새 일정등록</div></a></li>
-        <li><a href="#" class="item"><div>내 일정</div></a></li>
-        <li><a href="#" class="item"><div>팀 일정</div></a></li>
-        <li><a href="#" class="item"><div>전체 일정</div></a></li>
-        <li><a href="#" class="item"><div></div></a></li>
-        <li><a href="#" class="item"><div>설정</div></a></li>
+        <li><a href="#"><div class="sideItem">새 일정등록</div></a></li>
+        <li><a href="#"><div class="sideItem">내 일정</div></a></li>
+        <li><a href="#"><div class="sideItem">팀 일정</div></a></li>
+        <li><a href="#"><div class="sideItem">전체 일정</div></a></li>
+        <li><a href="#"><div class="sideItem">test</div></a></li>
+        <li><a href="#"><div class="sideItem">설정</div></a></li>
     </ul>
 </div>
