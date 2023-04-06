@@ -37,6 +37,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/members/addmember">테스트</a>
                     </li>
+                    <!-- 4월 5일 성윤(테스트 용으로 버튼 추가함(나중에 없애다)) 여기서부터 -->
+                    <button onclick="toBoardFreeWriteForm()">write new content</button>
+                    <script>
+                        function toBoardFreeWriteForm(){
+                            alert("you've clicked this free write btn!")
+                            location.href="/board/free/new";
+                        }
+                    </script>
+                    <!-- 여기까지 -->
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
