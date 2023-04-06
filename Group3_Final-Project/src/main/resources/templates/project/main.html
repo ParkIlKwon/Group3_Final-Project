@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="~{/fragments/header :: header}"><title></title></head>
+<body>
+<div th:replace="~{/fragments/bodyHeader :: bodyHeader}"></div>
+
+<section>
+  <div class="row">
+    <!-- 헤더 -->
+    <div class="section-header col-1">
+      <a>새 업무</a>
+    </div>
+    <div class="section-header col-11" style="display: flex; justify-content: left">
+      <span>전체 업무(사이드바 클릭따라 변경)</span>
+    </div>
+    <!--    사이드바
+          전체업무, 담당 업무, 보낸 업무 -->
+    <div class="col-1" style="font-size: 13px;">
+      <div>
+        <div th:replace="/fragments/sidebar.html"></div>
+      </div>
+    </div>
+
+    <!--       가운데
+              체크박스 선택 : 삭제 / 정렬 : 날짜순(기본),이름순 -->
+    <div class="col-3" style="border: 1px solid black;">
+      <form action="" method="">
+        <nav class="navbar navbar-expand-lg">
+
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="content-header nav-link"> <input type="checkbox" /> </a>
+              </li>
+              <li class="nav-item">
+                <a class="content-header nav-link" href="#">완료하기</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="content-header nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  등록일
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">상태</a></li>
+                  <li><a class="dropdown-item" href="#">만기일</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+        </nav>
+
+
+
+
+        <table class="table" style="font-size: 13px;">
+          <thead>
+          </thead>
+          <tbody>
+          <tr>
+            <td><input type="checkbox" name=""/></td>
+            <td><button>찜</button></td>
+            <td style="width: 50%;">
+              <span>업무1</span><br>
+              <span>등록자</span>
+            </td>
+            <td>
+              <span>상태</span>
+              <span>아이콘</span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+
+    <!--    오른쪽 : 상세정보
+           가운데 목록에서 파일이름 누르면 상세정보에 표기 -->
+    <div class="col-8" style="background-color: antiquewhite; border: 1px solid black;">
+
+      <table class="table" style="vertical-align: middle; font-size: 13px;">
+        <tr>
+          <td>
+            <select id="taskStatus">
+              <option value="inProgress">진행중</option>
+              <option value="toDo">할일</option>
+              <option value="completed">완료</option>
+            </select>
+            <span style="margin-left: 20px;"><a>편집</a></span>
+          </td>
+        </tr>
+        <tr>
+          <th>업무 제목</th>
+        </tr>
+        <tr>
+          <td>
+            등록자 : <span></span><br>
+            담당자 : <span></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <section>
+              업무 내용 ( .html)
+
+            </section>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+
+</body>
+</html>
