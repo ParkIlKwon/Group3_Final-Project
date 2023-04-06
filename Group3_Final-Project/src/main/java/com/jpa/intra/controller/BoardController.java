@@ -65,21 +65,20 @@ public class BoardController {
     }
 
     @PostMapping("/board/newtaskboard")
-    public String writeNewBoardTask(@Valid BoardTaskDTO boardTaskDTO, BindingResult rst) {
-
-
-        if(rst.hasErrors()) {
-
-            log.info("ttttt={}" , rst.getErrorCount());
-            return "board/boardTaskWriteForm";
-        }
+    public String writeNewBoardTask(BoardTaskDTO boardTaskDTO) {
+        System.out.println("-----------------------------");
+        System.out.println("비타이틀 : "+boardTaskDTO.getBoardTitle());
+        System.out.println("리스폰시블맴넘 : "+boardTaskDTO.getResponsibleMemNum());
+        System.out.println("팀넘 : "+boardTaskDTO.getTeamNum());
+        System.out.println("크리애이트대이트 : "+formattedDate);
 
         BoardTask boardTask=new BoardTask();
         boardTask.setBoardTitle(boardTaskDTO.getBoardTitle());
         boardTask.setBoardContent(boardTaskDTO.getBoardContent());
         boardTask.setCreateDate(formattedDate);
         boardTask.setUpdateDate(null);
-        boardTask.setResponsibleMemName(boardTaskDTO.getResponsibleMemNum());
+        boardTask.setResponsibleMemNum(boardTaskDTO.getResponsibleMemNum());
+        Long id = boardTaskDTO.getResponsibleMemNum().getId();
         boardTask.setTeamNum(boardTaskDTO.getTeamNum());
         boardTask.setProgress(boardTaskDTO.getProgress());
 

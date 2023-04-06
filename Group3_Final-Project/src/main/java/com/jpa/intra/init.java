@@ -1,6 +1,7 @@
 package com.jpa.intra;
 
 import com.jpa.intra.domain.Member;
+import com.jpa.intra.domain.Team;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -38,15 +39,25 @@ public class init {
 
         private final EntityManager em;
 
-        public void dbInit1() {
 
+        public void dbInit1() {
+            // add Team DataSample
+            Team t=new Team();
+            t.setTeam_name("dummy_department");
+            em.persist(t);
+
+            // add Member DataSample
             Member m = new Member();
             m.setMem_id("test1");
             m.setMem_pw("321");
-
             em.persist(m);
 
+            t.getMembers().add(m);
+            m.setTeam(t);
         }
+
+
+
     }
 }
 
