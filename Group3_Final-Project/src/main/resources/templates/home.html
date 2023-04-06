@@ -1,17 +1,10 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{/fragments/header :: header}">
-    <title>Hello</title>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
-</head>
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/header :: header}"></head>
 <body>
+<div th:replace="~{/fragments/bodyHeader :: bodyHeader}"></div>
 
-<div class="row">
-
-    <div th:replace="~{/fragments/bodyHeader :: bodyHeader}"></div>
-</div>
-
-<section class="bg-light">
+<section>
     <div class="row">
         <div class="col-2">
             <div>
