@@ -1,45 +1,43 @@
-/* Space out content a bit */
+/* 하늘색 #9FFFFF 회색바탕 #f8f9fa*/
 @charset "UTF-8";
 
 body {
+    padding: 0px;
     margin: 0px;
     background-color: #f8f9fa;
 }
 
-a[class*=nav-link]{color:white; font-weight:bold; margin-right: 10px;}
-a[class*=nav-link]:hover{color:white; transform: scale(1.3);}
+/* 내비게이션 */
+.nav-link,.nav-link:visited
+{color:white; font-weight:bold; margin-right: 14px; text-decoration: none;}
+.nav-link:hover,.nav-link:active,.nav-link:focus{transform: scale(1.1);color:#9FFFFF;}
 
+.banner1{background: linear-gradient(to right, #1D0A33, #683D99);}
+.banner2{background: linear-gradient(to right, #0A2333, #3D7499);}
+.banner3{background: linear-gradient(to right, #21330A, #71993D);}
+.banner4{background: linear-gradient(to right, #330A23, #993D76);}
+.banner5{background: linear-gradient(to right, #33320A, #99973D);}
+.banner6{background: linear-gradient(to right, #33120A, #99503D);}
+.banner7{background: linear-gradient(to right, #1A2933, #6B8799);}
+.banner8{background: linear-gradient(to right, #330A1C, #993D65);}
+
+/* 검색버튼*/
 .btn-search{
     color:white;
     border: 0;
     background-color: transparent;
 }
-.gnb-bg{
-    background: linear-gradient(to right, #1D0A33, #683D99);
-    color:white;
-}
+
+.btn-search:hover{transform: scale(1.2);}
+
+/*.nav-link-1:active + .nav-item .navbar-nav .navbar-collapse
+.container-fluid .gnb-bg{
+    background: linear-gradient(to right, #0A2333, #3D7499);
+}*/
 
 section{
     padding-right: 10px;
     height: 98vh;
-}
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-    padding: 5px 15px;
-}
-
-/* Custom page header */
-.header {
-    border-bottom: 1px solid #e5e5e5;
-}
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
 }
 
 /* Customize container */
