@@ -1,7 +1,4 @@
-
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!DOCTYPE HTML>
-
 
 
 <head th:replace="~{/fragments/header :: header}">
@@ -31,29 +28,11 @@
         <div class="form-outline mb-4">
             <input type="text" id="pw" name="pw" class="form-control form-control-lg" placeholder="PW을 입력하세요"/>
         </div>
-        <div class="form-outline mb-4">
-            <input type="text" id="name" name="name" class="form-control form-control-lg" placeholder="name을 입력하세요"/>
-        </div>
-
-        <table>
-            <tr>
-                <th>주소</th>
-                <td><input type="text" id="address_kakao" name="address" readonly onclick="popup()" /></td>
-            </tr>
-            <tr>
-                <th>상세 주소</th>
-                <td><input type="text" name="address_detail" /></td>
-            </tr>
-        </table>
-
-
-
 
         <div class="d-flex justify-content-center">
             <button type="submit"
                     class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
         </div>
-
     </form>
 
 
@@ -61,17 +40,4 @@
 <div th:replace="~{/fragments/footer :: footer}"></div>
 
 </body>
-
-<script>
-
-    function popup(){
-        new daum.Postcode({
-            oncomplete: function(data) { //선택시 입력값 세팅
-                document.getElementById("address_kakao").value = data.address; // 주소 넣기
-                document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
-            }
-        }).open();
-    }
-
-</script>
 </html>

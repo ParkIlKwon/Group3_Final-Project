@@ -31,5 +31,25 @@ public class MemberController {
         return "redirect:/"; //홈 페이지로 리디렉션.
     }
 
+    @GetMapping("/login")
+    public String LoginForm(Model model){
+
+        model.addAttribute("memberDTO",new MemberDTO());
+        //memberDTO 형식으로 생성자 만들어서 보내줌 .
+        return "members/loginForm";
+    }
+
+    @PostMapping("/login")
+    public String LoginPro(Model model){
+
+        model.addAttribute("memberDTO",new MemberDTO());
+        //memberDTO 형식으로 생성자 만들어서 보내줌 .
+        return "redirect:/";
+    }
+
+
+
+
+
 
 }
