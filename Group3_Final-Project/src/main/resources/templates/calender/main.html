@@ -4,17 +4,16 @@
 <body>
 <div th:replace="~{/fragments/bodyHeader :: bodyHeader}"></div>
 
-<!--<script src="/fullcalendar/Main.js" defer> </script>-->
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js" defer></script>
 <section>
-  <div class="row">
-    <!--    사이드바 -->
-    <div class="col-2">
-      <div>
-        <div th:replace="/fragments/sidebar.html"/>
-      </div>
-    </div>
-<!--    -->
+<!--  <div class="row">-->
+<!--    &lt;!&ndash;    사이드바 &ndash;&gt;-->
+<!--    <div class="col-2">-->
+<!--      <div>-->
+<!--&lt;!&ndash;        <div th:replace="/fragments/sidebar.html"/>&ndash;&gt;-->
+<!--      </div>-->
+<!--    </div>-->
+
     <div class="col" style="background-color: antiquewhite;">
       <div id='calendar'>
 
@@ -29,7 +28,6 @@
               plugins: [ interactionPlugin ],
               droppable: true
             });
-
 
 
             calendar.render();
