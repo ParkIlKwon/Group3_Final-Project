@@ -5,9 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a21d27b7-6876-4c98-99b4-621a616f7c83" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/bodyTop.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/PageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/plugin.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/calender.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/drive.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/mail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/member.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/aside.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/aside.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/billing.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/project.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/rtl.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/rtl.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/tables.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/tables.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/virtual-reality.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/virtual-reality.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +93,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "E:/kbj_Group3_Final-Project/Group3_Final-Project/src/main/resources/static",
+    "last_opened_file_path": "E:/kbj_Group3_Final-Project/Group3_Final-Project/src/main/resources/templates/pages",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -95,11 +108,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\templates\pages" />
       <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static" />
       <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\templates" />
       <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static\css\summernote" />
       <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static\js\summernote" />
-      <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static\js\summernote\lang" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static\js\summernote" />
@@ -146,7 +159,7 @@
       <workItem from="1680749063936" duration="10939000" />
       <workItem from="1680765609431" duration="348000" />
       <workItem from="1680767059772" duration="6256000" />
-      <workItem from="1680827974331" duration="17303000" />
+      <workItem from="1680827974331" duration="25139000" />
     </task>
     <servers />
   </component>
