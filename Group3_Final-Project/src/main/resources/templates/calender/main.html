@@ -19,7 +19,7 @@
 <section>
   <div class="row">
     <!--    사이드바 -->
-@ -16,37 +25,60 @@
+
     </div>
 <!--    -->
     <div class="col" style="background-color: antiquewhite;">
@@ -34,15 +34,12 @@
 
         <script>
 
-          import { Calendar } from '@fullcalendar/core';
-          import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 
           document.addEventListener('DOMContentLoaded', function() {
             //var Draggable = FullCalendarInteraction.Draggable;
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
               initialView: 'dayGridMonth',
-              plugins: [ interactionPlugin ],
               droppable: true,
    
               editable: true, // 수정 가능?
@@ -50,7 +47,6 @@
               nowIndicator: true, // 현재 시간 마크
               dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
               locale: 'ko', // 한국어 설정
-              droppable: true,
 
               events: [
 
