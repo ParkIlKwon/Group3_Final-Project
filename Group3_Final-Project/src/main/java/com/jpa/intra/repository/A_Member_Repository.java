@@ -39,6 +39,7 @@ public class A_Member_Repository {
         }
     }
 
+    // EntityManager의 내장 함수 find로 아이디 값을 참조하여 Member 객체를 뽑음
     public Member findById(Long id) {return em.find(Member.class, id);}
 
 

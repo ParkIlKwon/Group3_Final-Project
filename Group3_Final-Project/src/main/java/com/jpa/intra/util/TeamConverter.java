@@ -12,6 +12,7 @@ public class TeamConverter implements Converter<String, Team>  {
     @Autowired
     private B_Board_Repository bBoardRepository;
 
+    // Team타입의 객체를 String으로 받아오기 때문에 다시 Team타입으로 변환해주다.
     @Override
     public Team convert(String source) {
         Long teamNum=Long.parseLong(source);
