@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a21d27b7-6876-4c98-99b4-621a616f7c83" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/aside.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/sidebar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/dashboard.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +80,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "E:/Github/Group3_Final-Project/Group3_Final-Project/src/main/resources/templates",
+    "last_opened_file_path": "E:/kbj_Group3_Final-Project/Group3_Final-Project/src/main/resources/static",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -96,53 +95,24 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\templates" />
-      <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\templates\pages" />
+      <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static" />
+      <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\templates" />
       <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static\css\summernote" />
       <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static\js\summernote" />
       <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static\js\summernote\lang" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\static" />
       <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static\js\summernote" />
       <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static\css\summernote" />
       <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\templates\fragments" />
       <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\static\css" />
+      <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\templates" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.boot.pro.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.Group3FinalProjectApplication (1)">
-    <configuration name="home.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Group3_Final-Project/Group3_Final-Project/src/main/resources/templates/home.html" useBuiltInWebServerPort="true">
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="com.example.Group3_Final-Project" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="com.example.Group3_Final-Project" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Group3FinalProjectApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="com.example.Group3_Final-Project.main" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.jpa.intra.Group3FinalProjectApplication" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.jpa.intra.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager">
     <configuration name="Group3FinalProjectApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="Group3_Final-Project.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.jpa.intra.Group3FinalProjectApplication" />
@@ -156,15 +126,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <list>
-      <item itemvalue="JavaScript Debug.home.html" />
-      <item itemvalue="Spring Boot.Group3FinalProjectApplication" />
-      <item itemvalue="Spring Boot.Group3FinalProjectApplication (1)" />
-    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.Group3FinalProjectApplication (1)" />
-        <item itemvalue="JavaScript Debug.home.html" />
         <item itemvalue="Spring Boot.Group3FinalProjectApplication" />
       </list>
     </recent_temporary>
@@ -183,16 +146,11 @@
       <workItem from="1680749063936" duration="10939000" />
       <workItem from="1680765609431" duration="348000" />
       <workItem from="1680767059772" duration="6256000" />
-      <workItem from="1680827974331" duration="2854000" />
+      <workItem from="1680827974331" duration="15782000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Group3_Final_Project$Group3FinalProjectApplication__2_.ic" NAME="Group3FinalProjectApplication (2) Coverage Results" MODIFIED="1680728172114" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.jpa.intra.*</FILTER>
-    </SUITE>
   </component>
 </project>
