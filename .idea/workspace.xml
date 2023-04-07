@@ -5,22 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a21d27b7-6876-4c98-99b4-621a616f7c83" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/PageController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/plugin.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/calender.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/drive.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/mail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/member.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/headerMenu.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/assets/img/favicon.png" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/assets/img/favicon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/img/favi.ico" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/assets/img/favi.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/img/favicon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/img/m1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/assets/img/m1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/img/m1f.png" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/assets/img/m1f.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/aside.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/aside.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/billing.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/project.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/rtl.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/rtl.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/tables.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/tables.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/virtual-reality.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/virtual-reality.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/bodyHeader.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/bodyHeader.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/header-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/header-1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/header.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +89,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "E:/kbj_Group3_Final-Project/Group3_Final-Project/src/main/resources/templates/pages",
+    "last_opened_file_path": "E:/Github/Group3_Final-Project/Group3_Final-Project/src/main/resources/templates/fragments",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -108,26 +104,45 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\templates\pages" />
-      <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static" />
-      <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\templates" />
+      <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\templates\fragments" />
+      <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\templates" />
+      <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\templates\pages" />
       <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static\css\summernote" />
       <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static\js\summernote" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\static\assets\img" />
+      <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\static" />
       <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static\js\summernote" />
       <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\static\css\summernote" />
       <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\templates\fragments" />
-      <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\static\css" />
-      <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\templates" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.boot.pro.controller" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JavaScript Debug.aside.html">
+    <configuration name="aside.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Group3_Final-Project/Group3_Final-Project/src/main/resources/templates/fragments/aside.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="home.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Group3_Final-Project/Group3_Final-Project/src/main/resources/templates/home.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="com.example.Group3_Final-Project" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="com.example.Group3_Final-Project" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Group3FinalProjectApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="Group3_Final-Project.main" />
+      <module name="com.example.Group3_Final-Project.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.jpa.intra.Group3FinalProjectApplication" />
       <extension name="coverage">
         <pattern>
@@ -139,9 +154,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="JavaScript Debug.aside.html" />
+      <item itemvalue="JavaScript Debug.home.html" />
+      <item itemvalue="Spring Boot.Group3FinalProjectApplication" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.aside.html" />
         <item itemvalue="Spring Boot.Group3FinalProjectApplication" />
+        <item itemvalue="JavaScript Debug.home.html" />
       </list>
     </recent_temporary>
   </component>
@@ -159,11 +181,16 @@
       <workItem from="1680749063936" duration="10939000" />
       <workItem from="1680765609431" duration="348000" />
       <workItem from="1680767059772" duration="6256000" />
-      <workItem from="1680827974331" duration="25139000" />
+      <workItem from="1680827974331" duration="2854000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Group3_Final_Project$Group3FinalProjectApplication__2_.ic" NAME="Group3FinalProjectApplication (2) Coverage Results" MODIFIED="1680728172114" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.jpa.intra.*</FILTER>
+    </SUITE>
   </component>
 </project>
