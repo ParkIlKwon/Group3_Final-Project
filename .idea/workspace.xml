@@ -4,24 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a21d27b7-6876-4c98-99b4-621a616f7c83" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/MailController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/css/summernote/font/summernote.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/css/summernote/font/summernote.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/css/summernote/font/summernote.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/css/summernote/font/summernote.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/css/summernote/summernote-lite.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/js/summernote/lang/summernote-ko-KR.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/js/summernote/summernote-lite.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/css/intra.css" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/static/css/intra.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/bodyHeader.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/bodyHeader.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/mail/mailForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/mail/mailForm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/mail/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/mail/main.html" afterDir="false" />
-    </list>
+    <list default="true" id="a21d27b7-6876-4c98-99b4-621a616f7c83" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -158,7 +141,7 @@
       <workItem from="1680747756581" duration="1295000" />
       <workItem from="1680749063936" duration="10939000" />
       <workItem from="1680765609431" duration="348000" />
-      <workItem from="1680767059772" duration="5754000" />
+      <workItem from="1680767059772" duration="6256000" />
     </task>
     <servers />
   </component>
