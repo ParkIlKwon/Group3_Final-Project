@@ -3,10 +3,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>새 프로젝트</title>
 </head>
 <body>
-    <h1>Hi there, this is BoardFreeWriteForm section</h1>
     <div>
         <form action="/board/newtaskboard" th:object="${boardTaskDTO}" method="POST">
 
@@ -25,10 +24,6 @@
             <div class="form-group">
                 <label th:for="responsibleMmeNum">팀번호</label>
                 <input type="text" th:field="*{teamNum}" placeholder="제목을 입력하다.">
-            </div>
-            <div class="form-group">
-                <label th:for="responsibleMmeNum">업무현황</label>
-                <input type="text" th:field="*{progress}" placeholder="제목을 입력하다.">
             </div>
 
             <button type="submit">제출</button>

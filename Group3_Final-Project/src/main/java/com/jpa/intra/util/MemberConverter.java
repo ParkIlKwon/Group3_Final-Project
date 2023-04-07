@@ -12,6 +12,7 @@ public class MemberConverter implements Converter<String, Member> {
     @Autowired
     private A_Member_Repository aMemberRepository;
 
+    // Member타입의 객체를 String으로 받아오기 때문에 다시 Member타입으로 변환해주다.
     @Override
     public Member convert(String source) {
         Long memNum = Long.parseLong(source);
