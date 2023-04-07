@@ -14,7 +14,7 @@ public class HomeController {
     @RequestMapping("/")
     public String home(Model model) {
         model.addAttribute("banner","banner1");
-        model.addAttribute("side","sidebar9");
+        model.addAttribute("side","sidebar1");
         return "/home";
     }
 
