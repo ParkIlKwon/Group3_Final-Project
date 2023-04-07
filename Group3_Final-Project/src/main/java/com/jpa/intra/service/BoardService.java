@@ -28,4 +28,12 @@ public class BoardService {
     }
 
     public List<BoardTask> findTasks() {return bBoardRepository.findAll();}
+    @Transactional
+    public void deleteBoardTaskById(Long boardId) {bBoardRepository.deleteBoardTaskById(boardId);}
+
+    @Transactional
+    public void changeTaskProgress(Long boardId, String boardProgress) {
+        bBoardRepository.changeTaskProgress(boardId, boardProgress);
+    }
+
 }

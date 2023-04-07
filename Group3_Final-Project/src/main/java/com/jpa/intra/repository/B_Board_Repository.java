@@ -19,6 +19,20 @@ public class B_Board_Repository {
 
     public List<BoardTask> findAll() {return em.createQuery("SELECT t FROM BoardTask t", BoardTask.class).getResultList();}
 
+    public void deleteBoardTaskById(Long boardId) {
+        BoardTask boardTask = em.getReference(BoardTask.class, boardId);
+        em.remove(boardTask);
+        em.flush();
+    }
+
+    public void changeTaskProgress(Long boardId, String boardProgress) {
+        BoardTask boardTask = em.find(BoardTask.class, boardId);
+        boardTask.setProgress(boardProgress);
+        em.merge(boardTask);
+        em.flush();
+    }
+
+
     // EntityManager의 내장 함수 find로 아이디 값을 참조하여 Team 객체를 뽑음
     public Team findById(Long id) {return em.find(Team.class, id);}
 }

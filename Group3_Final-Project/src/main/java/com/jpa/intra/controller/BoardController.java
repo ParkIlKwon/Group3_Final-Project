@@ -7,15 +7,16 @@ import com.jpa.intra.query.BoardTaskDTO;
 import com.jpa.intra.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @Slf4j
@@ -88,5 +89,23 @@ public class BoardController {
         model.addAttribute("tlist", tlist);
         return "board/boardTaskList";
     }
+
+    // 업무게시판 삭제
+    @DeleteMapping("/board/deleteboardtask")
+    public ResponseEntity<Void> deleteBoardTask(@RequestBody Map<String, Object> reqData) {
+        System.out.println("this is deleteBoardTask");
+        Long boardId = Long.parseLong(reqData.get("boardId").toString());
+        System.out.println("Welcome to another world episode of ajax, This is deleteBoardTask Method. I can help you with delete task board number "+boardId);
+
+        boardService.deleteBoardTaskById(boardId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/board/changetaskprogress")
+    public ResponseEntity<Void> changeTaskProgress(@RequestParam Long boardId, @RequestParam String boardProgress) {
+        boardService.changeTaskProgress(boardId, boardProgress);
+        return ResponseEntity.noContent().build();
+    }
+
 
 }
