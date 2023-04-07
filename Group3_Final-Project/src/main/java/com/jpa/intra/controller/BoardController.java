@@ -28,11 +28,6 @@ public class BoardController {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분");
     String formattedDate = now.format(formatter);
 
-    @GetMapping("/board/freeboardlist")
-    public String showBoardFreeList(Model model) {
-        return "board/boardFreeList";
-    }
-
     @GetMapping("/board/newfreeboard")
     public String callBoardFreeWriteForm(Model model) {
         model.addAttribute("boardFreeDTO", new BoardFreeDTO());
@@ -58,19 +53,8 @@ public class BoardController {
         return "redirect:/";
     }
 
-    @GetMapping("/board/newtaskboard")
-    public String callBoardTaskWriteForm(Model model) {
-        model.addAttribute("boardTaskDTO", new BoardTaskDTO());
-        return "board/boardTaskWriteForm";
-    }
-
     @PostMapping("/board/newtaskboard")
     public String writeNewBoardTask(BoardTaskDTO boardTaskDTO) {
-        System.out.println("-----------------------------");
-        System.out.println("비타이틀 : "+boardTaskDTO.getBoardTitle());
-        System.out.println("리스폰시블맴넘 : "+boardTaskDTO.getResponsibleMemNum());
-        System.out.println("팀넘 : "+boardTaskDTO.getTeamNum());
-        System.out.println("크리애이트대이트 : "+formattedDate);
 
         BoardTask boardTask=new BoardTask();
         boardTask.setBoardTitle(boardTaskDTO.getBoardTitle());
