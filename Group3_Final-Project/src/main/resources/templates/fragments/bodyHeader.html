@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
-<div th:fragment="bodyHeader" class="banner">
-    <nav class="navbar navbar-expand-lg gnb-bg" style="height: 55px;">
+<div th:fragment="bodyHeader" th:class="${banner == null ? 'banner1' : banner}">
+    <!--<div th:fragment="bodyHeader" class="banner1">-->
+    <nav class="navbar navbar-expand-lg" style="height: 55px;">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="/"><img src="/img/m1f.png" alt="noImage" width="48px"></a>
+            <a class="navbar-brand" href="/"><img src="/img/m1f.png" width="48px"></a>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">프로젝트</a>
+                        <a class="nav-link" href="/moveProject">프로젝트</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/mail/main">메일</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">캘린더</a>
+                        <a class="nav-link" href="/calender/main">캘린더</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">드라이브</a>
+                        <a class="nav-link" href="/moveDrive">드라이브</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">주소록</a>
+                        <a class="nav-link" href="/members/list">주소록</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">결재</a>
+                        <a class="nav-link" href="/confirm/main">결재</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/members/addmember">관리자</a>
+                        <a class="nav-link" href="/board/boardFreeList">관리자</a>
                     </li>
                     <!-- 4월 5일 성윤(테스트 용으로 버튼 추가함(나중에 없애다)) 여기서부터 -->
                     <button onclick="toBoardFreeWriteForm()">write new content</button>

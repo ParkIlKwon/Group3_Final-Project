@@ -6,9 +6,10 @@
 
 <section>
     <div class="row">
+        <!--    사이드바 -->
         <div class="col-2">
             <div>
-                <div th:replace="/fragments/sidebar.html"></div>
+                <div th:replace="/fragments/sidebar.html"/>
             </div>
         </div>
         <div class="col" style="background-color: antiquewhite;">
@@ -29,8 +30,8 @@
             </div>
         </div>
     </div>
-    <div th:replace="~{/fragments/footer :: footer}"/>
 </section>
+<div th:replace="~{/fragments/footer :: footer}"/>
 
 
 </body>
