@@ -50,6 +50,7 @@ public class init {
             Member m = new Member();
             m.setMem_id("test1");
             m.setMem_pw("321");
+            m.setMem_name("shoichi");
             em.persist(m);
 
             t.getMembers().add(m);

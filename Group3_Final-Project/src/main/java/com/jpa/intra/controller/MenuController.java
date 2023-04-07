@@ -1,15 +1,24 @@
 package com.jpa.intra.controller;
 
+import com.jpa.intra.domain.board.BoardTask;
 import com.jpa.intra.query.MemberDTO;
+import com.jpa.intra.service.BoardService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.List;
+
 @Controller
+@RequiredArgsConstructor
 public class MenuController {
+    private final BoardService boardService;
 //내비게이션 메뉴 선택에 따라 변동된는 sidebar와 css를 위한 컨트롤러
     @GetMapping("/moveProject")
     public String MoveProject(Model model){
+        List<BoardTask> tlist = boardService.findTasks();
+        model.addAttribute("tlist", tlist);
         model.addAttribute("banner","banner2");
         model.addAttribute("side","sidebar2");
         return "/project/main";
@@ -24,8 +33,17 @@ public class MenuController {
     public String MoveCalender(Model model){
         model.addAttribute("banner","banner4");
         model.addAttribute("side","sidebar4");
+
+
+
         return "/calender/main"; //캘린더화면 구현후 /calender/main으로 변경
     }
+
+
+
+
+
+
     @GetMapping("/moveDrive")
     public String MoveDrive(Model model){
         model.addAttribute("banner","banner5");

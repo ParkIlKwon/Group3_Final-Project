@@ -25,7 +25,7 @@
               체크박스 선택 : 삭제 / 정렬 : 날짜순(기본),이름순 -->
     <div class="col-3" style="border: 1px solid black;">
       <form action="" method="">
-        <nav class="navbar navbar-expand-lg">
+        <!--<nav class="navbar navbar-expand-lg">
 
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
@@ -47,12 +47,12 @@
             </ul>
           </div>
 
-        </nav>
+        </nav>-->
 
 
 
 
-        <table class="table" style="font-size: 13px;">
+        <!--<table class="table" style="font-size: 13px;">
           <thead>
           </thead>
           <tbody>
@@ -69,7 +69,31 @@
             </td>
           </tr>
           </tbody>
-        </table>
+        </table>-->
+
+        <div class="task-main-left" th:with="tlist=${tlist}">
+          <div th:each="vo:${tlist}" class="task-main-left-tlist-section" onclick="showTlistContents(this)">
+            <div class="task-main-left-tlist-section-component">
+              <input type="hidden" class="task-board-id" th:value="${vo.id}">
+              <input type="hidden" class="task-board-content" th:value="${vo.boardContent}">
+              <input type="hidden" class="task-board-create-date" th:value="${vo.createDate}">
+              <input type="hidden" class="task-board-update-date" th:value="${vo.updateDate}">
+              <h6 class="task-board-title" th:text="${vo.boardTitle}"></h6>
+              <h6 class="task-board-small-element">
+                담당자 :<span class="task-board-responsibleMember" th:text="${vo.responsibleMemNum.mem_name}"></span>
+              </h6>
+              <h6 class="task-board-small-element">
+                참조자 :<span class="task-board-responsibleTeam" th:text="${vo.teamNum.team_name}"></span>
+              </h6>
+            </div>
+            <h6 id="task-board-progress" th:class="${vo.progress == 'TO_DO' ? 'task-status-to-do' : (vo.progress == 'IN_PROGRESS' ? 'task-status-in-progress' : 'task-status-done')}">
+              <span th:text="${vo.progress == 'TO_DO'} ? '할 일' : (${vo.progress == 'IN_PROGRESS'} ? '진행 중' : '완료')"></span>&nbsp;&nbsp;
+              <span class="badge bg-secondary"></span>
+            </h6>
+          </div>
+        </div>
+
+
       </form>
     </div>
 
@@ -80,26 +104,26 @@
       <table class="table" style="vertical-align: middle; font-size: 13px;">
         <tr>
           <td>
-            <select id="taskStatus">
-              <option value="inProgress">진행중</option>
-              <option value="toDo">할일</option>
-              <option value="completed">완료</option>
+            <select class="task-board-detail-status" id="taskStatus">
+              <option value="TO_DO">할일</option>
+              <option value="IN_PROGRESS">진행중</option>
+              <option value="DONE">완료</option>
             </select>
             <span style="margin-left: 20px;"><a>편집</a></span>
           </td>
         </tr>
         <tr>
-          <th>업무 제목</th>
+          <th><strong class="task-board-detail-title"></strong></th>
         </tr>
         <tr>
           <td>
-            등록자 : <span></span><br>
-            담당자 : <span></span>
+            등록자 : <span class="task-board-detail-responsibleMember"></span><br>
+            담당자 : <span class="task-board-detail-responsibleTeam"></span>
           </td>
         </tr>
         <tr>
           <td>
-            <section>
+            <section class="task-board-detail-content">
               업무 내용 ( .html)
 
             </section>
@@ -110,6 +134,107 @@
 
   </div>
 </section>
+
+
+
+
+<script>
+  function showTlistContents(data){
+
+    var boardProgress = data.querySelector('#task-board-progress').className;
+    var statusSelect = document.getElementById('taskStatus');
+
+    console.log(boardProgress);
+
+    if (boardProgress === 'task-status-to-do') {
+      statusSelect.value = 'TO_DO';
+    } else if (boardProgress === 'task-status-in-progress') {
+      statusSelect.value = 'IN_PROGRESS';
+    } else if (boardProgress === 'task-status-done') {
+      statusSelect.value = 'DONE';
+    }
+
+
+    function setValue(targetSelector, sourceSelector) {
+      const target = document.querySelector(targetSelector);
+      target.innerHTML = "";
+      target.innerHTML = data.querySelector(sourceSelector).textContent;
+    }
+
+    setValue('.task-board-detail-title', '.task-board-title');
+    setValue('.task-board-detail-responsibleMember', '.task-board-responsibleMember');
+    setValue('.task-board-detail-responsibleTeam', '.task-board-responsibleTeam');
+
+    var detailContent=document.querySelector('.task-board-detail-content');
+    detailContent.innerHTML="";
+    detailContent.innerHTML=data.querySelector('.task-board-content').value;
+  }
+</script>
+
+<style>
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:'Roboto', sans-serif;
+}
+
+body {
+  background-color:#f4f6f9;
+}
+.task-board-title {
+  font-size:20px;
+  font-weight:bold;
+}
+.task-board-small-element {
+  font-size:12px;
+}
+.task-main-left {
+  border-right:1px solid #dee2e6;
+  grid-area:left;
+  background-color:#ffffff;
+  overflow-y:scroll;
+}
+/*업무 게시판 리스트 스크롤바 관련*/
+.task-main-left::-webkit-scrollbar {
+  width:0px;
+}
+.task-main-left::-webkit-scrollbar-thumb {
+  background:rgba(0, 0, 0, 0.5);
+}
+.task-main-left::-webkit-scrollbar-track {
+  background:transparent;
+}
+
+.task-main-left-tlist-section {
+  height:100px;
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  padding:0 10px;
+  border-bottom:1px solid #dee2e6;
+  cursor:pointer;
+}
+.task-main-left-tlist-section:hover {
+  background-color:#f4f6f9;
+}
+.task-status-to-do {
+  color:limegreen;
+  font-size:11px;
+}
+.task-status-in-progress {
+  color:blue;
+  font-size:12px;
+}
+.task-status-done {
+  color:gray;
+  font-size:12px;
+}
+</style>
+
+
+
+
 
 
 </body>
