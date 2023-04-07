@@ -5,17 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a21d27b7-6876-4c98-99b4-621a616f7c83" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/util/MemberConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/util/TeamConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/BoardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/domain/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/domain/Team.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/domain/board/BoardTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/domain/board/BoardTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/init.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/init.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/repository/A_Member_Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/repository/A_Member_Repository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/repository/B_Board_Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/repository/B_Board_Repository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/service/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/service/BoardService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/bodyHeader.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/bodyHeader.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,6 +109,19 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.Group3FinalProjectApplication">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Group3_Final-Project" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Group3_Final-Project" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Group3FinalProjectApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="com.example.Group3_Final-Project.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.jpa.intra.Group3FinalProjectApplication" />
@@ -168,6 +172,9 @@
       <workItem from="1680747756581" duration="1295000" />
       <workItem from="1680749063936" duration="10939000" />
       <workItem from="1680765609431" duration="348000" />
+      <workItem from="1680773285010" duration="259000" />
+      <workItem from="1680773551382" duration="16000" />
+      <workItem from="1680825883855" duration="1466000" />
     </task>
     <servers />
   </component>
