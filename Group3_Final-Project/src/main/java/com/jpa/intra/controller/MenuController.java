@@ -33,8 +33,17 @@ public class MenuController {
     public String MoveCalender(Model model){
         model.addAttribute("banner","banner4");
         model.addAttribute("side","sidebar4");
+
+
+
         return "/calender/main"; //캘린더화면 구현후 /calender/main으로 변경
     }
+
+
+
+
+
+
     @GetMapping("/moveDrive")
     public String MoveDrive(Model model){
         model.addAttribute("banner","banner5");
