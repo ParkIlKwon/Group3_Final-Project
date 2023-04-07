@@ -3662,7 +3662,7 @@ textarea.form-control.is-invalid {
 .btn-check:checked+.btn,
 :not(.btn-check)+.btn:active,
 .btn:first-child:active,
-.btn.active,
+/*.btn.active,*/
 .btn.show {
   color: var(--bs-btn-active-color);
   background-color: var(--bs-btn-active-bg);
