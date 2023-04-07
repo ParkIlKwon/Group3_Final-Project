@@ -23,7 +23,7 @@ import javax.validation.Valid;
 public class MemberController {
 
     private final MemberService service;
-    @GetMapping("/addmember")
+    @GetMapping()
     public String addForm(Model model){
 
         model.addAttribute("memberDTO",new MemberDTO());
@@ -31,7 +31,7 @@ public class MemberController {
         return "members/joinForm";
     }
 
-    @PostMapping("/addmember") //form 에서 post형식으로
+    @PostMapping() //form 에서 post형식으로
                                 //받아오면 여기로 들어옴 .
     public String addPro(@Valid MemberDTO getmember, BindingResult result,Model model){
 

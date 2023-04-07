@@ -14,13 +14,13 @@ public class MenuController {
         model.addAttribute("side","sidebar2");
         return "/project/main";
     }
-    @GetMapping("/mail/main")
+    @GetMapping("/moveMail")
     public String MoveMail(Model model){
         model.addAttribute("banner","banner3");
         model.addAttribute("side","sidebar3");
         return "/mail/main";
     }
-    @GetMapping("/calender/main")
+    @GetMapping("/moveCalender")
     public String MoveCalender(Model model){
         model.addAttribute("banner","banner4");
         model.addAttribute("side","sidebar4");
@@ -32,19 +32,19 @@ public class MenuController {
         model.addAttribute("side","sidebar5");
         return "/drive/main";
     }
-    @GetMapping("/members/list")
+    @GetMapping("/moveMembers")
     public String MoveMember(Model model){
         model.addAttribute("banner","banner6");
         model.addAttribute("side","sidebar6");
         return "/members/list"; //조직도 화면 구성후 조직도 링크로 변경예정
     }
-    @GetMapping("/confirm/main")
+    @GetMapping("/moveConfirm")
     public String MoveConfirm(Model model){
         model.addAttribute("banner","banner7");
         model.addAttribute("side","sidebar7");
         return "/home"; //결재 화면 구성후 결재 링크로 변경예정
     }
-    @GetMapping("/board/boardFreeList")
+    @GetMapping("/moveBoard")
     public String MoveAdmin(Model model){
         model.addAttribute("banner","banner8");
         model.addAttribute("side","sidebar8");
