@@ -89,7 +89,6 @@ section{
 
 /* 메인 레이아웃 */
 .home-layout{
-    border: 10px solid #f8f9fa;
     height: 32vh;
     padding: 10px;
 }
