@@ -32,6 +32,7 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5'
+    implementation 'org.json:json:20200518'
 }
 
 tasks.named('test') {
