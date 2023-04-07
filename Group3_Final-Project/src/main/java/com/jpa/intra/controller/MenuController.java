@@ -35,31 +35,34 @@ public class MenuController {
     public String MoveMail(Model model){
         model.addAttribute("side","sidebar3");
         model.addAttribute("gnb","topMenu3");
-        return "/pages/mail";
-        /*return "/mail/main";*/
+        return "/mail/main";
     }
 
-    @GetMapping("/moveCalender")
+    @GetMapping("/moveCalendar")
     public String MoveCalender(Model model){
         model.addAttribute("side","sidebar4");
         model.addAttribute("gnb","topMenu4");
+<<<<<<< HEAD
         return "/pages/calender";
 //        return "/calender/main";
+=======
+        return "/calendar/main"; //캘린더화면 구현후 /calender/main으로 변경
+>>>>>>> KBJ
     }
 
     @GetMapping("/moveDrive")
     public String MoveDrive(Model model){
         model.addAttribute("side","sidebar5");
         model.addAttribute("gnb","topMenu5");
-        return "/pages/drive";
-        /*return "/drive/main";*/
+        return "/drive/main";
+
     }
 
     @GetMapping("/moveMembers")
     public String MoveMember(Model model){
         model.addAttribute("side","sidebar6");
         model.addAttribute("gnb","topMenu6");
-        return "pages/members";
+        return "/members/main";
         /*return "/members/list"; //조직도 화면 구성후 조직도 링크로 변경예정*/
     }
 
@@ -67,7 +70,7 @@ public class MenuController {
     public String MoveConfirm(Model model){
         model.addAttribute("side","sidebar7");
         model.addAttribute("gnb","topMenu7");
-        return "pages/confirm";
+        return "/confirm/main";
         /*return "/home"; //결재 화면 구성후 결재 링크로 변경예정*/
     }
 
@@ -75,8 +78,8 @@ public class MenuController {
     public String MoveAdmin(Model model){
         model.addAttribute("side","sidebar8");
         model.addAttribute("gnb","topMenu8");
-        return "pages/admin"; //관리자 화면 구성후 링크 수정예정
-        /*return "/admin/main"; //관리자 화면 구성후 링크 수정예정*/
+        return "/admin/main"; //관리자 화면 구성후 링크 수정예정
+
     }
 
 }
