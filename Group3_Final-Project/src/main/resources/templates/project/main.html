@@ -100,36 +100,39 @@
     <!--    오른쪽 : 상세정보
            가운데 목록에서 파일이름 누르면 상세정보에 표기 -->
     <div class="col-8" style="background-color: antiquewhite; border: 1px solid black;">
+      <div class="task-main-right">
+        <input type="hidden" class="task-board-detail-id">
+        <table class="table" style="vertical-align: middle; font-size: 13px;">
+          <tr>
+            <td>
+              <select class="task-board-detail-status" id="taskStatus">
+                <option value="TO_DO">할일</option>
+                <option value="IN_PROGRESS">진행중</option>
+                <option value="DONE">완료</option>
+              </select>
+              <span style="margin-left: 20px;"><a>편집</a></span>
+              <span style="margin-left: 20px;"><a href="/board/deleteboardtask" class="delete-board-task">삭제</a></span>
+            </td>
+          </tr>
+          <tr>
+            <th><strong class="task-board-detail-title"></strong></th>
+          </tr>
+          <tr>
+            <td>
+              등록자 : <span class="task-board-detail-responsibleMember"></span><br>
+              담당자 : <span class="task-board-detail-responsibleTeam"></span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <section class="task-board-detail-content">
+                업무 내용 ( .html)
 
-      <table class="table" style="vertical-align: middle; font-size: 13px;">
-        <tr>
-          <td>
-            <select class="task-board-detail-status" id="taskStatus">
-              <option value="TO_DO">할일</option>
-              <option value="IN_PROGRESS">진행중</option>
-              <option value="DONE">완료</option>
-            </select>
-            <span style="margin-left: 20px;"><a>편집</a></span>
-          </td>
-        </tr>
-        <tr>
-          <th><strong class="task-board-detail-title"></strong></th>
-        </tr>
-        <tr>
-          <td>
-            등록자 : <span class="task-board-detail-responsibleMember"></span><br>
-            담당자 : <span class="task-board-detail-responsibleTeam"></span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <section class="task-board-detail-content">
-              업무 내용 ( .html)
-
-            </section>
-          </td>
-        </tr>
-      </table>
+              </section>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
 
   </div>
@@ -137,24 +140,24 @@
 
 
 
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+  //게시글 클릭 시, 우측단에 게시글 상세정보 작성해주는 함수
   function showTlistContents(data){
-
+    //업무진행도 작성
     var boardProgress = data.querySelector('#task-board-progress').className;
     var statusSelect = document.getElementById('taskStatus');
-
-    console.log(boardProgress);
-
     if (boardProgress === 'task-status-to-do') {
       statusSelect.value = 'TO_DO';
-    } else if (boardProgress === 'task-status-in-progress') {
+    }
+    else if (boardProgress === 'task-status-in-progress') {
       statusSelect.value = 'IN_PROGRESS';
-    } else if (boardProgress === 'task-status-done') {
+    }
+    else if (boardProgress === 'task-status-done') {
       statusSelect.value = 'DONE';
     }
 
-
+    //기타 업무정보 작성
     function setValue(targetSelector, sourceSelector) {
       const target = document.querySelector(targetSelector);
       target.innerHTML = "";
@@ -168,7 +171,57 @@
     var detailContent=document.querySelector('.task-board-detail-content');
     detailContent.innerHTML="";
     detailContent.innerHTML=data.querySelector('.task-board-content').value;
+
+    var detailId = document.querySelector('.task-board-detail-id');
+    detailId.value = "";
+    detailId.value = data.querySelector('.task-board-id').value;
   }
+
+  //게시글 삭제 ajax함수
+  $(document).ready(function() {
+    $('.delete-board-task').on('click', function(e) {
+      e.preventDefault();
+      var boardId=document.querySelector('.task-board-detail-id').value;
+      var url = $(this).attr('href');
+
+      $.ajax({
+        url: url,
+        method: 'DELETE',
+        contentType: 'application/json',
+        data: JSON.stringify({ boardId: boardId })
+      })
+      .done(function(response) {
+        alert('게시글이 삭제되었습니다.');
+        location.href="/moveProject";
+      })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+        alert('게시글 삭제에 실패했습니다.');
+      });
+    });
+  });
+
+  // 업무진행도 변경 함수
+  $(document).ready(function() {
+    $(document).on('change', '.task-board-detail-status', function() {
+      var progress=$(this).val();
+      var boardId = $(this).closest('.task-main-right').find('.task-board-detail-id').val();
+      console.log("progress : "+progress+", boardId : "+boardId);
+
+      $.ajax({
+        url: "/board/changetaskprogress",
+        method: 'POST',
+        data: { boardId: boardId, boardProgress: progress }
+      })
+      .done(function(response) {
+        location.href="/moveProject";
+      })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+        alert('게시글 삭제에 실패했습니다.');
+      });
+
+    });
+  });
+
 </script>
 
 <style>

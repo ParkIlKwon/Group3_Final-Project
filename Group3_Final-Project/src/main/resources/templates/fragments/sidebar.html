@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="/assets/material-dashboard.css">
 
 
+<<<<<<< HEAD
 <!--    <div id="addFn">새 일정</div>
     <label for="expand-menu"><div>메뉴</div></label>
     <input type="checkbox" id="expand-menu" name="expand-menu">-->
@@ -20,6 +21,24 @@
         <li><a href="/members/login"><div class="sideItem">로그인</div></a></li>
         <li><a href="/members/logout"><div class="sideItem">로그아웃</div></a></li>
     </ul>
+=======
+    <div th:if="${side == 'sidebar2'}">
+        <div class="sidemenu" th:fragment="sidebar">
+        <ul>
+            <li>
+                <!--<a href="javascript:window.open('/board/newtaskboard', '_blank', 'width=800,height=600,top=50%,left=50%,transform=translate(-50%,-50%)')">
+                    <div class="sideItem">새 프로젝트</div>
+                </a>-->
+                <a href="/board/newtaskboard">
+                    <div class="sideItem">새 프로젝트</div>
+                </a>
+
+            </li>
+            <li><a href="#"><div class="sideItem">내 할일</div></a></li>
+            <li><a href="#"><div class="sideItem">팀 할일</div></a></li>
+        </ul>
+        </div>
+>>>>>>> KSY
     </div>
 </div>
 
