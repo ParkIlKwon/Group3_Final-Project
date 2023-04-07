@@ -14,6 +14,9 @@
         <li><a href="#"><div class="sideItem">전체 일정</div></a></li>
         <li><a href="#"><div class="sideItem">test</div></a></li>
         <li><a href="#"><div class="sideItem">설정</div></a></li>
-        <li><a href="/members/login"><div class="sideItem">로그인</div></a></li>
+
+        <li><a th:if="${session.log == null}" href="/members/login"><div class="sideItem">로그인</div></a></li>
+        <li><a th:if="${session.log != null}" href="/members/logout"><div class="sideItem">로그아웃</div></a></li>
+
     </ul>
 </div>

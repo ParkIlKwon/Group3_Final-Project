@@ -53,6 +53,8 @@
 .sidemenu li:nth-child(5) a::before{ content: '\e87d'; }
 .sidemenu li:nth-child(6) a::before{ content: '\e8b8'; }
 .sidemenu li:nth-child(7) a::before{ content: '\e73c'; }
+.sidemenu li:nth-child(8) a::before{ content: '\e9ba'; }
+
 @media screen and (max-width:1023px) {
     .sidemenu {
         width: 60px;

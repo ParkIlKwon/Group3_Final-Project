@@ -1,5 +1,6 @@
 package com.jpa.intra.repository;
 
+import com.jpa.intra.domain.Team;
 import com.jpa.intra.domain.board.BoardFree;
 import com.jpa.intra.domain.board.BoardTask;
 import lombok.RequiredArgsConstructor;
@@ -14,4 +15,6 @@ public class B_Board_Repository {
 
     public void createBoardFree(BoardFree boardFree) {em.persist(boardFree);}
     public void createBoardTask(BoardTask boardTask) {em.persist(boardTask);}
+
+    public Team findById(Long id) {return em.find(Team.class, id);}
 }
