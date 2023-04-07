@@ -15,7 +15,7 @@ public class HomeController {
     public String home(Model model) {
         model.addAttribute("banner","banner1");
         model.addAttribute("side","sidebar9");
-        return "/pages/dashboard";
+        return "/home";
     }
 
 }
