@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/header :: header}"></head>
+<body>
+<div th:replace="~{/fragments/bodyHeader :: bodyHeader}"></div>
+
+<section>
+  <div class="row">
+    <!--    사이드바 -->
+    <div class="col-2">
+      <div>
+        <div th:replace="/fragments/sidebar.html"/>
+      </div>
+    </div>
+<!--    -->
+    <div class="col" style="background-color: antiquewhite;">
+
+    </div>
+  </div>
+</section>
+<div th:replace="~{/fragments/footer :: footer}"/>
+
+
+</body>
+</html>
