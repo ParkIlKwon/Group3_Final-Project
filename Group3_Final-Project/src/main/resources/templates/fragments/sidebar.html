@@ -2,94 +2,96 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="/css/sidebar.css">
+<link rel="stylesheet" href="/assets/material-dashboard.css">
 
-    <!--    <div id="addFn">새 일정</div>
-        <label for="expand-menu"><div>메뉴</div></label>
-        <input type="checkbox" id="expand-menu" name="expand-menu">-->
-    <div th:if="${side == 'sidebar1'}">
-        <div class="sidemenu" th:fragment="sidebar">
-        <ul>
-            <li><a href="#"><div class="sideItem">***님 로그인</div></a></li>
-            <li><a href="#"><div class="sideItem">출퇴근 상태</div></a></li>
-            <li><a href="#"><div class="sideItem">출근/퇴근</div></a></li>
-            <li><a href="#"><div class="sideItem">회원정보 수정</div></a></li>
-            <li><a href="#"><div class="sideItem">test1</div></a></li>
-            <li><a href="#"><div class="sideItem">test2</div></a></li>
-            <li><a href="/members/login"><div class="sideItem">로그인</div></a></li>
-            <li><a href="/members/logout"><div class="sideItem">로그아웃</div></a></li>
-        </ul>
-        </div>
-    </div>
 
-    <div th:if="${side == 'sidebar2'}">
-        <div class="sidemenu" th:fragment="sidebar">
-        <ul>
-            <li><a href="#"><div class="sideItem">새 프로젝트</div></a></li>
-            <li><a href="#"><div class="sideItem">내 할일</div></a></li>
-            <li><a href="#"><div class="sideItem">팀 할일</div></a></li>
-        </ul>
-        </div>
+<!--    <div id="addFn">새 일정</div>
+    <label for="expand-menu"><div>메뉴</div></label>
+    <input type="checkbox" id="expand-menu" name="expand-menu">-->
+<div th:if="${side == 'sidebar1'}">
+    <div class="sidemenu" th:fragment="sidebar">
+    <ul>
+        <li><a href="#"><div class="sideItem">***님 로그인</div></a></li>
+        <li><a href="#"><div class="sideItem">출퇴근 상태</div></a></li>
+        <li><a href="#"><div class="sideItem">출근/퇴근</div></a></li>
+        <li><a href="#"><div class="sideItem">회원정보 수정</div></a></li>
+        <li><a href="#"><div class="sideItem">test1</div></a></li>
+        <li><a href="#"><div class="sideItem">test2</div></a></li>
+        <li><a href="/members/login"><div class="sideItem">로그인</div></a></li>
+        <li><a href="/members/logout"><div class="sideItem">로그아웃</div></a></li>
+    </ul>
     </div>
+</div>
 
-    <div th:if="${side == 'sidebar3'}">
-        <div class="sidemenu" th:fragment="sidebar">
-        <ul>
-            <li><a href="#"><div class="sideItem">메일 쓰기</div></a></li>
-            <li><a href="#"><div class="sideItem">받은 메일함 </div></a></li>
-            <li><a href="#"><div class="sideItem">보낸 메일함 </div></a></li>
-        </ul>
-        </div>
+<div th:if="${side == 'sidebar2'}">
+    <div class="sidemenu" th:fragment="sidebar">
+    <ul>
+        <li><a href="#"><div class="sideItem">새 프로젝트</div></a></li>
+        <li><a href="#"><div class="sideItem">내 할일</div></a></li>
+        <li><a href="#"><div class="sideItem">팀 할일</div></a></li>
+    </ul>
     </div>
+</div>
 
-    <div th:if="${side == 'sidebar4'}">
-        <div class="sidemenu" th:fragment="sidebar">
-        <ul>
-            <li><a href="#"><div class="sideItem">새 일정</div></a></li>
-            <li><a href="#"><div class="sideItem">내 일정</div></a></li>
-            <li><a href="#"><div class="sideItem">팀 일정</div></a></li>
-            <li><a href="#"><div class="sideItem">전체 일정</div></a></li>
-        </ul>
-        </div>
+<div th:if="${side == 'sidebar3'}">
+    <div class="sidemenu" th:fragment="sidebar">
+    <ul>
+        <li><a href="#"><div class="sideItem">메일 쓰기</div></a></li>
+        <li><a href="#"><div class="sideItem">받은 메일함 </div></a></li>
+        <li><a href="#"><div class="sideItem">보낸 메일함 </div></a></li>
+    </ul>
     </div>
+</div>
 
-    <div th:if="${side == 'sidebar5'}">
-        <div class="sidemenu" th:fragment="sidebar">
-        <ul>
-            <li><a href="#"><div class="sideItem">새 자료</div></a></li>
-            <li><a href="#"><div class="sideItem">전체 자료</div></a></li>
-        </ul>
-        </div>
+<div th:if="${side == 'sidebar4'}">
+    <div class="sidemenu" th:fragment="sidebar">
+    <ul>
+        <li><a href="#"><div class="sideItem">새 일정</div></a></li>
+        <li><a href="#"><div class="sideItem">내 일정</div></a></li>
+        <li><a href="#"><div class="sideItem">팀 일정</div></a></li>
+        <li><a href="#"><div class="sideItem">전체 일정</div></a></li>
+    </ul>
     </div>
+</div>
 
-    <div th:if="${side == 'sidebar6'}">
-        <div class="sidemenu" th:fragment="sidebar">
-        <ul>
-            <li><a href="#"><div class="sideItem">조직도</div></a></li>
-            <li><a href="#"><div class="sideItem">전체 주소록</div></a></li>
-        </ul>
-        </div>
+<div th:if="${side == 'sidebar5'}">
+    <div class="sidemenu" th:fragment="sidebar">
+    <ul>
+        <li><a href="#"><div class="sideItem">새 자료</div></a></li>
+        <li><a href="#"><div class="sideItem">전체 자료</div></a></li>
+    </ul>
     </div>
+</div>
 
-    <div th:if="${side == 'sidebar7'}">
-        <div class="sidemenu" th:fragment="sidebar">
-        <ul>
-            <li><a href="#"><div class="sideItem">새 결제</div></a></li>
-                <li><a href="#"><div class="sideItem">휴가 신청</div></a></li>
-                <li><a href="#"><div class="sideItem">근무 변경</div></a></li>
-                <li><a href="#"><div class="sideItem">경비 청구</div></a></li>
-                <li><a href="#"><div class="sideItem">재직증명서 신청</div></a></li>
-            <li><a href="#"><div class="sideItem">결제현황</div></a></li>
-        </ul>
-        </div>
+<div th:if="${side == 'sidebar6'}">
+    <div class="sidemenu" th:fragment="sidebar">
+    <ul>
+        <li><a href="#"><div class="sideItem">조직도</div></a></li>
+        <li><a href="#"><div class="sideItem">전체 주소록</div></a></li>
+    </ul>
     </div>
+</div>
 
-    <div th:if="${side == 'sidebar8'}">
-        <div class="sidemenu" th:fragment="sidebar">
-        <ul>
-            <li><a href="#"><div class="sideItem">사원관리</div></a></li>
-            <li><a href="#"><div class="sideItem">공지관리</div></a></li>
-            <li><a href="#"><div class="sideItem">근태관리</div></a></li>
-            <li><a href="#"><div class="sideItem">급여관리</div></a></li>
-        </ul>
-        </div>
+<div th:if="${side == 'sidebar7'}">
+    <div class="sidemenu" th:fragment="sidebar">
+    <ul>
+        <li><a href="#"><div class="sideItem">새 결제</div></a></li>
+            <li><a href="#"><div class="sideItem">휴가 신청</div></a></li>
+            <li><a href="#"><div class="sideItem">근무 변경</div></a></li>
+            <li><a href="#"><div class="sideItem">경비 청구</div></a></li>
+            <li><a href="#"><div class="sideItem">재직증명서 신청</div></a></li>
+        <li><a href="#"><div class="sideItem">결제현황</div></a></li>
+    </ul>
     </div>
+</div>
+
+<div th:if="${side == 'sidebar8'}">
+    <div class="sidemenu" th:fragment="sidebar">
+    <ul>
+        <li><a href="#"><div class="sideItem">사원관리</div></a></li>
+        <li><a href="#"><div class="sideItem">공지관리</div></a></li>
+        <li><a href="#"><div class="sideItem">근태관리</div></a></li>
+        <li><a href="#"><div class="sideItem">급여관리</div></a></li>
+    </ul>
+    </div>
+</div>
