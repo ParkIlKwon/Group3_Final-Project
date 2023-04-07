@@ -2,7 +2,12 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="/css/sidebar.css">
+<link rel="stylesheet" href="/assets/material-dashboard.css">
 
+
+<!--    <div id="addFn">새 일정</div>
+    <label for="expand-menu"><div>메뉴</div></label>
+    <input type="checkbox" id="expand-menu" name="expand-menu">-->
 <div th:if="${side == 'sidebar1'}">
     <div class="sidemenu" th:fragment="sidebar">
     <ul>
@@ -21,7 +26,9 @@
 <div th:if="${side == 'sidebar2'}">
     <div class="sidemenu" th:fragment="sidebar">
     <ul>
-        <li><a href="/board/newtaskboard"><div class="sideItem">새 프로젝트</div></a></li>
+        <li><a href="/board/newtaskboard">
+            <div class="sideItem">새 프로젝트</div>
+        </a></li>
         <li><a href="#"><div class="sideItem">내 할일</div></a></li>
         <li><a href="#"><div class="sideItem">팀 할일</div></a></li>
     </ul>
