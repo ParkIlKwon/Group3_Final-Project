@@ -25,7 +25,6 @@ public class MenuController {
     public String MoveProject(Model model){
         List<BoardTask> tlist = boardService.findTasks();
         model.addAttribute("tlist", tlist);
-        model.addAttribute("banner","banner2");
         model.addAttribute("side","sidebar2");
         model.addAttribute("gnb","topMenu2");
         return "/pages/project";
@@ -34,7 +33,6 @@ public class MenuController {
 
     @GetMapping("/moveMail")
     public String MoveMail(Model model){
-        model.addAttribute("banner","banner3");
         model.addAttribute("side","sidebar3");
         model.addAttribute("gnb","topMenu3");
         return "/pages/mail";
@@ -43,16 +41,14 @@ public class MenuController {
 
     @GetMapping("/moveCalender")
     public String MoveCalender(Model model){
-        model.addAttribute("banner","banner4");
         model.addAttribute("side","sidebar4");
         model.addAttribute("gnb","topMenu4");
-        return "/pages/calender"; //캘린더화면 구현후 /calender/main으로 변경
-        /*return "/pages/calender"; //캘린더화면 구현후 /calender/main으로 변경*/
+        /*return "/pages/calender";*/
+        return "/calender/main"; //캘린더화면 구현후 /calender/main으로 변경
     }
 
     @GetMapping("/moveDrive")
     public String MoveDrive(Model model){
-        model.addAttribute("banner","banner5");
         model.addAttribute("side","sidebar5");
         model.addAttribute("gnb","topMenu5");
         return "/pages/drive";
@@ -61,7 +57,6 @@ public class MenuController {
 
     @GetMapping("/moveMembers")
     public String MoveMember(Model model){
-        model.addAttribute("banner","banner6");
         model.addAttribute("side","sidebar6");
         model.addAttribute("gnb","topMenu6");
         return "pages/members";
@@ -70,7 +65,6 @@ public class MenuController {
 
     @GetMapping("/moveConfirm")
     public String MoveConfirm(Model model){
-        model.addAttribute("banner","banner7");
         model.addAttribute("side","sidebar7");
         model.addAttribute("gnb","topMenu7");
         return "pages/confirm";
@@ -79,7 +73,6 @@ public class MenuController {
 
     @GetMapping("/moveAdmin")
     public String MoveAdmin(Model model){
-        model.addAttribute("banner","banner8");
         model.addAttribute("side","sidebar8");
         model.addAttribute("gnb","topMenu8");
         return "pages/admin"; //관리자 화면 구성후 링크 수정예정
