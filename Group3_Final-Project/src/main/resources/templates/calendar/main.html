@@ -36,7 +36,7 @@
 
                             </div>
                             <!--    -->
-                            <div class="col" style="background-color: antiquewhite;">
+                            <div class="col" style="background-color: #ababab;">
 
                                 <div id='external-events'>
                                     <h4>Draggable Events   WORK IN PROGRESS  </h4>
@@ -52,6 +52,19 @@
                                         document.addEventListener('DOMContentLoaded', function() {
                                             //var Draggable = FullCalendarInteraction.Draggable;
                                             var calendarEl = document.getElementById('calendar');
+                                            let CalData;
+                                            $.ajax({
+                                                type:"GET", //겟으로 받아옴 .
+                                                url:"/Calendar",
+                                                async: false, //비동기 -> 동기로 바꿈 . 전역변수에 값 넣어서 쓸수 있게됨
+                                                success:function (res){
+                                                    console.log(res);
+                                                    CalData = res;
+                                                }
+                                            })
+
+                                            console.log(CalData);
+
                                             var calendar = new FullCalendar.Calendar(calendarEl, {
                                                 initialView: 'dayGridMonth',
                                                 droppable: true,
@@ -62,25 +75,11 @@
                                                 dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
                                                 locale: 'ko', // 한국어 설정
 
-                                                events: [
-
-                                                    $.ajax({
-                                                        type:"GET",
-                                                        url:"/Calendar",
-                                                        data:{},
-                                                        success:function (res){
-                                                            console.log(res);
-
-                                                        }
-                                                    })
-
-                                                ]
-
+                                                events: CalData
 
                                             });
 
                                             calendar.render();
-                                            new Draggable(draggableEl);
 
                                         });
 
@@ -89,7 +88,7 @@
                                 </div>
 
                             </div>
-                    </div>
+
                     </section>
 
                     </div>

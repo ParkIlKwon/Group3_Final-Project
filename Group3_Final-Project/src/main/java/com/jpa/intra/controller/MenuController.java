@@ -44,9 +44,6 @@ public class MenuController {
         model.addAttribute("gnb","topMenu4");
 
        return "/calendar/main";
-//        return "/calender/main";
-
-//        return "/calendar/main"; //캘린더화면 구현후 /calender/main으로 변경
 
     }
 

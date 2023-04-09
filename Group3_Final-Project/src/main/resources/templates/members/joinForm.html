@@ -3,20 +3,19 @@
 <!DOCTYPE HTML>
 
 
-
-<head th:replace="~{/fragments/header-1 :: header}">
     <meta charset="UTF-8">
 </head>
 
 <body>
 
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{/fragments/header-1 :: header}">
-<body>
+<head th:replace="~{/fragments/header :: header}"></head>
+
+<aside th:replace="/fragments/aside"></aside>
 
 <div class="row">
-    <div th:replace="~{/fragments/bodyHeader :: bodyHeader}"></div>
 </div>
+
 <section> <!--/members/addmember 로 post 형식으로 보내줌 .-->
     <!--스크립트(ajax)로 해도 좋을것같음-->
     <form action="/members/addmember" method="post" th:object="${MemberDTO}">
@@ -63,9 +62,8 @@
     </div>
 
 </section>
-<div th:replace="~{/fragments/footer :: footer}"></div>
 
-</body>
+
 
 <script>
 

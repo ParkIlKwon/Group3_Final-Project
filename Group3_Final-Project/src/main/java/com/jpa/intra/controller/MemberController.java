@@ -4,18 +4,20 @@ import com.jpa.intra.domain.Address;
 import com.jpa.intra.domain.Member;
 import com.jpa.intra.query.LoginDTO;
 import com.jpa.intra.query.MemberDTO;
+import com.jpa.intra.service.MailService;
 import com.jpa.intra.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
 
 @Controller //model 을 지정 , view를 반환 시켜주는 컨트롤러 역활
 @RequiredArgsConstructor //생성자 주입
@@ -28,7 +30,7 @@ public class MemberController {
 
         model.addAttribute("memberDTO",new MemberDTO());
         //memberDTO 형식으로 생성자 만들어서 보내줌 .
-        return "members/joinForm";
+        return "pages/joinForm";
     }
 
     @PostMapping() //form 에서 post형식으로
@@ -39,7 +41,7 @@ public class MemberController {
             model.addAttribute("errorMsg", "내용을 전부 채워주세요.");
             model.addAttribute("MemberDTO",new MemberDTO());
             //model.addAttribute >> html로 객체 보내줌 . setAttribute랑 비슷한 역활  
-            return "members/joinForm"; //폼으로 다시 감 .
+            return "pages/joinForm"; //폼으로 다시 감 .
         }
 
         Member m = new Member(); // 받아온 정보 Member 객체로 파싱
@@ -81,6 +83,20 @@ public class MemberController {
         HttpSession session = request.getSession();
         session.invalidate();
         return "redirect:/";
+    }
+
+
+    @Autowired
+    MailService registerMail;
+
+
+    @PostMapping("/mailConfirm")
+    @ResponseBody
+    String mailConfirm(@RequestParam("email") String email) throws Exception {
+
+        String code = registerMail.sendSimpleMessage(email);
+        System.out.println("인증코드 : " + code);
+        return code;
     }
 
 
