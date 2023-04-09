@@ -19,4 +19,9 @@ public class PageController {
     public String pagesProject(){
         return "/pages/project";
     }
+
+    @GetMapping("/login")
+    public String pageLogin(){
+        return "/members/login";
+    }
 }
