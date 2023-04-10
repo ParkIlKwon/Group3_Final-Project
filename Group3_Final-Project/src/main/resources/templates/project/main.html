@@ -1,149 +1,137 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-<head th:replace="~{/fragments/header-1 :: header-1}"><title></title></head>
-<body>
-<div th:replace="~{/fragments/bodyHeader :: bodyHeader}"></div>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/header :: header}"></head>
 
-<section>
-  <div class="row">
-    <!-- 헤더 -->
-    <div class="section-header col-1">
-      <a>새 업무</a>
-    </div>
-    <div class="section-header col-11" style="display: flex; justify-content: left">
-      <span>전체 업무(사이드바 클릭따라 변경)</span>
-    </div>
-    <!--    사이드바
-          전체업무, 담당 업무, 보낸 업무 -->
-    <div class="col-1" style="font-size: 13px;">
-      <div>
-        <div th:replace="/fragments/sidebar.html"></div>
-      </div>
-    </div>
+<body class="g-sidenav-show  bg-gray-100">
 
-    <!--       가운데
-              체크박스 선택 : 삭제 / 정렬 : 날짜순(기본),이름순 -->
-    <div class="col-3" style="border: 1px solid black;">
-      <form action="" method="">
-        <!--<nav class="navbar navbar-expand-lg">
 
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="content-header nav-link"> <input type="checkbox" /> </a>
-              </li>
-              <li class="nav-item">
-                <a class="content-header nav-link" href="#">완료하기</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="content-header nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  등록일
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">상태</a></li>
-                  <li><a class="dropdown-item" href="#">만기일</a></li>
-                </ul>
+<!--   사이드 : aside -->
+<aside th:replace="/fragments/aside"></aside>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+  <!-- body Top Navbar : bodyTop  -->
+  <nav th:replace="fragments/bodyTop"></nav>
+  <!-- Start Content -->
+  <div class="container-fluid py-4">
+    <!--      Left : 업무 목록 -->
+    <div class="row" >
+      <div class="col-md-4 mt-4">
+        <div class="card" style="height: 100vh;">
+          <div class="card-header pb-0 px-3">
+            <button type="button" class="btn btn-primary" onclick="writeForm()">new task</button>
+            <hr>
+          </div>
+
+          <div class="card-body pt-4 p-3 task-main-left" th:with="tlist=${tlist}">
+            <h6 class="mb-0">업무 목록</h6>
+            <ul class="list-group task-main-left-tlist-section" th:each="vo:${tlist}" onclick="showTlistContents(this)">
+              <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg task-main-left-tlist-section">
+                <div class="d-flex flex-column task-main-left-tlist-section-component">
+                  <input type="hidden" class="task-board-id" th:value="${vo.id}">
+                  <input type="hidden" class="task-board-content" th:value="${vo.boardContent}">
+                  <input type="hidden" class="task-board-create-date" th:value="${vo.createDate}">
+                  <input type="hidden" class="task-board-update-date" th:value="${vo.updateDate}">
+                  <input type="hidden" class="task-board-start-date" th:value="${vo.startDate}">
+                  <input type="hidden" class="task-board-end-date" th:value="${vo.endDate}">
+                  <h6 class="mb-3 text-sm task-board-title" th:text="${vo.boardTitle}"></h6>
+                  <span class="mb-2 text-xs task-board-small-element">담당자: <span class="text-dark font-weight-bold ms-sm-2 task-board-responsibleMember" th:text="${vo.responsibleMemNum.mem_name}"></span></span>
+                  <span class="mb-2 text-xs task-board-small-element">참조부서: <span class="text-dark ms-sm-2 font-weight-bold task-board-responsibleTeam" th:text="${vo.teamNum.team_name}"></span></span>
+                  <h6 id="task-board-progress" th:class="${vo.progress == 'TO_DO' ? 'task-status-to-do' : (vo.progress == 'IN_PROGRESS' ? 'task-status-in-progress' : 'task-status-done')}">
+                    <span th:text="${vo.progress == 'TO_DO'} ? '할 일' : (${vo.progress == 'IN_PROGRESS'} ? '진행 중' : '완료')"></span>&nbsp;&nbsp;
+                    <span class="badge bg-secondary"></span>
+                  </h6>
+                </div>
+                <div class="ms-auto text-end">
+                  <a class="btn btn-link text-danger text-gradient px-3 mb-0 delete-board-task" href="/board/deleteboardtask"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                  <a class="btn btn-link text-dark px-3 mb-0" href="#"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                </div>
               </li>
             </ul>
+
           </div>
 
-        </nav>-->
+        </div>
+      </div>
 
+      <!--        Right : 업무 상세 정보 -->
+      <div class="col-md-8 mt-4">
+        <div class="card h-100 mb-4 task-main-right">
+          <input type="hidden" class="task-board-detail-id">
 
+          <div class="card-header pb-0 px-3">
+            <div class="row">
+              <div class="col-md-6">
+                <h6 class="mb-0">선택한 업무</h6>
+              </div>
+              <div class="col-md-6 d-flex justify-content-end align-items-center">
+                <i class="far fa-calendar-alt me-2"></i>
+                <small class="task-board-detail-create-date"></small>
 
+                <select class="task-board-detail-status" id="taskStatus">
+                  <option value="TO_DO">할일</option>
+                  <option value="IN_PROGRESS">진행중</option>
+                  <option value="DONE">완료</option>
+                </select>
 
-        <!--<table class="table" style="font-size: 13px;">
-          <thead>
-          </thead>
-          <tbody>
-          <tr>
-            <td><input type="checkbox" name=""/></td>
-            <td><button>찜</button></td>
-            <td style="width: 50%;">
-              <span>업무1</span><br>
-              <span>등록자</span>
-            </td>
-            <td>
-              <span>상태</span>
-              <span>아이콘</span>
-            </td>
-          </tr>
-          </tbody>
-        </table>-->
-
-        <div class="task-main-left" th:with="tlist=${tlist}">
-          <div th:each="vo:${tlist}" class="task-main-left-tlist-section" onclick="showTlistContents(this)">
-            <div class="task-main-left-tlist-section-component">
-              <input type="hidden" class="task-board-id" th:value="${vo.id}">
-              <input type="hidden" class="task-board-content" th:value="${vo.boardContent}">
-              <input type="hidden" class="task-board-create-date" th:value="${vo.createDate}">
-              <input type="hidden" class="task-board-update-date" th:value="${vo.updateDate}">
-              <h6 class="task-board-title" th:text="${vo.boardTitle}"></h6>
-              <h6 class="task-board-small-element">
-                담당자 :<span class="task-board-responsibleMember" th:text="${vo.responsibleMemNum.mem_name}"></span>
-              </h6>
-              <h6 class="task-board-small-element">
-                참조자 :<span class="task-board-responsibleTeam" th:text="${vo.teamNum.team_name}"></span>
-              </h6>
+              </div>
             </div>
-            <h6 id="task-board-progress" th:class="${vo.progress == 'TO_DO' ? 'task-status-to-do' : (vo.progress == 'IN_PROGRESS' ? 'task-status-in-progress' : 'task-status-done')}">
-              <span th:text="${vo.progress == 'TO_DO'} ? '할 일' : (${vo.progress == 'IN_PROGRESS'} ? '진행 중' : '완료')"></span>&nbsp;&nbsp;
-              <span class="badge bg-secondary"></span>
-            </h6>
+          </div>
+
+          <div class="card-body pt-4 p-3">
+            <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3 task-board-detail-title"></h6>
+            <ul class="list-group">
+              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                <div class="d-flex align-items-center">
+                  <div class="d-flex flex-column">
+                    <h6 class="mb-1 text-dark text-sm">담당자</h6>
+                    <span class="text-xs task-board-detail-responsibleMember"></span>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold task-board-detail-start-date"></div>
+              </li>
+
+              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                <div class="d-flex align-items-center">
+                  <div class="d-flex flex-column">
+                    <h6 class="mb-1 text-dark text-sm">참조부서</h6>
+                    <span class="text-xs task-board-detail-responsibleTeam"></span>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold task-board-detail-end-date"></div>
+              </li>
+            </ul>
+            <hr>
+            <h6 class="mb-0">업무 상세</h6>
+            <br>
+            <section class="task-board-detail-content"></section>
           </div>
         </div>
-
-
-      </form>
-    </div>
-
-    <!--    오른쪽 : 상세정보
-           가운데 목록에서 파일이름 누르면 상세정보에 표기 -->
-    <div class="col-8" style="background-color: antiquewhite; border: 1px solid black;">
-      <div class="task-main-right">
-        <input type="hidden" class="task-board-detail-id">
-        <table class="table" style="vertical-align: middle; font-size: 13px;">
-          <tr>
-            <td>
-              <select class="task-board-detail-status" id="taskStatus">
-                <option value="TO_DO">할일</option>
-                <option value="IN_PROGRESS">진행중</option>
-                <option value="DONE">완료</option>
-              </select>
-              <span style="margin-left: 20px;"><a>편집</a></span>
-              <span style="margin-left: 20px;"><a href="/board/deleteboardtask" class="delete-board-task">삭제</a></span>
-            </td>
-          </tr>
-          <tr>
-            <th><strong class="task-board-detail-title"></strong></th>
-          </tr>
-          <tr>
-            <td>
-              등록자 : <span class="task-board-detail-responsibleMember"></span><br>
-              담당자 : <span class="task-board-detail-responsibleTeam"></span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <section class="task-board-detail-content">
-                업무 내용 ( .html)
-
-              </section>
-            </td>
-          </tr>
-        </table>
       </div>
+
     </div>
+
+    <!-- footer -->
+    <footer th:replace="/fragments/footer"></footer>
 
   </div>
-</section>
+</main>
+<!-- plugin -->
+<div th:replace="/fragments/plugin"></div>
 
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
+  //writeT 임시버튼 클릭이벤트
+  function writeForm() {
+    console.log();
+    location.href="/board/newtaskboard";
+  }
+
+
   //게시글 클릭 시, 우측단에 게시글 상세정보 작성해주는 함수
   function showTlistContents(data){
+    $('.task-main-right').show();
     //업무진행도 작성
     var boardProgress = data.querySelector('#task-board-progress').className;
     var statusSelect = document.getElementById('taskStatus');
@@ -173,16 +161,30 @@
     detailContent.innerHTML=data.querySelector('.task-board-content').value;
 
     var detailId = document.querySelector('.task-board-detail-id');
-    detailId.value = "";
-    detailId.value = data.querySelector('.task-board-id').value;
+    detailId.value="";
+    detailId.value=data.querySelector('.task-board-id').value;
+
+    var createDate = document.querySelector('.task-board-detail-create-date');
+    createDate.textContent="";
+    createDate.textContent=data.querySelector('.task-board-create-date').value;
+
+    var startDate = document.querySelector('.task-board-detail-start-date');
+    startDate.textContent="";
+    startDate.textContent="업무 시작날짜 : "+data.querySelector('.task-board-start-date').value;
+
+    var endDate = document.querySelector('.task-board-detail-end-date');
+    endDate.textContent="";
+    endDate.textContent="업무 종료날짜 : "+data.querySelector('.task-board-end-date').value;
+
   }
 
   //게시글 삭제 ajax함수
   $(document).ready(function() {
     $('.delete-board-task').on('click', function(e) {
       e.preventDefault();
-      var boardId=document.querySelector('.task-board-detail-id').value;
+      var boardId=document.querySelector('.task-board-id').value;
       var url = $(this).attr('href');
+      console.log("boardId : "+boardId+", url : "+url)
 
       $.ajax({
         url: url,
@@ -190,13 +192,13 @@
         contentType: 'application/json',
         data: JSON.stringify({ boardId: boardId })
       })
-      .done(function(response) {
-        alert('게시글이 삭제되었습니다.');
-        location.href="/moveProject";
-      })
-      .fail(function(jqXHR, textStatus, errorThrown) {
-        alert('게시글 삭제에 실패했습니다.');
-      });
+              .done(function(response) {
+                alert('게시글이 삭제되었습니다.');
+                location.href="/moveProject";
+              })
+              .fail(function(jqXHR, textStatus, errorThrown) {
+                alert('게시글 삭제에 실패했습니다.');
+              });
     });
   });
 
@@ -212,12 +214,12 @@
         method: 'POST',
         data: { boardId: boardId, boardProgress: progress }
       })
-      .done(function(response) {
-        location.href="/moveProject";
-      })
-      .fail(function(jqXHR, textStatus, errorThrown) {
-        alert('게시글 삭제에 실패했습니다.');
-      });
+              .done(function(response) {
+                location.href="/moveProject";
+              })
+              .fail(function(jqXHR, textStatus, errorThrown) {
+                alert('게시글 삭제에 실패했습니다.');
+              });
 
     });
   });
@@ -225,70 +227,44 @@
 </script>
 
 <style>
-* {
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:'Roboto', sans-serif;
-}
-
-body {
-  background-color:#f4f6f9;
-}
-.task-board-title {
-  font-size:20px;
-  font-weight:bold;
-}
-.task-board-small-element {
-  font-size:12px;
-}
-.task-main-left {
-  border-right:1px solid #dee2e6;
-  grid-area:left;
-  background-color:#ffffff;
-  overflow-y:scroll;
-}
-/*업무 게시판 리스트 스크롤바 관련*/
-.task-main-left::-webkit-scrollbar {
-  width:0px;
-}
-.task-main-left::-webkit-scrollbar-thumb {
-  background:rgba(0, 0, 0, 0.5);
-}
-.task-main-left::-webkit-scrollbar-track {
-  background:transparent;
-}
-
-.task-main-left-tlist-section {
-  height:100px;
-  display:flex;
-  justify-content: space-between;
-  align-items:center;
-  padding:0 10px;
-  border-bottom:1px solid #dee2e6;
-  cursor:pointer;
-}
-.task-main-left-tlist-section:hover {
-  background-color:#f4f6f9;
-}
-.task-status-to-do {
-  color:limegreen;
-  font-size:11px;
-}
-.task-status-in-progress {
-  color:blue;
-  font-size:12px;
-}
-.task-status-done {
-  color:gray;
-  font-size:12px;
-}
+  /*업무 게시판 리스트 스크롤바 관련*/
+  .task-main-left::-webkit-scrollbar {
+    width:0px;
+  }
+  .task-main-left::-webkit-scrollbar-thumb {
+    background:rgba(0, 0, 0, 0.5);
+  }
+  .task-main-left::-webkit-scrollbar-track {
+    background:transparent;
+  }
+  .task-main-left-tlist-section:hover {
+    background-color:#f4f6f9;
+  }
+  .task-main-right {
+    display: none;
+  }
+  .task-board-detail-status {
+    margin-left:10px;
+  }
+  .task-status-to-do {
+    color:limegreen;
+    font-size:11px;
+  }
+  .task-status-in-progress {
+    color:blue;
+    font-size:11px;
+  }
+  .task-status-done {
+    color:gray;
+    font-size:11px;
+  }
+  hr {
+    background:gray;
+    height:1px;
+    border:0;
+  }
 </style>
 
-
-
-
-
-
 </body>
+
 </html>
