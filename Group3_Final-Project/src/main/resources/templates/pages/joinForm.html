@@ -61,27 +61,27 @@
                                     <input type="text" id="address_name" name="address_name" hidden="hidden">
                                     <input type="text" id="address_road" name="address_road" hidden="hidden">
 
+                                    <h1> - 회원가입 이메일 TEST -</h1>
+
+                                    <div class="form-group last mb-4 email_input">
+                                        <label for="memail" id="mailTxt">이메일을 입력해주세요</label>
+                                        <input type="text" class="form-control" name="memail" id="memail">
+                                    </div>
+                                    <!-- <span>이메일 인증번호</span> -->
+                                    <button class="btn btn-outline-primary" type="button" id="checkEmail">인증번호</button>
+
+
+                                    <div class="form-group last mb-4 check_input">
+                                        <label for="memailconfirm" id="memailconfirmTxt">인증번호를 입력해주세요</label>
+                                        <input type="text" class="form-control" id="memailconfirm">
+                                    </div>
+
                                     <div class="d-flex justify-content-center">
                                         <button type="submit"
                                                 class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
                                     </div>
-
-
                                 </form>
-                                <h1> - 회원가입 이메일 TEST -</h1>
 
-                                <div class="form-group last mb-4 email_input">
-                                    <label for="memail" id="mailTxt">이메일을 입력해주세요</label>
-                                    <input type="text" class="form-control" name="memail" id="memail">
-                                </div>
-                                <!-- <span>이메일 인증번호</span> -->
-                                <button class="btn btn-outline-primary" type="button" id="checkEmail">인증번호</button>
-
-
-                                <div class="form-group last mb-4 check_input">
-                                    <label for="memailconfirm" id="memailconfirmTxt">인증번호를 입력해주세요</label>
-                                    <input type="text" class="form-control" id="memailconfirm">
-                                </div>
 
 
                             </div>
@@ -133,11 +133,9 @@
                 alert("해당 이메일로 인증번호 발송이 완료되었습니다. \n 확인부탁드립니다.")
                 //console.log("data : "+data); 자바에서 생성된 코드 확인
                 if($('#memail').val() == data){ //랜덤코드랑 입력코드랑 일치하면
-                    alert("맞습니다.")
+                    alert("인증확인 되었습니다.")
                     CheckEmail = true; //이메일 확인 true로 .
                 }
-
-
             }
         })
     })
