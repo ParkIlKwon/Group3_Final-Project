@@ -7,7 +7,6 @@ import com.jpa.intra.query.MemberDTO;
 import com.jpa.intra.service.MailService;
 import com.jpa.intra.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -84,6 +83,24 @@ public class MemberController {
         session.invalidate();
         return "redirect:/";
     }
+
+//    @PostMapping("/login")
+//    @ResponseBody
+//    public String login(@RequestParam("id") String id,
+//                        @RequestParam("pw") String pw) {
+//        System.out.println(id + pw);
+//        // 로그인 처리 로직을 구현합니다.
+//        // id, pw, rememberMe 값을 이용해 로그인 처리를 수행하고, 처리 결과를 응답으로 반환합니다.
+//        // 예시로 로그인 성공 시 "success"를 반환하고, 실패 시 "failure"를 반환합니다.
+//        if (service.Login(id,pw) != null) {
+//            return "redirect:/";
+//        } else {
+//            return "redirect:/";
+//        }
+//
+//    }
+
+
 
 
     @Autowired
