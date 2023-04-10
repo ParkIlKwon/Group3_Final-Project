@@ -43,7 +43,7 @@ public class init {
         public void dbInit1() {
             // add Team DataSample
             Team t=new Team();
-            t.setTeam_name("dummy_department");
+            t.setTeam_name("영업부");
             em.persist(t);
 
             // add Member DataSample
@@ -56,6 +56,14 @@ public class init {
             t.getMembers().add(m);
             m.setTeam(t);
         }
+
+
+
+
+
+
+
+
 
 
 
