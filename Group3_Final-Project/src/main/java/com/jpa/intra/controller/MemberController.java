@@ -60,7 +60,7 @@ public class MemberController {
 
         model.addAttribute("memberDTO",new MemberDTO());
         //memberDTO 형식으로 생성자 만들어서 보내줌 .
-        return "members/loginForm";
+        return "pages/loginForm";
     }
 
     @PostMapping("/login") //로그인 세션 사용       ,  memberDTO 형식으로 생성자 만들어서 보내줌 .
