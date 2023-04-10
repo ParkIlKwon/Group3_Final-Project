@@ -29,6 +29,8 @@
                     <input type="hidden" class="task-board-content" th:value="${vo.boardContent}">
                     <input type="hidden" class="task-board-create-date" th:value="${vo.createDate}">
                     <input type="hidden" class="task-board-update-date" th:value="${vo.updateDate}">
+                    <input type="hidden" class="task-board-start-date" th:value="${vo.startDate}">
+                    <input type="hidden" class="task-board-end-date" th:value="${vo.endDate}">
                     <h6 class="mb-3 text-sm task-board-title" th:text="${vo.boardTitle}"></h6>
                     <span class="mb-2 text-xs task-board-small-element">담당자: <span class="text-dark font-weight-bold ms-sm-2 task-board-responsibleMember" th:text="${vo.responsibleMemNum.mem_name}"></span></span>
                     <span class="mb-2 text-xs task-board-small-element">참조부서: <span class="text-dark ms-sm-2 font-weight-bold task-board-responsibleTeam" th:text="${vo.teamNum.team_name}"></span></span>
@@ -83,9 +85,7 @@
                       <span class="text-xs task-board-detail-responsibleMember"></span>
                     </div>
                   </div>
-                  <!--<div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
-                    - $ 2,500
-                  </div>-->
+                  <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold task-board-detail-start-date"></div>
                 </li>
 
                 <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
@@ -95,10 +95,12 @@
                       <span class="text-xs task-board-detail-responsibleTeam"></span>
                     </div>
                   </div>
+                  <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold task-board-detail-end-date"></div>
                 </li>
               </ul>
-
-              <h6 class="text-uppercase text-body text-xs font-weight-bolder my-3">업무 상세</h6>
+              <hr>
+              <h6 class="mb-0">업무 상세</h6>
+              <br>
               <section class="task-board-detail-content"></section>
             </div>
           </div>
@@ -156,12 +158,20 @@
     detailContent.innerHTML=data.querySelector('.task-board-content').value;
 
     var detailId = document.querySelector('.task-board-detail-id');
-    detailId.value = "";
-    detailId.value = data.querySelector('.task-board-id').value;
+    detailId.value="";
+    detailId.value=data.querySelector('.task-board-id').value;
 
     var createDate = document.querySelector('.task-board-detail-create-date');
-    createDate.textContent = "";
-    createDate.textContent = data.querySelector('.task-board-create-date').value;
+    createDate.textContent="";
+    createDate.textContent=data.querySelector('.task-board-create-date').value;
+
+    var startDate = document.querySelector('.task-board-detail-start-date');
+    startDate.textContent="";
+    startDate.textContent="업무 시작날짜 : "+data.querySelector('.task-board-start-date').value;
+
+    var endDate = document.querySelector('.task-board-detail-end-date');
+    endDate.textContent="";
+    endDate.textContent="업무 종료날짜 : "+data.querySelector('.task-board-end-date').value;
 
   }
 
@@ -244,6 +254,11 @@
   .task-status-done {
     color:gray;
     font-size:11px;
+  }
+  hr {
+    background:gray;
+    height:1px;
+    border:0;
   }
 </style>
 
