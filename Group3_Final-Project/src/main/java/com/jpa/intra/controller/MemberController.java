@@ -71,7 +71,7 @@ public class MemberController {
 
         //세션으로 로그인 아이디를 넘겨줌 .
         if(m == null){
-            return "members/loginForm";
+            return "pages/loginForm";
         }
         session.setAttribute("log",m.getMem_id());
         return "redirect:/";
