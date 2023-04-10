@@ -7,7 +7,6 @@ import com.jpa.intra.query.MemberDTO;
 import com.jpa.intra.service.MailService;
 import com.jpa.intra.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

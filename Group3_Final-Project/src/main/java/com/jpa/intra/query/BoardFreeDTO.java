@@ -12,4 +12,5 @@ public class BoardFreeDTO {
     private String boardTitle;
     private String boardContent;
     private String createDate;
+    private String boardWriter;
 }
