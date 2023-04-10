@@ -2,7 +2,6 @@ package com.jpa.intra.controller;
 
 import com.jpa.intra.domain.Address;
 import com.jpa.intra.domain.Member;
-import com.jpa.intra.query.LoginDTO;
 import com.jpa.intra.query.MemberDTO;
 import com.jpa.intra.service.MailService;
 import com.jpa.intra.service.MemberService;
@@ -62,20 +61,20 @@ public class MemberController {
         return "pages/loginForm";
     }
 
-    @PostMapping("/login") //로그인 세션 사용       ,  memberDTO 형식으로 생성자 만들어서 보내줌 .
-    public String LoginPro(HttpServletRequest request, LoginDTO logMem){
-        HttpSession session = request.getSession();
-
-        Member m = service.Login(logMem.getId(),logMem.getPw());
-
-        //세션으로 로그인 아이디를 넘겨줌 .
-        if(m == null){
-            return "pages/loginForm";
-        }
-        session.setAttribute("log",m.getMem_id());
-        return "redirect:/";
-
-    }
+//    @PostMapping("/login") //로그인 세션 사용       ,  memberDTO 형식으로 생성자 만들어서 보내줌 .
+//    public String LoginPro(HttpServletRequest request, LoginDTO logMem){
+//        HttpSession session = request.getSession();
+//
+//        Member m = service.Login(logMem.getId(),logMem.getPw());
+//
+//        //세션으로 로그인 아이디를 넘겨줌 .
+//        if(m == null){
+//            return "pages/loginForm";
+//        }
+//        session.setAttribute("log",m.getMem_id());
+//        return "redirect:/";
+//
+//    }
 
     @GetMapping("/logout")
     public String Logout(HttpServletRequest request){
@@ -84,21 +83,21 @@ public class MemberController {
         return "redirect:/";
     }
 
-//    @PostMapping("/login")
-//    @ResponseBody
-//    public String login(@RequestParam("id") String id,
-//                        @RequestParam("pw") String pw) {
-//        System.out.println(id + pw);
-//        // 로그인 처리 로직을 구현합니다.
-//        // id, pw, rememberMe 값을 이용해 로그인 처리를 수행하고, 처리 결과를 응답으로 반환합니다.
-//        // 예시로 로그인 성공 시 "success"를 반환하고, 실패 시 "failure"를 반환합니다.
-//        if (service.Login(id,pw) != null) {
-//            return "redirect:/";
-//        } else {
-//            return "redirect:/";
-//        }
-//
-//    }
+    @PostMapping("/login")
+    @ResponseBody
+    public String login(@RequestParam("id") String id,
+                        @RequestParam("pw") String pw) {
+        System.out.println(id + pw);
+        // 로그인 처리 로직을 구현합니다.
+        // id, pw, rememberMe 값을 이용해 로그인 처리를 수행하고, 처리 결과를 응답으로 반환합니다.
+        // 예시로 로그인 성공 시 "success"를 반환하고, 실패 시 "failure"를 반환합니다.
+        if (service.Login(id,pw) != null) {
+            return "redirect:/";
+        } else {
+            return "pages/loginForm";
+        }
+
+    }
 
 
 

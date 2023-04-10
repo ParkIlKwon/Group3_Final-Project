@@ -123,12 +123,17 @@
         const pw = $("#pw").val();
 
         $.ajax({
-            url:"members/login",
+            url:"/members/login",
             type:"POST",
             data:{id:id,
             pw:pw},
             success:function(data){
-                console.log(data);
+                alert("sss"+data);
+                $.ajax({
+                   url:"redirect:/",
+                    type:"get",
+                    data:""
+                });
             },
             error:function (data){
                 alert(data);
