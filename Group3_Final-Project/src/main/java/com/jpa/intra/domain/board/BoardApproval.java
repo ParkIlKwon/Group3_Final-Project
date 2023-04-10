@@ -20,20 +20,13 @@ public class BoardApproval extends BoardCommon {
     //결재시작일 (시작일과)
     //결재마감일 (마감일을 통해 언제까지 받아주는 사람이 이걸 승인 반려해줄지 기간관련정보)
     //결재상세정보 (결재 타입에 따라 다른 데이터를 넣을 수 있도록 JSON 타입으로 생성)
-<<<<<<< HEAD
 
-=======
-//    @ManyToOne
-//    @JoinColumn(name="mem_num")
-//    @Convert(converter= MemberConverter.class)
-//    private Member requestorMemNum;
-//
->>>>>>> main
+
 //    @ManyToOne
 //    @JoinColumn(name="mem_num")
 //    @Convert(converter= MemberConverter.class)
 //    private Member approverMemNum;
-<<<<<<< HEAD
+
 
     @Enumerated(EnumType.STRING)
     private ApprovalType approvalType;
@@ -43,14 +36,6 @@ public class BoardApproval extends BoardCommon {
     private String dueDate;
 
     private ObjectMapper approvalInfo;
-=======
-//
-//    private String approvalType;
-//    private String approvalStatus;
-//
-//    private String startDate;
-//    private String dueDate;
-//
-//    private ObjectMapper approvalInfo;
->>>>>>> main
+
+
 }
