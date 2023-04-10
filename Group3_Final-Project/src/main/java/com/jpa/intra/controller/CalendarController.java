@@ -31,6 +31,7 @@ public class CalendarController {
             event.put("title", t.getBoardTitle());
             event.put("start", t.getStartDate());
             event.put("end",t.getEndDate());
+            eventList.add(event);
         }
 
 //        event.put("start", LocalDate.now());
