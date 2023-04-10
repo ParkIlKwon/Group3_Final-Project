@@ -42,7 +42,9 @@ public class MenuController {
     public String MoveCalender(Model model){
         model.addAttribute("side","sidebar4");
         model.addAttribute("gnb","topMenu4");
-        return "/calendar/main"; //캘린더화면 구현후 /calender/main으로 변경
+
+       return "/calendar/main";
+
     }
 
     @GetMapping("/moveDrive")

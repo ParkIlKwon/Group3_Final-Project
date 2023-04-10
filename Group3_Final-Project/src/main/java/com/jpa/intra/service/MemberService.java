@@ -1,7 +1,7 @@
 package com.jpa.intra.service;
 
 import com.jpa.intra.domain.Member;
-import com.jpa.intra.repository.A_Member_Repository;
+import com.jpa.intra.repository.Member_Repository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class MemberService {
 
-    private final A_Member_Repository aMemberRepository;
+    private final Member_Repository aMemberRepository;
     @Transactional //DB에 적용시켜주는 어노테이션
     public void Join(Member member){
         aMemberRepository.save(member);

@@ -24,4 +24,5 @@ public abstract class BoardCommon {
     private String createDate;
     private String updateDate;
 
+
 }

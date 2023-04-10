@@ -1,7 +1,7 @@
 package com.jpa.intra.util;
 
 import com.jpa.intra.domain.Team;
-import com.jpa.intra.repository.B_Board_Repository;
+import com.jpa.intra.repository.Board_Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class TeamConverter implements Converter<String, Team>  {
 
     @Autowired
-    private B_Board_Repository bBoardRepository;
+    private Board_Repository bBoardRepository;
 
     // Team타입의 객체를 String으로 받아오기 때문에 다시 Team타입으로 변환해주다.
     @Override

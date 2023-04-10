@@ -73,6 +73,8 @@ public class BoardController {
         boardTask.setCreateDate(formattedDate); //작성일
         boardTask.setUpdateDate(null);  //수정일
         boardTask.setResponsibleMemNum(boardTaskDTO.getResponsibleMemNum());    //담당자번호
+        boardTask.setStartDate(boardTaskDTO.getStartDate());    //업무시작 날짜
+        boardTask.setEndDate(boardTaskDTO.getEndDate());    //업무 종료 날짜
         boardTask.setTeamNum(boardTaskDTO.getTeamNum());    //담당자의 팀번호
         boardTask.setProgress("TO_DO");  //진행상황("TO_DO","IN_PROGRESS","DONE") : 최초 저장은 무조건 "할 일"이기 때문에 "TO_DO"고정
 

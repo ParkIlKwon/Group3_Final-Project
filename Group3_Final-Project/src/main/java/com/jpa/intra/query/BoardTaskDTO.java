@@ -15,6 +15,8 @@ public class BoardTaskDTO {
     private String boardContent;
     private String createDate;
     private Member responsibleMemNum;
+    private String startDate;
+    private String endDate;
     private Team teamNum;
     private String progress;
 }

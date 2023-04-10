@@ -25,6 +25,14 @@
                 <label th:for="responsibleMmeNum">팀번호</label>
                 <input type="text" th:field="*{teamNum}" placeholder="제목을 입력하다.">
             </div>
+            <div class="form-group">
+                <label th:for="startDate">업무시작일</label>
+                <input type="date" th:field="*{startDate}" placeholder="시작일을 입력하다.">
+            </div>
+            <div class="form-group">
+                <label th:for="endDate">업무종료일</label>
+                <input type="date" th:field="*{endDate}" placeholder="종료일을 입력하다.">
+            </div>
 
             <button type="submit">제출</button>
         </form>

@@ -16,5 +16,6 @@ public class HomeController {
         model.addAttribute("banner","banner1");
         model.addAttribute("side","sidebar1");
         return "pages/dashboard";
+//        return "home";
     }
 }

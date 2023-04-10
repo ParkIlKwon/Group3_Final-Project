@@ -1,7 +1,7 @@
 package com.jpa.intra.util;
 
 import com.jpa.intra.domain.Member;
-import com.jpa.intra.repository.A_Member_Repository;
+import com.jpa.intra.repository.Member_Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class MemberConverter implements Converter<String, Member> {
 
     @Autowired
-    private A_Member_Repository aMemberRepository;
+    private Member_Repository aMemberRepository;
 
     // Member타입의 객체를 String으로 받아오기 때문에 다시 Member타입으로 변환해주다.
     @Override

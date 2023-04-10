@@ -4,6 +4,7 @@
 <head th:replace="~{/fragments/header :: header}"></head>
 
 <body class="g-sidenav-show  bg-gray-100">
+<button onclick="writeForm()">writeT</button>
 <!--   사이드 : aside -->
 <aside th:replace="/fragments/aside"></aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -19,54 +20,42 @@
               <h6 class="mb-0">업무 목록</h6>
             </div>
 
-            <div class="card-body pt-4 p-3">
-              <ul class="list-group">
-<!--                Start 예시 형식    -->
-                <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-3 text-sm">Oliver Liam</h6>
-                    <span class="mb-2 text-xs">Company Name: <span class="text-dark font-weight-bold ms-sm-2">Viking Burrito</span></span>
-                    <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">oliver@burrito.com</span></span>
-                    <span class="text-xs">VAT Number: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
+            <div class="card-body pt-4 p-3 task-main-left" th:with="tlist=${tlist}">
+
+              <ul class="list-group task-main-left-tlist-section" th:each="vo:${tlist}" onclick="showTlistContents(this)">
+                <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg task-main-left-tlist-section">
+                  <div class="d-flex flex-column task-main-left-tlist-section-component">
+                    <input type="hidden" class="task-board-id" th:value="${vo.id}">
+                    <input type="hidden" class="task-board-content" th:value="${vo.boardContent}">
+                    <input type="hidden" class="task-board-create-date" th:value="${vo.createDate}">
+                    <input type="hidden" class="task-board-update-date" th:value="${vo.updateDate}">
+                    <input type="hidden" class="task-board-start-date" th:value="${vo.startDate}">
+                    <input type="hidden" class="task-board-end-date" th:value="${vo.endDate}">
+                    <h6 class="mb-3 text-sm task-board-title" th:text="${vo.boardTitle}"></h6>
+                    <span class="mb-2 text-xs task-board-small-element">담당자: <span class="text-dark font-weight-bold ms-sm-2 task-board-responsibleMember" th:text="${vo.responsibleMemNum.mem_name}"></span></span>
+                    <span class="mb-2 text-xs task-board-small-element">참조부서: <span class="text-dark ms-sm-2 font-weight-bold task-board-responsibleTeam" th:text="${vo.teamNum.team_name}"></span></span>
+                    <h6 id="task-board-progress" th:class="${vo.progress == 'TO_DO' ? 'task-status-to-do' : (vo.progress == 'IN_PROGRESS' ? 'task-status-in-progress' : 'task-status-done')}">
+                      <span th:text="${vo.progress == 'TO_DO'} ? '할 일' : (${vo.progress == 'IN_PROGRESS'} ? '진행 중' : '완료')"></span>&nbsp;&nbsp;
+                      <span class="badge bg-secondary"></span>
+                    </h6>
                   </div>
                   <div class="ms-auto text-end">
-                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                  </div>
-                </li>
-<!--                End 예시 형식 -->
-                <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-3 text-sm">Lucas Harper</h6>
-                    <span class="mb-2 text-xs">Company Name: <span class="text-dark font-weight-bold ms-sm-2">Stone Tech Zone</span></span>
-                    <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">lucas@stone-tech.com</span></span>
-                    <span class="text-xs">VAT Number: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
-                  </div>
-                  <div class="ms-auto text-end">
-                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                  </div>
-                </li>
-                <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-3 text-sm">Ethan James</h6>
-                    <span class="mb-2 text-xs">Company Name: <span class="text-dark font-weight-bold ms-sm-2">Fiber Notion</span></span>
-                    <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">ethan@fiber.com</span></span>
-                    <span class="text-xs">VAT Number: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
-                  </div>
-                  <div class="ms-auto text-end">
-                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                    <a class="btn btn-link text-danger text-gradient px-3 mb-0 delete-board-task" href="/board/deleteboardtask"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                    <a class="btn btn-link text-dark px-3 mb-0" href="#"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
                   </div>
                 </li>
               </ul>
+
             </div>
+
           </div>
         </div>
 
 <!--        Right : 업무 상세 정보 -->
         <div class="col-md-8 mt-4">
-          <div class="card h-100 mb-4">
+          <div class="card h-100 mb-4 task-main-right">
+            <input type="hidden" class="task-board-detail-id">
+
             <div class="card-header pb-0 px-3">
               <div class="row">
                 <div class="col-md-6">
@@ -74,92 +63,49 @@
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
                   <i class="far fa-calendar-alt me-2"></i>
-                  <small>23 - 30 March 2020</small>
+                  <small class="task-board-detail-create-date"></small>
+
+                  <select class="task-board-detail-status" id="taskStatus">
+                    <option value="TO_DO">할일</option>
+                    <option value="IN_PROGRESS">진행중</option>
+                    <option value="DONE">완료</option>
+                  </select>
+
                 </div>
               </div>
             </div>
+
             <div class="card-body pt-4 p-3">
-              <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">Newest</h6>
+              <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3 task-board-detail-title"></h6>
               <ul class="list-group">
                 <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                   <div class="d-flex align-items-center">
-                    <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-down"></i></button>
                     <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">Netflix</h6>
-                      <span class="text-xs">27 March 2020, at 12:30 PM</span>
+                      <h6 class="mb-1 text-dark text-sm">담당자</h6>
+                      <span class="text-xs task-board-detail-responsibleMember"></span>
                     </div>
                   </div>
-                  <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
-                    - $ 2,500
-                  </div>
+                  <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold task-board-detail-start-date"></div>
                 </li>
+
                 <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                   <div class="d-flex align-items-center">
-                    <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-up"></i></button>
                     <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">Apple</h6>
-                      <span class="text-xs">27 March 2020, at 04:30 AM</span>
+                      <h6 class="mb-1 text-dark text-sm">참조부서</h6>
+                      <span class="text-xs task-board-detail-responsibleTeam"></span>
                     </div>
                   </div>
-                  <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-                    + $ 2,000
-                  </div>
+                  <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold task-board-detail-end-date"></div>
                 </li>
               </ul>
-              <h6 class="text-uppercase text-body text-xs font-weight-bolder my-3">Yesterday</h6>
-              <ul class="list-group">
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                  <div class="d-flex align-items-center">
-                    <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-up"></i></button>
-                    <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">Stripe</h6>
-                      <span class="text-xs">26 March 2020, at 13:45 PM</span>
-                    </div>
-                  </div>
-                  <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-                    + $ 750
-                  </div>
-                </li>
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                  <div class="d-flex align-items-center">
-                    <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-up"></i></button>
-                    <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">HubSpot</h6>
-                      <span class="text-xs">26 March 2020, at 12:30 PM</span>
-                    </div>
-                  </div>
-                  <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-                    + $ 1,000
-                  </div>
-                </li>
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                  <div class="d-flex align-items-center">
-                    <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-up"></i></button>
-                    <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">Creative Tim</h6>
-                      <span class="text-xs">26 March 2020, at 08:30 AM</span>
-                    </div>
-                  </div>
-                  <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-                    + $ 2,500
-                  </div>
-                </li>
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                  <div class="d-flex align-items-center">
-                    <button class="btn btn-icon-only btn-rounded btn-outline-dark mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-exclamation"></i></button>
-                    <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">Webflow</h6>
-                      <span class="text-xs">26 March 2020, at 05:00 AM</span>
-                    </div>
-                  </div>
-                  <div class="d-flex align-items-center text-dark text-sm font-weight-bold">
-                    Pending
-                  </div>
-                </li>
-              </ul>
+              <hr>
+              <h6 class="mb-0">업무 상세</h6>
+              <br>
+              <section class="task-board-detail-content"></section>
             </div>
           </div>
         </div>
+
       </div>
 
 <!-- footer -->
@@ -169,6 +115,153 @@
   </main>
 <!-- plugin -->
 <div th:replace="/fragments/plugin"></div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+  //writeT 임시버튼 클릭이벤트
+  function writeForm() {
+    location.href="/board/newtaskboard";
+  }
+
+  //게시글 클릭 시, 우측단에 게시글 상세정보 작성해주는 함수
+  function showTlistContents(data){
+    $('.task-main-right').show();
+    //업무진행도 작성
+    var boardProgress = data.querySelector('#task-board-progress').className;
+    var statusSelect = document.getElementById('taskStatus');
+    if (boardProgress === 'task-status-to-do') {
+      statusSelect.value = 'TO_DO';
+    }
+    else if (boardProgress === 'task-status-in-progress') {
+      statusSelect.value = 'IN_PROGRESS';
+    }
+    else if (boardProgress === 'task-status-done') {
+      statusSelect.value = 'DONE';
+    }
+
+    //기타 업무정보 작성
+    function setValue(targetSelector, sourceSelector) {
+      const target = document.querySelector(targetSelector);
+      target.innerHTML = "";
+      target.innerHTML = data.querySelector(sourceSelector).textContent;
+    }
+
+    setValue('.task-board-detail-title', '.task-board-title');
+    setValue('.task-board-detail-responsibleMember', '.task-board-responsibleMember');
+    setValue('.task-board-detail-responsibleTeam', '.task-board-responsibleTeam');
+
+    var detailContent=document.querySelector('.task-board-detail-content');
+    detailContent.innerHTML="";
+    detailContent.innerHTML=data.querySelector('.task-board-content').value;
+
+    var detailId = document.querySelector('.task-board-detail-id');
+    detailId.value="";
+    detailId.value=data.querySelector('.task-board-id').value;
+
+    var createDate = document.querySelector('.task-board-detail-create-date');
+    createDate.textContent="";
+    createDate.textContent=data.querySelector('.task-board-create-date').value;
+
+    var startDate = document.querySelector('.task-board-detail-start-date');
+    startDate.textContent="";
+    startDate.textContent="업무 시작날짜 : "+data.querySelector('.task-board-start-date').value;
+
+    var endDate = document.querySelector('.task-board-detail-end-date');
+    endDate.textContent="";
+    endDate.textContent="업무 종료날짜 : "+data.querySelector('.task-board-end-date').value;
+
+  }
+
+  //게시글 삭제 ajax함수
+  $(document).ready(function() {
+    $('.delete-board-task').on('click', function(e) {
+      e.preventDefault();
+      var boardId=document.querySelector('.task-board-id').value;
+      var url = $(this).attr('href');
+      console.log("boardId : "+boardId+", url : "+url)
+
+      $.ajax({
+        url: url,
+        method: 'DELETE',
+        contentType: 'application/json',
+        data: JSON.stringify({ boardId: boardId })
+      })
+              .done(function(response) {
+                alert('게시글이 삭제되었습니다.');
+                location.href="/moveProject";
+              })
+              .fail(function(jqXHR, textStatus, errorThrown) {
+                alert('게시글 삭제에 실패했습니다.');
+              });
+    });
+  });
+
+  // 업무진행도 변경 함수
+  $(document).ready(function() {
+    $(document).on('change', '.task-board-detail-status', function() {
+      var progress=$(this).val();
+      var boardId = $(this).closest('.task-main-right').find('.task-board-detail-id').val();
+      console.log("progress : "+progress+", boardId : "+boardId);
+
+      $.ajax({
+        url: "/board/changetaskprogress",
+        method: 'POST',
+        data: { boardId: boardId, boardProgress: progress }
+      })
+              .done(function(response) {
+                location.href="/moveProject";
+              })
+              .fail(function(jqXHR, textStatus, errorThrown) {
+                alert('게시글 삭제에 실패했습니다.');
+              });
+
+    });
+  });
+
+</script>
+
+<style>
+  /*업무 게시판 리스트 스크롤바 관련*/
+  .task-main-left::-webkit-scrollbar {
+    width:0px;
+  }
+  .task-main-left::-webkit-scrollbar-thumb {
+    background:rgba(0, 0, 0, 0.5);
+  }
+  .task-main-left::-webkit-scrollbar-track {
+    background:transparent;
+  }
+  .task-main-left-tlist-section:hover {
+    background-color:#f4f6f9;
+  }
+  .task-main-right {
+    display: none;
+  }
+  .task-board-detail-status {
+    margin-left:10px;
+  }
+  .task-status-to-do {
+    color:limegreen;
+    font-size:11px;
+  }
+  .task-status-in-progress {
+    color:blue;
+    font-size:11px;
+  }
+  .task-status-done {
+    color:gray;
+    font-size:11px;
+  }
+  hr {
+    background:gray;
+    height:1px;
+    border:0;
+  }
+</style>
+
 </body>
 
 </html>
