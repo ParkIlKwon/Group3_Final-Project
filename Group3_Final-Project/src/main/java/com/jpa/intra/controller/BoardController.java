@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -86,7 +88,10 @@ public class BoardController {
 
     // 업무게시판 리스트
     @GetMapping("/board/boardtasklist")
-    public String boardTaskList(Model model) {
+    public String boardTaskList(HttpServletRequest req,Model model) {
+//        HttpSession session=req.getSession();
+//        System.out.println("current session info : "+session.getAttribute("log"));
+
         List<BoardTask> tlist = boardService.findTasks();
         model.addAttribute("tlist", tlist);
         return "board/boardTaskList";
