@@ -5,6 +5,7 @@
 
 <body class="g-sidenav-show  bg-gray-100">
 <button onclick="writeForm()">writeT</button>
+
 <!--   사이드 : aside -->
 <aside th:replace="/fragments/aside"></aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -123,8 +124,10 @@
 
   //writeT 임시버튼 클릭이벤트
   function writeForm() {
+    console.log();
     location.href="/board/newtaskboard";
   }
+
 
   //게시글 클릭 시, 우측단에 게시글 상세정보 작성해주는 함수
   function showTlistContents(data){
