@@ -24,4 +24,6 @@ public class BoardTask extends BoardCommon {
     @Convert(converter = TeamConverter.class)
     private Team teamNum;
     private String progress;
+    private String startDate;
+    private String endDate;
 }
