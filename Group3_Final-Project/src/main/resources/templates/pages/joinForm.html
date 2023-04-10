@@ -105,6 +105,7 @@
 
 <script>
 
+    let CheckEmail = false;
     function popup(){
         new daum.Postcode({
             oncomplete: function(data) { //선택시 입력값 세팅
@@ -130,8 +131,13 @@
             },
             success : function(data){
                 alert("해당 이메일로 인증번호 발송이 완료되었습니다. \n 확인부탁드립니다.")
-                console.log("data : "+data);
-               //이메일 인증확인 기능 만들어야함. chkEmailConfirm(data, $memailconfirm, $memailconfirmTxt);
+                //console.log("data : "+data); 자바에서 생성된 코드 확인
+                if($('#memail').val() == data){ //랜덤코드랑 입력코드랑 일치하면
+                    alert("맞습니다.")
+                    CheckEmail = true; //이메일 확인 true로 .
+                }
+
+
             }
         })
     })
