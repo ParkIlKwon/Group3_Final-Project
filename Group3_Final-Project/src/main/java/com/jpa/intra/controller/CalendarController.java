@@ -31,18 +31,11 @@ public class CalendarController {
             event.put("title", t.getBoardTitle());
             event.put("start", t.getStartDate());
             event.put("end",t.getEndDate());
+            event.put("color","orange");
             eventList.add(event);
         }
 
-//        event.put("start", LocalDate.now());
-//        event.put("title", "test");
-//        event.put("end",LocalDate.now());
-//        eventList.add(event);
-//        event = new HashMap<String, Object>();
-//        event.put("start", LocalDate.now().plusDays(3));
-//        event.put("title", "test2");
-//        event.put("end",LocalDate.now().plusDays(4));
-//        eventList.add(event);
+
         return eventList;
     }
 
