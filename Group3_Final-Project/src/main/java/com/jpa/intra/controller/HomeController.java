@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HomeController {
 
     @RequestMapping("/")
-    @ResponseBody
     public String home(Model model) {
         model.addAttribute("banner","banner1");
         model.addAttribute("side","sidebar1");
         return "pages/dashboard";
-//        return "home";
     }
 }
