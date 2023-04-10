@@ -1,67 +1,144 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/fragments/header :: header}"></head>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <body>
-<!--<div th:replace="~{/fragments/bodyHeader :: bodyHeader}"></div>-->
-
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js"></script>
-
-
-<!--   사이드 : aside -->
-<aside th:replace="/fragments/aside"></aside>
-<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-    <!-- body Top Navbar : bodyTop  -->
-    <nav th:replace="fragments/bodyTop"></nav>
-    <!-- Start Content -->
-    <div class="container-fluid py-4">
-        <div class="row">
-            <div class="col-12">
-                <div class="card mb-4">
-                    <div class="card-header pb-0">
-                        <h6>회원가입폼</h6>
+<main class="main-content  mt-0">
+    <section>
+        <div class="page-header min-vh-75">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
+                        <div class="card card-plain mt-8">
+                            <div class="card-header pb-0 text-left bg-transparent">
+                                <h3 class="font-weight-bolder text-info text-gradient">Welcome back</h3>
+                                <p class="mb-0">Enter your id and password to sign in</p>
+                            </div>
+                            <div class="card-body">
+                                <form method="post">
+                                    <label>Id</label> <!-- 로그인 ID -->
+                                    <div class="mb-3">
+                                        <input type="text" id="id" name="id" class="form-control" placeholder="Id" aria-label="Id" aria-describedby="email-addon" required>
+                                    </div>
+                                    <label>Password</label> <!-- 로그인 PW -->
+                                    <div class="mb-3">
+                                        <input type="text" id="pw" name="pw" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon" required>
+                                    </div>
+                                    <!--                  아이디 저장 버튼 -->
+                                    <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
+                                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                                    </div>
+                                    <div class="text-center"> <!-- 로그인 버튼 -->
+                                        <button type="submit" id="loginBtn" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                <section>
-    <div class="row">
-        <!--    사이드바 -->
-
-    </div>
-    <!--    -->
-    <div class="col" style="background-color: antiquewhite;">
-
-        <div id='external-events'>
-
-            <form action="/members/login" method="post">
-
-                <div class="alert" th:if="${not #strings.isEmpty(msg)}">
-                    <strong th:text="${msg}"> </strong>
-                </div>
-
-                <div class="form-outline mb-4">
-                    <input type="text" id="id" name="id" class="form-control form-control-lg" placeholder="ID을 입력하세요"/>
-                </div>
-                <div class="form-outline mb-4">
-                    <input type="text" id="pw" name="pw" class="form-control form-control-lg" placeholder="PW을 입력하세요"/>
-                </div>
-
-                <div class="d-flex justify-content-center">
-                    <button type="submit"
-                            class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
-                </div>
-            </form>
-
-        </div>
-
-    </div>
-</section>
-
+                    <!--           배경 이미지 -->
+                    <!--          <div class="col-md-6">-->
+                    <!--            <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">-->
+                    <!--              <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('../assets/img/curved-images/curved6.jpg')"></div>-->
+                    <!--            </div>-->
+                    <!--          </div>-->
                 </div>
             </div>
         </div>
-    </div>
-<div th:replace="~{/fragments/footer :: footer}"/>
+    </section>
 </main>
 
+<script src="../assets/js/core/popper.min.js"></script>
+<script src="../assets/js/core/bootstrap.min.js"></script>
+<script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
 
+<!-- remember id -->
+<script type="text/javascript">
+    window.onload = function() {
+
+        // 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 쿠키값 없으면 공백.
+        let userLoginId = getCookie("userLoginId");
+        document.getElementById("id").value = userLoginId;
+
+        // ID가 있는경우 아이디 저장 체크박스 체크
+        if(document.getElementById("id").value !== ""){
+            document.getElementById("rememberMe").checked = true;
+        }
+
+        // 아이디 저장하기 체크박스 onchange
+        const checkId = document.getElementById("rememberMe");
+
+        checkId.onchange = function (event) {
+            if(checkId.checked){ //checked true
+                userLoginId = document.getElementById("id").value;
+                setCookie("userLoginId", userLoginId, 30); // 30일 동안 쿠키 보관
+            }else{ //checked false
+                deleteCookie("userLoginId");
+            }
+        };
+
+        // remember id check true : ID를 입력한 경우
+        const idInput = document.getElementById("id");
+
+        idInput.addEventListener("keyup", function(e) {
+            if(checkId.checked){ //checked true
+                userLoginId = document.getElementById("id").value;
+                setCookie("userLoginId", userLoginId, 30); // 30일 동안 쿠키 보관
+            }
+        })
+    }
+    // cookie 저장
+    function setCookie(cookieName, value, exdays){
+        const exdate = new Date();
+        exdate.setDate(exdate.getDate() + exdays);
+        const cookieValue = decodeURIComponent(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+        document.cookie = cookieName + "=" + cookieValue;
+    }
+    // cookie 삭제
+    function deleteCookie(cookieName){
+        const expireDate = new Date();
+        expireDate.setDate(expireDate.getDate() - 1);
+        document.cookie = cookieName + "= " + "; expires=" + expireDate.toUTCString();
+    }
+    // 저장된 cookie 가져오기
+    function getCookie(cookieName) {
+        cookieName = cookieName + '=';
+        const cookieData = document.cookie;
+        let start = cookieData.indexOf(cookieName);
+        let cookieValue = '';
+        if(start !== -1){
+            start += cookieName.length;
+            let end = cookieData.indexOf(';', start);
+            if(end === -1)end = cookieData.length;
+            cookieValue = cookieData.substring(start, end);
+        }
+        return decodeURIComponent(cookieValue);
+    }
+
+    const loginBtn = document.getElementById("loginBtn");
+    loginBtn.addEventListener("click",()=>{
+        const id = $("#id").val();
+        const pw = $("#pw").val();
+
+        $.ajax({
+            url:"members/login",
+            type:"POST",
+            data:{id:id,
+            pw:pw},
+            success:function(data){
+                console.log(data);
+            },
+            error:function (data){
+                alert(data);
+            }
+        });
+    })
+
+
+</script>
 
 </body>
+
 </html>
