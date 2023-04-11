@@ -62,7 +62,7 @@ public class MailController {
         resMail.setView(0); //열람여부 0 -> false , 1 -> true
 
         resMail.setSender((String) session.getAttribute("log")); //보내는 사람 (현재 로그인된 사람 불러옴)
-        //object type to String
+        //String type to Object
         resMail.setReceiver(m.getReceiver()); //받는사람
         
 

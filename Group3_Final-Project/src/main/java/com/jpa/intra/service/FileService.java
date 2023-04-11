@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -30,7 +32,7 @@ public class FileService {
     private final File_Repository fileRepository;
 
     @Transactional
-    public Long saveFile(MultipartFile files) throws IOException {
+    public Long saveFile(MultipartFile files, HttpServletRequest request) throws IOException {
 
         File fileObj = new File(fileDir);
         if (files.isEmpty()) {
@@ -56,8 +58,11 @@ public class FileService {
         // 파일을 불러올 때 사용할 파일 경로
         String savedPath = fileDir + savedName;
 
+        HttpSession session = request.getSession();
+
         // 파일 엔티티 생성
         FileEntity file = FileEntity.builder()
+                .userId(session.getId())
                 .orgNm(origName)
                 .savedNm(savedName)
                 .savedPath(savedPath)
@@ -70,7 +75,6 @@ public class FileService {
 
         // 데이터베이스에 파일 정보 저장
         FileEntity savedFile = fileRepository.save(file);
-
 
         return savedFile.getId();
        // return null;
