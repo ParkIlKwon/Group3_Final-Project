@@ -3843,9 +3843,12 @@ fieldset:disabled .btn {
 .btn-outline-primary {
   --bs-btn-color: #cb0c9f;
   --bs-btn-border-color: #cb0c9f;
-  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-color: white;
   --bs-btn-hover-bg: #cb0c9f;
   --bs-btn-hover-border-color: #cb0c9f;
+  /*--bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #cb0c9f;
+  --bs-btn-hover-border-color: #cb0c9f;*/
   --bs-btn-focus-shadow-rgb: 203, 12, 159;
   --bs-btn-active-color: #fff;
   --bs-btn-active-bg: #cb0c9f;
