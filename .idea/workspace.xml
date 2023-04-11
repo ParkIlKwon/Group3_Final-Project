@@ -6,6 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="a21d27b7-6876-4c98-99b4-621a616f7c83" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/MenuController.java" afterDir="false" />
+>>>>>>> LJH
       <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/aside.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/fragments/aside.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/mail/mailForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/mail/mailForm.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/mail/mailFormBeta.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/mail/mailFormBeta.html" afterDir="false" />
@@ -44,12 +49,6 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Group3_Final-Project" type="f1a62948:ProjectNode" />
                 <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Group3_Final-Project" type="f1a62948:ProjectNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
-                <item name="compileClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
               </path>
             </expand>
             <select />
@@ -94,7 +93,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "E:/kbj_Group3_Final-Project/Group3_Final-Project/src/main/resources/templates/drive",
+    "last_opened_file_path": "E:/shopJPA",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -102,18 +101,18 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.grazie",
     "spring.configuration.checksum": "4b5c0d748a41a0f524bff6923aa70138",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\templates\drive" />
       <recent name="E:\ksyGithub\Group3_Final-Project\Group3_Final-Project\src\main\resources\templates\board" />
       <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\static" />
       <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\templates\fragments" />
       <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources" />
+      <recent name="E:\kbj_Group3_Final-Project\Group3_Final-Project\src\main\resources\template" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Github\Group3_Final-Project\Group3_Final-Project\src\main\resources\templates\fragments" />
@@ -126,7 +125,7 @@
   </component>
   <component name="RunManager">
     <configuration name="Group3FinalProjectApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="Group3_Final-Project.main" />
+      <module name="com.example.Group3_Final-Project.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.jpa.intra.Group3FinalProjectApplication" />
       <extension name="coverage">
         <pattern>
@@ -162,7 +161,10 @@
       <workItem from="1680825883855" duration="31316000" />
       <workItem from="1681063899358" duration="928000" />
       <workItem from="1681064852277" duration="8885000" />
+<<<<<<< HEAD
       <workItem from="1681173655209" duration="11891000" />
+=======
+>>>>>>> LJH
     </task>
     <servers />
   </component>

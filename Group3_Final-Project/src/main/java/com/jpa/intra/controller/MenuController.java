@@ -14,68 +14,68 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MenuController {
     private final BoardService boardService;
-//내비게이션 메뉴 선택에 따라 변동된는 topMenu(sidebar)를 위한 컨트롤러
 
+    //대시보드 페이지 이동
     @GetMapping("/moveDashboard")
     public String MoveDashboard(Model model){
-        model.addAttribute("gnb","topMenu1");
+        //페이지 이동시 (페이지제목/사이드바 active/top메뉴 변경을 위한 model)
+        model.addAttribute("page", "Dashboard");
         return "/pages/dashboard";
     }
+
+    //프로젝트 페이지 이동
     @GetMapping("/moveProject")
     public String MoveProject(Model model){
         List<BoardTask> tlist = boardService.findTasks();
         model.addAttribute("tlist", tlist);
-        model.addAttribute("side","sidebar2");
-        model.addAttribute("gnb","topMenu2");
+        model.addAttribute("page","프로젝트");
         return "/project/main";
     }
 
+    //메일 페이지 이동
     @GetMapping("/moveMail")
     public String MoveMail(Model model){
-        model.addAttribute("side","sidebar3");
-        model.addAttribute("gnb","topMenu3");
+        model.addAttribute("page", "메일");
         return "/mail/main";
     }
 
+    //캘린더 페이지 이동
     @GetMapping("/moveCalendar")
     public String MoveCalender(Model model){
-        model.addAttribute("side","sidebar4");
-        model.addAttribute("gnb","topMenu4");
-
+        model.addAttribute("page", "캘린더");
        return "/calendar/main";
 
     }
 
+    //드라이브 페이지 이동
     @GetMapping("/moveDrive")
     public String MoveDrive(Model model){
-        model.addAttribute("side","sidebar5");
-        model.addAttribute("gnb","topMenu5");
+        model.addAttribute("page", "드라이브");
         return "/drive/main";
 
     }
 
+    // 주소록 페이지 이동
     @GetMapping("/moveMembers")
     public String MoveMember(Model model){
-        model.addAttribute("side","sidebar6");
-        model.addAttribute("gnb","topMenu6");
+        model.addAttribute("page", "주소록");
         return "/members/main";
-        /*return "/members/list"; //조직도 화면 구성후 조직도 링크로 변경예정*/
     }
 
+    //결재 페이지 이동
     @GetMapping("/moveApproval")
     public String MoveConfirm(Model model){
+
         List<BoardApproval> alist = boardService.findApproval1();
         model.addAttribute("alist", alist);
-        model.addAttribute("side","sidebar7");
-        model.addAttribute("gnb","topMenu7");
+        model.addAttribute("page", "결재");
         return "/approval/main";
-        /*return "/home"; //결재 화면 구성후 결재 링크로 변경예정*/
     }
 
+    //관리자 페이지 이동
     @GetMapping("/moveAdmin")
     public String MoveAdmin(Model model){
-        model.addAttribute("side","sidebar8");
-        model.addAttribute("gnb","topMenu8");
+        model.addAttribute("page", "관리자");
         return "/admin/main"; //관리자 화면 구성후 링크 수정예정
 
     }
