@@ -23,6 +23,6 @@ public abstract class BoardCommon {
     private String boardContent;
     private String createDate;
     private String updateDate;
-
+    private String boardWriter;
 
 }

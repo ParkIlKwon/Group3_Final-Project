@@ -1,4 +1,4 @@
-<!--자유게시판 작성 양식-->
+<!--업무게시판 작성 양식-->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -8,7 +8,6 @@
 <body>
     <div>
         <form action="/board/newtaskboard" th:object="${boardTaskDTO}" method="POST">
-
             <div class="form-group">
                 <label th:for="boardTitle">제목</label>
                 <input type="text" th:field="*{boardTitle}" placeholder="제목을 입력하다.">

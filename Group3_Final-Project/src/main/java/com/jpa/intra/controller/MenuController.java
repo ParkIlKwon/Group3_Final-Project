@@ -1,7 +1,6 @@
 package com.jpa.intra.controller;
 
 import com.jpa.intra.domain.board.BoardTask;
-import com.jpa.intra.query.MemberDTO;
 import com.jpa.intra.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -27,8 +26,7 @@ public class MenuController {
         model.addAttribute("tlist", tlist);
         model.addAttribute("side","sidebar2");
         model.addAttribute("gnb","topMenu2");
-        return "/pages/project";
-        /*return "/project/main";*/
+        return "/project/main";
     }
 
     @GetMapping("/moveMail")
@@ -63,11 +61,11 @@ public class MenuController {
         /*return "/members/list"; //조직도 화면 구성후 조직도 링크로 변경예정*/
     }
 
-    @GetMapping("/moveConfirm")
+    @GetMapping("/moveApproval")
     public String MoveConfirm(Model model){
         model.addAttribute("side","sidebar7");
         model.addAttribute("gnb","topMenu7");
-        return "/confirm/main";
+        return "/approval/main";
         /*return "/home"; //결재 화면 구성후 결재 링크로 변경예정*/
     }
 
@@ -78,5 +76,12 @@ public class MenuController {
         return "/admin/main"; //관리자 화면 구성후 링크 수정예정
 
     }
+
+    @GetMapping("/sendMail")
+    public String SendMail(){
+
+        return "/mail/mailForm";
+    }
+
 
 }

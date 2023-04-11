@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/header :: header}"></head>
+
+<body class="g-sidenav-show  bg-gray-100">
+
+<!--   사이드 : aside -->
+<aside th:replace="/fragments/aside"></aside>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+  <!-- body Top Navbar : bodyTop  -->
+  <nav th:replace="fragments/bodyTop"></nav>
+  <!-- Start Content -->
+  <div class="container-fluid py-4">
+    <!--      Left : 결재 목록 -->
+    <div class="row" >
+      <div class="col-md-4 mt-4">
+        <div class="card" style="height: 100vh;">
+          <div class="card-header pb-0 px-3">
+            <!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">새 기안</button>-->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#writeModal">새 기안</button>
+            <hr>
+          </div>
+
+          <div class="card-body pt-4 p-3 approval-main-left" th:with="alist=${alist}">
+            <h6 class="mb-0">내 결재 목록</h6>
+            <ul class="list-group approval-main-left-alist-section" th:each="vo:${alist}" onclick="showAlistContents(this)">
+              <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg approval-main-left-alist-section">
+                <div class="d-flex flex-column approval-main-left-alist-section-component">
+                  <input type="hidden" class="approval-board-id" th:value="${vo.id}">
+                  <input type="hidden" class="approval-board-content" th:value="${vo.boardContent}">
+                  <input type="hidden" class="approval-board-create-date" th:value="${vo.createDate}">
+                  <input type="hidden" class="approval-board-update-date" th:value="${vo.updateDate}">
+                  <input type="hidden" class="approval-board-start-date" th:value="${vo.startDate}">
+                  <input type="hidden" class="approval-board-end-date" th:value="${vo.dueDate}">
+                  <h6 class="mb-3 text-sm approval-board-title" th:text="${vo.boardTitle}"></h6>
+                  <span class="mb-2 text-xs approval-board-small-element">요청된 기안 : <span class="text-dark font-weight-bold ms-sm-2 approval-board-approval-type" th:text="${vo.approvalType == 'VACATION'} ? '휴가신청' : (${vo.approvalStatus == 'OVERTIME'} ? '연장근무신청' : '근무시간변경')"></span></span>
+                  <span class="mb-2 text-xs approval-board-small-element">결재 요청자: <span class="text-dark font-weight-bold ms-sm-2 approval-board-requestorMemNum" th:text="${vo.boardWriter}"></span></span>
+                  <span class="mb-2 text-xs approval-board-small-element">결재 승인자: <span class="text-dark ms-sm-2 font-weight-bold approval-board-approverMemNum" th:text="${vo.approvalMemNum.mem_name}"></span></span>
+                  <h6 id="task-board-progress" th:class="${vo.approvalStatus == 'APPROVED' ? 'approval-status-approved' : (vo.approvalStatus == 'REJECTED' ? 'approval-status-rejected' : 'approval-status-requested')}">
+                    <span th:text="${vo.approvalStatus == 'REQUESTED'} ? '요청됨' : (${vo.approvalStatus == 'APPROVED'} ? '승인됨' : '반려됨')"></span>&nbsp;&nbsp;
+                    <span class="badge bg-secondary"></span>
+                  </h6>
+                </div>
+                <div class="ms-auto text-end">
+                  <a class="btn btn-link text-danger text-gradient px-3 mb-0 delete-board-task" href="/board/deleteboardapproval"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                  <a class="btn btn-link text-dark px-3 mb-0" href="#"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                </div>
+              </li>
+            </ul>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!--        Right : 업무 상세 정보 -->
+      <div class="col-md-8 mt-4">
+        <div class="card h-100 mb-4 approval-main-right">
+          <input type="hidden" class="approval-board-detail-id">
+
+          <div class="card-header pb-0 px-3">
+            <div class="row">
+              <div class="col-md-6">
+                <h6 class="mb-0">선택한 문서</h6>
+              </div>
+              <div class="col-md-6 d-flex justify-content-end align-items-center">
+                <i class="far fa-calendar-alt me-2"></i>
+                <small class="approval-board-detail-create-date"></small>
+
+                <span class="text-xs approval-board-detail-status"id="approvalStatus">대기</span>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body pt-4 p-3">
+            <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3 approval-board-detail-title"></h6>
+            <ul class="list-group">
+              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                <div class="d-flex align-items-center">
+                  <div class="d-flex flex-column">
+                    <h6 class="mb-1 text-dark text-sm">결재 요청자</h6>
+                    <span class="text-xs approval-board-detail-requestorMemNum"></span>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold approval-board-detail-start-date"></div>
+              </li>
+
+              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                <div class="d-flex align-items-center">
+                  <div class="d-flex flex-column">
+                    <h6 class="mb-1 text-dark text-sm">결재 승인자</h6>
+                    <span class="text-xs task-board-detail-approverMemNum"></span>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold approval-board-detail-due-date"></div>
+              </li>
+            </ul>
+            <hr>
+            <h6 class="mb-0">문서 상세</h6>
+            <br>
+            <section class="approval-board-detail-content"></section>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- footer -->
+    <footer th:replace="/fragments/footer"></footer>
+
+  </div>
+</main>
+<!-- plugin -->
+<div th:replace="/fragments/plugin"></div>
+
+
+<!-- 기안 매뉴 선택 모달 -->
+<div class="modal fade" id="writeModal" tabindex="-1" role="dialog" aria-labelledby="writeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="writeModalLabel">새 기안</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="approval-menu" id="vacation" value="vacation">
+          <label class="form-check-label" for="vacation">휴가신청</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="approval-menu" id="overtime" value="overtime">
+          <label class="form-check-label" for="overtime">연장근무신청</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="approval-menu" id="work-hour-change" value="work-hour-change">
+          <label class="form-check-label" for="work-hour-change">업무시간변경</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" onclick="redirectToPage()">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+  // 선택한 기안메뉴에 따라 적절한 작성페이지로 이동시켜주다.
+  function redirectToPage() {
+    var menu = $('input[name="approval-menu"]:checked').val();  // 선택한 메뉴 가져오기
+    if (menu === "vacation") {
+      window.location.href = "/board/newapprovalvacationboard";
+    } else if (menu === "overtime") {
+      window.location.href = "/board/newapprovalovertimeboard";
+    } else if (menu === "work-hour-change") {
+      window.location.href = "/board/newapprovalwocboard";
+    } else {
+      // 메뉴를 선택하지 않은 경우, 경고창 표시
+      alert("기안 유형을 선택해 주세요");
+    }
+  }
+
+  //게시글 클릭 시, 우측단에 게시글 상세정보 작성해주는 함수
+  function showAlistContents(data){
+    $('.approval-main-right').show();
+    //결재상세정보 작성
+    var boardProgress = data.querySelector('#task-board-progress').className;
+
+    //기타 결재정보 작성
+    function setValue(targetSelector, sourceSelector) {
+      const target = document.querySelector(targetSelector);
+      target.innerHTML = "";
+      target.innerHTML = data.querySelector(sourceSelector).textContent;
+    }
+
+    setValue('.task-board-detail-title', '.task-board-title');
+    setValue('.task-board-detail-responsibleMember', '.task-board-responsibleMember');
+    setValue('.task-board-detail-responsibleTeam', '.task-board-responsibleTeam');
+
+    var detailContent=document.querySelector('.task-board-detail-content');
+    detailContent.innerHTML="";
+    detailContent.innerHTML=data.querySelector('.task-board-content').value;
+
+    var detailId = document.querySelector('.task-board-detail-id');
+    detailId.value="";
+    detailId.value=data.querySelector('.task-board-id').value;
+
+    var createDate = document.querySelector('.task-board-detail-create-date');
+    createDate.textContent="";
+    createDate.textContent=data.querySelector('.task-board-create-date').value;
+
+    var startDate = document.querySelector('.task-board-detail-start-date');
+    startDate.textContent="";
+    startDate.textContent="업무 시작날짜 : "+data.querySelector('.task-board-start-date').value;
+
+    var endDate = document.querySelector('.task-board-detail-end-date');
+    endDate.textContent="";
+    endDate.textContent="업무 종료날짜 : "+data.querySelector('.task-board-end-date').value;
+
+  }
+
+  //게시글 삭제 ajax함수
+  $(document).ready(function() {
+    $('.delete-board-task').on('click', function(e) {
+      e.preventDefault();
+      var boardId=document.querySelector('.task-board-id').value;
+      var url = $(this).attr('href');
+      console.log("boardId : "+boardId+", url : "+url)
+
+      $.ajax({
+        url: url,
+        method: 'DELETE',
+        contentType: 'application/json',
+        data: JSON.stringify({ boardId: boardId })
+      })
+              .done(function(response) {
+                alert('게시글이 삭제되었습니다.');
+                location.href="/moveProject";
+              })
+              .fail(function(jqXHR, textStatus, errorThrown) {
+                alert('게시글 삭제에 실패했습니다.');
+              });
+    });
+  });
+
+  // 업무진행도 변경 함수
+  $(document).ready(function() {
+    $(document).on('change', '.task-board-detail-status', function() {
+      var progress=$(this).val();
+      var boardId = $(this).closest('.task-main-right').find('.task-board-detail-id').val();
+      console.log("progress : "+progress+", boardId : "+boardId);
+
+      $.ajax({
+        url: "/board/changetaskprogress",
+        method: 'POST',
+        data: { boardId: boardId, boardProgress: progress }
+      })
+              .done(function(response) {
+                location.href="/moveProject";
+              })
+              .fail(function(jqXHR, textStatus, errorThrown) {
+                alert('게시글 삭제에 실패했습니다.');
+              });
+
+    });
+  });
+
+</script>
+
+<style>
+  /*업무 게시판 리스트 스크롤바 관련*/
+  .task-main-left::-webkit-scrollbar {
+    width:0px;
+  }
+  .task-main-left::-webkit-scrollbar-thumb {
+    background:rgba(0, 0, 0, 0.5);
+  }
+  .task-main-left::-webkit-scrollbar-track {
+    background:transparent;
+  }
+  .task-main-left-tlist-section:hover {
+    background-color:#f4f6f9;
+  }
+  .task-main-right {
+    display: none;
+  }
+  .task-board-detail-status {
+    margin-left:10px;
+  }
+  .task-status-to-do {
+    color:limegreen;
+    font-size:11px;
+  }
+  .task-status-in-progress {
+    color:blue;
+    font-size:11px;
+  }
+  .task-status-done {
+    color:gray;
+    font-size:11px;
+  }
+  hr {
+    background:gray;
+    height:1px;
+    border:0;
+  }
+</style>
+
+</body>
+
+</html>
