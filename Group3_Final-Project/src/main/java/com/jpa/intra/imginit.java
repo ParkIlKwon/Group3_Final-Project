@@ -25,6 +25,7 @@ public class imginit {
         List<Member> allMemberList = repository.getAllMemberList();
         for (int i = 0; i < allMemberList.size() ; i++){
             makeProfileImg(i,allMemberList.get(i));
+            System.out.println(i);
         }
     }
 
