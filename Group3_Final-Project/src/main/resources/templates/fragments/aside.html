@@ -14,7 +14,6 @@
     <ul class="navbar-nav">
       <!-- GNB_대시보드 -->
       <li class="nav-item">
-<!--        <div th:fragment="bodyHeader" th:class="${banner == null ? 'banner1' : banner}"></div>-->
         <a th:class="${page=='Dashboard'} ? 'nav-link active' : 'nav-link'" href="/moveDashboard">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -37,7 +36,6 @@
       <!-- GNB_프로젝트 -->
       <li class="nav-item">
         <a th:class="${page=='프로젝트'} ? 'nav-link active' : 'nav-link'" href="/moveProject">
-        <!--<a class="nav-link" href="/moveProject">-->
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>shop </title>
@@ -58,11 +56,7 @@
       </li>
       <!-- GNB_메일 -->
       <li class="nav-item">
-<<<<<<< HEAD
-        <a class="nav-link" href="/mail/main">
-=======
         <a th:class="${page=='메일'} ? 'nav-link active' : 'nav-link'" href="/moveMail">
->>>>>>> LJH
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>office</title>
