@@ -25,5 +25,5 @@ public class Mail {
 
         private String sendDate; //보낸날짜
 
-        private boolean view; //읽었는지 체크
+        private int view; //읽었는지 체크
 }
