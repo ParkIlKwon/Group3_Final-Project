@@ -111,8 +111,8 @@
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <!--                        <h6 class="mb-0 text-sm">John Michael</h6>   &lt;!&ndash; 보낸 이  &ndash;&gt;-->
                                                     <!--                        <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>  &lt;!&ndash; 이메일 &ndash;&gt;-->
-                                                    <div>받는사람 : <input type="email" name=""></div>
-                                                    <div>제목 : <input type="text" name=""></div>
+                                                    <div>받는 이 <input class="form-control" type="email" name="" required></div>
+                                                    <div>제목 <input class="form-control" type="text" name="" required></div>
                                                 </div>
                                             </div>
                                         </td>
@@ -144,21 +144,10 @@
 <div th:replace="/fragments/plugin"></div>
 
 <!-- SUMMER NOTE -->
-<!--<script>-->
-<!--  // 메인화면 페이지 로드 함수-->
-<!--  $(document).ready(function () {-->
-<!--    $('#summernote').summernote({-->
-<!--      placeholder: '내용을 작성하세요.',-->
-<!--      height: 400,-->
-<!--      maxHeight: 400-->
-<!--    });-->
-<!--  });-->
-<!--</script>-->
-
 <script>
     $('#summernote').summernote({
         // 에디터 높이
-        height: 150,
+        height: 500,
         // 에디터 한글 설정
         lang: "ko-KR",
         // 에디터에 커서 이동 (input창의 autofocus라고 생각)
@@ -179,7 +168,11 @@
             // 줄간격
             ['height', ['height']],
             // 코드보기, 확대해서보기, 도움말
-            ['view', ['codeview','fullscreen', 'help']]
+            ['view', ['codeview','fullscreen', 'help']],
+            // 이미지 넣기
+            ['Insert', ['picture']],
+            // 링크 넣기
+            ['Insert', ['link']]
         ],
         // 추가한 글꼴
         fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
