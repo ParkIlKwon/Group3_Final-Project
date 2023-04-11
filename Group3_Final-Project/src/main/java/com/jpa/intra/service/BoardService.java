@@ -1,5 +1,6 @@
 package com.jpa.intra.service;
 
+import com.jpa.intra.domain.board.BoardApproval;
 import com.jpa.intra.domain.board.BoardFree;
 import com.jpa.intra.domain.board.BoardTask;
 import com.jpa.intra.repository.Board_Repository;
@@ -25,7 +26,7 @@ public class BoardService {
         return boardTask.getId();
     }
 
-    public List<BoardTask> findTasks() {return bBoardRepository.findAll();}
+    public List<BoardTask> findTasks() {return bBoardRepository.findAllBoardTask();}
     @Transactional
     public void deleteBoardTaskById(Long boardId) {bBoardRepository.deleteBoardTaskById(boardId);}
 
@@ -33,5 +34,13 @@ public class BoardService {
     public void changeTaskProgress(Long boardId, String boardProgress) {
         bBoardRepository.changeTaskProgress(boardId, boardProgress);
     }
+
+    @Transactional
+    public Long createBoardApproval1(BoardApproval boardApproval) {
+        bBoardRepository.createBoardApproval1(boardApproval);
+        return boardApproval.getId();
+    }
+
+    public List<BoardApproval> findApproval1() {return bBoardRepository.findAllBoardApproval1();}
 
 }

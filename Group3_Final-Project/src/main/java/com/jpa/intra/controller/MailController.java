@@ -3,6 +3,7 @@ package com.jpa.intra.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -19,4 +20,11 @@ public class MailController {
     public String mailForm(){
         return "mail/mailForm";
     }
+
+    @PostMapping("/mailForm")
+    public String SendMail(){
+
+        return "pages/moveMail";
+    }
+
 }

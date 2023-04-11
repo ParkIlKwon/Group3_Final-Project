@@ -1,5 +1,6 @@
 package com.jpa.intra.controller;
 
+import com.jpa.intra.domain.board.BoardApproval;
 import com.jpa.intra.domain.board.BoardTask;
 import com.jpa.intra.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -71,8 +72,14 @@ public class MenuController {
 
     @GetMapping("/moveApproval")
     public String MoveConfirm(Model model){
+<<<<<<< HEAD
         model.addAttribute("side","side7");
 //        model.addAttribute("side","sidebar7");
+=======
+        List<BoardApproval> alist = boardService.findApproval1();
+        model.addAttribute("alist", alist);
+        model.addAttribute("side","sidebar7");
+>>>>>>> main
         model.addAttribute("gnb","topMenu7");
         return "/approval/main";
         /*return "/home"; //결재 화면 구성후 결재 링크로 변경예정*/
