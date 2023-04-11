@@ -2,45 +2,41 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/fragments/header :: header}"></head>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" defer></script>
-<body>
-<aside th:replace="/fragments/aside"></aside>
+<body style="background-color: #f8f9fa">
 <main class="main-content  mt-0">
     <section>
         <div class="page-header min-vh-75">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
-                        <div class="card card-plain mt-8">
+            <div class="container mt-8 px-lg-8">
+                <div class="row row-cols-1 row-cols-md-2 g-5">
+                    <div class="col-5 m-auto">
+                        <img src="../assets/img/M_Logo_A.png" style="width:80%">
+                    </div>
+                    <div class="col-7">
+                        <div class="card card-plain">
                             <div class="card-header pb-0 text-left bg-transparent">
-                                <h3 class="font-weight-bolder text-info text-gradient">Welcome back</h3>
-                                <p class="mb-0">Enter your id and password to sign in</p>
+                                <h3 class="font-weight-bolder text-info text-gradient">Welcome to MANY TO ONE</h3>
+                                <p class="mb-0">로그인 완료 후 출근 상태를 확인해주세요.</p>
                             </div>
                             <div class="card-body">
-                                    <label>Id</label> <!-- 로그인 ID -->
+                                    <label>아이디</label> <!-- 로그인 ID -->
                                     <div class="mb-3">
-                                        <input type="text" id="id" name="id" class="form-control" placeholder="Id" aria-label="Id" aria-describedby="email-addon" required>
+                                        <input type="text" id="id" name="id" class="form-control" placeholder="Id" aria-label="Id" aria-describedby="email-addon" title="아이디를 입력해주세요" required>
                                     </div>
-                                    <label>Password</label> <!-- 로그인 PW -->
+                                    <label>비밀번호</label> <!-- 로그인 PW -->
                                     <div class="mb-3">
-                                        <input type="text" id="pw" name="pw" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon" required>
+                                        <input type="text" id="pw" name="pw" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon" title="비밀번호를 입력해주세요" required>
                                     </div>
                                     <!--                  아이디 저장 버튼 -->
                                     <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
-                                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                                    <label class="form-check-label" for="rememberMe">아이디 저장</label>
                                     </div>
                                     <div class="text-center"> <!-- 로그인 버튼 -->
-                                        <button type="submit" id="loginBtn" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>
+                                        <button type="submit" id="loginBtn" class="btn bg-gradient-info w-100 mt-4 mb-0">LOG IN</button>
                                     </div>
                             </div>
                         </div>
                     </div>
-                    <!--           배경 이미지 -->
-                    <!--          <div class="col-md-6">-->
-                    <!--            <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">-->
-                    <!--              <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('../assets/img/curved-images/curved6.jpg')"></div>-->
-                    <!--            </div>-->
-                    <!--          </div>-->
                 </div>
             </div>
         </div>
