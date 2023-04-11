@@ -11,8 +11,9 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home(Model model) {
-        model.addAttribute("banner","banner1");
-        model.addAttribute("side","side1");
+//        model.addAttribute("banner","banner1");
+        //페이지 이동시 (페이지제목/사이드바 active/top메뉴 변경을 위한 model)
+        model.addAttribute("page", "Dashboard"); //페이지 제목
         return "pages/dashboard";
     }
 }
