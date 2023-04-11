@@ -26,10 +26,8 @@ public class BoardApproval extends BoardCommon {
     private Member approverMemNum;
 
 
-    @Enumerated(EnumType.STRING)
-    private ApprovalType approvalType;
-    @Enumerated(EnumType.STRING)
-    private ApprovalStatus approvalStatus;
+    private String approvalType;
+    private String approvalStatus;
 
     private String dueDate;
 

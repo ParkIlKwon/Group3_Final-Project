@@ -41,6 +41,18 @@ public class BoardService {
         return boardApproval.getId();
     }
 
+    @Transactional
+    public Long createBoardApproval2(BoardApproval boardApproval) {
+        bBoardRepository.createBoardApproval2(boardApproval);
+        return boardApproval.getId();
+    }
+
+    @Transactional
+    public Long createBoardApproval3(BoardApproval boardApproval) {
+        bBoardRepository.createBoardApproval3(boardApproval);
+        return boardApproval.getId();
+    }
+
     public List<BoardApproval> findApproval1() {return bBoardRepository.findAllBoardApproval1();}
 
 }
