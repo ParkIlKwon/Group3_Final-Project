@@ -1,13 +1,11 @@
 package com.jpa.intra.domain.board;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jpa.intra.domain.Member;
+import com.jpa.intra.util.MemberConverter;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("APPROVAL")
@@ -22,10 +20,10 @@ public class BoardApproval extends BoardCommon {
     //결재상세정보 (결재 타입에 따라 다른 데이터를 넣을 수 있도록 JSON 타입으로 생성)
 
 
-//    @ManyToOne
-//    @JoinColumn(name="mem_num")
-//    @Convert(converter= MemberConverter.class)
-//    private Member approverMemNum;
+    @ManyToOne
+    @JoinColumn(name="mem_num")
+    @Convert(converter= MemberConverter.class)
+    private Member approverMemNum;
 
 
     @Enumerated(EnumType.STRING)
@@ -35,7 +33,7 @@ public class BoardApproval extends BoardCommon {
 
     private String dueDate;
 
-    private ObjectMapper approvalInfo;
+    private String approvalInfo;
 
 
 }
