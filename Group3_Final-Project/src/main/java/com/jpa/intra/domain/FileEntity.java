@@ -21,8 +21,7 @@ public class FileEntity {
     private String  savedPath;
 
     @Builder
-    public FileEntity(Long id,String userId ,String orgNm, String savedNm, String savedPath) {
-        this.id = id;
+    public FileEntity(String userId ,String orgNm, String savedNm, String savedPath) {
         this.userId = userId;
         this.originalName = orgNm;
         this.savedName = savedNm;
