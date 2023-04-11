@@ -24,18 +24,21 @@
           <div class="card-body pt-4 p-3 approval-main-left" th:with="alist=${alist}">
             <h6 class="mb-0">내 결재 목록</h6>
             <ul class="list-group approval-main-left-alist-section" th:each="vo:${alist}" onclick="showAlistContents(this)">
+              <span class="text-dark font-weight-bold ms-sm-2" th:text="${vo.approvalType}"></span>
+              <span class="text-dark font-weight-bold ms-sm-2" th:text="${vo.approvalStatus}"></span>
               <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg approval-main-left-alist-section">
                 <div class="d-flex flex-column approval-main-left-alist-section-component">
                   <input type="hidden" class="approval-board-id" th:value="${vo.id}">
                   <input type="hidden" class="approval-board-content" th:value="${vo.boardContent}">
                   <input type="hidden" class="approval-board-create-date" th:value="${vo.createDate}">
                   <input type="hidden" class="approval-board-update-date" th:value="${vo.updateDate}">
-                  <input type="hidden" class="approval-board-start-date" th:value="${vo.startDate}">
+<!--                  <input type="hidden" class="approval-board-start-date" th:value="${vo.startDate}">-->
                   <input type="hidden" class="approval-board-end-date" th:value="${vo.dueDate}">
                   <h6 class="mb-3 text-sm approval-board-title" th:text="${vo.boardTitle}"></h6>
-                  <span class="mb-2 text-xs approval-board-small-element">요청된 기안 : <span class="text-dark font-weight-bold ms-sm-2 approval-board-approval-type" th:text="${vo.approvalType == 'VACATION'} ? '휴가신청' : (${vo.approvalStatus == 'OVERTIME'} ? '연장근무신청' : '근무시간변경')"></span></span>
+                  <span class="mb-2 text-xs approval-board-small-element">요청된 기안 :<span class="text-dark font-weight-bold ms-sm-2 approval-board-approval-type" th:text="(${vo.approvalType == T(com.example.demo.domain.ApprovalType).VACATION.getValue()} ? '휴가신청':(${vo.approvalType == T(com.example.demo.domain.ApprovalType).OVERTIME.getValue()} ? '연장근무신청':'근무시간변경'))"></span></span>
+
                   <span class="mb-2 text-xs approval-board-small-element">결재 요청자: <span class="text-dark font-weight-bold ms-sm-2 approval-board-requestorMemNum" th:text="${vo.boardWriter}"></span></span>
-                  <span class="mb-2 text-xs approval-board-small-element">결재 승인자: <span class="text-dark ms-sm-2 font-weight-bold approval-board-approverMemNum" th:text="${vo.approvalMemNum.mem_name}"></span></span>
+                  <span class="mb-2 text-xs approval-board-small-element">결재 승인자: <span class="text-dark ms-sm-2 font-weight-bold approval-board-approverMemNum" th:text="${vo.approverMemNum.mem_name}"></span></span>
                   <h6 id="task-board-progress" th:class="${vo.approvalStatus == 'APPROVED' ? 'approval-status-approved' : (vo.approvalStatus == 'REJECTED' ? 'approval-status-rejected' : 'approval-status-requested')}">
                     <span th:text="${vo.approvalStatus == 'REQUESTED'} ? '요청됨' : (${vo.approvalStatus == 'APPROVED'} ? '승인됨' : '반려됨')"></span>&nbsp;&nbsp;
                     <span class="badge bg-secondary"></span>

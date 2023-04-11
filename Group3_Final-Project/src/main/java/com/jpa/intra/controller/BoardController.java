@@ -1,8 +1,8 @@
 package com.jpa.intra.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jpa.intra.domain.board.BoardFree;
-import com.jpa.intra.domain.board.BoardTask;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.jpa.intra.domain.board.*;
 import com.jpa.intra.query.BoardApprovalDTO;
 import com.jpa.intra.query.BoardApprovalInfoDTO;
 import com.jpa.intra.query.BoardFreeDTO;
@@ -10,7 +10,6 @@ import com.jpa.intra.query.BoardTaskDTO;
 import com.jpa.intra.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,9 +28,6 @@ import java.util.Map;
 public class BoardController {
 
     private final BoardService boardService;
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     // 현재 날짜와 시간 정보를 LocalDateTime을 통해 가져오고 Formatter를 이용하여 필요한 형식으로 치환하다.
     LocalDateTime now = LocalDateTime.now();
@@ -148,21 +144,29 @@ public class BoardController {
         LocalDateTime plus7Days = now.plusDays(7);
         String sevenFormattedDate = plus7Days.format(formatter);
 
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode infoNode = mapper.createObjectNode();
+        infoNode.put("startDate", boardApprovalInfoDTO.getStartDate());
+        infoNode.put("endDate", boardApprovalInfoDTO.getEndDate());
+        infoNode.put("deduction", boardApprovalInfoDTO.getDeduction());
+        String infoJson = infoNode.toString();
 
+        boardApprovalDTO.setApprovalInfo(infoJson);
 
-//        ObjectMapper mapper = new ObjectMapper();
-//        String boardApprovalInfoJson = objectMapper.writeValueAsString(boardApprovalInfoDTO);
+        BoardApproval boardApproval=new BoardApproval();
+        boardApproval.setBoardTitle("approval vacation title");
+        boardApproval.setBoardContent(boardApprovalDTO.getBoardContent());
+        boardApproval.setCreateDate(formattedDate); // 작성일, 즉 휴가기안 확인 시작날짜
+        boardApproval.setUpdateDate(null);  // 수정일
+        boardApproval.setBoardWriter(boardWriter);  //requestorMember
+        boardApproval.setDueDate(sevenFormattedDate); // 휴가기안 확인 마감날짜 (작성일로부터 7일)
+        boardApproval.setApprovalType(ApprovalType.VACATION);
+        boardApproval.setApprovalStatus(ApprovalStatus.REQUESTED);
+        boardApproval.setApproverMemNum(boardApprovalDTO.getApproverMemNum());  // 승인하는 사람의 정보를 담은 맴버객체
+        boardApproval.setApprovalInfo(boardApprovalDTO.getApprovalInfo());
 
-//        BoardApproval boardApproval=new BoardApproval();
-//        boardApproval.setBoardTitle("approval vacation title");
-//        boardApproval.setBoardContent(boardApprovalDTO.getBoardContent());
-//        boardApproval.setCreateDate(formattedDate);
-//        boardApproval.setUpdateDate(null);
-//        boardApproval.setBoardWriter(boardWriter);  //requestorMember
-//        boardApproval.setDueDate(sevenFormattedDate);
-//        boardApproval.setApprovalType(ApprovalType.VACATION);
-//        boardApproval.setApprovalStatus(ApprovalStatus.REQUESTED);
-//        return "redirect:/moveApproval";
-        return "redirect:/moveProject";
+        boardService.createBoardApproval1(boardApproval);
+
+        return "redirect:/moveApproval";
     }
 }

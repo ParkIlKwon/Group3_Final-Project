@@ -1,15 +1,13 @@
 package com.jpa.intra.repository;
 
-import com.jpa.intra.domain.Member;
 import com.jpa.intra.domain.Team;
-import com.jpa.intra.domain.board.BoardCommon;
+import com.jpa.intra.domain.board.BoardApproval;
 import com.jpa.intra.domain.board.BoardFree;
 import com.jpa.intra.domain.board.BoardTask;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
@@ -20,7 +18,7 @@ public class Board_Repository {
     public void createBoardFree(BoardFree boardFree) {em.persist(boardFree);}
     public void createBoardTask(BoardTask boardTask) {em.persist(boardTask);}
 
-    public List<BoardTask> findAll() {return em.createQuery("SELECT t FROM BoardTask t", BoardTask.class).getResultList();}
+    public List<BoardTask> findAllBoardTask() {return em.createQuery("SELECT t FROM BoardTask t", BoardTask.class).getResultList();}
 
 
     public void deleteBoardTaskById(Long boardId) {
@@ -35,6 +33,10 @@ public class Board_Repository {
         em.merge(boardTask);
         em.flush();
     }
+
+    public void createBoardApproval1(BoardApproval boardApproval) {em.persist(boardApproval);}
+
+    public List<BoardApproval> findAllBoardApproval1() {return em.createQuery("SELECT a FROM BoardApproval a", BoardApproval.class).getResultList();}
 
     // EntityManager의 내장 함수 find로 아이디 값을 참조하여 Team 객체를 뽑음
     public Team findById(Long id) {return em.find(Team.class, id);}
