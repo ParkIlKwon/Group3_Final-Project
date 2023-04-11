@@ -104,8 +104,6 @@ public class MemberController {
     }
 
 
-
-
     @Autowired
     MailService registerMail;
 

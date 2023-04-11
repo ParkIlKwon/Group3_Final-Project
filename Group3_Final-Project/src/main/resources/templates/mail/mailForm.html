@@ -18,8 +18,8 @@
 <body>
 
 <h1>Summernote</h1>
-<form>
-    <div class="col"><a>보내기</a></div>
+<form action="/mail/mailForm" method="post">
+    <div class="col"><input type="submit">보내기</input></div>
     <div>받는사람 : <input type="email" name=""></div>
     <div>제목 : <input type="text" name=""></div>
     <textarea id="summernote"></textarea>
