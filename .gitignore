@@ -3,10 +3,6 @@
 *.iws
 *.iml
 *.ipr
-.idea/workspace.xml
-.idea/workspace.xml
-.idea/workspace.xml
-.idea/workspace.xml
-.idea/workspace.xml
-.idea/workspace.xml
-.idea/workspace.xml
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/

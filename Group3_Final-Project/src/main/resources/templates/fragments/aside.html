@@ -15,7 +15,7 @@
       <!-- GNB_대시보드 -->
       <li class="nav-item">
 <!--        <div th:fragment="bodyHeader" th:class="${banner == null ? 'banner1' : banner}"></div>-->
-        <a class="nav-link active" href="/moveDashboard">
+        <a th:class="${page=='Dashboard'} ? 'nav-link active' : 'nav-link'" href="/moveDashboard">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>shop </title>
@@ -36,7 +36,8 @@
       </li>
       <!-- GNB_프로젝트 -->
       <li class="nav-item">
-        <a class="nav-link" href="/moveProject">
+        <a th:class="${page=='프로젝트'} ? 'nav-link active' : 'nav-link'" href="/moveProject">
+        <!--<a class="nav-link" href="/moveProject">-->
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>shop </title>
@@ -57,7 +58,11 @@
       </li>
       <!-- GNB_메일 -->
       <li class="nav-item">
+<<<<<<< HEAD
         <a class="nav-link" href="/mail/main">
+=======
+        <a th:class="${page=='메일'} ? 'nav-link active' : 'nav-link'" href="/moveMail">
+>>>>>>> LJH
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>office</title>
@@ -78,7 +83,7 @@
       </li>
       <!-- GNB_캘린더 -->
       <li class="nav-item">
-        <a class="nav-link" href="/moveCalendar">
+        <a th:class="${page=='캘린더'} ? 'nav-link active' : 'nav-link'" href="/moveCalendar">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>credit-card</title>
@@ -99,7 +104,7 @@
       </li>
       <!-- GNB_드라이브 -->
       <li class="nav-item">
-        <a class="nav-link" href="/moveDrive">
+        <a th:class="${page=='드라이브'} ? 'nav-link active' : 'nav-link'" href="/moveDrive">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>box-3d-50</title>
@@ -121,7 +126,7 @@
       </li>
       <!-- GNB_주소록 -->
       <li class="nav-item">
-        <a class="nav-link" href="/moveMembers">
+        <a th:class="${side=='side6'} ? 'nav-link active' : 'nav-link'" href="/moveMembers">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>settings</title>
@@ -143,7 +148,7 @@
       </li>
       <!-- GNB_결재 -->
       <li class="nav-item">
-        <a class="nav-link" href="/moveApproval">
+        <a th:class="${page=='결재'} ? 'nav-link active' : 'nav-link'" href="/moveApproval">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>settings</title>
@@ -165,7 +170,7 @@
       </li>
       <!-- GNB_Admin -->
       <li class="nav-item">
-        <a class="nav-link" href="/moveAdmin">
+        <a th:class="${page=='관리자'} ? 'nav-link active' : 'nav-link'" href="/moveAdmin">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>settings</title>
@@ -188,7 +193,7 @@
 
       <!-- 회원가입 TEST -->
       <li class="nav-item">
-        <a class="nav-link  " href="/members">
+        <a class="nav-link" href="/members">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>settings</title>

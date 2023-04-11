@@ -13,7 +13,16 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BoardApprovalInfoDTO {
+    //휴우가 네지
     private String startDate;
     private String endDate;
     private int deduction;
+
+    //연장근무
+    private String endTime;
+    private int bonusAllowance;
+
+    //출퇴근시간변경
+    private String goToOffice;
+    private String leaveOffice;
 }
