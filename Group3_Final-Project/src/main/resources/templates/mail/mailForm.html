@@ -3,9 +3,9 @@
 <head th:replace="~{/fragments/header :: header}"></head>
 <!-- jquery-->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<!-- include summernote css/js-->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+<script src="/js/summernote/summernote-lite.js"></script>
+<script src="/js/summernote/lang/summernote-ko-KR.js"></script>
+<link href="/css/summernote/summernote-lite.css" rel="stylesheet">
 <body class="g-sidenav-show  bg-gray-100">
 <!--   사이드 : aside -->
 <aside th:replace="/fragments/aside"></aside>
@@ -15,74 +15,53 @@
     <!-- Start Content -->
     <div class="container-fluid py-4">
         <!--      Left : 메일 목록 -->
-        <div class="row" >
+        <div class="row">
             <div class="col-md-4 mt-4">
                 <div class="card" style="height: 100vh;">
                     <div class="card-header pb-0 px-3">
                         <h6 class="mb-0">메일 목록</h6>
-                        <!--                        메일 목록 정렬 순 원하는 걸로 만들기 -->
-                        <div class="nav-wrapper position-relative end-0">
-                            <ul class="nav nav-pills nav-fill p-1" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#profile-tabs-simple" role="tab" aria-controls="profile" aria-selected="true">
-                                        정렬 1
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-simple" role="tab" aria-controls="dashboard" aria-selected="false">
-                                        정렬 2
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
-
                     <div class="card-body pt-4 p-3">
                         <ul class="list-group">
                             <!--                Start 예시 형식    -->
                             <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg"
                                 th:each="m:${mailList}">
                                 <div class="d-flex flex-column">
-                                    <h6 class="mb-3 text-sm">메일 제목</h6>
-                                    <p th:text="${m.title}"></p>
+                                    <h6 class="mb-3 text-sm" th:text="${m.title}">메일 제목</h6>
                                     <span class="mb-2 text-xs">보낸 이: <span class="text-dark font-weight-bold ms-sm-2"
-                                                                           th:text="${m.getSender()}">
-
-                                    </span>
-                                        </span>
-
-                                    <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">
-
-                                    </span>
-                                        </span>
-                                    <span class="text-xs">사원 번호: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
+                                                                           th:text="${m.getSender()}">발신자</span></span>
                                 </div>
                                 <div class="ms-auto text-end">
-                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:"></a>
+                                    <!--                  삭제 기능 -->
+                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0"
+                                       href="javascript:"><i class="far fa-trash-alt me-2"></i>Delete</a>
                                 </div>
                             </li>
-
+                            <!--                End 예시 형식 -->
                         </ul>
                     </div>
+
                 </div>
             </div>
             <!-- End Left -->
-            <!--        Right : 메일 상세 정보 -->
+            <!--        Right : 새 메일 -->
             <div class="col-md-8 mt-4">
                 <div class="card mb-4" style="height: 100vh;">
                     <div class="card-header pb-0">
-                        <h6>메일 폼</h6>
+                        <h6>새 메일</h6>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
-                        <form method="post" action="/mail/mailForm">
+                        <form method="post" action="/mail/mailForm" id="mailForm">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                     <tr>
 
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            <input type="submit"> SEND MAIL
+                                            <input type="submit" value="SEND" style="border: none;background-color: white;font-size: large;color: #1ab7ea;font-weight: bold">
+                                            &nbsp;&nbsp;&nbsp;
+                                            <a onclick=summernoteReset() style="font-size: large;">RESET</a>
                                         </th>  <!--누르면 보내기 기능 -->
 
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><a>SEND</a></th>  <!--누르면 보내기 기능 -->
@@ -99,8 +78,10 @@
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <!--                        <h6 class="mb-0 text-sm">John Michael</h6>   &lt;!&ndash; 보낸 이  &ndash;&gt;-->
                                                     <!--                        <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>  &lt;!&ndash; 이메일 &ndash;&gt;-->
-                                                    <div>받는사람 : <input type="email" name="receiver"></div>
-                                                    <div>제목 : <input type="text" name="title"></div>
+                                                    <div>받는 이 <input class="form-control" name="receiver"
+                                                                     required type="email"></div>
+                                                    <div>제목 <input class="form-control" name="title" required
+                                                                   type="text"></div>
                                                 </div>
                                             </div>
                                         </td>
@@ -122,8 +103,8 @@
                 </div>
             </div>
             <!--                End Right --->
-        </div>
 
+        </div>
         <!-- footer -->
         <footer th:replace="/fragments/footer"></footer>
     </div>
@@ -133,15 +114,51 @@
 
 <!-- SUMMER NOTE -->
 <script>
-    // 메인화면 페이지 로드 함수
-    $(document).ready(function () {
-        $('#summernote').summernote({
-            placeholder: '내용을 작성하세요.',
-            height: 400,
-            maxHeight: 400
-        });
+    $('#summernote').summernote({
+        // 에디터 높이
+        height: 500,
+        // 에디터 한글 설정
+        lang: "ko-KR",
+        // 에디터에 커서 이동 (input창의 autofocus라고 생각)
+        focus: true,
+        toolbar: [
+            // 글꼴 설정
+            ['fontname', ['fontname']],
+            // 글자 크기 설정
+            ['fontsize', ['fontsize']],
+            // 굵기, 기울임꼴, 밑줄,취소 선, 서식지우기
+            ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+            // 글자색
+            ['color', ['forecolor', 'color']],
+            // 표만들기
+            ['table', ['table']],
+            // 글머리 기호, 번호매기기, 문단정렬
+            ['para', ['ul', 'ol', 'paragraph']],
+            // 줄간격
+            ['height', ['height']],
+            // 코드보기, 확대해서보기, 도움말
+            ['view', ['codeview', 'fullscreen', 'help']],
+            // 이미지 넣기
+            ['Insert', ['picture']],
+            // 링크 넣기
+            ['Insert', ['link']]
+        ],
+        // 추가한 글꼴
+        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋음체', '바탕체'],
+        // 추가한 폰트사이즈
+        fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72']
+
     });
+    // SUMMER NOTE CONTENT RESET
+    function summernoteReset() {
+        $('#summernote').summernote('reset');
+    }
+
+
+
+
 </script>
+
 
 </body>
 </html>
