@@ -26,14 +26,13 @@ import java.util.UUID;
 @Transactional(readOnly = true)
 public class FileService {
 
-    private String fileDir = "E:\\test\\"; //파일 저장경로 그냥 이렇게 함 . C로 해도 됨
-
+    //파일 저장경로 그냥 이렇게 함 . C로 해도 됨
 
     private final File_Repository fileRepository;
 
     @Transactional
     public Long saveFile(MultipartFile files, HttpServletRequest request) throws IOException {
-
+        String fileDir = "E:\\Storage\\";
         File fileObj = new File(fileDir);
         if (files.isEmpty()) {
             return null;
@@ -78,5 +77,65 @@ public class FileService {
 
         return savedFile.getId();
     }
+
+    @Transactional
+    public Long saveProfileImage(File file, String userId) throws IOException {
+        String fileDir = "E:\\profile\\";
+        File fileObj = new File(fileDir);
+        if (file.exists()) {
+            return null;
+        } else if (fileObj.isDirectory() == false) { //해당위치에 폴더없으면 생성
+            System.out.println("없습니다.");
+            Path directoryPath = Paths.get(fileDir);
+            Files.createDirectory(directoryPath);
+        }
+
+        // 원래 파일 이름 추출
+        String origName = file.getName();
+
+
+        // 확장자 추출(ex : .png)
+        String extension = origName.substring(origName.lastIndexOf("."));
+
+
+        // 파일을 불러올 때 사용할 파일 경로
+        String savedPath = fileDir + origName;
+
+        // 파일 엔티티 생성
+        FileEntity fileE = FileEntity.builder()
+                .userId(userId)
+                .orgNm(origName)
+                .savedNm(origName)
+                .savedPath(savedPath)
+                .build();
+        System.out.println(savedPath);
+
+        Path savedFilePath = Paths.get(savedPath);
+        Files.copy(file.toPath(), savedFilePath);
+
+        // 데이터베이스에 파일 정보 저장
+        FileEntity savedFile = fileRepository.save(fileE);
+
+        return savedFile.getId();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

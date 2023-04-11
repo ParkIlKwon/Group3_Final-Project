@@ -3,12 +3,18 @@ package com.jpa.intra;
 import com.jpa.intra.domain.Address;
 import com.jpa.intra.domain.Member;
 import com.jpa.intra.domain.Team;
+import com.jpa.intra.service.FileService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 @Component //자동으로 객체를 생성해줌
@@ -16,6 +22,7 @@ import java.util.Random;
 public class init {
 
     private final InitService initService;
+    private final FileService fileService;
 
 
 //생성자가 만들어지면 바로 호출하는 메서드
@@ -30,17 +37,20 @@ public class init {
         //initService.dbInit1();
 
 
+
     }
 
     @Component
     @Transactional //db에 값을 넣어주는 어노테이션.
     @RequiredArgsConstructor //생성자 의존성 주입 생략
-    static class InitService {
+    class InitService {
         int index = 0;
 
         private final EntityManager em;
 
-        public void makeMemberDummy(int num){
+        public void makeMemberDummy(@Lazy int num){
+
+
             String TeamArr [] = {"영업부","인사부","기획부",
             "관리부","회계부","총무부"};
             Team t=new Team();
@@ -70,6 +80,22 @@ public class init {
             t.getMembers().add(m);
             m.setTeam(t);
 
+            String rootPath = System.getProperty("user.dir"); //현재 프로젝트 경로 위치를 수정하더라도 그에 따라 바뀜
+            String currentPath = "\\src\\main\\resources\\image\\" + index + ".jpg"; //그뒤 나머지 경로
+
+            String filePath = rootPath + currentPath;
+            File file = new File(filePath);
+
+//            if (file.exists()){
+//                System.out.println("======프로필 사진이 정상적으로 존재합니다.");
+//                try{
+//                    fileService.saveProfileImage(file,m.getMem_id());
+//                }catch (IOException e){
+//                    e.getStackTrace();
+//                }
+//
+//            }
+            
             index++;
         }
 

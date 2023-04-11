@@ -3,6 +3,8 @@ spring:
     ansi:
       enabled: always
 
+
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
 #    url: jdbc:mysql://database-intranetdb.cgydu6nogwyk.us-east-1.rds.amazonaws.com:3306/intranetDB?serverTimezone=UTC&useSSL=false
