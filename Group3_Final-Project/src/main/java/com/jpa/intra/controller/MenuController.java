@@ -32,19 +32,11 @@ public class MenuController {
         return "/project/main";
     }
 
-    //메일 페이지 이동
-    @GetMapping("/moveMail")
-    public String MoveMail(Model model){
-        model.addAttribute("page", "메일");
-        return "/mail/main";
-    }
-
     //캘린더 페이지 이동
     @GetMapping("/moveCalendar")
     public String MoveCalender(Model model){
         model.addAttribute("page", "캘린더");
        return "/calendar/main";
-
     }
 
     //드라이브 페이지 이동

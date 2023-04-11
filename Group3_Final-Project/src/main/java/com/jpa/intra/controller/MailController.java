@@ -29,7 +29,7 @@ public class MailController {
         mailList = mailRepository.findAllMailList();
         System.out.println(mailList.size() +"사이즈");
         model.addAttribute("mailList",mailList);
-
+        model.addAttribute("page", "메일");
         return "mail/main";
     }
 
@@ -40,7 +40,7 @@ public class MailController {
         mailList = mailRepository.findAllMailList();
         System.out.println(mailList.size() +"사이즈");
         model.addAttribute("mailList",mailList);
-
+        model.addAttribute("page", "메일");
         return "mail/mailForm";
     }
 
