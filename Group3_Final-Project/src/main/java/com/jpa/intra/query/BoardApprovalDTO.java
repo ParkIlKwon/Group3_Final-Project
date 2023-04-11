@@ -1,6 +1,5 @@
 package com.jpa.intra.query;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jpa.intra.domain.Member;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,5 +9,5 @@ import lombok.Setter;
 public class BoardApprovalDTO {
     private String boardContent;
     private Member approverMemNum;
-    private ObjectMapper approvalInfo;
+    private String approvalInfo;
 }
