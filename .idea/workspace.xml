@@ -8,9 +8,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/HomeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/controller/MemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/domain/board/BoardApproval.java" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/java/com/jpa/intra/domain/board/BoardApproval.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/members/loginForm.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/loginForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/loginForm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/sign-up.html" beforeDir="false" afterPath="$PROJECT_DIR$/Group3_Final-Project/src/main/resources/templates/pages/sign-up.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
