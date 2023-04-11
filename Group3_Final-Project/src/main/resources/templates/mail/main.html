@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/fragments/header :: header}"></head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -11,8 +10,8 @@
     <nav th:replace="fragments/bodyTop"></nav>
     <!-- Start Content -->
     <div class="container-fluid py-4">
-        <!--      Left : 메일 목록 -->
         <div class="row" >
+            <!--      Left : 메일 목록 -->
             <div class="col-md-4 mt-4">
                 <div class="card" style="height: 100vh;">
                     <div class="card-header pb-0 px-3">
@@ -78,7 +77,7 @@
                     </div>
                 </div>
             </div>
-
+            <!-- End Left -->
             <!--        Right : 메일 상세 정보 -->
             <div class="col-md-8 mt-4">
                 <div class="card mb-4" style="height: 100vh;">
@@ -113,7 +112,7 @@
 <!--                                        메일 내용 -->
                                     </td>
                                 </tr>
-                                <!--                End 메일 상세정보 --->
+
 
                                 </tbody>
                             </table>
@@ -121,6 +120,7 @@
                     </div>
                 </div>
             </div>
+            <!--                End Right --->
         </div>
 
         <!-- footer -->
