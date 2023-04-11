@@ -4,9 +4,9 @@
 <!-- 사이드바 헤더 : 로고영역(대시보드 이동) -->
   <div class="sidenav-header">
     <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-    <a class="navbar-brand m-0" href="/pages/Dashboard" target="_blank">
-      <img src="../assets/img/M_Logo_P.png" class="navbar-brand-img h-100" alt="logo_pic">
-      <img src="../assets/img/M_Logo_T.png" class="navbar-brand-img" style="height:23px" alt="logo_name">
+    <a class="navbar-brand m-0" href="/" target="_blank">
+      <img src="../assets/img/m1f.png" class="navbar-brand-img h-100" alt="logo_pic">
+      <img src="../assets/img/m1_name.png" class="navbar-brand-img" style="height:23px" alt="logo_name">
     </a>
   </div>
   <hr class="horizontal dark mt-0">
@@ -120,7 +120,7 @@
       </li>
       <!-- GNB_주소록 -->
       <li class="nav-item">
-        <a th:class="${page=='주소록'} ? 'nav-link active' : 'nav-link'" href="/moveMembers">
+        <a th:class="${side=='side6'} ? 'nav-link active' : 'nav-link'" href="/members/main">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>settings</title>
@@ -231,7 +231,7 @@
           <span class="nav-link-text ms-1">로그인</span>
         </a>
 
-        <!--<a th:if="${session.log != null}" class="nav-link  " href="/members/logout">
+        <a th:if="${session.log != null}" class="nav-link  " href="/members/logout">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>settings</title>
@@ -249,25 +249,31 @@
             </svg>
           </div>
           <span class="nav-link-text ms-1">로그아웃</span>
-        </a>-->
+        </a>
+
       </li>
+
+
+
+
+
     </ul>
   </div>
-
-  <div class="sidenav-footer mx-3 ">
-    <div class="card card-background shadow-none card-background-mask-primary" id="sidenavCard">
-      <div class="full-background" style="background-image: url('/assets/img/curved-images/white-curved.jpg')"></div>
-      <div class="card-body text-start p-3 w-100">
-        <div class="docs-info">
-          <img src="../assets/img/kal-visuals-square.jpg" class="userPic" style="height:100px; border-radius:50px" alt="user_pic">
-          <p class="text-2xl font-weight-bold">Jessica<br>
-          <span class="text-sm">Development Team</span></p>
-          <a href="#" target="_blank" class="btn btn-white btn-sm w-100 mb-0 text-md-center fw-bold">마이 페이지</a>
-        </div>
-      </div>
-    </div>
-    <a class="btn bg-gradient-primary mt-3 w-100 text-md-center" href="/members/logout">LOGOUT</a>
-  </div>
+<!-- 로그인 사용자 정보-->
+<!--  <div class="sidenav-footer mx-3 ">-->
+<!--    <div class="card card-background shadow-none card-background-mask-primary" id="sidenavCard">-->
+<!--      <div class="full-background" style="background-image: url('../assets/img/curved-images/white-curved.jpg')"></div>-->
+<!--      <div class="card-body text-start p-3 w-100">-->
+<!--        <div class="docs-info">-->
+<!--          <img src="../assets/img/kal-visuals-square.jpg" class="userPic" style="height:100px; border-radius:50px" alt="user_pic">-->
+<!--          <p class="text-2xl font-weight-bold">Jessica<br>-->
+<!--          <span class="text-sm">Development Team</span></p>-->
+<!--          <a href="#" target="_blank" class="btn btn-white btn-sm w-100 mb-0 text-md-center fw-bold">마이 페이지</a>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <a class="btn bg-gradient-primary mt-3 w-100 text-md-center" href="#">LOGOUT</a>-->
+<!--  </div>-->
 
 
 

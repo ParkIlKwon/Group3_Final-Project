@@ -16,21 +16,6 @@
         <div class="card mb-4" style="height: 100vh;">
           <div class="card-header pb-0">
             <h6>사원 목록</h6>
-            <!--                        사원 목록 정렬 순 원하는 걸로 만들기 -->
-            <div class="nav-wrapper position-relative end-0">
-              <ul class="nav nav-pills nav-fill p-1" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#profile-tabs-simple" role="tab" aria-controls="profile" aria-selected="true">
-                    정렬 1  <!-- 이름 순 -->
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-simple" role="tab" aria-controls="dashboard" aria-selected="false">
-                    정렬 2   <!-- 팀 순 -->
-                  </a>
-                </li>
-              </ul>
-            </div>
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
@@ -41,40 +26,40 @@
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">POSITION</th>
                   <!--                  생략 가능-->
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th>
-                  <th class="text-secondary opacity-7"></th>
+<!--                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th>-->
+<!--                  <th class="text-secondary opacity-7"></th>-->
                 </tr>
                 </thead>
                 <tbody>
 <!--                Start 사원 정보 : 이름 클릭하면 , Modal > 상세정보 -->
-                <tr>
+                <tr th:each="member:${memberList}">
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
                         <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">  <!-- 사진 -->
                       </div>
                       <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal" >John Michael</a></h6>   <!-- 이름 -->
-                        <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>  <!-- 이메일 -->
+                        <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal" th:text="${member.getMem_name()}">이름</a></h6>   <!-- 이름 -->
+                        <p class="text-xs text-secondary mb-0" th:text="${member.getEmail()}">이메일</p>  <!-- 이메일 -->
                       </div>
                     </div>
                   </td>
                   <td>
-                    <p class="text-xs font-weight-bold mb-0">Manager</p>  <!-- 부서 -->
-                    <p class="text-xs text-secondary mb-0">Organization</p> <!-- 직급 -->
+                    <p class="text-xs font-weight-bold mb-0" th:text="${member.getTeam().getTeam_name()}">부서</p>  <!-- 부서 -->
+                    <p class="text-xs text-secondary mb-0" th:text="${member.getEmp_type()}">직급</p> <!-- 직급 -->
                   </td>
 <!--                  생략 가능-->
                   <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm bg-gradient-success">Online</span>
+                    <span class="badge badge-sm bg-gradient-success">Online</span> <!-- 출 퇴근 상태 -->
                   </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                  </td>
-                  <td class="align-middle">
-                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                      Edit
-                    </a>
-                  </td>
+<!--                  <td class="align-middle text-center">-->
+<!--                    <span class="text-secondary text-xs font-weight-bold">23/04/18</span>-->
+<!--                  </td>-->
+<!--                  <td class="align-middle">-->
+<!--                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">-->
+<!--                      Edit-->
+<!--                    </a>-->
+<!--                  </td>-->
                 </tr>
 <!--                End 사원 정보 --->
                 <tr>
