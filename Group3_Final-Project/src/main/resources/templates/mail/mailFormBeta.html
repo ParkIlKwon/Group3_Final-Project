@@ -2,10 +2,17 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/fragments/header :: header}"></head>
 <!-- jquery-->
+<<<<<<< HEAD
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script src="/js/summernote/summernote-lite.js"></script>
+<script src="/js/summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="/css/summernote/summernote-lite.css">
+=======
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <!-- include summernote css/js-->
   <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
   <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+>>>>>>> LJH
 <body class="g-sidenav-show  bg-gray-100">
 <!--   사이드 : aside -->
 <aside th:replace="/fragments/aside"></aside>
@@ -81,7 +88,7 @@
           </div>
         </div>
       </div>
-<!-- End Left -->
+      <!-- End Left -->
       <!--        Right : 메일 상세 정보 -->
       <div class="col-md-8 mt-4">
         <div class="card mb-4" style="height: 100vh;">
@@ -90,41 +97,45 @@
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <form>
-            <div class="table-responsive p-0">
-              <table class="table align-items-center mb-0">
-                <thead>
-                <tr>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><a>SEND</a></th>  <!--누르면 보내기 기능 -->
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>
-                    <div class="d-flex px-2 py-1">
-<!--                      <div>-->
-<!--                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">  &lt;!&ndash; 사진 &ndash;&gt;-->
-<!--                      </div>-->
-                      <div class="d-flex flex-column justify-content-center">
-<!--                        <h6 class="mb-0 text-sm">John Michael</h6>   &lt;!&ndash; 보낸 이  &ndash;&gt;-->
-<!--                        <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>  &lt;!&ndash; 이메일 &ndash;&gt;-->
-                        <div>받는사람 : <input type="email" name=""></div>
-                        <div>제목 : <input type="text" name=""></div>
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                  <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                      <a>SEND</a>
+                      &nbsp;&nbsp;&nbsp;
+                      <a onclick=summernoteReset() style="color: red;">RESET</a>
+                    </th>  <!--누르면 보내기 기능 -->
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <!--                      <div>-->
+                        <!--                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">  &lt;!&ndash; 사진 &ndash;&gt;-->
+                        <!--                      </div>-->
+                        <div class="d-flex flex-column justify-content-center">
+                          <!--                        <h6 class="mb-0 text-sm">John Michael</h6>   &lt;!&ndash; 보낸 이  &ndash;&gt;-->
+                          <!--                        <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>  &lt;!&ndash; 이메일 &ndash;&gt;-->
+                          <div>받는 이 <input class="form-control" type="email" name="" required></div>
+                          <div>제목 <input class="form-control" type="text" name="" required></div>
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <textarea id="summernote"></textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <textarea id="summernote"></textarea>
 
-                    <!--                                        메일 내용 -->
-                  </td>
-                </tr>
+                      <!--                                        메일 내용 -->
+                    </td>
+                  </tr>
 
 
-                </tbody>
-              </table>
-            </div>
+                  </tbody>
+                </table>
+              </div>
             </form>
           </div>
         </div>
@@ -141,6 +152,42 @@
 
 <!-- SUMMER NOTE -->
 <script>
+<<<<<<< HEAD
+  $('#summernote').summernote({
+    // 에디터 높이
+    height: 500,
+    // 에디터 한글 설정
+    lang: "ko-KR",
+    // 에디터에 커서 이동 (input창의 autofocus라고 생각)
+    focus : true,
+    toolbar: [
+      // 글꼴 설정
+      ['fontname', ['fontname']],
+      // 글자 크기 설정
+      ['fontsize', ['fontsize']],
+      // 굵기, 기울임꼴, 밑줄,취소 선, 서식지우기
+      ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+      // 글자색
+      ['color', ['forecolor','color']],
+      // 표만들기
+      ['table', ['table']],
+      // 글머리 기호, 번호매기기, 문단정렬
+      ['para', ['ul', 'ol', 'paragraph']],
+      // 줄간격
+      ['height', ['height']],
+      // 코드보기, 확대해서보기, 도움말
+      ['view', ['codeview','fullscreen', 'help']],
+      // 이미지 넣기
+      ['Insert', ['picture']],
+      // 링크 넣기
+      ['Insert', ['link']]
+    ],
+    // 추가한 글꼴
+    fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
+    // 추가한 폰트사이즈
+    fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+
+=======
   // 메인화면 페이지 로드 함수
   $(document).ready(function () {
     $('#summernote').summernote({
@@ -148,7 +195,13 @@
       height: 400,
       maxHeight: 400
     });
+>>>>>>> LJH
   });
+
+  function summernoteReset(){
+    $('#summernote').summernote('reset');
+  }
+
 </script>
 
 </body>
