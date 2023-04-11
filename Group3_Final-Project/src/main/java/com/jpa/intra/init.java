@@ -35,8 +35,7 @@ public class init {
             initService.makeMemberDummy(num);
         }
         //initService.dbInit1();
-
-
+        
 
     }
 
@@ -48,8 +47,7 @@ public class init {
 
         private final EntityManager em;
 
-        public void makeMemberDummy(@Lazy int num){
-
+        public void makeMemberDummy(int num){
 
             String TeamArr [] = {"영업부","인사부","기획부",
             "관리부","회계부","총무부"};
