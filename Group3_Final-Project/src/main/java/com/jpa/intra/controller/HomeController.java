@@ -12,7 +12,7 @@ public class HomeController {
     @RequestMapping("/")
     public String home(Model model) {
         model.addAttribute("banner","banner1");
-        model.addAttribute("side","sidebar1");
+        model.addAttribute("side","side1");
         return "pages/dashboard";
     }
 }
