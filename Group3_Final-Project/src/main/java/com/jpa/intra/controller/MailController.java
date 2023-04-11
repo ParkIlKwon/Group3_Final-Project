@@ -22,7 +22,7 @@ public class MailController {
     }
 
     @PostMapping("/mailForm")
-    public String mailFrom(){
+    public String SendMail(){
 
         return "pages/moveMail";
     }
