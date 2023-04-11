@@ -77,4 +77,11 @@ public class MenuController {
 
     }
 
+    @GetMapping("/sendMail")
+    public String SendMail(){
+
+        return "/mail/mailForm";
+    }
+
+
 }

@@ -8,6 +8,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
 
+import com.jpa.intra.domain.Mail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -102,4 +103,16 @@ public class MailService{
 
         return ePw; // 메일로 보냈던 인증 코드를 서버로 반환
     }
+
+    public void sendMail(){
+
+    }
+
+
+
+
+
+
+
+
 }
