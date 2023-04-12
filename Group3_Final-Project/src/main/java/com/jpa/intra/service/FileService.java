@@ -87,7 +87,7 @@ public class FileService {
 
         // 파일 엔티티 생성
         FileEntity fileE = FileEntity.builder()
-                .userId(m.getMem_id())
+                .userId(null)
                 .orgNm(origName)
                 .savedNm(origName)
                 .savedPath(savedPath)
