@@ -2,6 +2,10 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/fragments/header :: header}"></head>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" defer></script>
+
+<!--  뒤로가기 block 처리  -->
+<script src="../../static/assets/js/material/pageblock.js" defer ></script>
+
 <body style="background-color: #f8f9fa">
 <main class="main-content  mt-0">
     <section>
@@ -51,6 +55,7 @@
 
 <!-- remember id -->
 <script type="text/javascript">
+
     window.onload = function() {
 
         // 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 쿠키값 없으면 공백.
