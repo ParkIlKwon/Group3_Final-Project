@@ -112,7 +112,7 @@
             return "members/main";
         }
 
-    <<<<<<< HEAD
+
         @PostMapping("/main")
         @ResponseBody
         public List<String> memberMain(@RequestParam("id") Long id){
@@ -136,7 +136,7 @@
 
             return list;
         }
-    =======
+
         @GetMapping("/AttendanceControl") //출퇴근 로직
         public String gettingStart(HttpServletRequest request){
             HttpSession session = request.getSession();
@@ -154,7 +154,4 @@
         }
 
 
-
-
-    >>>>>>> main
     }
