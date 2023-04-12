@@ -44,6 +44,15 @@ public class Member_Repository {
 
     // EntityManager의 내장 함수 find로 아이디 값을 참조하여 Member 객체를 뽑음
     public Member findById(Long id) {return em.find(Member.class, id);}
-    
+
+    public void update(Member m) { //업데이트 문
+        em.createQuery("UPDATE Member m SET m.mem_id = :id, m.mem_pw = :pw, m.status = :status WHERE m.id = :memberId")
+                .setParameter("id", m.getMem_id())
+                .setParameter("pw", m.getMem_pw())
+                .setParameter("status", m.getStatus())
+                .setParameter("memberId", m.getId())
+                .executeUpdate();
+    }
+
 
 }
