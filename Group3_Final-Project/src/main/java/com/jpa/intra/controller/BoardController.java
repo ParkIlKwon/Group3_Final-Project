@@ -2,11 +2,13 @@ package com.jpa.intra.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.jpa.intra.domain.Member;
 import com.jpa.intra.domain.board.*;
 import com.jpa.intra.query.BoardApprovalDTO;
 import com.jpa.intra.query.BoardApprovalInfoDTO;
 import com.jpa.intra.query.BoardFreeDTO;
 import com.jpa.intra.query.BoardTaskDTO;
+import com.jpa.intra.repository.Member_Repository;
 import com.jpa.intra.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +30,7 @@ import java.util.Map;
 public class BoardController {
 
     private final BoardService boardService;
+    private final Member_Repository member_repository;
 
     // 현재 날짜와 시간 정보를 LocalDateTime을 통해 가져오고 Formatter를 이용하여 필요한 형식으로 치환하다.
     LocalDateTime now = LocalDateTime.now();
@@ -121,8 +124,10 @@ public class BoardController {
     // 결재게시판으로 이동
     @GetMapping("/board/newapprovalvacationboard")
     public String callBoardApprovalWriteForm1(Model model) {
+        List<Member> mlist = member_repository.getAllMemberList();
         model.addAttribute("boardApprovalDTO", new BoardApprovalDTO());
         model.addAttribute("boardApprovalInfoDTO", new BoardApprovalInfoDTO());
+        model.addAttribute("mlist",mlist);
         return "approval/appvacation";
     }
 
@@ -139,100 +144,6 @@ public class BoardController {
         model.addAttribute("boardApprovalInfoDTO", new BoardApprovalInfoDTO());
         return "approval/appwoc";
     }
-
-//    @PostMapping("/board/newapprovalvacationboard")
-//    public String writeNewBoardApprovalForm1(HttpSession session, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
-//        String boardWriter=(String)session.getAttribute("log");
-//        LocalDateTime plus7Days = now.plusDays(7);
-//        String sevenFormattedDate = plus7Days.format(formatter);
-//
-//        ObjectMapper mapper = new ObjectMapper();
-//        ObjectNode infoNode = mapper.createObjectNode();
-//        infoNode.put("startDate", boardApprovalInfoDTO.getStartDate());
-//        infoNode.put("endDate", boardApprovalInfoDTO.getEndDate());
-//        infoNode.put("deduction", boardApprovalInfoDTO.getDeduction());
-//        String infoJson = infoNode.toString();
-//
-//        boardApprovalDTO.setApprovalInfo(infoJson);
-//
-//        BoardApproval boardApproval=new BoardApproval();
-//        boardApproval.setBoardTitle("approval vacation title");
-//        boardApproval.setBoardContent(boardApprovalDTO.getBoardContent());
-//        boardApproval.setCreateDate(formattedDate); // 작성일, 즉 휴가기안 확인 시작날짜
-//        boardApproval.setUpdateDate(null);  // 수정일
-//        boardApproval.setBoardWriter(boardWriter);  //requestorMember
-//        boardApproval.setDueDate(sevenFormattedDate); // 휴가기안 확인 마감날짜 (작성일로부터 7일)
-//        boardApproval.setApprovalType("VACATION");
-//        boardApproval.setApprovalStatus("REQUESTED");
-//        boardApproval.setApproverMemNum(boardApprovalDTO.getApproverMemNum());  // 승인하는 사람의 정보를 담은 맴버객체
-//        boardApproval.setApprovalInfo(boardApprovalDTO.getApprovalInfo());
-//
-//        boardService.createBoardApproval1(boardApproval);
-//
-//        return "redirect:/moveApproval";
-//    }
-//
-//    @PostMapping("/board/newapprovalovertimeboard")
-//    public String writeNewBoardApprovalForm2(HttpSession session, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
-//        String boardWriter=(String)session.getAttribute("log");
-//        LocalDateTime plus7Days = now.plusDays(7);
-//        String sevenFormattedDate = plus7Days.format(formatter);
-//
-//        ObjectMapper mapper = new ObjectMapper();
-//        ObjectNode infoNode = mapper.createObjectNode();
-//        infoNode.put("endTime", boardApprovalInfoDTO.getEndTime());
-//        infoNode.put("bonusAllowance", boardApprovalInfoDTO.getBonusAllowance());
-//        String infoJson = infoNode.toString();
-//
-//        boardApprovalDTO.setApprovalInfo(infoJson);
-//
-//        BoardApproval boardApproval=new BoardApproval();
-//        boardApproval.setBoardTitle("approval overtime title");
-//        boardApproval.setBoardContent(boardApprovalDTO.getBoardContent());
-//        boardApproval.setCreateDate(formattedDate); // 작성일, 즉 휴가기안 확인 시작날짜
-//        boardApproval.setUpdateDate(null);  // 수정일
-//        boardApproval.setBoardWriter(boardWriter);  //requestorMember
-//        boardApproval.setDueDate(sevenFormattedDate); // 휴가기안 확인 마감날짜 (작성일로부터 7일)
-//        boardApproval.setApprovalType("OVERTIME");
-//        boardApproval.setApprovalStatus("REQUESTED");
-//        boardApproval.setApproverMemNum(boardApprovalDTO.getApproverMemNum());  // 승인하는 사람의 정보를 담은 맴버객체
-//        boardApproval.setApprovalInfo(boardApprovalDTO.getApprovalInfo());
-//
-//        boardService.createBoardApproval2(boardApproval);
-//
-//        return "redirect:/moveApproval";
-//    }
-//
-//    @PostMapping("/board/newapprovalwocboard")
-//    public String writeNewBoardApprovalForm3(HttpSession session, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
-//        String boardWriter=(String)session.getAttribute("log");
-//        LocalDateTime plus7Days = now.plusDays(7);
-//        String sevenFormattedDate = plus7Days.format(formatter);
-//
-//        ObjectMapper mapper = new ObjectMapper();
-//        ObjectNode infoNode = mapper.createObjectNode();
-//        infoNode.put("goToOffice", boardApprovalInfoDTO.getGoToOffice());
-//        infoNode.put("leaveOffice", boardApprovalInfoDTO.getLeaveOffice());
-//        String infoJson = infoNode.toString();
-//
-//        boardApprovalDTO.setApprovalInfo(infoJson);
-//
-//        BoardApproval boardApproval=new BoardApproval();
-//        boardApproval.setBoardTitle("approval woc title");
-//        boardApproval.setBoardContent(boardApprovalDTO.getBoardContent());
-//        boardApproval.setCreateDate(formattedDate); // 작성일, 즉 휴가기안 확인 시작날짜
-//        boardApproval.setUpdateDate(null);  // 수정일
-//        boardApproval.setBoardWriter(boardWriter);  //requestorMember
-//        boardApproval.setDueDate(sevenFormattedDate); // 휴가기안 확인 마감날짜 (작성일로부터 7일)
-//        boardApproval.setApprovalType("WORK_HOUR_CHANGE");
-//        boardApproval.setApprovalStatus("REQUESTED");
-//        boardApproval.setApproverMemNum(boardApprovalDTO.getApproverMemNum());  // 승인하는 사람의 정보를 담은 맴버객체
-//        boardApproval.setApprovalInfo(boardApprovalDTO.getApprovalInfo());
-//
-//        boardService.createBoardApproval3(boardApproval);
-//
-//        return "redirect:/moveApproval";
-//    }
 
     private BoardApproval createNewBoardApproval(HttpSession session, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO, String boardTitle, String approvalType) {
         String boardWriter=(String)session.getAttribute("log");
@@ -293,7 +204,7 @@ public class BoardController {
 
     @PostMapping("/board/newapprovalwocboard")
     public String writeNewBoardApprovalForm3(HttpSession session, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
-        BoardApproval boardApproval=createNewBoardApproval(session, boardApprovalDTO, boardApprovalInfoDTO, "approval overtime title", "OVERTIME");
+        BoardApproval boardApproval=createNewBoardApproval(session, boardApprovalDTO, boardApprovalInfoDTO, "approval overtime title", "WORK_HOUR_CHANGE");
         boardService.createBoardApproval3(boardApproval);
         return "redirect:/moveApproval";
     }
