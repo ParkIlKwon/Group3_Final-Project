@@ -20,6 +20,7 @@ public class AdminController {
 
     private final Member_Repository member_repository;
 
+    //관리자_메인_페이지 (아직 미구현)
     @GetMapping()
     public String adminMain(Model model){
 
@@ -27,6 +28,7 @@ public class AdminController {
         return "admin/main";
     }
 
+    //관리자_사원관리 페이지
     @GetMapping("/admin_member")
     public String admin_member(Model model){
         List<Member> memberList = member_repository.getAllMemberList();
@@ -34,6 +36,8 @@ public class AdminController {
         model.addAttribute("page", "관리자");
         return "admin/admin_member";
     }
+
+    //관리자_사원관리_사원등록 페이지
     @GetMapping("/join")
     public String memberJoin(Model model){
         model.addAttribute("page", "관리자");

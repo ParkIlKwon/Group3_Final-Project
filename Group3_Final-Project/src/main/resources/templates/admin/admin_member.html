@@ -41,7 +41,7 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
-                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">  <!-- 사진 -->
+                        <img th:src="@{'/' + ${member.getMem_img()}}" class="avatar avatar-md me-3 text-center" alt="user1">  <!-- 사진 -->
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm" th:text="${member.getMem_name()}">이름</h6>   <!-- 이름 -->
@@ -77,17 +77,17 @@
                     <p class="text-xs font-weight-bold mb-0" th:text="${member.getTeam().getTeam_name()}">부서</p>
                     <p class="text-xs text-secondary mb-0" th:text="${member.getEmp_type()}">직급</p> <!-- 직급 -->
                   </td>
-
+                  <!-- 출 퇴근 현황 -->
                   <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm bg-gradient-success">Online</span> <!-- 출 퇴근 현황 -->
+                    <span class="badge badge-sm bg-gradient-success">Online</span>
                   </td>
-                  <!-- Modal로 수정 -->
+                  <!-- 사원정보 수정 : Modal -->
                   <td class="align-middle text-center text-sm">
-                    <button class="btn bg-gradient-warning px-3 py-1 mb-0">수정</button> <!-- 사원정보 수정 -->
+                    <button class="btn bg-gradient-warning px-3 py-1 mb-0">수정</button>
                   </td>
-
+                  <!-- 사원 삭제 -->
                   <td class="align-middle text-center text-sm">
-                    <button class="btn bg-gradient-danger px-3 py-1 mb-0">삭제</button> <!-- 사원 삭제 -->
+                    <button class="btn bg-gradient-danger px-3 py-1 mb-0">삭제</button>
                   </td>
 
 <!--                  <td class="align-middle text-center">-->
