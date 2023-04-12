@@ -121,9 +121,11 @@ public class MemberController {
     }
 
     @GetMapping("/main")
-    public String mailMain(Model model){
+    public String membersMain(Model model){
         List<Member> memberList = member_repository.getAllMemberList();
         model.addAttribute("memberList",memberList);
         return "members/main";
     }
+
+
 }
