@@ -3,13 +3,13 @@ package com.jpa.intra.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.jpa.intra.domain.Member;
+import com.jpa.intra.domain.Reply;
 import com.jpa.intra.domain.board.*;
-import com.jpa.intra.query.BoardApprovalDTO;
-import com.jpa.intra.query.BoardApprovalInfoDTO;
-import com.jpa.intra.query.BoardFreeDTO;
-import com.jpa.intra.query.BoardTaskDTO;
+import com.jpa.intra.query.*;
 import com.jpa.intra.repository.Member_Repository;
 import com.jpa.intra.service.BoardService;
+import com.jpa.intra.service.ReplyService;
+import com.jpa.intra.util.MemberConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @Slf4j
@@ -30,6 +31,7 @@ import java.util.Map;
 public class BoardController {
 
     private final BoardService boardService;
+    private final ReplyService replyService;
     private final Member_Repository member_repository;
 
     // 현재 날짜와 시간 정보를 LocalDateTime을 통해 가져오고 Formatter를 이용하여 필요한 형식으로 치환하다.
@@ -96,12 +98,25 @@ public class BoardController {
     // 업무게시판 리스트
     @GetMapping("/board/boardtasklist")
     public String boardTaskList(Model model) {
-
-
-        List<BoardTask> tlist = boardService.findTasks();
+        List<BoardTask> tlist=boardService.findTasks();
+        List<Reply> rplist=replyService.findReply();
         model.addAttribute("tlist", tlist);
+        model.addAttribute("rplist", rplist);
         return "board/boardTaskList";
     }
+
+    // 업무게시판 상세
+    @GetMapping("/board/getCurrentBoardDetail")
+    public String setCurrentBoardInfo(@RequestParam("boardId") Long boardId, Model model) {
+        BoardTask curBoard=boardService.findTaskByBoardId(boardId);
+        List<Reply> curRplist=replyService.findReplyByBoardId(boardId);
+        if(curRplist!=null){model.addAttribute("curRplist", curRplist);}
+        else {System.out.println("컬 리플라이 리스트는 널이다.");}
+        model.addAttribute("curBoard", curBoard);
+        model.addAttribute("replyDTO", new ReplyDTO());
+        return "/project/projectDetail";
+    }
+//    public String
 
     // 업무게시판 삭제
     @DeleteMapping("/board/deleteboardtask")
@@ -125,33 +140,42 @@ public class BoardController {
     @GetMapping("/board/newapprovalvacationboard")
     public String callBoardApprovalWriteForm1(Model model) {
         List<Member> mlist = member_repository.getAllMemberList();
+        Member hrGuy = pickOneHrGuy(mlist);
         model.addAttribute("boardApprovalDTO", new BoardApprovalDTO());
         model.addAttribute("boardApprovalInfoDTO", new BoardApprovalInfoDTO());
-        model.addAttribute("mlist",mlist);
+        model.addAttribute("hrGuy", hrGuy);
         return "approval/appvacation";
     }
 
     @GetMapping("/board/newapprovalovertimeboard")
     public String callBoardApprovalWriteForm2(Model model) {
+        List<Member> mlist = member_repository.getAllMemberList();
+        Member hrGuy = pickOneHrGuy(mlist);
         model.addAttribute("boardApprovalDTO", new BoardApprovalDTO());
         model.addAttribute("boardApprovalInfoDTO", new BoardApprovalInfoDTO());
+        model.addAttribute("hrGuy", hrGuy);
         return "approval/appovertime";
     }
 
     @GetMapping("/board/newapprovalwocboard")
     public String callBoardApprovalWriteForm3(Model model) {
+        List<Member> mlist = member_repository.getAllMemberList();
+        Member hrGuy = pickOneHrGuy(mlist);
         model.addAttribute("boardApprovalDTO", new BoardApprovalDTO());
         model.addAttribute("boardApprovalInfoDTO", new BoardApprovalInfoDTO());
+        model.addAttribute("hrGuy", hrGuy);
         return "approval/appwoc";
     }
 
-    private BoardApproval createNewBoardApproval(HttpSession session, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO, String boardTitle, String approvalType) {
+    private BoardApproval createNewBoardApproval(HttpSession session, Long memberId, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO, String boardTitle, String approvalType) {
         String boardWriter=(String)session.getAttribute("log");
         LocalDateTime plus7Days = now.plusDays(7);
         String sevenFormattedDate = plus7Days.format(formatter);
 
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode infoNode = mapper.createObjectNode();
+
+        Member hrGuy = member_repository.findById(memberId);
 
         switch (approvalType) {
             case "VACATION":
@@ -182,31 +206,45 @@ public class BoardController {
         boardApproval.setDueDate(sevenFormattedDate); // 기안 확인 마감날짜 (작성일로부터 7일)
         boardApproval.setApprovalType(approvalType);
         boardApproval.setApprovalStatus("REQUESTED");
-        boardApproval.setApproverMemNum(boardApprovalDTO.getApproverMemNum());  // 승인하는 사람의 정보를 담은 맴버객체
+        boardApproval.setApproverMemNum(hrGuy);  // 승인하는 사람의 정보를 담은 맴버객체
         boardApproval.setApprovalInfo(boardApprovalDTO.getApprovalInfo());
 
         return boardApproval;
     }
 
     @PostMapping("/board/newapprovalvacationboard")
-    public String writeNewBoardApprovalForm1(HttpSession session, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
-        BoardApproval boardApproval=createNewBoardApproval(session, boardApprovalDTO, boardApprovalInfoDTO, "approval vacation title", "VACATION");
+    public String writeNewBoardApprovalForm1(HttpSession session, Long memberId, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
+        BoardApproval boardApproval=createNewBoardApproval(session, memberId, boardApprovalDTO, boardApprovalInfoDTO, "approval vacation title", "VACATION");
         boardService.createBoardApproval1(boardApproval);
         return "redirect:/moveApproval";
     }
 
     @PostMapping("/board/newapprovalovertimeboard")
-    public String writeNewBoardApprovalForm2(HttpSession session, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
-        BoardApproval boardApproval=createNewBoardApproval(session, boardApprovalDTO, boardApprovalInfoDTO, "approval overtime title", "OVERTIME");
+    public String writeNewBoardApprovalForm2(HttpSession session, Long memberId, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
+        BoardApproval boardApproval=createNewBoardApproval(session, memberId, boardApprovalDTO, boardApprovalInfoDTO, "approval overtime title", "OVERTIME");
         boardService.createBoardApproval2(boardApproval);
         return "redirect:/moveApproval";
     }
 
     @PostMapping("/board/newapprovalwocboard")
-    public String writeNewBoardApprovalForm3(HttpSession session, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
-        BoardApproval boardApproval=createNewBoardApproval(session, boardApprovalDTO, boardApprovalInfoDTO, "approval overtime title", "WORK_HOUR_CHANGE");
+    public String writeNewBoardApprovalForm3(HttpSession session, Long memberId, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
+        BoardApproval boardApproval=createNewBoardApproval(session, memberId, boardApprovalDTO, boardApprovalInfoDTO, "approval overtime title", "WORK_HOUR_CHANGE");
         boardService.createBoardApproval3(boardApproval);
         return "redirect:/moveApproval";
+    }
+
+    public Member pickOneHrGuy(List<Member> mlist) {
+        // "인사부" 팀에 속한 멤버들을 찾다.
+        List<Member> hrMembers=mlist.stream()
+                .filter(member->member.getTeam().getTeam_name().equals("인사부"))
+                .collect(Collectors.toList());
+
+        // 추출된 멤버들 중에서 랜덤으로 하나를 선택합니다.
+        int r=(int)(Math.random()*hrMembers.size());
+        Member hrGuy=hrMembers.get(r);
+
+        System.out.println("랜덤 인사부 사원 이름 : "+hrGuy.getMem_name());
+        return hrGuy;
     }
 
 

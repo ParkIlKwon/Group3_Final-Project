@@ -1,7 +1,9 @@
 package com.jpa.intra.repository;
 
+import com.jpa.intra.domain.Reply;
 import com.jpa.intra.domain.Team;
 import com.jpa.intra.domain.board.BoardApproval;
+import com.jpa.intra.domain.board.BoardCommon;
 import com.jpa.intra.domain.board.BoardFree;
 import com.jpa.intra.domain.board.BoardTask;
 import lombok.RequiredArgsConstructor;
@@ -20,11 +22,11 @@ public class Board_Repository {
 
     public List<BoardTask> findAllBoardTask() {return em.createQuery("SELECT t FROM BoardTask t", BoardTask.class).getResultList();}
 
-    public List<BoardTask> findBoardTaskById(String id){
-        return em.createQuery("select t from BoardTask t where t.boardWriter = :id")
-                .setParameter("id",id)
-                .getResultList();
+    public BoardTask findTaskByBoardId(Long boardId) {
+        return em.createQuery("SELECT t FROM BoardTask t WHERE t.id = :boardId", BoardTask.class)
+                .setParameter("boardId", boardId).getSingleResult();
     }
+
 
     public void deleteBoardTaskById(Long boardId) {
         BoardTask boardTask = em.getReference(BoardTask.class, boardId);
@@ -49,6 +51,9 @@ public class Board_Repository {
 
     // EntityManager의 내장 함수 find로 아이디 값을 참조하여 Team 객체를 뽑음
     public Team findById(Long id) {return em.find(Team.class, id);}
+
+    // EntityManager의 내장 함수 find로 아이디 값을 참조하여 BoardCommon 객체를 뽑음
+    public BoardCommon findByBoardId(Long id) {return em.find(BoardCommon.class, id);}
 
 
 }

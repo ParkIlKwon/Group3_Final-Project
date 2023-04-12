@@ -1,5 +1,6 @@
 package com.jpa.intra.service;
 
+import com.jpa.intra.domain.Reply;
 import com.jpa.intra.domain.board.BoardApproval;
 import com.jpa.intra.domain.board.BoardFree;
 import com.jpa.intra.domain.board.BoardTask;
@@ -28,10 +29,7 @@ public class BoardService {
 
     public List<BoardTask> findTasks() {return bBoardRepository.findAllBoardTask();}
 
-    public List<BoardTask> findTasks(String id){ //메서드 오버 로딩
-        return bBoardRepository.findBoardTaskById(id);
-    }
-
+    public BoardTask findTaskByBoardId(Long boardId) {return bBoardRepository.findTaskByBoardId(boardId);}
     @Transactional
     public void deleteBoardTaskById(Long boardId) {bBoardRepository.deleteBoardTaskById(boardId);}
 

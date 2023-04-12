@@ -7,23 +7,9 @@
 </head>
 <body>
 <div>
-    <label>멤버 리스트 테스트</label>
-    <div id="mlist" th:object="${mlist}">
-        <th:block th:each="vo:${mlist}">
-            <h6 th:text="${vo.mem_id}"></h6>
-            <h6 th:text="${vo.mem_name}"></h6>
-            <h6 th:text="${vo.team.team_name}"></h6>
-        </th:block>
-    </div>
-<!--    <button onclick="mlistInJs()">ㅋㅋ</button>-->
-</div>
-<div>
     <form action="/board/newapprovalvacationboard" method="POST">
+        <input type="hidden" name="memberId" th:value="${hrGuy.id}">
         <div class="form-group" th:object="${boardApprovalDTO}">
-            <div class="form-group">
-                <label th:for="approverMemNum">사원번호</label>
-                <input type="text" th:field="*{approverMemNum}">
-            </div>
             <div class="form-group">
                 <label th:for="boardContent">휴가 신청 사유</label>
                 <textarea th:field="*{boardContent}" placeholder="사유를 입력하다."></textarea>
@@ -47,19 +33,6 @@
         <button type="submit">제출</button>
     </form>
 </div>
-
-<!--<script>-->
-<!--    function mlistInJs(){-->
-<!--        // "mlist" id를 가진 div 엘리먼트를 선택합니다.-->
-<!--        var mlistElement = document.getElementById("mlist");-->
-
-<!--        // 선택한 div 엘리먼트에서 데이터를 추출합니다.-->
-<!--        var mlist = JSON.parse(mlistElement.textContent);-->
-
-<!--        // 추출한 데이터를 출력합니다.-->
-<!--        console.log(mlist);-->
-<!--    }-->
-<!--</script>-->
 
 </body>
 </html>

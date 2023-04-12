@@ -8,11 +8,8 @@
 <body>
 <div>
     <form action="/board/newapprovalwocboard" method="POST">
+        <input type="hidden" name="memberId" th:value="${hrGuy.id}">
         <div class="form-group" th:object="${boardApprovalDTO}">
-            <div class="form-group">
-                <label th:for="approverMemNum">사원번호</label>
-                <input type="text" th:field="*{approverMemNum}">
-            </div>
             <div class="form-group">
                 <label th:for="boardContent">출퇴근 시간 변경신청 사유</label>
                 <textarea th:field="*{boardContent}" placeholder="사유를 입력하다."></textarea>
