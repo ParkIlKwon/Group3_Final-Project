@@ -216,12 +216,50 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">정보</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  Society has put up so many boundaries, so many limitations on what’s right and wrong that it’s almost impossible to get a pure thought out.
-                  <br><br>
-                  It’s like a little kid, a little boy, looking at colors, and no one told him what colors are good, before somebody tells you you shouldn’t like pink because that’s for girls, or you’d instantly become a gay two-year-old.
+                  <table style="width: 100%">
+                    <tr>
+                      <td>사원 번호</td>
+                      <td id="modal-id"></td>
+                    </tr>
+                    <tr>
+                      <td>사원 I D</td>
+                      <td id="modal-mem_id"></td>
+                    </tr>
+                    <tr>
+                      <td>이름</td>
+                      <td id="modal-name"></td>
+                    </tr>
+                    <tr>
+                      <td>성별</td>
+                      <td id="modal-gender"></td>
+                    </tr>
+                    <tr>
+                      <td>부서</td>
+                      <td id="modal-team"></td>
+                    </tr>
+                    <tr>
+                      <td>직급</td>
+                      <td id="modal-emp_type"></td>
+                    </tr>
+                    <tr>
+                      <td>Email</td>
+                      <td id="modal-email"></td>
+                    </tr>
+                    <tr>
+                      <td>사내 번호</td>
+                      <td id="modal-inline_tel"></td>
+                    </tr>
+                    <tr>
+                      <td>생일</td>
+                      <td id="modal-birthday"></td>
+                    </tr>
+                    <tr>
+                      <td>입사일</td>
+                      <td id="modal-reg_date"></td>
+                    </tr>
+                  </table>
                 </div>
                 <div class="modal-footer justify-content-between">
                   <button type="button" class="btn bg-gradient-dark" data-bs-dismiss="modal">Close</button>
@@ -244,7 +282,7 @@
 <div th:replace="/fragments/plugin"></div>
 
 
-<!--   -->
+<!-- modal script  -->
 <script>
   window.onload = function() {
     let memberId = document.querySelectorAll('.memberId');
@@ -259,15 +297,17 @@
           data: {id:data},
           datatype:"json",
           success:function (x) {
-            // alert(x[0]);
-            let head = x[4];
-            $("#exampleModalLabel").text(head + " 사원 정보");
-            let content ="";
-            content += <table>
-              <tr>
-
-              </tr>
-            </table>
+            $("#exampleModalLabel").text(x[2] + " 사원 정보");
+            $("#modal-id").text(x[0]);
+            $("#modal-mem_id").text(x[1]);
+            $("#modal-name").text(x[2]);
+            $("#modal-gender").text(x[3]);
+            $("#modal-team").text(x[4]);
+            $("#modal-emp_type").text(x[5]);
+            $("#modal-email").text(x[6]);
+            $("#modal-inline_tel").text(x[7]);
+            $("#modal-birthday").text(x[8]);
+            $("#modal-reg_date").text(x[9]);
           },
           error:function (x){
             alert("err");
