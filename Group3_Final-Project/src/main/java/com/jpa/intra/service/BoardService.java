@@ -27,6 +27,11 @@ public class BoardService {
     }
 
     public List<BoardTask> findTasks() {return bBoardRepository.findAllBoardTask();}
+
+    public List<BoardTask> findTasks(String id){ //메서드 오버 로딩
+        return bBoardRepository.findBoardTaskById(id);
+    }
+
     @Transactional
     public void deleteBoardTaskById(Long boardId) {bBoardRepository.deleteBoardTaskById(boardId);}
 
