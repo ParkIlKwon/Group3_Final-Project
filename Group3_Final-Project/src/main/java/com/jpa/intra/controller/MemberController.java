@@ -84,7 +84,7 @@ public class MemberController {
     public String Logout(HttpServletRequest request){
         HttpSession session = request.getSession();
         session.invalidate();
-        return "redirect:/";
+        return "pages/loginForm";
     }
 
     @PostMapping("/login")
