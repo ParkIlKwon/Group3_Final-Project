@@ -20,6 +20,11 @@ public class Board_Repository {
     public void createBoardFree(BoardFree boardFree) {em.persist(boardFree);}
     public void createBoardTask(BoardTask boardTask) {em.persist(boardTask);}
 
+    public List<BoardTask> findBoardTaskById(String id){
+        return em.createQuery("select t from BoardTask t where t.boardWriter = :id")
+                .setParameter("id",id)
+                .getResultList();
+    }
     public List<BoardTask> findAllBoardTask() {return em.createQuery("SELECT t FROM BoardTask t", BoardTask.class).getResultList();}
 
     public BoardTask findTaskByBoardId(Long boardId) {
