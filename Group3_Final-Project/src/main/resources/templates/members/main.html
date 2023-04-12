@@ -35,11 +35,11 @@
                 <tr th:each="member:${memberList}">
                   <td>
                     <div class="d-flex px-2 py-1">
-                        <img th:src="@{'/' + ${member.getMem_img()}}">
+                        <img class="avatar avatar-sm me-3" th:src="@{'/' + ${member.getMem_img()}}">
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal" th:text="${member.getMem_name()}">이름</a></h6>   <!-- 이름 -->
                         <p class="text-xs text-secondary mb-0" th:text="${member.getEmail()}">이메일</p>  <!-- 이메일 -->
-                        <p class="id" th:text="${member.getId()}" style="display: none">id</p> <!-- id -->
+                        <p class="memberId text-xs text-secondary mb-0" th:text="${member.getId()}" data-bs-toggle="modal" data-bs-target="#exampleModal">id</p> <!-- id -->
                       </div>
                     </div>
                   </td>
@@ -247,8 +247,28 @@
 <!--   -->
 <script>
   window.onload = function() {
-    let id = document.querySelectorAll(".id");
+    let memberId = document.querySelectorAll('.memberId');
+    for(let i=0; i<memberId.length; i++){
+      memberId[i].addEventListener('click',()=>{
+        // alert(memberId[i].textContent);
+        let data = memberId[i].textContent;
 
+        $.ajax({
+          url:"/members/main",
+          type:"POST",
+          data: {id:data},
+          datatype:"json",
+          success:function (x) {
+            // alert(x[0]);
+            let str = x[5];
+            $("#exampleModalLabel").text(str);
+          },
+          error:function (x){
+            alert("err");
+          }
+        });
+      });
+    }
   };
 
 

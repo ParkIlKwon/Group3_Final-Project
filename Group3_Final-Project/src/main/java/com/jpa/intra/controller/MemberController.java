@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -80,9 +81,7 @@ public class MemberController {
         System.out.println(id + pw);
         HttpSession session = request.getSession();
         Member m = service.Login(id,pw);
-        // 로그인 처리 로직을 구현합니다.
-        // id, pw, rememberMe 값을 이용해 로그인 처리를 수행하고, 처리 결과를 응답으로 반환합니다.
-        // 예시로 로그인 성공 시 "success"를 반환하고, 실패 시 "failure"를 반환합니다.
+
         if (m != null) {
             session.setAttribute("log",id);
             session.setAttribute("user",m);
@@ -112,5 +111,27 @@ public class MemberController {
         return "members/main";
     }
 
+    @PostMapping("/main")
+    @ResponseBody
+    public List<String> memberMain(@RequestParam("id") Long id){
+        Member member = member_repository.findById(id);
+        List<String> list = new ArrayList<>();
+        if(member != null) {
+            list.add(member.getMem_img());
+            list.add(String.valueOf(member.getId()));
+            list.add(member.getMem_id());
+            list.add(member.getMem_name());
+            list.add(member.getGender());
+            list.add(member.getTeam().getTeam_name());
+            list.add(member.getEmp_type());
+            list.add(member.getEmail());
+            list.add(member.getInline_tel());
+            list.add(String.valueOf(member.getBirthday()));
+            list.add(String.valueOf(member.getReg_date())) ;
 
+            return list;
+        }
+
+        return list;
+    }
 }
