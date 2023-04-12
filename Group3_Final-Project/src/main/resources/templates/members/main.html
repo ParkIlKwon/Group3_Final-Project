@@ -260,8 +260,14 @@
           datatype:"json",
           success:function (x) {
             // alert(x[0]);
-            let str = x[5];
-            $("#exampleModalLabel").text(str);
+            let head = x[4];
+            $("#exampleModalLabel").text(head + " 사원 정보");
+            let content ="";
+            content += <table>
+              <tr>
+
+              </tr>
+            </table>
           },
           error:function (x){
             alert("err");
