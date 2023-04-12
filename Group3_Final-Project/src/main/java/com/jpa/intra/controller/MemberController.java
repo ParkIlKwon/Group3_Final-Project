@@ -130,11 +130,9 @@
                 list.add(member.getInline_tel());
                 list.add(String.valueOf(member.getBirthday()));
                 list.add(String.valueOf(member.getReg_date())) ;
-
                 return list;
             }
-
-            return list;
+            return null;
         }
 
         @GetMapping("/AttendanceControl") //출퇴근 로직
