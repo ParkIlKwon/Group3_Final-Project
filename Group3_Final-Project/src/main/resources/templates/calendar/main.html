@@ -75,7 +75,15 @@
                                                 dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
                                                 locale: 'ko', // 한국어 설정
 
-                                                events: CalData
+                                                events: CalData,
+                                                googleCalendarApiKey : "AIzaSyBWS_eq3DEHprUaxOZe-mxmfl8laq2W5wg",
+                                                eventSources :[
+                                                    {
+                                                        googleCalendarId : 'ko.south_korea#holiday@group.v.calendar.google.com'
+                                                        , color: 'white'   // an option!
+                                                        , textColor: 'red' // an option!
+                                                    }
+                                                ]
 
                                             });
 
