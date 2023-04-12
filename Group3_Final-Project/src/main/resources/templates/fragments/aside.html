@@ -231,7 +231,7 @@
           <span class="nav-link-text ms-1">로그인</span>
         </a>
 
-        <a th:if="${session.log != null}" class="nav-link  " href="/members/logout">
+<!--        <a th:if="${session.log != null}" class="nav-link  " href="/members/logout">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>settings</title>
@@ -249,31 +249,29 @@
             </svg>
           </div>
           <span class="nav-link-text ms-1">로그아웃</span>
-        </a>
+        </a>-->
 
       </li>
 
 
-
-
-
     </ul>
   </div>
-<!-- 로그인 사용자 정보-->
-<!--  <div class="sidenav-footer mx-3 ">-->
-<!--    <div class="card card-background shadow-none card-background-mask-primary" id="sidenavCard">-->
-<!--      <div class="full-background" style="background-image: url('../assets/img/curved-images/white-curved.jpg')"></div>-->
-<!--      <div class="card-body text-start p-3 w-100">-->
-<!--        <div class="docs-info">-->
-<!--          <img src="../assets/img/kal-visuals-square.jpg" class="userPic" style="height:100px; border-radius:50px" alt="user_pic">-->
-<!--          <p class="text-2xl font-weight-bold">Jessica<br>-->
-<!--          <span class="text-sm">Development Team</span></p>-->
-<!--          <a href="#" target="_blank" class="btn btn-white btn-sm w-100 mb-0 text-md-center fw-bold">마이 페이지</a>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <a class="btn bg-gradient-primary mt-3 w-100 text-md-center" href="#">LOGOUT</a>-->
-<!--  </div>-->
+  <div class="sidenav-footer mx-3 ">
+    <div class="card card-background shadow-none card-background-mask-primary" id="sidenavCard">
+      <div class="full-background" style="background-image: url('../assets/img/curved-images/white-curved.jpg')"></div>
+      <div class="card-body text-start p-3 w-100">
+        <div class="docs-info">
+          <a class="btn bg-gradient-secondary w-100 text-md-center fw-bold" href="#">출근하기</a>
+          <p><span class="text-2xl font-weight-bold">Jessica</span>
+            <img src="../assets/img/mem_img/1.jpg" class="userPic" style="height:60px; border-radius:50px; float: right">
+             </p>
+          <p class="text-sm">Development Team</p>
+          <a href="#" target="_blank" class="btn btn-white btn-sm w-100 mb-0 text-md-center fw-bold">마이 페이지</a>
+        </div>
+      </div>
+    </div>
+    <a class="btn bg-gradient-primary mt-3 w-100 text-md-center" href="/members/logout">LOGOUT</a>
+  </div>
 
 
 
