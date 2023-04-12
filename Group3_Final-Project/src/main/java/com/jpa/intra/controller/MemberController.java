@@ -54,7 +54,7 @@ public class MemberController {
         m.setAddress(address); //Address 객체생성후 받아온 주소정보 각각 넣어줌 
         service.Join(m); //서비스로 등록 영속성 - DB 반영
 
-        return "redirect:/"; //홈 페이지로 리디렉션.
+        return "redirect:/dashboard"; //홈 페이지로 리디렉션.
     }
 
     @GetMapping("/login")
@@ -86,6 +86,7 @@ public class MemberController {
         if (m != null) {
             session.setAttribute("log",id);
             session.setAttribute("user",m);
+            session.setAttribute("teamName",m.getTeam().getTeam_name());
             return id;
         } else {
             return null;
@@ -111,4 +112,24 @@ public class MemberController {
         model.addAttribute("memberList",memberList);
         return "members/main";
     }
+
+    @GetMapping("/AttendanceControl") //출퇴근 로직
+    public String gettingStart(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Member m = (Member)session.getAttribute("user"); //현재 세션에 저장된 유저 객체를 불러와서
+        if(m.getStatus().equals("offline")){ //오프라인이면 온라인으로 그 반대면 반대로 .
+            m.setStatus("online");
+        }else{
+            m.setStatus("offline");
+        }
+
+        service.Update(m); //리포지토리 JPQL 문에서 업데이트 , 저장 시켜줌 .
+        session.setAttribute("user",m); //다시 업데이트 된 유저 정보를 반영 view 로 보내줌 .
+
+        return "/pages/dashboard";
+    }
+
+
+
+
 }
