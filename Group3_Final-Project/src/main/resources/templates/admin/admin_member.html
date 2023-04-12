@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/header :: header}"></head>
+
+<body class="g-sidenav-show  bg-gray-100">
+<!--   사이드 : aside -->
+<aside th:replace="/fragments/aside"></aside>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+  <!-- body Top Navbar : bodyTop  -->
+  <nav th:replace="fragments/bodyTop"></nav>
+  <!-- Start Content -->
+  <div class="container-fluid py-4">
+    <div class="row">
+      <div class="col-12">
+        <div class="card px-4" style="height: 100vh;">
+          <div class="card-header pb-0">
+            <h6 class="fw-bold" style="float: left">사원 목록</h6>
+            <!-- 사원 등록 -->
+            <button class="btn btn-sm bg-gradient-info mb-0" style="float: right" onclick="location.href='/admin/join'">사원 등록</button>
+          </div>
+          <div class="card-body px-0 pt-0 pb-2">
+            <div class="table-responsive p-0">
+              <table class="table align-items-center mb-0">
+
+                <thead>
+                <tr class="text-center">
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">이름</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">연락처</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">회사번호</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">이메일</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">부서/직급</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">출근현황</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">수정</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">삭제</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="member:${memberList}" class="text-center">
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div>
+                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">  <!-- 사진 -->
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm" th:text="${member.getMem_name()}">이름</h6>   <!-- 이름 -->
+                      </div>
+                    </div>
+                  </td>
+                  <!-- 연락처 -->
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal" th:text="${member.getOutline_tel}">연락처</a></h6>
+                      </div>
+                    </div>
+                  </td>
+                  <!-- 회사번호 -->
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal" th:text="${member.getInline_tel}">회사번호</a></h6>
+                      </div>
+                    </div>
+                  </td>
+                  <!-- 이메일 -->
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal" th:text="${member.getEmail()}">이메일</a></h6>
+                      </div>
+                    </div>
+                  </td>
+                  <!-- 부서/직급 -->
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0" th:text="${member.getTeam().getTeam_name()}">부서</p>
+                    <p class="text-xs text-secondary mb-0" th:text="${member.getEmp_type()}">직급</p> <!-- 직급 -->
+                  </td>
+
+                  <td class="align-middle text-center text-sm">
+                    <span class="badge badge-sm bg-gradient-success">Online</span> <!-- 출 퇴근 현황 -->
+                  </td>
+                  <!-- Modal로 수정 -->
+                  <td class="align-middle text-center text-sm">
+                    <button class="btn bg-gradient-warning px-3 py-1 mb-0">수정</button> <!-- 사원정보 수정 -->
+                  </td>
+
+                  <td class="align-middle text-center text-sm">
+                    <button class="btn bg-gradient-danger px-3 py-1 mb-0">삭제</button> <!-- 사원 삭제 -->
+                  </td>
+
+<!--                  <td class="align-middle text-center">-->
+<!--                    <span class="text-secondary text-xs font-weight-bold">23/04/18</span>-->
+<!--                  </td>-->
+<!--                  <td class="align-middle">-->
+<!--                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">-->
+<!--                      Edit-->
+<!--                    </a>-->
+<!--                  </td>-->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">정보</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Society has put up so many boundaries, so many limitations on what’s right and wrong that it’s almost impossible to get a pure thought out.
+                  <br><br>
+                  It’s like a little kid, a little boy, looking at colors, and no one told him what colors are good, before somebody tells you you shouldn’t like pink because that’s for girls, or you’d instantly become a gay two-year-old.
+                </div>
+                <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn bg-gradient-dark" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn bg-gradient-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+      <div><a href="pages/login">login</a></div>
+
+
+    <!-- footer -->
+    <footer th:replace="/fragments/footer"></footer>
+
+  </div>
+</main>
+<!-- plugin -->
+<div th:replace="/fragments/plugin"></div>
+</body>
+
+</html>
