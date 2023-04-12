@@ -38,3 +38,12 @@ server:
   servlet:
     encoding:
       force-response: true
+
+resource:
+  path:  file:///C:/profile/
+
+upload:
+  path: /C:/profile/**
+
+
+

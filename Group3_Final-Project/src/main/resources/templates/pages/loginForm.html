@@ -3,8 +3,13 @@
 <head th:replace="~{/fragments/header :: header}"></head>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" defer></script>
 
-<!--  뒤로가기 block 처리  -->
-<script src="../assets/js/material/pageblock.js" defer ></script>
+<script>
+    history.pushState(null, null, location.href); //현재 페이지 고정적으로 주고
+    window.onpopstate = function() { //뒤로가기 키를 누를시 .
+        history.go(1); //현재 페이지에 머물게 함
+    };
+</script>
+
 
 <body style="background-color: #f8f9fa">
 <main class="main-content  mt-0">
