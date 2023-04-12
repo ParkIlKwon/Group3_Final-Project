@@ -57,8 +57,10 @@ public class imginit {
 
     @Transactional
     public void makeProfileImg(int index,Member m){
-        String currentPath = "\\src\\main\\resources\\static\\assets\\img\\mem_img" + index + ".jpg"; //그뒤 나머지 경로
+        String currentPath = "\\src\\main\\resources\\static\\image\\mem_img\\" + index + ".jpg"; //그뒤 나머지 경로
+
         String filePath = rootPath + currentPath;
+
         File file = new File(filePath);
 
             try {
