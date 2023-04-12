@@ -3,13 +3,8 @@
 <head th:replace="~{/fragments/header :: header}"></head>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" defer></script>
 
-<script>
-    history.pushState(null, null, location.href); //현재 페이지 고정적으로 주고
-    window.onpopstate = function() { //뒤로가기 키를 누를시 .
-        history.go(1); //현재 페이지에 머물게 함
-    };
-</script>
-
+<!--  뒤로가기 block 처리  -->
+<script src="../assets/js/material/pageblock.js" defer ></script>
 
 <body style="background-color: #f8f9fa">
 <main class="main-content  mt-0">
@@ -18,7 +13,7 @@
             <div class="container mt-8 px-lg-8">
                 <div class="row row-cols-1 row-cols-md-2 g-5">
                     <div class="col-5 m-auto">
-                        <img src="../assets/img/M_Logo_A.png" style="width:80%">
+                        <img src="../image/logo/M_Logo_A.png" style="width:80%">
                     </div>
                     <div class="col-7">
                         <div class="card card-plain">
@@ -29,7 +24,7 @@
                             <div class="card-body">
                                     <label>아이디</label> <!-- 로그인 ID -->
                                     <div class="mb-3">
-                                        <input type="text" id="id" name="id" class="form-control" placeholder="Id" aria-label="Id" aria-describedby="email-addon" title="아이디를 입력해주세요" required>
+                                        <input type="text" id="id" name="id" class="form-control" placeholder="Id" aria-label="Id" aria-describedby="email-addon" title="아이디를 입력해주세요" autofocus required>
                                     </div>
                                     <label>비밀번호</label> <!-- 로그인 PW -->
                                     <div class="mb-3">

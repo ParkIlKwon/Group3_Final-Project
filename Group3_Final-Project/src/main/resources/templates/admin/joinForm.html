@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/header :: header}"></head>
+
+<body class="g-sidenav-show  bg-gray-100">
+<!--   사이드 : aside -->
+<aside th:replace="/fragments/aside"></aside>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- body Top Navbar : bodyTop  -->
+    <nav th:replace="fragments/bodyTop"></nav>
+    <!-- Start Content -->
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card px-4" style="height: 100vh;">
+                    <div class="card-header pb-0">
+                        <h6 class="fw-bold" style="float: left">사원 등록</h6>
+                    </div>
+                    <form action="/members/addmember" method="post" th:object="${MemberDTO}">
+
+                        <div class="alert" th:if="${not #strings.isEmpty(msg)}">
+                            <strong th:text="${msg}"> </strong>
+                        </div>
+
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            <!--왼쪽 섹션-->
+                            <div class="card-body px-3 border-end" >
+                                <div class="mb-3">
+                                    <label>사원명</label>
+                                    <input type="text" class="form-control" placeholder="Name" name="name">
+                                </div>
+                                <div class="mb-3">
+                                    <label>아이디</label>
+                                    <input type="text" class="form-control" placeholder="Id" name="id">
+                                </div>
+                                <div class="mb-3">
+                                    <label>비밀번호</label>
+                                    <input type="password" class="form-control" placeholder="Password" name="pw" aria-describedby="password-addon">
+                                </div>
+                                <div class="mb-3">
+                                    <label>생일</label>
+                                    <input type="date" class="form-control" placeholder="Birthday" name="birthday">
+                                </div>
+                                <div class="mb-3">
+                                    <label>
+                                        <input style="accent-color:#252a47" type="radio" name="gender" value="male" checked>
+                                        남성
+                                    </label>
+                                    &nbsp;
+                                    <label>
+                                        <input style="accent-color:#252a47" type="radio" name="gender" value="female">
+                                        여성
+                                    </label>
+                                </div>
+                                <div class="mb-3">
+                                    <label>이메일</label>
+                                    <input type="email" class="form-control" placeholder="Email" name="email" aria-describedby="email-addon">
+                                </div>
+                            </div>
+                            <!--오른쪽 섹션-->
+                            <div class="card-body px-3">
+                                <div class="mb-3">
+                                    <label>휴대폰 번호</label>
+                                    <input type="text" class="form-control" placeholder="HP" name="HP">
+                                </div>
+                                <div class="mb-3">
+                                    <label>회사 번호</label>
+                                    <input type="text" class="form-control" placeholder="Phone" name="phone">
+                                </div>
+                                <div class="mb-3">
+                                    <table>
+                                        <tr>
+                                            <th>주소</th>
+                                            <td><input type="text" id="address_kakao" name="address" readonly onclick="popup()" /></td>
+                                        </tr>
+                                        <tr>
+                                            <th>상세 주소</th>
+                                            <td><input type="text" name="address_detail" /></td>
+                                        </tr>
+
+                                    </table>
+
+                                    <input type="text" id="address_name" name="address_name" hidden="hidden">
+                                    <input type="text" id="address_road" name="address_road" hidden="hidden">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="image" class="form-control" placeholder="Name" aria-describedby="email-addon">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Name" aria-describedby="email-addon">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Name" aria-describedby="email-addon">
+                                </div>
+                                <div class="text-center">
+                                    <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2">사원 등록</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!--   Core JS Files   -->
+<script src="../assets/js/core/popper.min.js"></script>
+<script src="../assets/js/core/bootstrap.min.js"></script>
+<script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+            damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+</script>
+<!-- Github buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+</body>
+
+</html>
