@@ -3,8 +3,8 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <head th:replace="~{/fragments/header :: header}"></head>
 
-<!--<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
-<script src="http://code.jquery.com/jquery.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+<script src="http://code.jquery.com/jquery.min.js"></script>
 
 <body class="g-sidenav-show  bg-gray-100">
 <!--   사이드 : aside -->
@@ -63,21 +63,6 @@
                             <!--오른쪽 섹션-->
                             <div class="card-body px-3">
                                 <div class="mb-3">
-                                    <label>휴대폰 번호</label>
-                                    <input type="text"  class="form-control" placeholder="HP" name="HP" />
-                                </div>
-                                <div class="mb-3">
-                                    <label>회사 번호</label>
-                                    <input type="text" class="form-control" placeholder="Phone" name="phone" />
-                                </div>
-                                    <label>이메일</label>
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Email" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                                        <button class="btn btn-outline-secondary" type="button" id="button-addon1" style="border: 1px solid #d2d6da;transition: box-shadow 0.15s ease, border-color 0.15s ease;">인증</button>
-                                    </div>
-
-
-                                <div class="mb-3">
                                     <label>주소</label>
                                     <input type="text" class="form-control" placeholder="Address" id="address_kakao" name="address" readonly onclick="popup()" />
 
@@ -85,16 +70,35 @@
                                     <input type="text" id="address_road" name="address_road" hidden="hidden" />
                                 </div>
                                 <div class="mb-3">
-                                    <input type="image" class="form-control" placeholder="Name" name="testtest"/>
+                                    <label>휴대폰 번호</label>
+                                    <input type="text"  class="form-control" placeholder="HP" name="HP" />
                                 </div>
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="Name" />
+                                    <label>회사 번호</label>
+                                    <input type="text" class="form-control" placeholder="Phone" name="phone" />
                                 </div>
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="Name" />
+                                    <label>이메일</label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control col-9" style="height: 40px;
+                                         border-radius: 7px 0px 0px 7px !important;" placeholder="Email" id="memail" name="memail">
+                                        <button class="btn btn-outline-secondary col-3 mb-0" style="height: 40px" id="checkEmail">
+                                            인증번호 전송</button>
+                                    </div>
                                 </div>
+                                <!-- <span>이메일 인증번호</span> -->
+                                <div class="mb-3">
+                                    <label>이메일 인증번호를 입력해주세요</label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control col-9" style="height: 40px;
+                                         border-radius: 7px 0px 0px 7px !important;" id="memailconfirm" name="memailconfirm">
+                                        <button type="submit" class="btn btn-outline-secondary col-3 mb-0" style="height: 40px">
+                                            인증번호 확인</button>
+                                    </div>
+                                </div>
+
                                 <div class="text-center">
-                                    <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2">사원 등록</button>
+                                    <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">사원 등록</button>
                                 </div>
                             </div>
                         </div>
@@ -104,25 +108,6 @@
         </div>
     </div>
 </main>
-<!--   Core JS Files   -->
-<!--<script src="../assets/js/core/popper.min.js"></script>
-<script src="../assets/js/core/bootstrap.min.js"></script>
-<script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-<script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-<script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-        var options = {
-            damping: '0.5'
-        }
-        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-</script>
-&lt;!&ndash; Github buttons &ndash;&gt;
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-&lt;!&ndash; Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc &ndash;&gt;
-<script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>-->
-<!-- plugin -->
 
 <script>
     let CheckEmail = false;
@@ -144,7 +129,7 @@
 
         $.ajax({
             type : "POST",
-            url : "/members/mailConfirm",
+            url : "/admin/mailConfirm",
             data : {
                 "email" : email
             },

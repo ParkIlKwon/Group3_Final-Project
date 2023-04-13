@@ -94,18 +94,6 @@
             }
         }
 
-        @Autowired
-        MailService registerMail;
-
-        @PostMapping("/mailConfirm")
-        @ResponseBody
-        String mailConfirm(@RequestParam("email") String email) throws Exception {
-
-            String code = registerMail.sendSimpleMessage(email);
-            System.out.println("인증코드 : " + code);
-            return code;
-        }
-
         @GetMapping("/main")
         public String membersMain(Model model){
             List<Member> memberList = member_repository.getAllMemberList();
