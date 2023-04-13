@@ -1,9 +1,11 @@
 package com.jpa.intra.controller;
 
+import com.jpa.intra.domain.FileEntity;
 import com.jpa.intra.domain.Reply;
 import com.jpa.intra.domain.board.BoardApproval;
 import com.jpa.intra.domain.board.BoardTask;
 import com.jpa.intra.query.ReplyDTO;
+import com.jpa.intra.repository.File_Repository;
 import com.jpa.intra.service.BoardService;
 import com.jpa.intra.service.ReplyService;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -46,10 +50,17 @@ public class MenuController {
        return "/calendar/main";
     }
 
+    final private File_Repository fileRepository;
     //드라이브 페이지 이동
     @GetMapping("/moveDrive")
-    public String MoveDrive(Model model){
+    public String MoveDrive(Model model, HttpServletRequest request){
         model.addAttribute("page", "드라이브");
+        HttpSession session = request.getSession();
+
+        List<FileEntity> flist = fileRepository.findFilelistById(
+                (String) session.getAttribute("log"));
+        model.addAttribute("fileList" , flist);
+
         return "/drive/main";
 
     }

@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
-@Table(name = "file")
 @Getter
 public class FileEntity {
     @Id
@@ -19,13 +18,15 @@ public class FileEntity {
     private String originalName;
     private String savedName;
     private String  savedPath;
+    private String date;
 
     @Builder
-    public FileEntity(String userId ,String orgNm, String savedNm, String savedPath) {
+    public FileEntity(String userId ,String orgNm, String savedNm, String savedPath,String date) {
         this.userId = userId;
         this.originalName = orgNm;
         this.savedName = savedNm;
         this.savedPath = savedPath;
+        this.date = date;
     }
 
 }
