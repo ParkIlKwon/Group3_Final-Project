@@ -3,6 +3,9 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <head th:replace="~{/fragments/header :: header}"></head>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+
 <body class="g-sidenav-show  bg-gray-100">
 <!--   사이드 : aside -->
 <aside th:replace="/fragments/aside"></aside>
@@ -105,25 +108,6 @@
         </div>
     </div>
 </main>
-<!--   Core JS Files   -->
-<!--<script src="../assets/js/core/popper.min.js"></script>
-<script src="../assets/js/core/bootstrap.min.js"></script>
-<script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-<script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-<script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-        var options = {
-            damping: '0.5'
-        }
-        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-</script>
-&lt;!&ndash; Github buttons &ndash;&gt;
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-&lt;!&ndash; Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc &ndash;&gt;
-<script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>-->
-<!-- plugin -->
 
 <script>
     let CheckEmail = false;
