@@ -108,11 +108,15 @@ public class BoardController {
     // 업무게시판 상세
     @GetMapping("/board/getCurrentBoardDetail")
     public String setCurrentBoardInfo(@RequestParam("boardId") Long boardId, Model model) {
-        BoardTask curBoard=boardService.findTaskByBoardId(boardId);
-        List<Reply> curRplist=replyService.findReplyByBoardId(boardId);
-        if(curRplist!=null){model.addAttribute("curRplist", curRplist);}
-        else {System.out.println("컬 리플라이 리스트는 널이다.");}
+        BoardTask curBoard = boardService.findTaskByBoardId(boardId);
+        List<Reply> curRplist = replyService.findReplyByBoardId(boardId);
+        if (curRplist != null) {
+            model.addAttribute("curRplist", curRplist);
+        } else {
+            System.out.println("컬 리플라이 리스트는 널이다.");
+        }
         model.addAttribute("curBoard", curBoard);
+
         model.addAttribute("replyDTO", new ReplyDTO());
         return "/project/projectDetail";
     }

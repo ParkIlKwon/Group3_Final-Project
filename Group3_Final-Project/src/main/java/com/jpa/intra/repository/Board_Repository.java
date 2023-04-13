@@ -35,8 +35,8 @@ public class Board_Repository {
 
     public void deleteBoardTaskById(Long boardId) {
         BoardTask boardTask = em.getReference(BoardTask.class, boardId);
-        em.remove(boardTask);
-        em.flush();
+        em.remove(boardTask); // 목록에서 얘만 지워줌 . commit 만 되어 있는 상태
+        em.flush(); //적용
     }
 
     public void changeTaskProgress(Long boardId, String boardProgress) {

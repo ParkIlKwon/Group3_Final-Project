@@ -37,33 +37,38 @@
                                     <th class="text-uppercase text-secondary text-xs font-weight-bolder">파일명</th>
                                     <th class="text-uppercase text-secondary text-xs font-weight-bolder">등록자</th>
                                     <th class="text-uppercase text-secondary text-xs font-weight-bolder">등록일</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder">업로드경로</th>
                                     <th class="text-uppercase text-secondary text-xs font-weight-bolder">파일형식</th>
                                     <th class="text-uppercase text-secondary text-xs font-weight-bolder">다운로드</th>
                                     <th class="text-uppercase text-secondary text-xs font-weight-bolder">삭제</th>
                                 </tr>
                                 </thead>
                                 <!--************ 드라이브 리스트 받아와서 뿌리기***************-->
-                                <tbody th:each="i : ${#numbers.sequence(1,5)}">
+                                <tbody th:each="file,i : ${fileList}">
                                 <tr class="text-center">
                                     <!--번호 넣기-->
                                     <td><div class="d-flex px-2 py-1">
-                                        <p th:text="${i}"/>
+                                        <p th:text="${i.index+1}"/>
                                     </div></td>
                                     <!-- 파일명 -->
                                     <td><div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm" th:text="파일명">파일명</h6>
+                                        <h6 class="mb-0 text-sm" th:text="${file.getOriginalName()}">파일명</h6>
                                     </div></td>
                                     <!-- 등록자 -->
                                     <td><div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm" th:text="등록자">등록자</h6>
+                                        <h6 class="mb-0 text-sm" th:text="${file.getUserId()}">등록자</h6>
                                     </div></td>
                                     <!-- 등록일 -->
                                     <td><div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm" th:text="등록일">등록일</h6>
+                                        <h6 class="mb-0 text-sm" th:text="${file.getDate()}">등록일</h6>
+                                    </div></td>
+                                    <!-- 업로드경로 -->
+                                    <td><div class="d-flex flex-column justify-content-center">
+                                        <h6 class="mb-0 text-sm" th:text="${file.getSavedPath()}">업로드경로</h6>
                                     </div></td>
                                     <!-- 파일형식 -->
                                     <td><div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm" th:text="파일형식">파일형식</h6>
+                                        <h6 class="mb-0 text-sm" th:text="image">파일형식</h6>
                                     </div></td>
                                     <!-- 다운로드 -->
                                     <td class="align-middle text-center text-sm">
@@ -71,7 +76,8 @@
                                     </td>
                                     <!-- 파일 삭제 -->
                                     <td class="align-middle text-center text-sm">
-                                        <button class="btn bg-gradient-danger px-3 py-1 mb-0" onclick="location.href='#'">삭제</button>
+                                        <button class="btn bg-gradient-danger px-3 py-1 mb-0"
+                                                th:onclick="|location.href='@{/delete(path=${file.getSavedPath()})}'|">삭제</button>
                                     </td>
                                 </tr>
                                 </tbody>
