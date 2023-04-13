@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+
+<!--  검색기능 관련 JS 파일  -->
+<script src="../../static/assets/js/search/dashboard.js" ></script>
+
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
     <div th:fragment="bodyHeader" class="banner1">
@@ -33,7 +37,7 @@
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control me-2" type="search" id="search_area" placeholder="Search" aria-label="Search">
                     <button class="btn-search" type="submit"><span class="material-icons">search</span></button>
                 </form>
             </div>
