@@ -27,6 +27,7 @@
               <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg task-main-left-tlist-section">
                 <div class="d-flex flex-column task-main-left-tlist-section-component">
                   <input type="hidden" class="task-board-id" th:value="${vo.id}">
+                  <input type="hidden" class="task-board-board-writer" th:value="${vo.boardWriter}">
                   <input type="hidden" class="task-board-content" th:value="${vo.boardContent}">
                   <input type="hidden" class="task-board-create-date" th:value="${vo.createDate}">
                   <input type="hidden" class="task-board-update-date" th:value="${vo.updateDate}">
@@ -46,7 +47,6 @@
                 </div>
               </li>
             </ul>
-
           </div>
 
         </div>
@@ -102,7 +102,46 @@
             <hr>
             <h6 class="mb-0">업무 상세</h6>
             <br>
-            <section class="task-board-detail-content"></section>
+
+            <div class="task-board-detail-task-section">
+              <section class="task-board-detail-content"></section>
+              <div class="task-board-detail-task-reply">
+                <hr>
+                  <div class="card-body pt-4 p-3 task-board-detail-task-reply-list" th:with="rplist=${rplist}">
+                    <a class="collapsed" data-bs-toggle="collapse" href="#reply-list-collapse" aria-expanded="false" onclick="semo()">
+                      <i class="fas fa-angle-down me-2"></i>
+                      댓글 목록
+                    </a>
+                    <div class="collapse" id="reply-list-collapse">
+                      <ul class="list-group task-board-detail-task-reply-list-section" th:each="vo:${rplist}">
+                        <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg task-board-detail-task-reply-list-section">
+                          <div class="d-flex flex-column task-board-detail-task-reply-list-section-component">
+                            <input type="hidden" class="task-reply-id" th:value="${vo.id}">
+                            <input type="hidden" class="task-reply-create-date" th:value="${vo.createDate}">
+                            <input type="hidden" class="task-reply-update-date" th:value="${vo.updateDate}">
+                            <h6 class="mb-3 text-sm task-reply-writer" th:text="${vo.replyWriter}"></h6>
+                            <span class="mb-2 text-xs task-reply-small-element"><span class="text-dark font-weight-bold ms-sm-2 task-reply-content" th:text="${vo.replyContent}"></span></span>
+                            <span class="mb-2 text-xs task-reply-small-element"><span class="text-dark font-weight-bold ms-sm-2 task-reply-current-board" th:text="${vo.currentBoard.getId()}"></span></span>
+                          </div>
+                          <div class="ms-auto text-end">
+                            <a class="btn btn-link text-danger text-gradient px-3 mb-0 delete-board-task" href="/board/deleteboardtask"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                            <a class="btn btn-link text-dark px-3 mb-0" href="#"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+
+
+                  </div>
+                <hr>
+                <form action="/writeNewReply" th:object="${replyDTO}" method="POST">
+                  <input type="hidden" name="boardId" class="task-board-detail-reply-id">
+                  <textarea th:field="*{replyContent}" placeholder="댓글을 작성하세요"></textarea>
+                  <button type="submit">작성</button>
+                </form>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -122,16 +161,16 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 
-  //writeT 임시버튼 클릭이벤트
+  // 작성폼으로 이동
   function writeForm() {
     console.log();
     location.href="/board/newtaskboard";
   }
 
-
   //게시글 클릭 시, 우측단에 게시글 상세정보 작성해주는 함수
   function showTlistContents(data){
     $('.task-main-right').show();
+
     //업무진행도 작성
     var boardProgress = data.querySelector('#task-board-progress').className;
     var statusSelect = document.getElementById('taskStatus');
@@ -176,6 +215,11 @@
     endDate.textContent="";
     endDate.textContent="업무 종료날짜 : "+data.querySelector('.task-board-end-date').value;
 
+    // 댓글 form태그에 전달되어야할 정보
+    var replyId = document.querySelector('.task-board-detail-reply-id');
+    replyId.value="";
+    replyId.value=data.querySelector('.task-board-id').value;
+
   }
 
   //게시글 삭제 ajax함수
@@ -194,7 +238,8 @@
       })
               .done(function(response) {
                 alert('게시글이 삭제되었습니다.');
-                location.href="/moveProject";
+                // location.href="/moveProject";
+                location.replace("/moveProject");
               })
               .fail(function(jqXHR, textStatus, errorThrown) {
                 alert('게시글 삭제에 실패했습니다.');
@@ -215,7 +260,8 @@
         data: { boardId: boardId, boardProgress: progress }
       })
               .done(function(response) {
-                location.href="/moveProject";
+                // location.href="/moveProject";
+                location.replace("/moveProject");
               })
               .fail(function(jqXHR, textStatus, errorThrown) {
                 alert('게시글 삭제에 실패했습니다.');
@@ -223,6 +269,12 @@
 
     });
   });
+
+  //댓글 관련 함수
+  function semo() {
+
+
+  }
 
 </script>
 
@@ -262,6 +314,10 @@
     background:gray;
     height:1px;
     border:0;
+  }
+
+  .task-board-detail-task-section textarea {
+    width: 90%;
   }
 </style>
 

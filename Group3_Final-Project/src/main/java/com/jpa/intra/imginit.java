@@ -31,21 +31,10 @@ public class imginit {
         if(fileObj.exists() == false) { //해당위치에 폴더없으면 생성
             System.out.println("폴더가 없습니다.");
                 fileObj.mkdir();
-
-        }else{ //있으면 지우고 재 생성 이걸 안 해주면 uuid로 쓰는경우 켤때마다
-            //폴더가 있으면 그안에 이미지가 계속 쌓임 ...
-            System.out.println("폴더가 있으므로 재생성합니다.");
-
-            File[] deleteFolderList = fileObj.listFiles();
-
-            for (int j = 0; j < deleteFolderList.length; j++) {
-                deleteFolderList[j].delete();
-            }
-            // 폴더 내부에 파일 하나라도 있으면 폴더가 삭제 안 됨 .
-            fileObj.delete();
-            fileObj.mkdir();
         }
+                
 
+        
 
         List<Member> allMemberList = repository.getAllMemberList();
         for (int i = 0; i < allMemberList.size() ; i++){
@@ -53,6 +42,27 @@ public class imginit {
             System.out.println(i);
         }
     }
+    
+    //폴더 지워주는 로직  
+    //만든이유 : 계속 실행을 하다보면 폴더에 파일들이 쌓임 . ※ 폴더 내부에 파일을 모두 지워야 폴더삭제가능.
+    //파일 객체를 받아와서 지워줌
+    private void deleteFolder(File fileobj){
+
+        File[] deleteFolderList = fileobj.listFiles();
+
+        for (int j = 0; j < deleteFolderList.length; j++) {
+            deleteFolderList[j].delete();
+        } //폴더 내부에 파일이 존재하면 폴더 삭제불가 . 따라서 그걸 지워주는 로직
+
+        fileobj.delete();
+        fileobj.mkdir();
+
+    }
+    
+    
+    
+    
+    
 
 
     @Transactional
@@ -70,4 +80,11 @@ public class imginit {
             }
 
     }
+    
+    
+    
+    
+    
+    
+    
 }

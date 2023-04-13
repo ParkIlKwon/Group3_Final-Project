@@ -86,11 +86,12 @@
                 session.setAttribute("log",id);
                 session.setAttribute("user",m);
                 session.setAttribute("teamName",m.getTeam().getTeam_name());
+                session.setAttribute("memberList",member_repository.getAllMemberList());
+
                 return id;
             } else {
                 return null;
             }
-
         }
 
         @Autowired

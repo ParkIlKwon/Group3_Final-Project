@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -20,13 +22,16 @@ public class CalendarController {
 
     @GetMapping()
     @ResponseBody
-    public List<Map<String, Object>> getEventList() {
+    public List<Map<String, Object>> getEventList(HttpServletRequest request) {
         Map<String, Object> event ;
         List<Map<String, Object>> eventList = new ArrayList<Map<String, Object>>();
 
-        List<BoardTask> boardTaskList = boardService.findTasks();
-        System.out.println(boardTaskList.size());
-        for (BoardTask t: boardTaskList) {
+        HttpSession session = request.getSession();
+        String userId = (String) session.getAttribute("log");
+
+        List<BoardTask> boardTaskList2 = boardService.findTasks(userId);
+
+        for (BoardTask t: boardTaskList2) {
             event = new HashMap<String, Object>();
             event.put("title", t.getBoardTitle());
             event.put("start", t.getStartDate());
