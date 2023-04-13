@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/fragments/header :: header}"></head>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
 <body class="g-sidenav-show  bg-gray-100">
 <!--   사이드 : aside -->
@@ -632,6 +633,9 @@
 <div th:replace="/fragments/plugin"></div>
   <!--   Core JS Files   -->
   <script src="../assets/js/plugins/chartjs.min.js"></script>
+
+  <script src="../assets/js/search/dashboard.js" ></script>
+
   <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");
 

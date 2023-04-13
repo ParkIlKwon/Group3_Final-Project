@@ -129,17 +129,17 @@ public class FileService {
     }
 
     public void fileDownload(Long id) throws IOException{
-        String fileDir = "C:\\download\\";
         List<FileEntity> flist = fileRepository.findFilelistByFileId(id);
         File uploadedFile = new File(flist.get(0).getSavedPath());
 
-        File folder = new File(fileDir);
+        String originalName = uploadedFile.getName();
+        String CurrentPath = "C:\\download\\" + originalName;
 
-        if(!folder.exists()){
-            folder.mkdir();
+        Path downloadPath = Paths.get(CurrentPath);
+        if(downloadPath.toFile().exists()){
+           return;
         }
 
-        Path downloadPath = Paths.get(fileDir);
         Files.copy(uploadedFile.toPath(),downloadPath);
 
     }
