@@ -86,6 +86,7 @@
                 session.setAttribute("log",id);
                 session.setAttribute("user",m);
                 session.setAttribute("teamName",m.getTeam().getTeam_name());
+                
                 return id;
             } else {
                 return null;
