@@ -20,6 +20,11 @@ public class Board_Repository {
     public void createBoardFree(BoardFree boardFree) {em.persist(boardFree);}
     public void createBoardTask(BoardTask boardTask) {em.persist(boardTask);}
 
+    public List<BoardTask> findBoardTaskById(String id){
+        return em.createQuery("select t from BoardTask t where t.boardWriter = :id")
+                .setParameter("id",id)
+                .getResultList();
+    }
     public List<BoardTask> findAllBoardTask() {return em.createQuery("SELECT t FROM BoardTask t", BoardTask.class).getResultList();}
 
     public BoardTask findTaskByBoardId(Long boardId) {
@@ -30,8 +35,8 @@ public class Board_Repository {
 
     public void deleteBoardTaskById(Long boardId) {
         BoardTask boardTask = em.getReference(BoardTask.class, boardId);
-        em.remove(boardTask);
-        em.flush();
+        em.remove(boardTask); // 목록에서 얘만 지워줌 . commit 만 되어 있는 상태
+        em.flush(); //적용
     }
 
     public void changeTaskProgress(Long boardId, String boardProgress) {

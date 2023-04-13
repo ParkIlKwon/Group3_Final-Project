@@ -53,6 +53,11 @@ public class init {
         public void makeMemberDummy(int num) {
             String TeamArr[] = {"영업부", "인사부", "기획부",
                     "관리부", "회계부", "총무부"};
+            String EmailArr[] = {"@naver.com","@hanmail.net"
+                    ,"@gmail.com","@kakao.com","@outlook.com"
+                    ,"@nate.com"};
+
+
             Team t = new Team();
             t.setTeam_name(TeamArr[index]);
             em.persist(t);
@@ -62,6 +67,11 @@ public class init {
             m.setMem_id(userID);
             m.setMem_pw("321");
             m.setMem_name(userID);
+            m.setStatus("offline");
+            m.setEmail(userID + EmailArr[num]);
+            String gender = num % 2 == 0 ? "남":"여";
+            m.setGender(gender);
+            m.setVacation(180);
 
             String RandomAddress[] = {"경기도 시흥시"
                     , "서울시", "강릉시", "강원도", "김포시", "안산시"};

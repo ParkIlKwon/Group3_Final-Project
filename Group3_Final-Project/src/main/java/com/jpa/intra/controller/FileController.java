@@ -3,6 +3,7 @@ package com.jpa.intra.controller;
 import com.jpa.intra.service.FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,16 +18,22 @@ public class FileController {
 
     private final FileService fileService;
     @PostMapping("/upload")
-    public String uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("files") List<MultipartFile> files,HttpServletRequest request) throws IOException {
-        fileService.saveFile(file,request);
+    public String uploadFile(@RequestParam("files") List<MultipartFile> files,HttpServletRequest request) throws IOException {
 
         for (MultipartFile multipartFile : files) {
-            fileService.saveFile(multipartFile, request);
+            fileService.uploadFile(multipartFile, request);
         }
 
-        return "redirect:/";
+        return "redirect:/moveDrive";
     }
 
+    @GetMapping("/delete")
+    public String deleteFile(@RequestParam("path")String path) throws IOException{
+//        System.out.println(path);
+        fileService.deleteFile(path);
+
+        return "redirect:/moveDrive";
+    }
 
 
 }

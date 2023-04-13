@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head th:replace="~{/fragments/header :: header}"></head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
 <body class="g-sidenav-show  bg-gray-100">
@@ -10,14 +10,92 @@
     <!-- body Top Navbar : bodyTop  -->
     <nav th:replace="fragments/bodyTop"></nav>
     <!-- Start Content -->
+
     <div class="container-fluid py-4">
-        <!--      Left : 메일 목록 -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card px-4" style="height: 100vh;">
+                    <div class="card-header pb-0">
+                        <h6 class="fw-bold" style="float: left">드라이브 목록</h6>
+                        <!-- 파일 업로드 -->
+                        <form style="float: right" action="/upload" method="post" enctype="multipart/form-data">
+
+                            <label class="bg-gradient-success p-2 border-radius-md">
+                                <input type="file"  multiple="multiple" name="files" required/>
+                                <input class="btn btn-sm bg-light mb-0"  type="submit" value="업로드"/>
+                            </label>
+                        </form>
+                    </div>
+
+                    <!-- 드라이브 목록 -->
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                <tr class="text-center">
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder">NO</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder">파일명</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder">등록자</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder">등록일</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder">업로드경로</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder">파일형식</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder">다운로드</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder">삭제</th>
+                                </tr>
+                                </thead>
+                                <!--************ 드라이브 리스트 받아와서 뿌리기***************-->
+                                <tbody th:each="file,i : ${fileList}">
+                                <tr class="text-center">
+                                    <!--번호 넣기-->
+                                    <td><div class="d-flex px-2 py-1">
+                                        <p th:text="${i.index+1}"/>
+                                    </div></td>
+                                    <!-- 파일명 -->
+                                    <td><div class="d-flex flex-column justify-content-center">
+                                        <h6 class="mb-0 text-sm" th:text="${file.getOriginalName()}">파일명</h6>
+                                    </div></td>
+                                    <!-- 등록자 -->
+                                    <td><div class="d-flex flex-column justify-content-center">
+                                        <h6 class="mb-0 text-sm" th:text="${file.getUserId()}">등록자</h6>
+                                    </div></td>
+                                    <!-- 등록일 -->
+                                    <td><div class="d-flex flex-column justify-content-center">
+                                        <h6 class="mb-0 text-sm" th:text="${file.getDate()}">등록일</h6>
+                                    </div></td>
+                                    <!-- 업로드경로 -->
+                                    <td><div class="d-flex flex-column justify-content-center">
+                                        <h6 class="mb-0 text-sm" th:text="${file.getSavedPath()}">업로드경로</h6>
+                                    </div></td>
+                                    <!-- 파일형식 -->
+                                    <td><div class="d-flex flex-column justify-content-center">
+                                        <h6 class="mb-0 text-sm" th:text="image">파일형식</h6>
+                                    </div></td>
+                                    <!-- 다운로드 -->
+                                    <td class="align-middle text-center text-sm">
+                                        <button class="btn bg-gradient-info px-3 py-1 mb-0" onclick="location.href='#'">다운로드</button>
+                                    </td>
+                                    <!-- 파일 삭제 -->
+                                    <td class="align-middle text-center text-sm">
+                                        <button class="btn bg-gradient-danger px-3 py-1 mb-0"
+                                                th:onclick="|location.href='@{/delete(path=${file.getSavedPath()})}'|">삭제</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<!--    <div class="container-fluid py-4">
         <div class="row" >
             <div class="col-md-4 mt-4">
                 <div class="card" style="height: 100vh;">
                     <div class="card-header pb-0 px-3">
                         <h6 class="mb-0">드라이브 목록</h6>
-                        <!--            Start 파일 업로드 -->
+                        &lt;!&ndash;            Start 파일 업로드 &ndash;&gt;
                         <br>
                         <form action="/upload" method="post" enctype="multipart/form-data">
 
@@ -29,11 +107,11 @@
 
                             <input type="submit"/>
                         </form>
-                        <!--            End 파일 업로드 -->
+                        &lt;!&ndash;            End 파일 업로드 &ndash;&gt;
                     </div>
                     <div class="card-body pt-4 p-3">
                         <ul class="list-group">
-                            <!--                Start 예시 형식    -->
+                            &lt;!&ndash;                Start 예시 형식    &ndash;&gt;
                             <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
                                 <div class="d-flex flex-column">
                                     <h6 class="mb-3 text-sm">파일 제목</h6>
@@ -43,7 +121,7 @@
                                 </div>
                                 <div class="ms-auto text-end">
                                     <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:"></a>
-                                    <!--                  삭제 버튼-->
+                                    &lt;!&ndash;                  삭제 버튼&ndash;&gt;
                                     <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:"><i class="far fa-trash-alt me-2"></i>Delete</a>
                                 </div>
                             </li>
@@ -53,9 +131,9 @@
 
             </div>
 
-            <!--                End 예시 형식 -->
+            &lt;!&ndash;                End 예시 형식 &ndash;&gt;
 
-            <!--        Right : 파일 상세 정보 -->
+            &lt;!&ndash;        Right : 파일 상세 정보 &ndash;&gt;
             <div class="col-md-8 mt-4">
                 <div class="card mb-4" style="height: 100vh;">
                     <div class="card-header pb-0">
@@ -65,19 +143,19 @@
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
                                 <thead>
-                                <!--                테이블 헤더 추가 요소 -->
+                                &lt;!&ndash;                테이블 헤더 추가 요소 &ndash;&gt;
                                 </thead>
                                 <tbody>
-                                <!--                파일 올린 사원 정보 -->
+                                &lt;!&ndash;                파일 올린 사원 정보 &ndash;&gt;
                                 <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div>
-                                                <img src="#" class="avatar avatar-sm me-3" alt="user1">  <!-- 사진 -->
+                                                <img src="#" class="avatar avatar-sm me-3" alt="user1">  &lt;!&ndash; 사진 &ndash;&gt;
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">John Michael</h6>   <!-- 올린 이  -->
-                                                <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>  <!-- 이메일 -->
+                                                <h6 class="mb-0 text-sm">John Michael</h6>   &lt;!&ndash; 올린 이  &ndash;&gt;
+                                                <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>  &lt;!&ndash; 이메일 &ndash;&gt;
                                             </div>
                                         </div>
                                     </td>
@@ -85,17 +163,17 @@
                                 <tr>
                                     <td>
                                         파일 내용
-                                        <!--                                        메일 내용 -->
+                                        &lt;!&ndash;                                        메일 내용 &ndash;&gt;
                                     </td>
                                 </tr>
                                 </tbody>
-                                <!--                End 메일 상세정보 --->
+                                &lt;!&ndash;                End 메일 상세정보 -&ndash;&gt;
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
 
         <!-- footer -->
         <footer th:replace="/fragments/footer"></footer>

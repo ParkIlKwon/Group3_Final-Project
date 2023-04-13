@@ -69,19 +69,24 @@
                                                 initialView: 'dayGridMonth',
                                                 droppable: true,
 
-                                                editable: true, // 수정 가능?
-                                                selectable: true, // 달력 일자 드래그 설정가능
+                                                editable: false, // 수정 가능?
                                                 nowIndicator: true, // 현재 시간 마크
                                                 dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
                                                 locale: 'ko', // 한국어 설정
 
+                                                eventClick : function(info) {
+                                                    let object =  info.event;
+                                                    alert(object.title);
+                                                    alert(object.value);
+                                                }
+                                                ,
                                                 events: CalData,
                                                 googleCalendarApiKey : "AIzaSyBWS_eq3DEHprUaxOZe-mxmfl8laq2W5wg",
                                                 eventSources :[
                                                     {
-                                                        googleCalendarId : 'ko.south_korea#holiday@group.v.calendar.google.com'
-                                                        , color: 'white'   // an option!
-                                                        , textColor: 'red' // an option!
+                                                        googleCalendarId : 'ko.south_korea.official#holiday@group.v.calendar.google.com'
+                                                        , color: '#F76200'   // an option!
+                                                        , textColor: 'white' // an option!
                                                     }
                                                 ]
 
