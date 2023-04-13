@@ -1,11 +1,13 @@
 package com.jpa.intra.controller;
 
 import com.jpa.intra.domain.FileEntity;
+import com.jpa.intra.domain.Member;
 import com.jpa.intra.domain.Reply;
 import com.jpa.intra.domain.board.BoardApproval;
 import com.jpa.intra.domain.board.BoardTask;
 import com.jpa.intra.query.ReplyDTO;
 import com.jpa.intra.repository.File_Repository;
+import com.jpa.intra.repository.Member_Repository;
 import com.jpa.intra.service.BoardService;
 import com.jpa.intra.service.ReplyService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +25,9 @@ import java.util.List;
 public class MenuController {
     private final BoardService boardService;
     private final ReplyService replyService;
-
+    
+    private final Member_Repository member_repository;
+    
     //대시보드 페이지 이동
     @GetMapping("/moveDashboard")
     public String MoveDashboard(Model model){
@@ -73,6 +77,9 @@ public class MenuController {
     @GetMapping("/moveMembers")
     public String MoveMember(Model model){
         model.addAttribute("page", "주소록");
+        // 전체 사원 목록
+        List<Member> memberList = member_repository.getAllMemberList();
+        model.addAttribute("memberList",memberList);
         return "/members/main";
     }
 
@@ -98,6 +105,14 @@ public class MenuController {
     public String SendMail(){
 
         return "/mail/mailForm";
+    }
+
+    //회의 채팅 페이지로 이동
+    @GetMapping("/moveMeeting")
+    public String MoveMeeting(Model model){
+        model.addAttribute("page", "회의");
+        return "/meeting/main"; //관리자 화면 구성후 링크 수정예정
+
     }
 
 

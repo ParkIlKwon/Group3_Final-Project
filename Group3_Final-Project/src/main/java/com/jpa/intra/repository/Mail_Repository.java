@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Repository
@@ -34,4 +35,15 @@ public class Mail_Repository {
     // @Id 선언한 값과 일치하는 Mail 객체 찾기
     public Mail findById(Long id){return em.find(Mail.class, id);}
 
+    // 로그인한 사원 전체 메일 목록
+    public List<Mail> findLogMailList(Member member){
+//        Member member = (Member) session.getAttribute("user");
+        String sender_email = member.getEmail();
+        TypedQuery<Mail> query = em.createQuery("select m from Mail m " +
+                "where m.sender_email=:sender_email or m.receiver=:receiver " +
+                "order by m.id desc ", Mail.class);
+        query.setParameter("sender_email",sender_email);
+        query.setParameter("receiver",sender_email);
+        return query.getResultList();
+    }
 }

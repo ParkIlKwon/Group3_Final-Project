@@ -3,11 +3,12 @@ package com.jpa.intra.controller;
 import com.jpa.intra.domain.Member;
 import com.jpa.intra.query.MemberDTO;
 import com.jpa.intra.repository.Member_Repository;
+import com.jpa.intra.service.MailService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -43,6 +44,17 @@ public class AdminController {
         model.addAttribute("page", "관리자");
 //        return "pages/joinFormAlpa";
         return "admin/joinForm";
+    }
+
+    @Autowired
+    MailService registerMail;
+    @PostMapping("/mailConfirm")
+    @ResponseBody
+    String mailConfirm(@RequestParam("email") String email) throws Exception {
+
+        String code = registerMail.sendSimpleMessage(email);
+        System.out.println("인증코드 : " + code);
+        return code;
     }
 
 }
