@@ -14,7 +14,7 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
-                <div class="card px-4" style="height: 100vh;">
+                <div class="card px-4" style="height: 90vh;">
                     <div class="card-header pb-0">
                         <h6 class="fw-bold" style="float: left">드라이브 목록</h6>
                         <!-- 파일 업로드 -->
@@ -68,11 +68,12 @@
                                     </div></td>
                                     <!-- 파일형식 -->
                                     <td><div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm" th:text="image">파일형식</h6>
+                                        <h6 class="mb-0 text-sm" th:text="${file.getFileType()}">파일형식</h6>
                                     </div></td>
                                     <!-- 다운로드 -->
                                     <td class="align-middle text-center text-sm">
-                                        <button class="btn bg-gradient-info px-3 py-1 mb-0" onclick="location.href='#'">다운로드</button>
+                                        <button class="btn bg-gradient-info px-3 py-1 mb-0"
+                                                th:onclick="|location.href='@{/downloadFile(id=${file.getId()})}'|">다운로드</button>
                                     </td>
                                     <!-- 파일 삭제 -->
                                     <td class="align-middle text-center text-sm">

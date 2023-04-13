@@ -17,6 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -33,28 +34,20 @@ public class FileService {
     public Long uploadFile(MultipartFile files, HttpServletRequest request) throws IOException {
         String fileDir = "C:\\Storage\\";
         File fileObj = new File(fileDir);
-         if (fileObj.isDirectory() == false) { //해당위치에 폴더없으면 생성
+        if (fileObj.isDirectory() == false) { //해당위치에 폴더없으면 생성
             System.out.println("폴더가 없습니다.");
             Path directoryPath = Paths.get(fileDir);
             Files.createDirectory(directoryPath);
-        } else {
-             System.out.println("폴더가 있으므로 재 생성합니다.");
-
-             File[] deleteFolderList = fileObj.listFiles();
-
-             for (int j = 0; j < deleteFolderList.length; j++) {
-                 deleteFolderList[j].delete();
-             } //폴더 내부에 파일이 존재하면 폴더 삭제불가 . 따라서 그걸 지워주는 로직
-
-             fileObj.delete();
-             fileObj.mkdir();
-         }
+        }
 
         // 원래 파일 이름 추출
         String origName = files.getOriginalFilename();
 
         // 파일 이름으로 쓸 uuid 생성
         String uuid = UUID.randomUUID().toString();
+
+        //확장자를 뺀 파일 이름 추출 (ex : calendar )
+        String currentFilename = origName.substring(0, origName.lastIndexOf('.'));
 
         // 확장자 추출(ex : .png)
         String extension = origName.substring(origName.lastIndexOf("."));
@@ -70,13 +63,17 @@ public class FileService {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분");
         String formattedDate = now.format(formatter);
+        Member m = (Member) session.getAttribute("user");
+
         // 파일 엔티티 생성
         FileEntity file = FileEntity.builder()
                 .userId((String) session.getAttribute("log"))
-                .orgNm(origName)
+                .orgNm(currentFilename)
                 .savedNm(savedName)
                 .savedPath(savedPath)
                 .date(formattedDate)
+                .teamName(m.getTeam().getTeam_name())
+                .fileType(extension)
                 .build();
         System.out.println(savedPath);
 
@@ -107,6 +104,8 @@ public class FileService {
                 .savedNm(origName)
                 .savedPath(savedPath)
                 .date("2021년 04월 11일 09시 28분")
+                .teamName("")
+                .fileType("jpg")
                 .build();
 
         Path savedFilePath = Paths.get(savedPath);
@@ -122,12 +121,26 @@ public class FileService {
     }
 
     @Transactional
-    public void deleteFile(String path){
+    public void deleteFile(String path) {
         File fileobj = new File(path); //파일 경로를 받아와서 파일 객체를 만들어줌.
         fileobj.delete(); //로컬저장경로에서 삭제
         fileRepository.deleteFile(path); //DB에서 삭제
- 
+
     }
 
+    public void fileDownload(Long id) throws IOException{
+        String fileDir = "C:\\download\\";
+        List<FileEntity> flist = fileRepository.findFilelistByFileId(id);
+        File uploadedFile = new File(flist.get(0).getSavedPath());
 
+        File folder = new File(fileDir);
+
+        if(!folder.exists()){
+            folder.mkdir();
+        }
+
+        Path downloadPath = Paths.get(fileDir);
+        Files.copy(uploadedFile.toPath(),downloadPath);
+
+    }
 }
