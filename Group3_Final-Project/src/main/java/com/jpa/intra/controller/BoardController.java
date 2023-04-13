@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.jpa.intra.domain.Member;
 import com.jpa.intra.domain.Reply;
+import com.jpa.intra.domain.Team;
 import com.jpa.intra.domain.board.*;
 import com.jpa.intra.query.*;
 import com.jpa.intra.repository.Member_Repository;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -104,19 +106,6 @@ public class BoardController {
         model.addAttribute("rplist", rplist);
         return "board/boardTaskList";
     }
-
-    // 업무게시판 상세
-    @GetMapping("/board/getCurrentBoardDetail")
-    public String setCurrentBoardInfo(@RequestParam("boardId") Long boardId, Model model) {
-        BoardTask curBoard=boardService.findTaskByBoardId(boardId);
-        List<Reply> curRplist=replyService.findReplyByBoardId(boardId);
-        if(curRplist!=null){model.addAttribute("curRplist", curRplist);}
-        else {System.out.println("컬 리플라이 리스트는 널이다.");}
-        model.addAttribute("curBoard", curBoard);
-        model.addAttribute("replyDTO", new ReplyDTO());
-        return "/project/projectDetail";
-    }
-//    public String
 
     // 업무게시판 삭제
     @DeleteMapping("/board/deleteboardtask")
@@ -246,6 +235,7 @@ public class BoardController {
         System.out.println("랜덤 인사부 사원 이름 : "+hrGuy.getMem_name());
         return hrGuy;
     }
+
 
 
 }
