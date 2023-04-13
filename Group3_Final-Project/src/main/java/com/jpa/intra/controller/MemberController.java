@@ -120,7 +120,6 @@
             Member member = member_repository.findById(id);
             List<String> list = new ArrayList<>();
             if(member != null) {
-                list.add(member.getMem_img());
                 list.add(String.valueOf(member.getId()));
                 list.add(member.getMem_id());
                 list.add(member.getMem_name());

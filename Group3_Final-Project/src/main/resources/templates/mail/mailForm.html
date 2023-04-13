@@ -32,7 +32,7 @@
                                                                            th:text="${m.getSender()}">발신자</span></span>
                                 </div>
                                 <div class="ms-auto text-end">
-                                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:"></a>
+                                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:" th:onclick="|window.location.href='/mail/read/${m.id}'|">Read</a>
                                     <!--                  삭제 기능 -->
                                     <a class="btn btn-link text-danger text-gradient px-3 mb-0"
                                        href="javascript:"><i class="far fa-trash-alt me-2"></i>Delete</a>
@@ -62,10 +62,7 @@
                                             <input type="submit" value="SEND" style="border: none;background-color: white;font-size: large;color: #1ab7ea;font-weight: bold">
                                             &nbsp;&nbsp;&nbsp;
                                             <a onclick=summernoteReset() style="font-size: large;">RESET</a>
-                                        </th>  <!--누르면 보내기 기능 -->
-
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><a>SEND</a></th>  <!--누르면 보내기 기능 -->
-
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -146,9 +143,36 @@
         // 추가한 글꼴
         fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋음체', '바탕체'],
         // 추가한 폰트사이즈
-        fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72']
+        fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
+        callbacks : {
+            onImageUpload : function(files, editor, welEditable) {
+                for (var i = 0; i < files.length; i++) {
+                    sendFile(files[i], this);
+                }
+            }
+        }
 
     });
+
+    function sendFile(file, el) {
+        var form_data = new FormData();
+        form_data.append('file', file);
+        $.ajax({
+            data : form_data,
+            type : "POST",
+            url : '/image',
+            cache : false,
+            contentType : false,
+            enctype : 'multipart/form-data',
+            processData : false,
+            success : function(url) {
+                $(el).summernote('insertImage', url, function($image) {
+                    $image.css('width', "50%");
+                });
+            }
+        });
+    }
+
     // SUMMER NOTE CONTENT RESET
     function summernoteReset() {
         $('#summernote').summernote('reset');

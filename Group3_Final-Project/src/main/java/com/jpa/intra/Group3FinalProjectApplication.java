@@ -21,4 +21,9 @@ public class Group3FinalProjectApplication {
         //JSON으로 직렬화할 때 연결의 지연 로드를 강제
     }
 
+
+    @Bean(name="uploadPath") // 메일 이미지 업로드 경로 Bean
+    public String uploadPath(){
+        return "c:/summernoteimage/";
+    }
 }
