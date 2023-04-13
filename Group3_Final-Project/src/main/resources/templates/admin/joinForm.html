@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <head th:replace="~{/fragments/header :: header}"></head>
+
+<!--<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+<script src="http://code.jquery.com/jquery.min.js"></script>-->
 
 <body class="g-sidenav-show  bg-gray-100">
 <!--   사이드 : aside -->
@@ -73,23 +77,12 @@
                                 <div class="mb-3">
                                     <label>주소</label>
                                     <input type="text" class="form-control" placeholder="Address" id="address_kakao" name="address" readonly onclick="popup()" />
-                                    <!--table>
-                                        <tr>
-                                            <th>주소</th>
-                                            <td><input type="text" id="address_kakao" name="address" readonly onclick="popup()" /></td>
-                                        </tr>
-                     &lt;!&ndash;                   <tr>
-                                            <th>상세 주소</th>
-                                            <td><input type="text" name="address_detail" /></td>
-                                        </tr>&ndash;&gt;
-
-                                    </table>-->
 
                                     <input type="text" id="address_name" name="address_name" hidden="hidden" />
                                     <input type="text" id="address_road" name="address_road" hidden="hidden" />
                                 </div>
                                 <div class="mb-3">
-                                    <input type="image" class="form-control" placeholder="Name" />
+                                    <input type="image" class="form-control" placeholder="Name" name="testtest"/>
                                 </div>
                                 <div class="mb-3">
                                     <input type="text" class="form-control" placeholder="Name" />
@@ -107,11 +100,7 @@
             </div>
         </div>
     </div>
-    <!-- footer -->
-    <footer th:replace="/fragments/footer"></footer>
 </main>
-
-
 <!--   Core JS Files   -->
 <!--<script src="../assets/js/core/popper.min.js"></script>
 <script src="../assets/js/core/bootstrap.min.js"></script>
@@ -131,7 +120,6 @@
 &lt;!&ndash; Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc &ndash;&gt;
 <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>-->
 <!-- plugin -->
-</body>
 
 <script>
     let CheckEmail = false;
@@ -143,7 +131,7 @@
                 document.getElementById("address_name").value = arr[0]+arr[1];
                 document.getElementById("address_road").value = arr[2]+arr[3];
                 document.getElementById("address_kakao").value = data.address; // 주소 넣기 (보이는거)
-                document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+                /*document.querySelector("input[name=testtest]").focus(); //상세입력 포커싱*/
             }
         }).open();
     }
@@ -169,4 +157,5 @@
     })
 </script>
 
+</body>
 </html>
