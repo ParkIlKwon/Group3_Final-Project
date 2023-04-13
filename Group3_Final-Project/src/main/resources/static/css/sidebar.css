@@ -1,3 +1,4 @@
+/*
 .sidemenu {
     display: block;
     overflow: hidden;
@@ -60,13 +61,13 @@
         width: 60px;
     }
 }
-/*@media screen and (max-width:560px) {
+!*@media screen and (max-width:560px) {
     .sidemenu #expand-menu:not(:checked) ~ ul {
         display: none;
     }
-}*/
+}*!
 @media screen and (max-width:600px) {
     .sideItem {
         display: none;
     }
-}
+}*/
