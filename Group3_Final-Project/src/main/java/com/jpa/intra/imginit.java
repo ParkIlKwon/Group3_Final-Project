@@ -9,9 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 @Component
@@ -25,16 +22,12 @@ public class imginit {
 
     public void run(){
 
-        String fileDir = "C:\\profile";
-        File fileObj = new File(fileDir);
+        initFolder(new File("C:\\profile"));
 
-        if(fileObj.exists() == false) { //해당위치에 폴더없으면 생성
-            System.out.println("폴더가 없습니다.");
-                fileObj.mkdir();
-        }
-                
+        initFolder(new File("C:\\download"));
 
-        
+        initFolder(new File("C:\\Storage"));
+
 
         List<Member> allMemberList = repository.getAllMemberList();
         for (int i = 0; i < allMemberList.size() ; i++){
@@ -43,11 +36,10 @@ public class imginit {
         }
     }
     
-    //폴더 지워주는 로직  
+    //폴더 지워주는 재생성해주는 로직
     //만든이유 : 계속 실행을 하다보면 폴더에 파일들이 쌓임 . ※ 폴더 내부에 파일을 모두 지워야 폴더삭제가능.
     //파일 객체를 받아와서 지워줌
-    private void deleteFolder(File fileobj){
-
+    private void initFolder(File fileobj){
         File[] deleteFolderList = fileobj.listFiles();
 
         for (int j = 0; j < deleteFolderList.length; j++) {
@@ -59,11 +51,6 @@ public class imginit {
 
     }
     
-    
-    
-    
-    
-
 
     @Transactional
     public void makeProfileImg(int index,Member m){
@@ -81,9 +68,7 @@ public class imginit {
 
     }
     
-    
-    
-    
+
     
     
     

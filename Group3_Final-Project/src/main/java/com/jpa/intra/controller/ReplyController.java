@@ -10,10 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
@@ -46,18 +43,11 @@ public class ReplyController {
         reply.setCurrentBoard(currentBoard);    // 어느 게시글에 댓글 달았는지(보드커먼 겍체)
 
         replyService.createNewReply(reply);
-        return "redirect:/";
+        return "redirect:/moveProject";
     }
 
-//    @GetMapping("/board/getCurrentBoardReplyList")
-//    public String giveCurrentReplySession(@RequestParam("boardId") Long boardId, Model model) {
-//        List<Reply> curRplist=replyService.findReplyByBoardId(boardId);
-//        for(int i=0;i<curRplist.size();i++) {
-//            System.out.println("컬리플라이리스트 컨탠트 : "+curRplist.get(i).getReplyContent());
-//            System.out.println("컬리플라이리스트 보드넘 : "+curRplist.get(i).getCurrentBoard().getId());
-//        }
-//        model.addAttribute("curRplist", curRplist);
-//        System.out.println("AJAX가 발동하면 여기로 와야하는데... 될랑가 안될랑가 모르겠네... 집에 존나 가고 싶다.");
-//        return "/project/main";
-//    }
+    @DeleteMapping("/deletethisreply")
+    public String deleteThisReply() {
+        return "";
+    }
 }

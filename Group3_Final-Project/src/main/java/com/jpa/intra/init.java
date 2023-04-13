@@ -93,36 +93,6 @@ public class init {
 
         }
 
-//        public void makeTaskDummy() {
-//
-//            Team t = new Team();
-//            t.setTeam_name("인사부");
-//            em.persist(t);
-//
-//            Member m = new Member();
-//            String userID = "shoichi";
-//            m.setMem_id(userID);
-//            m.setMem_pw("321");
-//            m.setMem_name("쇼이치");
-//            em.persist(m);
-//
-//            t.getMembers().add(m);
-//            m.setTeam(t);
-//
-//            BoardTask boardTask=new BoardTask();    //boardTask객체
-//            boardTask.setBoardTitle("강성 고객 민원 확인 후 달래주다.");  //제목
-//            boardTask.setBoardContent("Dummy Task");  //내용
-//            boardTask.setCreateDate(null); //작성일
-//            boardTask.setUpdateDate(null);  //수정일
-//            boardTask.setBoardWriter("shoichi");
-//            boardTask.setResponsibleMemNum(m);    //담당자번호
-//            boardTask.setStartDate(null);    //업무시작 날짜
-//            boardTask.setEndDate(null);    //업무 종료 날짜
-//            boardTask.setTeamNum(m.getTeam());    //담당자의 팀번호
-//            boardTask.setProgress("TO_DO");  //진행상황("TO_DO","IN_PROGRESS","DONE") : 최초 저장은 무조건 "할 일"이기 때문에 "TO_DO"고정
-//
-//            em.persist(boardTask);
-//        }
     }
 }
 
