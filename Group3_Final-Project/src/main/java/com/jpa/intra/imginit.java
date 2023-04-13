@@ -22,11 +22,11 @@ public class imginit {
 
     public void run(){
 
-        initFolder(new File("C:\\profile"));
+/*        initFolder(new File("C:\\profile"));
 
         initFolder(new File("C:\\download"));
 
-        initFolder(new File("C:\\Storage"));
+        initFolder(new File("C:\\Storage"));*/
 
 
         List<Member> allMemberList = repository.getAllMemberList();
@@ -39,7 +39,7 @@ public class imginit {
     //폴더 지워주는 재생성해주는 로직
     //만든이유 : 계속 실행을 하다보면 폴더에 파일들이 쌓임 . ※ 폴더 내부에 파일을 모두 지워야 폴더삭제가능.
     //파일 객체를 받아와서 지워줌
-    private void initFolder(File fileobj){
+   private void initFolder(File fileobj){
         File[] deleteFolderList = fileobj.listFiles();
 
         for (int j = 0; j < deleteFolderList.length; j++) {
