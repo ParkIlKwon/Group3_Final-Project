@@ -1,6 +1,7 @@
 package com.jpa.intra.controller;
 
 import com.jpa.intra.domain.Mail;
+import com.jpa.intra.domain.Member;
 import com.jpa.intra.query.MailDTO;
 import com.jpa.intra.repository.Mail_Repository;
 import com.jpa.intra.service.MailSendService;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -50,8 +52,10 @@ public class MailController {
 
         HttpSession session = request.getSession();
 
-        String newBody = m.getBody().replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+//        String newBody = m.getBody().replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
         //텍스트 에어리어는 화딱지 나게 태그를 따로 제거해줘야함.
+
+        String newBody = m.getBody();
         LocalDateTime now = LocalDateTime.now();
 
         Mail resMail = new Mail();
@@ -63,6 +67,8 @@ public class MailController {
 
         resMail.setSender((String) session.getAttribute("log")); //보내는 사람 (현재 로그인된 사람 불러옴)
         //String type to Object
+        Member member = (Member) session.getAttribute("user");
+        resMail.setSender_email(member.getEmail());
         resMail.setReceiver(m.getReceiver()); //받는사람
         
 
@@ -71,6 +77,16 @@ public class MailController {
 
 
         return "redirect:/mail/mailForm";
+    }
+
+    @GetMapping("/read/{id}")
+    public String readMail(Model model, @PathVariable Long id){
+        List<Mail> mailList = new ArrayList<>();
+        mailList = mailRepository.findAllMailList();
+        model.addAttribute("mailList",mailList);
+        Mail mail = mailRepository.findById(id);
+        model.addAttribute("mail",mail);
+        return "mail/read";
     }
 
 }

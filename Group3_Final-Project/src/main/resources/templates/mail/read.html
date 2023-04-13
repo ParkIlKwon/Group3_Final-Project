@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/header :: header}"></head>
+
+<body class="g-sidenav-show  bg-gray-100">
+<!--   사이드 : aside -->
+<aside th:replace="/fragments/aside"></aside>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- body Top Navbar : bodyTop  -->
+    <nav th:replace="fragments/bodyTop"></nav>
+    <!-- Start Content -->
+    <div class="container-fluid py-4">
+        <div class="row" >
+            <!--      Left : 메일 목록 -->
+            <div class="col-md-4 mt-4">
+                <div class="card" style="height: 100vh;">
+                    <div class="card-header pb-0 px-3">
+                        <h6 class="mb-0">메일 목록</h6>
+                    </div>
+
+                    <div class="card-body pt-4 p-3">
+                        <ul class="list-group">
+                            <!--                            메일함이 비었을 때-->
+                            <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg"
+                                th:if="${mailList.size()==0}">
+                                <div class="d-flex flex-column">
+                                    <h6 class="mb-3 text-sm">메일 함이 비어있습니다.</h6>
+                                </div>
+                            </li>
+                            <!--                Start 예시 형식    -->
+                            <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg"
+                                th:each="m:${mailList}">
+                                <div class="d-flex flex-column">
+                                    <h6 class="mb-3 text-sm">메일 제목</h6>
+                                    <p th:text="${m.title}"></p>
+                                    <span class="mb-2 text-xs">보낸 이: <span class="text-dark font-weight-bold ms-sm-2"
+                                                                           th:text="${m.getSender()}">
+
+                                    </span>
+                                        </span>
+
+                                    <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">
+
+                                    </span>
+                                        </span>
+                                    <span class="text-xs">사원 번호: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
+                                </div>
+                                <div class="ms-auto text-end">
+                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                                </div>
+                            </li>
+                            <!--                End 예시 형식 -->
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- End Left -->
+            <!--        Right : 메일 상세 정보 -->
+            <div class="col-md-8 mt-4">
+                <div class="card mb-4" style="height: 100vh;">
+                    <div class="card-header pb-0">
+                        <h6 th:text="${mail.getTitle()}">선택한 메일 제목</h6>
+                    </div>
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><a>REPLAY</a></th>  <!--누르면 답장 기능 -->
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm" th:text="${mail.getSender()}">John Michael</h6>   <!-- 보낸 이  -->
+                                                <p class="text-xs text-secondary mb-0" th:text="${mail.getSendDate()}">john@creative-tim.com</p>  <!-- 이메일 -->
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+
+                                        <!--                                        메일 내용 -->
+                                        <div th:utext="${mail.getBody()}"></div>
+                                    </td>
+                                </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--                End Right --->
+        </div>
+
+        <!-- footer -->
+        <footer th:replace="/fragments/footer"></footer>
+
+    </div>
+</main>
+<!-- plugin -->
+<div th:replace="/fragments/plugin"></div>
+</body>
+
+</html>

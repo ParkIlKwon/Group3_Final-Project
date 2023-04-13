@@ -31,6 +31,7 @@ public class Mail_Repository {
         return query.getResultList();
     }
 
-
+    // @Id 선언한 값과 일치하는 Mail 객체 찾기
+    public Mail findById(Long id){return em.find(Mail.class, id);}
 
 }
