@@ -107,5 +107,13 @@ public class MenuController {
         return "/mail/mailForm";
     }
 
+    //회의 채팅 페이지로 이동
+    @GetMapping("/moveMeeting")
+    public String MoveMeeting(Model model){
+        model.addAttribute("page", "회의");
+        return "/meeting/main"; //관리자 화면 구성후 링크 수정예정
+
+    }
+
 
 }
