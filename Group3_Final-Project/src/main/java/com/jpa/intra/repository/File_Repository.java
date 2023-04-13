@@ -33,6 +33,20 @@ public class File_Repository {
         em.clear(); //필수 .
     }
 
+    public List<FileEntity> findFilelistByTeamName(String name) {
+        return em.createQuery("select f from FileEntity f where f.teamName = :name")
+                .setParameter("name",name)
+                .getResultList();
+
+    }
+
+    public List findFilelistByFileId(Long id) {
+        return em.createQuery("select f from FileEntity f where f.id = :id")
+                .setParameter("id",id)
+                .getResultList();
+
+    }
+
 //    @Override
 //    public void delete(Long articleId) {
 //        em.createQuery("delete from Article a where a.id = :id")
