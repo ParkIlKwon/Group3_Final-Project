@@ -11,6 +11,7 @@ import com.jpa.intra.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,13 +34,16 @@ public class MenuController {
 
     //프로젝트 페이지 이동
     @GetMapping("/moveProject")
-    public String MoveProject(Model model){
+    public String MoveProject(HttpServletRequest req, Model model){
         List<BoardTask> tlist=boardService.findTasks();
         List<Reply> rplist=replyService.findReply();
         model.addAttribute("tlist", tlist);
         model.addAttribute("replyDTO", new ReplyDTO());
         model.addAttribute("page","프로젝트");
         model.addAttribute("rplist", rplist);
+        HttpSession session=req.getSession();
+        String onOff="off";
+        session.setAttribute("onOff",onOff);
         return "/project/main";
     }
 

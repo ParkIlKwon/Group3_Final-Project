@@ -19,6 +19,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -236,6 +238,14 @@ public class BoardController {
         return hrGuy;
     }
 
-
+    @GetMapping("/board/changeSession")
+    public String sessionChange(HttpServletRequest req){
+        System.out.println("you ve reached here");
+        HttpSession session=req.getSession();
+        String onOff=(String)session.getAttribute("onOff");
+        onOff="on";
+        session.setAttribute("onOff",onOff);
+        return "redirect:/moveProject";
+    }
 
 }

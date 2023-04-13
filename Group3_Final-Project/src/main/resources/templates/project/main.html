@@ -22,6 +22,8 @@
           </div>
 
           <div class="card-body pt-4 p-3 task-main-left" th:with="tlist=${tlist}">
+<!--            <span th:text="${session.onOff}"></span>-->
+<!--            <span class="sessiontest" th:text="${session.onOff}"></span>-->
             <h6 class="mb-0">업무 목록</h6>
             <ul class="list-group task-main-left-tlist-section" th:each="vo:${tlist}" onclick="showTlistContents(this)">
               <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg task-main-left-tlist-section">
@@ -108,10 +110,12 @@
               <div class="task-board-detail-task-reply">
                 <hr>
                   <div class="card-body pt-4 p-3 task-board-detail-task-reply-list" th:with="rplist=${rplist}">
-                    <a class="collapsed" data-bs-toggle="collapse" href="#reply-list-collapse" aria-expanded="false" onclick="semo()">
+                    <input type="hidden" class="mb-3 text-sm task-reply-current-board-number">
+                    <a class="collapsed" data-bs-toggle="collapse" href="#reply-list-collapse" aria-expanded="false" onclick="toggleReplyList()">
                       <i class="fas fa-angle-down me-2"></i>
                       댓글 목록
                     </a>
+
                     <div class="collapse" id="reply-list-collapse">
                       <ul class="list-group task-board-detail-task-reply-list-section" th:each="vo:${rplist}">
                         <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg task-board-detail-task-reply-list-section">
@@ -124,7 +128,7 @@
                             <span class="mb-2 text-xs task-reply-small-element"><span class="text-dark font-weight-bold ms-sm-2 task-reply-current-board" th:text="${vo.currentBoard.getId()}"></span></span>
                           </div>
                           <div class="ms-auto text-end">
-                            <a class="btn btn-link text-danger text-gradient px-3 mb-0 delete-board-task" href="/board/deleteboardtask"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                            <a class="btn btn-link text-danger text-gradient px-3 mb-0 delete-board-task" href="/deletethisreply"><i class="far fa-trash-alt me-2"></i>Delete</a>
                             <a class="btn btn-link text-dark px-3 mb-0" href="#"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
                           </div>
                         </li>
@@ -160,7 +164,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-
+  var replyListEnabled = true;
   // 작성폼으로 이동
   function writeForm() {
     console.log();
@@ -169,6 +173,13 @@
 
   //게시글 클릭 시, 우측단에 게시글 상세정보 작성해주는 함수
   function showTlistContents(data){
+
+    // if(replyListEnabled==false) replyListEnabled = !replyListEnabled;
+    var replyListCollapse = document.querySelector("#reply-list-collapse");
+    if (replyListCollapse.classList.contains("show")) {
+      toggleReplyList();
+    }
+
     $('.task-main-right').show();
 
     //업무진행도 작성
@@ -202,6 +213,10 @@
     var detailId = document.querySelector('.task-board-detail-id');
     detailId.value="";
     detailId.value=data.querySelector('.task-board-id').value;
+
+    var replyCurBoardId = document.querySelector('.task-reply-current-board-number');
+    replyCurBoardId.value="";
+    replyCurBoardId.value=data.querySelector('.task-board-id').value;
 
     var createDate = document.querySelector('.task-board-detail-create-date');
     createDate.textContent="";
@@ -271,10 +286,23 @@
   });
 
   //댓글 관련 함수
-  function semo() {
+  function toggleReplyList() {
+    alert(replyListEnabled);
+    var boardNumber = document.querySelector('.task-reply-current-board-number').value;
+    console.log(boardNumber);
 
+    // 각 댓글 항목을 반복하며, 게시물 번호와 일치하지 않는 항목은 숨기기
+    var replyList = document.querySelectorAll('.task-board-detail-task-reply-list-section');
+    replyList.forEach(function(reply) {
+      var replyBoardNumber = reply.querySelector('.task-reply-current-board').innerText;
+      if (replyBoardNumber !== boardNumber) {
+        reply.style.display = replyListEnabled ? 'none' : 'block';
+      }
+    });
 
+    replyListEnabled = !replyListEnabled;
   }
+
 
 </script>
 
