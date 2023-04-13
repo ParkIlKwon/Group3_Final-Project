@@ -70,10 +70,13 @@
                                     <label>회사 번호</label>
                                     <input type="text" class="form-control" placeholder="Phone" name="phone" />
                                 </div>
-                                <div class="mb-3">
                                     <label>이메일</label>
-                                    <input type="email" class="form-control" placeholder="Email" name="email" aria-describedby="email-addon" />
-                                </div>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Email" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                        <button class="btn btn-outline-secondary" type="button" id="button-addon1" style="border: 1px solid #d2d6da;transition: box-shadow 0.15s ease, border-color 0.15s ease;">인증</button>
+                                    </div>
+
+
                                 <div class="mb-3">
                                     <label>주소</label>
                                     <input type="text" class="form-control" placeholder="Address" id="address_kakao" name="address" readonly onclick="popup()" />

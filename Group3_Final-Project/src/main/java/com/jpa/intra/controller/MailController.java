@@ -65,11 +65,13 @@ public class MailController {
 
         resMail.setView(0); //열람여부 0 -> false , 1 -> true
 
-        resMail.setSender((String) session.getAttribute("log")); //보내는 사람 (현재 로그인된 사람 불러옴)
+        resMail.setSender((String) session.getAttribute("log")); //보내는 사람 id (현재 로그인된 사람 불러옴)
         //String type to Object
+        // 로그인 멤버 : 세션 user 참조
         Member member = (Member) session.getAttribute("user");
-        resMail.setSender_email(member.getEmail());
-        resMail.setReceiver(m.getReceiver()); //받는사람
+        resMail.setSender_name(member.getMem_name()); // 보내는사람 이름
+        resMail.setSender_email(member.getEmail()); // 보내는사람 이메일
+        resMail.setReceiver(m.getReceiver()); //받는사람 이메일
         
 
         //상황에 맡게 DTO로 가공한 메일 객체를 재 삽입.
