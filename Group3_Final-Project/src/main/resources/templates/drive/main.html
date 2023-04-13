@@ -17,19 +17,17 @@
                 <div class="card px-4" style="height: 100vh;">
                     <div class="card-header pb-0">
                         <h6 class="fw-bold" style="float: left">드라이브 목록</h6>
-                        <!--            Start 파일 업로드 -->
+                        <!-- 파일 업로드 -->
                         <form style="float: right" action="/upload" method="post" enctype="multipart/form-data">
 
-                            <!--<h6 class="mb-0">단일 파일 업로드</h6>
-                            <input type="file" name="file">-->
-
-<!--                            <h6 class="mb-0">다중 파일 업로드</h6>-->
-                            <input type="file" class="btn bg-gradient-success" multiple="multiple" name="files" >
-
-                            <input class="btn btn-sm bg-gradient-success mb-0"  type="submit" value="파일업로드"></input>
+                            <label class="bg-gradient-success p-2 border-radius-md">
+                                <input type="file"  multiple="multiple" name="files" required/>
+                                <input class="btn btn-sm bg-light mb-0"  type="submit" value="업로드"/>
+                            </label>
                         </form>
                     </div>
 
+                    <!-- 드라이브 목록 -->
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
@@ -44,10 +42,10 @@
                                     <th class="text-uppercase text-secondary text-xs font-weight-bolder">삭제</th>
                                 </tr>
                                 </thead>
-
+                                <!--************ 드라이브 리스트 받아와서 뿌리기***************-->
                                 <tbody th:each="i : ${#numbers.sequence(1,5)}">
                                 <tr class="text-center">
-                                    <!--번호-->
+                                    <!--번호 넣기-->
                                     <td><div class="d-flex px-2 py-1">
                                         <p th:text="${i}"/>
                                     </div></td>
@@ -69,11 +67,11 @@
                                     </div></td>
                                     <!-- 다운로드 -->
                                     <td class="align-middle text-center text-sm">
-                                        <button class="btn bg-gradient-info px-3 py-1 mb-0">다운로드</button>
+                                        <button class="btn bg-gradient-info px-3 py-1 mb-0" onclick="location.href='#'">다운로드</button>
                                     </td>
-                                    <!-- 사원 삭제 -->
+                                    <!-- 파일 삭제 -->
                                     <td class="align-middle text-center text-sm">
-                                        <button class="btn bg-gradient-danger px-3 py-1 mb-0">삭제</button>
+                                        <button class="btn bg-gradient-danger px-3 py-1 mb-0" onclick="location.href='#'">삭제</button>
                                     </td>
                                 </tr>
                                 </tbody>
