@@ -1,5 +1,4 @@
-/*
-!* 하늘색 #9FFFFF 회색바탕 #f8f9fa*!
+/* 하늘색 #9FFFFF 회색바탕 #f8f9fa*/
 @charset "UTF-8";
 
 body {
@@ -8,7 +7,7 @@ body {
     background-color: #f8f9fa;
 }
 
-!* 내비게이션 *!
+/* 내비게이션 */
 .nav-link,.nav-link:visited
 {color:white; font-weight:bold; margin-right: 14px; text-decoration: none;}
 .nav-link:hover,.nav-link:active,.nav-link:focus{transform: scale(1.1);color:#9FFFFF;}
@@ -22,7 +21,7 @@ body {
 .banner7{background: linear-gradient(to right, #1A2933, #6B8799);}
 .banner8{background: linear-gradient(to right, #330A1C, #993D65);}
 
-!* 검색버튼*!
+/* 검색버튼*/
 .btn-search{
     color:white;
     border: 0;
@@ -31,17 +30,17 @@ body {
 
 .btn-search:hover{transform: scale(1.2);}
 
-!*.nav-link-1:active + .nav-item .navbar-nav .navbar-collapse
+/*.nav-link-1:active + .nav-item .navbar-nav .navbar-collapse
 .container-fluid .gnb-bg{
     background: linear-gradient(to right, #0A2333, #3D7499);
-}*!
+}*/
 
 section{
     padding-right: 10px;
     height: 98vh;
 }
 
-!* Customize container *!
+/* Customize container */
 @media (min-width: 768px) {
     .container {
         max-width: 730px;
@@ -51,7 +50,7 @@ section{
     margin: 30px 0;
 }
 
-!* Main marketing message and sign up button *!
+/* Main marketing message and sign up button */
 .jumbotron {
     text-align: center;
     border-bottom: 1px solid #e5e5e5;
@@ -61,7 +60,7 @@ section{
     padding: 14px 24px;
 }
 
-!* Supporting marketing content *!
+/* Supporting marketing content */
 .marketing {
     margin: 40px 0;
 }
@@ -69,32 +68,32 @@ section{
     margin-top: 28px;
 }
 
-!* Responsive: Portrait tablets and up *!
+/* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-    !* Remove the padding we set earlier *!
+    /* Remove the padding we set earlier */
     .header,
     .marketing,
     .footer {
         padding-left: 0;
         padding-right: 0;
     }
-    !* Space out the masthead *!
+    /* Space out the masthead */
     .header {
         margin-bottom: 30px;
     }
-    !* Remove the bottom border on the jumbotron for visual effect *!
+    /* Remove the bottom border on the jumbotron for visual effect */
     .jumbotron {
         border-bottom: 0;
     }
 }
 
-!* 메인 레이아웃 *!
+/* 메인 레이아웃 */
 .home-layout{
     height: 32vh;
     padding: 10px;
 }
 
-!* section-header *!
+/* section-header */
 .section-header{
     height: 55px;
     display: flex;
@@ -103,11 +102,9 @@ section{
     border: 1px solid black;
 }
 
-!*content-header *!
+/*content-header */
 .content-header {
     font-size: 13px;
     color: #f8f9fa;
 }
 
-!* mail form*!
-*/

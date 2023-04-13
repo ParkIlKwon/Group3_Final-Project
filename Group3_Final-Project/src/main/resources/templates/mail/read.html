@@ -76,8 +76,9 @@
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm" th:text="${mail.getSender()}">John Michael</h6>   <!-- 보낸 이  -->
-                                                <p class="text-xs text-secondary mb-0" th:text="${mail.getSendDate()}">john@creative-tim.com</p>  <!-- 이메일 -->
+                                                <h6 class="mb-0 text-sm" th:text="${mail.getSender_name()}">보낸 이 이름</h6>   <!-- 보낸 이  -->
+                                                <p class="text-xs text-secondary mb-0" th:text="${mail.getSender_email()}">보낸 이 이메일</p>  <!-- 보낸 사람 이메일 -->
+                                                <p class="text-xs text-secondary mb-0" th:text="${mail.getSendDate()}">보낸 날짜</p>  <!-- 보낸 날짜 -->
                                             </div>
                                         </div>
                                     </td>

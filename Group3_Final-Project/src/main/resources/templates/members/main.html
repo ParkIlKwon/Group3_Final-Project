@@ -37,9 +37,9 @@
                     <div class="d-flex px-2 py-1">
                         <img class="avatar avatar-sm me-3" th:src="@{'/' + ${member.getMem_img()}}">
                       <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal" th:text="${member.getMem_name()}">이름</a></h6>   <!-- 이름 -->
+                        <h6 class="member-name mb-0 text-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" th:text="${member.getMem_name()}">이름</h6>   <!-- 이름 -->
                         <p class="text-xs text-secondary mb-0" th:text="${member.getEmail()}">이메일</p>  <!-- 이메일 -->
-                        <p class="memberId text-xs text-secondary mb-0" th:text="${member.getId()}" data-bs-toggle="modal" data-bs-target="#exampleModal">id</p> <!-- id -->
+                        <p class="member-id text-xs text-secondary mb-0" th:text="${member.getId()}">사원 번호</p> <!-- 사원 번호 -->
                       </div>
                     </div>
                   </td>
@@ -285,9 +285,10 @@
 <!-- modal script  -->
 <script>
   window.onload = function() {
-    let memberId = document.querySelectorAll('.memberId');
+    let memberId = document.querySelectorAll('.member-id');
+    let memberName = document.querySelectorAll('.member-name');
     for(let i=0; i<memberId.length; i++){
-      memberId[i].addEventListener('click',()=>{
+      memberName[i].addEventListener('click',()=>{
         // alert(memberId[i].textContent);
         let data = memberId[i].textContent;
 

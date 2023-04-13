@@ -21,6 +21,7 @@ public class Mail {
         private String content; //메일(쪽지)파일,업로드 (선택)
 
         private String sender; //보내는 사람 id (필수)
+        private String sender_name; // 보내는 사람 이름
         private String sender_email; // 보내는 사람 이메일
         private String receiver; //받는대상 이메일(필수)
 

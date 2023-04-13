@@ -1,6 +1,7 @@
 package com.jpa.intra.service;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.Random;
 
 import javax.mail.MessagingException;
@@ -9,13 +10,20 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
 
 import com.jpa.intra.domain.Mail;
+import com.jpa.intra.repository.Mail_Repository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class MailService{
+
+    private final Mail_Repository mail_repository;
 
     @Autowired
     JavaMailSender emailsender; // Bean 등록해둔 MailConfig 를 emailsender 라는 이름으로 autowired
@@ -103,6 +111,7 @@ public class MailService{
 
         return ePw; // 메일로 보냈던 인증 코드를 서버로 반환
     }
+
 
 
 
