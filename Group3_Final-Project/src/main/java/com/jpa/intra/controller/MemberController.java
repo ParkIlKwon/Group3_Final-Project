@@ -152,5 +152,10 @@
             return "/pages/dashboard";
         }
 
+        // 마이페이지 눌렀을 때 members/attendance.html
+        @GetMapping("/attendance")
+        public String memberAttendance(){
+            return "/members/attendance";
+        }
 
     }
