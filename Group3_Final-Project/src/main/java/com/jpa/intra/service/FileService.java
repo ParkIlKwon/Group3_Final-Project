@@ -11,8 +11,10 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
@@ -109,8 +111,10 @@ public class FileService {
                 .build();
 
         Path savedFilePath = Paths.get(savedPath);
+        //calen.jpg -> c:/ profile / calen.jpg
 
-        Files.copy(file.toPath(), savedFilePath);
+            Files.copy(file.toPath(), savedFilePath);
+
 
         // 데이터베이스에 파일 정보 저장
         FileEntity savedFile = fileRepository.save(fileE);
@@ -119,6 +123,51 @@ public class FileService {
 
         return savedFile.getId();
     }
+
+
+
+
+    @Transactional
+    public Long uploadProfileImage(MultipartFile files, Member m) throws IOException {
+        String fileDir = "C:\\profile\\";
+
+        // 원래 파일 이름 추출
+        String origName = files.getOriginalFilename();
+
+        // 파일을 불러올 때 사용할 파일 경로
+        String savedPath = fileDir + origName;
+
+        // 파일 엔티티 생성
+        FileEntity fileE = FileEntity.builder()
+                .userId(null)
+                .orgNm(origName)
+                .savedNm(origName)
+                .savedPath(savedPath)
+                .date("2021년 04월 11일 09시 28분")
+                .teamName("")
+                .fileType("jpg")
+                .build();
+
+
+        files.transferTo(new java.io.File(savedPath));
+
+
+        // 데이터베이스에 파일 정보 저장
+        FileEntity savedFile = fileRepository.save(fileE);
+
+        m.setMem_img(savedPath);
+
+        return savedFile.getId();
+    }
+
+
+
+
+
+
+
+
+
 
     @Transactional
     public void deleteFile(String path) {

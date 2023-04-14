@@ -41,7 +41,7 @@ public class Member {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(insertable = false)
+    @JoinColumn(name="team_num")
     @JsonIgnore //stackoverflow 방지
     private Team team; //팀
 
