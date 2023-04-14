@@ -23,8 +23,6 @@ public class MemberService {
         team.getMembers().add(member);
     }
 
-
-
     public Member Login(String id,String pw){
         Member m = aMemberRepository.login(id,pw); //리포지 >> 로그인 로직
 
