@@ -17,7 +17,10 @@
       <div class="col-md-4 mt-4">
         <div class="card" style="height: 100vh;">
           <div class="card-header pb-0 px-3">
-            <button type="button" class="btn btn-primary" onclick="writeForm()">new task</button>
+            <button type="button" class="btn bg-gradient-primary mb-0" onclick="writeForm()">새 프로젝트</button>
+            <button type="button" class="btn bg-gradient-info mb-0" onclick="#">내 할일</button>
+            <button type="button" class="btn bg-gradient-danger mb-0" onclick="#">미완료</button>
+            <button type="button" class="btn bg-gradient-secondary mb-0" onclick="#">완료</button>
             <hr>
           </div>
 
@@ -35,18 +38,19 @@
                   <input type="hidden" class="task-board-update-date" th:value="${vo.updateDate}">
                   <input type="hidden" class="task-board-start-date" th:value="${vo.startDate}">
                   <input type="hidden" class="task-board-end-date" th:value="${vo.endDate}">
-                  <h6 class="mb-3 text-sm task-board-title" th:text="${vo.boardTitle}"></h6>
+                  <div id="task-board-progress" style="border:1px solid" th:class="${vo.progress == 'TO_DO' ? 'task-status-to-do' : (vo.progress == 'IN_PROGRESS' ? 'task-status-in-progress' : 'task-status-done')}">
+                    <span th:text="${vo.progress == 'TO_DO'} ? '할 일' : (${vo.progress == 'IN_PROGRESS'} ? '진행 중' : '완료')"></span>&nbsp;&nbsp;
+<!--                    <span class="badge bg-secondary">123</span>-->
+                  </div>
+                  <div class="mb-3 text-md   task-board-title" th:text="${vo.boardTitle}"></div>
                   <span class="mb-2 text-xs task-board-small-element">담당자: <span class="text-dark font-weight-bold ms-sm-2 task-board-responsibleMember" th:text="${vo.responsibleMemNum.mem_name}"></span></span>
                   <span class="mb-2 text-xs task-board-small-element">참조부서: <span class="text-dark ms-sm-2 font-weight-bold task-board-responsibleTeam" th:text="${vo.teamNum.team_name}"></span></span>
-                  <h6 id="task-board-progress" th:class="${vo.progress == 'TO_DO' ? 'task-status-to-do' : (vo.progress == 'IN_PROGRESS' ? 'task-status-in-progress' : 'task-status-done')}">
-                    <span th:text="${vo.progress == 'TO_DO'} ? '할 일' : (${vo.progress == 'IN_PROGRESS'} ? '진행 중' : '완료')"></span>&nbsp;&nbsp;
-                    <span class="badge bg-secondary"></span>
-                  </h6>
+
                 </div>
-                <div class="ms-auto text-end">
+                <!-- <div class="ms-auto text-end">
                   <a class="btn btn-link text-danger text-gradient px-3 mb-0 delete-board-task" href="/board/deleteboardtask"><i class="far fa-trash-alt me-2"></i>Delete</a>
                   <a class="btn btn-link text-dark px-3 mb-0" href="#"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                </div>
+                </div>-->
               </li>
             </ul>
           </div>
