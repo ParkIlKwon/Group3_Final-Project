@@ -8,6 +8,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
+import javax.servlet.http.HttpServletRequest;
 
 import com.jpa.intra.domain.Mail;
 import com.jpa.intra.repository.Mail_Repository;
@@ -24,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MailService{
 
     private final Mail_Repository mail_repository;
+    private final HttpServletRequest request;
 
     @Autowired
     JavaMailSender emailsender; // Bean 등록해둔 MailConfig 를 emailsender 라는 이름으로 autowired
@@ -111,7 +113,7 @@ public class MailService{
         return ePw; // 메일로 보냈던 인증 코드를 서버로 반환
     }
 
-
+   
 
 
 
