@@ -1,144 +1,144 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<head th:replace="~{/fragments/header :: header}"></head>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>-->
+<!--<head th:replace="~{/fragments/header :: header}"></head>-->
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
-<script src="http://code.jquery.com/jquery.min.js"></script>
-
-
-<body class="g-sidenav-show  bg-gray-100">
-<!--   사이드 : aside -->
-<aside th:replace="/fragments/aside"></aside>
-<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-    <!-- body Top Navbar : bodyTop  -->
-    <nav th:replace="fragments/bodyTop"></nav>
-    <!-- Start Content -->
-    <div class="container-fluid py-4">
-        <div class="row">
-            <div class="col-12">
-                <div class="card mb-4">
-                    <div class="card-header pb-0">
-                        <h6>회원가입폼</h6>
-                    </div>
-                    <div class="card-body px-0 pt-0 pb-2">
-                        <section>
-                            <div class="row">
-                                <!--    사이드바 -->
-
-                            </div>
-                            <!--    -->
-                            <div class="col" style="background-color: #c9c8c8;">
-                                <form action="/members/addmember" method="post" th:object="${MemberDTO}">
-
-                                    <div class="alert" th:if="${not #strings.isEmpty(msg)}">
-                                        <strong th:text="${msg}"> </strong>
-                                    </div>
-
-                                    <div class="form-outline mb-4">
-                                        <input type="text" id="id" name="id" class="form-control form-control-lg" placeholder="ID을 입력하세요"
-                                        />
-                                    </div>
-                                    <div class="form-outline mb-4">
-                                        <input type="text" id="pw" name="pw" class="form-control form-control-lg" placeholder="PW을 입력하세요"/>
-                                    </div>
-                                    <div class="form-outline mb-4">
-                                        <input type="text" id="name" name="name" class="form-control form-control-lg" placeholder="name을 입력하세요"/>
-                                    </div>
-
-                                    <table>
-                                        <tr>
-                                            <th>주소</th>
-                                            <td><input type="text" id="address_kakao" name="address" readonly onclick="popup()" /></td>
-                                        </tr>
-                                        <tr>
-                                            <th>상세 주소</th>
-                                            <td><input type="text" name="address_detail" /></td>
-                                        </tr>
-
-                                    </table>
-
-                                    <input type="text" id="address_name" name="address_name" hidden="hidden">
-                                    <input type="text" id="address_road" name="address_road" hidden="hidden">
-
-                                    <h1> - 회원가입 이메일 TEST -</h1>
-
-                                    <div class="form-group last mb-4 email_input">
-                                        <label for="memail" id="mailTxt">이메일을 입력해주세요</label>
-                                        <input type="text" class="form-control" name="memail" id="memail">
-                                    </div>
-                                    <!-- <span>이메일 인증번호</span> -->
-                                    <button class="btn btn-outline-primary" type="button" id="checkEmail">인증번호</button>
+<!--<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>-->
+<!--<script src="http://code.jquery.com/jquery.min.js"></script>-->
 
 
-                                    <div class="form-group last mb-4 check_input">
-                                        <label for="memailconfirm" id="memailconfirmTxt">인증번호를 입력해주세요</label>
-                                        <input type="text" class="form-control" id="memailconfirm">
-                                    </div>
+<!--<body class="g-sidenav-show  bg-gray-100">-->
+<!--&lt;!&ndash;   사이드 : aside &ndash;&gt;-->
+<!--<aside th:replace="/fragments/aside"></aside>-->
+<!--<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">-->
+<!--    &lt;!&ndash; body Top Navbar : bodyTop  &ndash;&gt;-->
+<!--    <nav th:replace="fragments/bodyTop"></nav>-->
+<!--    &lt;!&ndash; Start Content &ndash;&gt;-->
+<!--    <div class="container-fluid py-4">-->
+<!--        <div class="row">-->
+<!--            <div class="col-12">-->
+<!--                <div class="card mb-4">-->
+<!--                    <div class="card-header pb-0">-->
+<!--                        <h6>회원가입폼</h6>-->
+<!--                    </div>-->
+<!--                    <div class="card-body px-0 pt-0 pb-2">-->
+<!--                        <section>-->
+<!--                            <div class="row">-->
+<!--                                &lt;!&ndash;    사이드바 &ndash;&gt;-->
 
-                                    <div class="d-flex justify-content-center">
-                                        <button type="submit"
-                                                class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
-                                    </div>
-                                </form>
+<!--                            </div>-->
+<!--                            &lt;!&ndash;    &ndash;&gt;-->
+<!--                            <div class="col" style="background-color: #c9c8c8;">-->
+<!--                                <form action="/members/addmember" method="post" th:object="${MemberDTO}">-->
+
+<!--                                    <div class="alert" th:if="${not #strings.isEmpty(msg)}">-->
+<!--                                        <strong th:text="${msg}"> </strong>-->
+<!--                                    </div>-->
+
+<!--                                    <div class="form-outline mb-4">-->
+<!--                                        <input type="text" id="id" name="id" class="form-control form-control-lg" placeholder="ID을 입력하세요"-->
+<!--                                        />-->
+<!--                                    </div>-->
+<!--                                    <div class="form-outline mb-4">-->
+<!--                                        <input type="text" id="pw" name="pw" class="form-control form-control-lg" placeholder="PW을 입력하세요"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="form-outline mb-4">-->
+<!--                                        <input type="text" id="name" name="name" class="form-control form-control-lg" placeholder="name을 입력하세요"/>-->
+<!--                                    </div>-->
+
+<!--                                    <table>-->
+<!--                                        <tr>-->
+<!--                                            <th>주소</th>-->
+<!--                                            <td><input type="text" id="address_kakao" name="address" readonly onclick="popup()" /></td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <th>상세 주소</th>-->
+<!--                                            <td><input type="text" name="address_detail" /></td>-->
+<!--                                        </tr>-->
+
+<!--                                    </table>-->
+
+<!--                                    <input type="text" id="address_name" name="address_name" hidden="hidden">-->
+<!--                                    <input type="text" id="address_road" name="address_road" hidden="hidden">-->
+
+<!--                                    <h1> - 회원가입 이메일 TEST -</h1>-->
+
+<!--                                    <div class="form-group last mb-4 email_input">-->
+<!--                                        <label for="memail" id="mailTxt">이메일을 입력해주세요</label>-->
+<!--                                        <input type="text" class="form-control" name="memail" id="memail">-->
+<!--                                    </div>-->
+<!--                                    &lt;!&ndash; <span>이메일 인증번호</span> &ndash;&gt;-->
+<!--                                    <button class="btn btn-outline-primary" type="button" id="checkEmail">인증번호</button>-->
+
+
+<!--                                    <div class="form-group last mb-4 check_input">-->
+<!--                                        <label for="memailconfirm" id="memailconfirmTxt">인증번호를 입력해주세요</label>-->
+<!--                                        <input type="text" class="form-control" id="memailconfirm">-->
+<!--                                    </div>-->
+
+<!--                                    <div class="d-flex justify-content-center">-->
+<!--                                        <button type="submit"-->
+<!--                                                class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>-->
+<!--                                    </div>-->
+<!--                                </form>-->
 
 
 
-                            </div>
+<!--                            </div>-->
 
-                        </section>
+<!--                        </section>-->
 
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- footer -->
-        <footer th:replace="/fragments/footer"></footer>
-
-    </div>
-</main>
-<!-- plugin -->
-<div th:replace="/fragments/plugin"></div>
-</body>
-
-<script>
-
-    let CheckEmail = false;
-    function popup(){
-        new daum.Postcode({
-            oncomplete: function(data) { //선택시 입력값 세팅
-                let location =  data.address; // 주소 넣기
-                let arr = location.split(' '); //주소 - 도로명 쪼깨기 . ex) 경기 시흥시 - 정왕대로 56번길
-                document.getElementById("address_name").value = arr[0]+arr[1];
-                document.getElementById("address_road").value = arr[2]+arr[3];
-                document.getElementById("address_kakao").value = data.address; // 주소 넣기 (보이는거)
-                document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
-            }
-        }).open();
-    }
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
 
-    $('#checkEmail').click(function() {
-        let email = $('#memail').val();
+<!--        &lt;!&ndash; footer &ndash;&gt;-->
+<!--        <footer th:replace="/fragments/footer"></footer>-->
 
-        $.ajax({
-            type : "POST",
-            url : "/members/mailConfirm",
-            data : {
-                "email" : email
-            },
-            success : function(data){
-                alert("해당 이메일로 인증번호 발송이 완료되었습니다. \n 확인부탁드립니다.")
-                //console.log("data : "+data); 자바에서 생성된 코드 확인
-                if($('#memail').val() == data){ //랜덤코드랑 입력코드랑 일치하면
-                    alert("인증확인 되었습니다.")
-                    CheckEmail = true; //이메일 확인 true로 .
-                }
-            }
-        })
-    })
-</script>
+<!--    </div>-->
+<!--</main>-->
+<!--&lt;!&ndash; plugin &ndash;&gt;-->
+<!--<div th:replace="/fragments/plugin"></div>-->
+<!--</body>-->
 
-</html>
+<!--<script>-->
+
+<!--    let CheckEmail = false;-->
+<!--    function popup(){-->
+<!--        new daum.Postcode({-->
+<!--            oncomplete: function(data) { //선택시 입력값 세팅-->
+<!--                let location =  data.address; // 주소 넣기-->
+<!--                let arr = location.split(' '); //주소 - 도로명 쪼깨기 . ex) 경기 시흥시 - 정왕대로 56번길-->
+<!--                document.getElementById("address_name").value = arr[0]+arr[1];-->
+<!--                document.getElementById("address_road").value = arr[2]+arr[3];-->
+<!--                document.getElementById("address_kakao").value = data.address; // 주소 넣기 (보이는거)-->
+<!--                document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱-->
+<!--            }-->
+<!--        }).open();-->
+<!--    }-->
+
+
+<!--    // $('#checkEmail').click(function() {-->
+<!--    //     let email = $('#memail').val();-->
+<!--    //-->
+<!--    //     $.ajax({-->
+<!--    //         type : "POST",-->
+<!--    //         url : "/members/mailConfirm",-->
+<!--    //         data : {-->
+<!--    //             "email" : email-->
+<!--    //         },-->
+<!--    //         success : function(data){-->
+<!--    //             alert("해당 이메일로 인증번호 발송이 완료되었습니다. \n 확인부탁드립니다.")-->
+<!--    //             //console.log("data : "+data); 자바에서 생성된 코드 확인-->
+<!--    //             if($('#memail').val() == data){ //랜덤코드랑 입력코드랑 일치하면-->
+<!--    //                 alert("인증확인 되었습니다.")-->
+<!--    //                 CheckEmail = true; //이메일 확인 true로 .-->
+<!--    //             }-->
+<!--    //         }-->
+<!--    //     })-->
+<!--    // })-->
+<!--</script>-->
+
+<!--</html>-->

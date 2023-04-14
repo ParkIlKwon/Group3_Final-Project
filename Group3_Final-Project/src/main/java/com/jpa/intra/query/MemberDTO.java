@@ -1,8 +1,11 @@
 package com.jpa.intra.query;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotEmpty;
+import java.io.File;
+import java.util.Date;
 
 @Data
 public class MemberDTO {
@@ -19,4 +22,11 @@ public class MemberDTO {
     
     private String address_road; //사용자 주소 (도로명)
 
+    private MultipartFile profileFile;
+
+    private String birthday;
+
+    private String gender;
+
+    private String memail;
 }

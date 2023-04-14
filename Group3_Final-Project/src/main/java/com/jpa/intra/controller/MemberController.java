@@ -2,20 +2,27 @@
 
     import com.jpa.intra.domain.Address;
     import com.jpa.intra.domain.Member;
+    import com.jpa.intra.domain.Team;
     import com.jpa.intra.query.MemberDTO;
+    import com.jpa.intra.repository.Board_Repository;
     import com.jpa.intra.repository.Member_Repository;
+    import com.jpa.intra.service.FileService;
     import com.jpa.intra.service.MailService;
     import com.jpa.intra.service.MemberService;
+    import com.jpa.intra.util.TeamConverter;
     import lombok.RequiredArgsConstructor;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.stereotype.Controller;
     import org.springframework.ui.Model;
     import org.springframework.validation.BindingResult;
     import org.springframework.web.bind.annotation.*;
+    import org.springframework.web.multipart.MultipartFile;
 
     import javax.servlet.http.HttpServletRequest;
     import javax.servlet.http.HttpSession;
     import javax.validation.Valid;
+    import java.io.File;
+    import java.io.IOException;
     import java.util.ArrayList;
     import java.util.List;
 
@@ -27,7 +34,7 @@
 
         private final MemberService service;
         private final Member_Repository member_repository;
-
+        private final TeamConverter tc;
         @GetMapping()
         public String addForm(Model model){
 
@@ -35,17 +42,11 @@
             //memberDTO 형식으로 생성자 만들어서 보내줌 .
             return "pages/joinForm";
         }
-
+        final private FileService fileService;
         @PostMapping() //form 에서 post형식으로
                                     //받아오면 여기로 들어옴 .
-        public String addPro(@Valid MemberDTO getmember, BindingResult result,Model model){
-
-            if (result.hasErrors()) { //Valid 즉 DTO에 @NotNull 해둔 항목이 없으면 여기로 들어옴
-                model.addAttribute("errorMsg", "내용을 전부 채워주세요.");
-                model.addAttribute("MemberDTO",new MemberDTO());
-                //model.addAttribute >> html로 객체 보내줌 . setAttribute랑 비슷한 역활
-                return "pages/joinForm"; //폼으로 다시 감 .
-            }
+        public String addPro(HttpServletRequest request, @Valid MemberDTO getmember, BindingResult result, Model model)
+        throws IOException {
 
             Member m = new Member(); // 받아온 정보 Member 객체로 파싱
             m.setMem_id(getmember.getId());
@@ -53,9 +54,20 @@
             m.setMem_name(getmember.getName());
             Address address = new Address(getmember.getAddress_name(),getmember.getAddress_road());
             m.setAddress(address); //Address 객체생성후 받아온 주소정보 각각 넣어줌
-            service.Join(m); //서비스로 등록 영속성 - DB 반영
+            m.setStatus("offline");
+            m.setVacation(180);
+            m.setGender(getmember.getGender());
+            m.setEmail(getmember.getMemail());
 
-            return "redirect:/dashboard"; //홈 페이지로 리디렉션.
+            Team t = tc.convert("1");
+            System.out.println(t.getTeam_name());
+
+
+            fileService.uploadProfileImage(getmember.getProfileFile(),m);
+
+            service.Join(m,t); //서비스로 등록 영속성 - DB 반영
+
+            return "redirect:/moveDashboard"; //홈 페이지로 리디렉션.
         }
 
         @GetMapping("/login")

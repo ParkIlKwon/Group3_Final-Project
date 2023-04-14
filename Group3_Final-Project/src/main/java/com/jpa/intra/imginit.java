@@ -40,14 +40,22 @@ public class imginit {
     //만든이유 : 계속 실행을 하다보면 폴더에 파일들이 쌓임 . ※ 폴더 내부에 파일을 모두 지워야 폴더삭제가능.
     //파일 객체를 받아와서 지워줌
     private void initFolder(File fileobj){
-        File[] deleteFolderList = fileobj.listFiles();
 
-        for (int j = 0; j < deleteFolderList.length; j++) {
-            deleteFolderList[j].delete();
-        } //폴더 내부에 파일이 존재하면 폴더 삭제불가 . 따라서 그걸 지워주는 로직
+        try {
+            File[] deleteFolderList = fileobj.listFiles();
 
-        fileobj.delete();
-        fileobj.mkdir();
+            for (int j = 0; j < deleteFolderList.length; j++) {
+                deleteFolderList[j].delete();
+            } //폴더 내부에 파일이 존재하면 폴더 삭제불가 . 따라서 그걸 지워주는 로직
+
+
+            fileobj.delete();
+            fileobj.mkdir();
+
+        }catch (NullPointerException e){ //폴더가 애초에 존재 하지 않을 시 Nullpoint 로 던져줌.
+            fileobj.mkdir();
+        }
+
 
     }
     

@@ -1,84 +1,84 @@
 
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<!DOCTYPE HTML>
+<!--<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>-->
+<!--<!DOCTYPE HTML>-->
 
 
-    <meta charset="UTF-8">
-</head>
+<!--    <meta charset="UTF-8">-->
+<!--</head>-->
 
-<body>
+<!--<body>-->
 
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{/fragments/header :: header}"></head>
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head th:replace="~{/fragments/header :: header}"></head>-->
 
-<aside th:replace="/fragments/aside"></aside>
+<!--<aside th:replace="/fragments/aside"></aside>-->
 
-<div class="row">
-</div>
+<!--<div class="row">-->
+<!--</div>-->
 
-<section> <!--/members/addmember 로 post 형식으로 보내줌 .-->
-    <!--스크립트(ajax)로 해도 좋을것같음-->
-    <form action="/members/addmember" method="post" th:object="${MemberDTO}">
+<!--<section> &lt;!&ndash;/members/addmember 로 post 형식으로 보내줌 .&ndash;&gt;-->
+<!--    &lt;!&ndash;스크립트(ajax)로 해도 좋을것같음&ndash;&gt;-->
+<!--    <form action="/members/addmember" method="post" th:object="${MemberDTO}">-->
 
-        <div class="alert" th:if="${not #strings.isEmpty(msg)}">
-            <strong th:text="${msg}"> </strong>
-        </div>
+<!--        <div class="alert" th:if="${not #strings.isEmpty(msg)}">-->
+<!--            <strong th:text="${msg}"> </strong>-->
+<!--        </div>-->
 
-        <div class="form-outline mb-4">
-            <input type="text" id="id" name="id" class="form-control form-control-lg" placeholder="ID을 입력하세요"
-                   />
-        </div>
-        <div class="form-outline mb-4">
-            <input type="text" id="pw" name="pw" class="form-control form-control-lg" placeholder="PW을 입력하세요"/>
-        </div>
-        <div class="form-outline mb-4">
-            <input type="text" id="name" name="name" class="form-control form-control-lg" placeholder="name을 입력하세요"/>
-        </div>
+<!--        <div class="form-outline mb-4">-->
+<!--            <input type="text" id="id" name="id" class="form-control form-control-lg" placeholder="ID을 입력하세요"-->
+<!--                   />-->
+<!--        </div>-->
+<!--        <div class="form-outline mb-4">-->
+<!--            <input type="text" id="pw" name="pw" class="form-control form-control-lg" placeholder="PW을 입력하세요"/>-->
+<!--        </div>-->
+<!--        <div class="form-outline mb-4">-->
+<!--            <input type="text" id="name" name="name" class="form-control form-control-lg" placeholder="name을 입력하세요"/>-->
+<!--        </div>-->
 
-        <table>
-            <tr>
-                <th>주소</th>
-                <td><input type="text" id="address_kakao" name="address" readonly onclick="popup()" /></td>
-            </tr>
-            <tr>
-                <th>상세 주소</th>
-                <td><input type="text" name="address_detail" /></td>
-            </tr>
+<!--        <table>-->
+<!--            <tr>-->
+<!--                <th>주소</th>-->
+<!--                <td><input type="text" id="address_kakao" name="address" readonly onclick="popup()" /></td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <th>상세 주소</th>-->
+<!--                <td><input type="text" name="address_detail" /></td>-->
+<!--            </tr>-->
 
-        </table>
+<!--        </table>-->
 
-            <input type="text" id="address_name" name="address_name" hidden="hidden">
-            <input type="text" id="address_road" name="address_road" hidden="hidden">
+<!--            <input type="text" id="address_name" name="address_name" hidden="hidden">-->
+<!--            <input type="text" id="address_road" name="address_road" hidden="hidden">-->
 
-        <div class="d-flex justify-content-center">
-            <button type="submit"
-                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
-        </div>
+<!--        <div class="d-flex justify-content-center">-->
+<!--            <button type="submit"-->
+<!--                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>-->
+<!--        </div>-->
 
-    </form>
+<!--    </form>-->
 
-    <div class="alert alert-danger" th:if="${errorMsg}">
-        <p th:text="${errorMsg}"></p>
-    </div>
+<!--    <div class="alert alert-danger" th:if="${errorMsg}">-->
+<!--        <p th:text="${errorMsg}"></p>-->
+<!--    </div>-->
 
-</section>
+<!--</section>-->
 
 
 
-<script>
+<!--<script>-->
 
-    function popup(){
-        new daum.Postcode({
-            oncomplete: function(data) { //선택시 입력값 세팅
-                let location =  data.address; // 주소 넣기
-                let arr = location.split(' '); //주소 - 도로명 쪼깨기 . ex) 경기 시흥시 - 정왕대로 56번길
-                document.getElementById("address_name").value = arr[0]+arr[1];
-                document.getElementById("address_road").value = arr[2]+arr[3];
-                document.getElementById("address_kakao").value = data.address; // 주소 넣기 (보이는거)
-                document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
-            }
-        }).open();
-    }
+<!--    function popup(){-->
+<!--        new daum.Postcode({-->
+<!--            oncomplete: function(data) { //선택시 입력값 세팅-->
+<!--                let location =  data.address; // 주소 넣기-->
+<!--                let arr = location.split(' '); //주소 - 도로명 쪼깨기 . ex) 경기 시흥시 - 정왕대로 56번길-->
+<!--                document.getElementById("address_name").value = arr[0]+arr[1];-->
+<!--                document.getElementById("address_road").value = arr[2]+arr[3];-->
+<!--                document.getElementById("address_kakao").value = data.address; // 주소 넣기 (보이는거)-->
+<!--                document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱-->
+<!--            }-->
+<!--        }).open();-->
+<!--    }-->
 
-</script>
-</html>
+<!--</script>-->
+<!--</html>-->

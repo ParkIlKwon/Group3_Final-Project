@@ -29,7 +29,6 @@ public class MailController {
     public String mailMain(Model model){
         List<Mail> mailList = new ArrayList<>();
         mailList = mailRepository.findAllMailList();
-        System.out.println(mailList.size() +"사이즈");
         model.addAttribute("mailList",mailList);
         model.addAttribute("page", "메일");
         return "mail/main";
