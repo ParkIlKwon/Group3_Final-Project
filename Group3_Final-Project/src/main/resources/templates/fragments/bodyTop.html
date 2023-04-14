@@ -15,27 +15,18 @@
 
                     <!--  검색기능 관련 JS 파일  -->
 
-
-                    <button type="button" class="btn btn-outline-primary mb-0">보드1</button>
-                    <button type="button" class="btn btn-outline-primary mb-0">보드2</button>
-                    <button type="button" class="btn btn-outline-primary mb-0">보드3</button>
-                    <button type="button" class="btn btn-outline-primary mb-0">전체 보드</button>
+                    <button type="button" class="btn btn-outline-secondary mb-0" readonly="">검색</button>
                     <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                     <input type="text" id="search_area" class="form-control" placeholder="search Text here">
                     <br>
                     <nav>
-
                     </nav>
                     <ul id='autoMaker'>
-
-
                     </ul>
                 </div>
 
                 <!--프로젝트 Top메뉴-->
                 <div th:if="${page=='프로젝트'}" class="input-group">
-
-
                     <button type="button" class="btn btn-outline-primary mb-0">새 할일</button>
                     <button type="button" class="btn btn-outline-secondary mb-0">내 할일</button>
                     <button type="button" class="btn btn-outline-secondary mb-0">팀 할일</button>
@@ -92,10 +83,7 @@
 
                 <!--관리자 Top메뉴-->
                 <div th:if="${page=='관리자'}" class="input-group">
-                    <button type="button" class="btn btn-outline-primary mb-0">공지관리</button>
-                    <button type="button" class="btn btn-outline-secondary mb-0" onclick="location.href='/admin/admin_member'">사원관리</button>
-                    <button type="button" class="btn btn-outline-secondary mb-0">근태관리</button>
-                    <button type="button" class="btn btn-outline-info mb-0">급여관리</button>
+                    <button type="button" class="btn btn-outline-secondary mb-0" readonly="">검색</button>
                     <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                     <input type="text" class="form-control" placeholder="Type here...">
                 </div>

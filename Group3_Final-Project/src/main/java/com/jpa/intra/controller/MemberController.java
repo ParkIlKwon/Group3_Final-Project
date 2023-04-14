@@ -42,6 +42,7 @@
             //memberDTO 형식으로 생성자 만들어서 보내줌 .
             return "pages/joinForm";
         }
+
         final private FileService fileService;
         @PostMapping() //form 에서 post형식으로
                                     //받아오면 여기로 들어옴 .
