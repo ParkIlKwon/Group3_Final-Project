@@ -22,11 +22,11 @@ public class imginit {
 
     public void run(){
 
-//        initFolder(new File("C:\\profile"));
-//
-//        initFolder(new File("C:\\download"));
-//
-//        initFolder(new File("C:\\Storage"));
+        initFolder(new File("C:\\profile"));
+
+        initFolder(new File("C:\\download"));
+
+        initFolder(new File("C:\\Storage"));
 
 
         List<Member> allMemberList = repository.getAllMemberList();
