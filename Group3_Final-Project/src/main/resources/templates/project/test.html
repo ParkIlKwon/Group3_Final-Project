@@ -151,11 +151,6 @@
 <!--            </div>-->
 
 <!--          </div>-->
-          <form action="/writeNewReply" th:object="${replyDTO}" method="POST">-->
-            <input type="hidden" name="boardId" class="task-board-detail-reply-id">
-            <textarea th:field="*{replyContent}" placeholder="댓글을 작성하세요"></textarea>
-            <button type="submit">작성</button>
-          </form>
         </div>
       </div>
 
@@ -169,6 +164,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
   var replyListEnabled = true;
   // 작성폼으로 이동
   function writeForm() {
@@ -179,21 +175,10 @@
   //게시글 클릭 시, 우측단에 게시글 상세정보 작성해주는 함수
   function showTlistContents(data){
 
-    var curBoardId=data.querySelector('.task-board-id').value;
+    var curBoardId=document.querySelector('.task-board-id').value;
     console.log(curBoardId);
 
-    $.ajax({
-      url: '/reply/curreplylist',
-      method: 'GET',
-      data: ({ "boardId": curBoardId }),
-      success(replyfindresult) {
-        alert("성공하다.")
-        console.log(replyfindresult);
-      }
-    })
-
-
-    // if(replyListEnabled==false) replyListEnabled = !replyListEnabled;
+    // // if(replyListEnabled==false) replyListEnabled = !replyListEnabled;
     // var replyListCollapse = document.querySelector("#reply-list-collapse");
     // if (replyListCollapse.classList.contains("show")) {
     //   toggleReplyList();
@@ -249,10 +234,10 @@
     // endDate.textContent="";
     // endDate.textContent="업무 종료날짜 : "+data.querySelector('.task-board-end-date').value;
     //
-    // 댓글 form태그에 전달되어야할 정보
-    var replyId = document.querySelector('.task-board-detail-reply-id');
-    replyId.value="";
-    replyId.value=data.querySelector('.task-board-id').value;
+    // // 댓글 form태그에 전달되어야할 정보
+    // var replyId = document.querySelector('.task-board-detail-reply-id');
+    // replyId.value="";
+    // replyId.value=data.querySelector('.task-board-id').value;
 
   }
 
