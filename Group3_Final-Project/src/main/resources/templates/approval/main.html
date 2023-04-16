@@ -157,17 +157,26 @@
 
   // 선택한 기안메뉴에 따라 적절한 작성페이지로 이동시켜주다.
   function redirectToPage() {
+    const width = 800;
+    const height = 600;
+    const left = window.screen.width / 2 - width / 2;
+    const top = window.screen.height / 2 - height / 2;
     var menu = $('input[name="approval-menu"]:checked').val();  // 선택한 메뉴 가져오기
     if (menu === "vacation") {
-      window.location.href = "/board/newapprovalvacationboard";
+      window.open('/board/newapprovalvacationboard', '휴가신청 기안', `width=${width},height=${height},left=${left},top=${top}`);
+      // window.location.href = "/board/newapprovalvacationboard";
     } else if (menu === "overtime") {
-      window.location.href = "/board/newapprovalovertimeboard";
+      window.open('/board/newapprovalovertimeboard', '야간근무 신청 기안', `width=${width},height=${height},left=${left},top=${top}`);
+      // window.location.href = "/board/newapprovalovertimeboard";
     } else if (menu === "work-hour-change") {
-      window.location.href = "/board/newapprovalwocboard";
+      window.open('/board/newapprovalwocboard', '출퇴근 시간 변경 기안', `width=${width},height=${height},left=${left},top=${top}`);
+      // window.location.href = "/board/newapprovalwocboard";
     } else {
       // 메뉴를 선택하지 않은 경우, 경고창 표시
       alert("기안 유형을 선택해 주세요");
     }
+
+    $("#writeModal").modal("hide");
   }
 
   // 게시글 클릭 시, 우측단에 결재문서 상세정보 작성해주는 함수

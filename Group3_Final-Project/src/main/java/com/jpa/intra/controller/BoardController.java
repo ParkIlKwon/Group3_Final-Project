@@ -4,13 +4,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.jpa.intra.domain.Member;
 import com.jpa.intra.domain.Reply;
-import com.jpa.intra.domain.Team;
-import com.jpa.intra.domain.board.*;
-import com.jpa.intra.query.*;
+import com.jpa.intra.domain.board.BoardApproval;
+import com.jpa.intra.domain.board.BoardFree;
+import com.jpa.intra.domain.board.BoardTask;
+import com.jpa.intra.query.BoardApprovalDTO;
+import com.jpa.intra.query.BoardApprovalInfoDTO;
+import com.jpa.intra.query.BoardFreeDTO;
+import com.jpa.intra.query.BoardTaskDTO;
 import com.jpa.intra.repository.Member_Repository;
 import com.jpa.intra.service.BoardService;
 import com.jpa.intra.service.ReplyService;
-import com.jpa.intra.util.MemberConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +23,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -207,7 +208,9 @@ public class BoardController {
     public String writeNewBoardApprovalForm1(HttpSession session, Long memberId, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
         BoardApproval boardApproval=createNewBoardApproval(session, memberId, boardApprovalDTO, boardApprovalInfoDTO, "approval vacation title", "VACATION");
         boardService.createBoardApproval1(boardApproval);
-        return "redirect:/moveApproval";
+//        return "redirect:/moveApproval";
+//        return "<script>window.opener.location.reload(); window.close();</script>";
+        return "";
     }
 
     @PostMapping("/board/newapprovalovertimeboard")
@@ -245,6 +248,7 @@ public class BoardController {
         String onOff=(String)session.getAttribute("onOff");
         onOff="on";
         session.setAttribute("onOff",onOff);
+        System.out.println("test");
         return "redirect:/moveProject";
     }
 
