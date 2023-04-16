@@ -1,5 +1,6 @@
 package com.jpa.intra.repository;
 
+import com.jpa.intra.domain.Member;
 import com.jpa.intra.domain.Reply;
 import com.jpa.intra.domain.Team;
 import com.jpa.intra.domain.board.BoardApproval;
@@ -10,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
@@ -60,5 +64,16 @@ public class Board_Repository {
     // EntityManager의 내장 함수 find로 아이디 값을 참조하여 BoardCommon 객체를 뽑음
     public BoardCommon findByBoardId(Long id) {return em.find(BoardCommon.class, id);}
 
+    public BoardCommon findByBoardUserIdAndTitle(String uid,String title) {
+        TypedQuery<BoardCommon> query = em.createQuery( //멤버 아이디와 패스워드 동시에 일치 하면 멤버 받아오는 로직
+                "SELECT b FROM BoardCommon b WHERE b.boardWriter = :id AND b.boardTitle = :title", BoardCommon.class);
+        query.setParameter("id", uid);
+        query.setParameter("title", title);
+        try {
+            return query.getSingleResult(); //성공시 하나의 일정(boardCommon)객체 받아옴
+        } catch (NoResultException | NonUniqueResultException e) {
+            return null; //받아온 값이 없을 때 Null을 반환
+        }
+    }
 
 }

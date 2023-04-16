@@ -55,7 +55,7 @@
                                             let CalData;
                                             $.ajax({
                                                 type:"GET", //겟으로 받아옴 .
-                                                url:"/Calendar",
+                                                url:"/Calendar/getCalendarData",
                                                 async: false, //비동기 -> 동기로 바꿈 . 전역변수에 값 넣어서 쓸수 있게됨
                                                 success:function (res){
                                                     console.log(res);
@@ -69,15 +69,24 @@
                                                 initialView: 'dayGridMonth',
                                                 droppable: true,
 
-                                                editable: false, // 수정 가능?
+                                                editable: false, // 드래그해서 수정 가능
                                                 nowIndicator: true, // 현재 시간 마크
                                                 dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
                                                 locale: 'ko', // 한국어 설정
 
                                                 eventClick : function(info) {
                                                     let object =  info.event;
-                                                    alert(object.title);
-                                                    alert(object.value);
+                                                   // alert(object.title); // 선택된 일정 제목
+
+                                                    $.ajax({
+                                                        type:"POST",
+                                                        url:"/Calendar/getSingleData",
+                                                        data:{"title":object.title},
+                                                        success:function (res){
+                                                            console.log(res);
+                                                        }
+                                                    });
+
                                                 }
                                                 ,
                                                 events: CalData,
@@ -85,8 +94,8 @@
                                                 eventSources :[
                                                     {
                                                         googleCalendarId : 'ko.south_korea.official#holiday@group.v.calendar.google.com'
-                                                        , color: '#F76200'   // an option!
-                                                        , textColor: 'white' // an option!
+                                                        , color: '#F76200'   // an option! 공휴일 표시 색
+                                                        , textColor: 'white' // an option! 폰트 색
                                                     }
                                                 ]
 
