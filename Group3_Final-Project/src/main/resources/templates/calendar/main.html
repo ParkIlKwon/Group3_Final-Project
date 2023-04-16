@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/fragments/header :: header}"></head>
 
 <!--<script src="/fullcalendar/Main.js" defer> </script>-->
@@ -25,94 +24,74 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
-                <div class="card mb-4">
-                    <div class="card-header pb-0">
-                        <h6>달력</h6>
+                <div class="card p-3" style="height: 850px">
+                    <div class="card-header p-0">
+                        <button type="button" class="btn bg-gradient-info p-2 mb-1" onclick="#">내 일정</button>
+                        <button type="button" class="btn bg-gradient-success p-2 mb-1" onclick="#">팀 일정</button>
+                        <button type="button" class="btn bg-gradient-danger p-2 mb-1" onclick="#">전체 일정</button>
+                        <hr class="solid">
                     </div>
-                    <div class="card-body px-0 pt-0 pb-2">
+
+                    <div class="card-body p-0">
                         <section>
-                            <div class="row">
-                                <!--    사이드바 -->
-
-                            </div>
-                            <!--    -->
                             <div class="col" style="background-color: #ffffff;">
-
                                 <div id='external-events'>
-                                    <h4>Draggable Events   WORK IN PROGRESS  </h4>
-                                    <div id='external-events-list'></div>
-
+                                    <div id='external-events-list'/>
                                 </div>
+                                <div id='calendar' style="display: inherit">
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        //var Draggable = FullCalendarInteraction.Draggable;
+                                        var calendarEl = document.getElementById('calendar');
+                                        let CalData;
+                                        $.ajax({
+                                            type:"GET", //겟으로 받아옴 .
+                                            url:"/Calendar",
+                                            async: false, //비동기 -> 동기로 바꿈 . 전역변수에 값 넣어서 쓸수 있게됨
+                                            success:function (res){
+                                                console.log(res);
+                                                CalData = res;
+                                            }
+                                        })
 
-                                <div id='calendar'>
+                                        console.log(CalData);
 
-                                    <script>
+                                        var calendar = new FullCalendar.Calendar(calendarEl, {
+                                            initialView: 'dayGridMonth',
+                                            droppable: true,
 
+                                            editable: false, // 수정 가능?
+                                            nowIndicator: true, // 현재 시간 마크
+                                            dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
+                                            locale: 'ko', // 한국어 설정
 
-                                        document.addEventListener('DOMContentLoaded', function() {
-                                            //var Draggable = FullCalendarInteraction.Draggable;
-                                            var calendarEl = document.getElementById('calendar');
-                                            let CalData;
-                                            $.ajax({
-                                                type:"GET", //겟으로 받아옴 .
-                                                url:"/Calendar",
-                                                async: false, //비동기 -> 동기로 바꿈 . 전역변수에 값 넣어서 쓸수 있게됨
-                                                success:function (res){
-                                                    console.log(res);
-                                                    CalData = res;
+                                            eventClick : function(info) {
+                                                let object =  info.event;
+                                                alert(object.title);
+                                                alert(object.value);
+                                            }
+                                            ,
+                                            events: CalData,
+                                            googleCalendarApiKey : "AIzaSyBWS_eq3DEHprUaxOZe-mxmfl8laq2W5wg",
+                                            eventSources :[
+                                                {
+                                                    googleCalendarId : 'ko.south_korea.official#holiday@group.v.calendar.google.com'
+                                                    , color: '#F76200'   // an option!
+                                                    , textColor: 'white' // an option!
                                                 }
-                                            })
-
-                                            console.log(CalData);
-
-                                            var calendar = new FullCalendar.Calendar(calendarEl, {
-                                                initialView: 'dayGridMonth',
-                                                droppable: true,
-
-                                                editable: false, // 수정 가능?
-                                                nowIndicator: true, // 현재 시간 마크
-                                                dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
-                                                locale: 'ko', // 한국어 설정
-
-                                                eventClick : function(info) {
-                                                    let object =  info.event;
-                                                    alert(object.title);
-                                                    alert(object.value);
-                                                }
-                                                ,
-                                                events: CalData,
-                                                googleCalendarApiKey : "AIzaSyBWS_eq3DEHprUaxOZe-mxmfl8laq2W5wg",
-                                                eventSources :[
-                                                    {
-                                                        googleCalendarId : 'ko.south_korea.official#holiday@group.v.calendar.google.com'
-                                                        , color: '#F76200'   // an option!
-                                                        , textColor: 'white' // an option!
-                                                    }
-                                                ]
-
-                                            });
-
-                                            calendar.render();
-
+                                            ]
                                         });
-
-                                    </script>
-
+                                        calendar.render();
+                                    });
+                                </script>
                                 </div>
-
                             </div>
-
                     </section>
-
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </main>
-<!-- plugin -->
-<div th:replace="/fragments/plugin"></div>
 </body>
-
 </html>

@@ -10,56 +10,56 @@
     <nav th:replace="fragments/bodyTop"></nav>
     <!-- Start Content -->
     <div class="container-fluid py-4">
+        <!-- Left : 메일 목록 -->
         <div class="row" >
-            <!--      Left : 메일 목록 -->
-            <div class="col-md-4 mt-4">
-                <div class="card" style="height: 100vh;">
-                    <div class="card-header pb-0 px-3">
-                        <h6 class="mb-0">메일 목록</h6>
+            <div class="col-md-4">
+                <div class="card p-3" style="height: 100vh">
+                    <div class="card-header p-0 text-center">
+                        <button type="button" class="btn bg-gradient-primary p-2 mb-1" onclick="location.href='/mail/mailForm'">새 메일</button>
+                        <button type="button" class="btn bg-gradient-info p-2 mb-1" onclick="#">받은 메일</button>
+                        <button type="button" class="btn bg-gradient-secondary p-2 mb-1" onclick="#">보낸 메일</button>
+                        <hr class="solid">
                     </div>
 
-                    <div class="card-body pt-4 p-3">
+                    <div class="card-body p-0">
+                        <h6 class="mb-0">메일 목록</h6>
                         <ul class="list-group">
-<!--                            메일함이 비었을 때-->
+                            <!-- 메일함이 비었을 때 -->
                             <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg"
                                 th:if="${mailList.size()==0}">
                                 <div class="d-flex flex-column">
                                     <h6 class="mb-3 text-sm">메일 함이 비어있습니다.</h6>
                                 </div>
                             </li>
-                            <!--                Start 예시 형식    -->
+                            <!-- 메일 목록-->
                             <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg"
                             th:each="m:${mailList}">
                                 <div class="d-flex flex-column">
                                     <h6 class="mb-3 text-sm">메일 제목</h6>
                                     <p th:text="${m.title}"></p>
-                                    <span class="mb-2 text-xs">보낸 이: <span class="text-dark font-weight-bold ms-sm-2"
-                                    th:text="${m.getSender()}">
-
+                                    <span class="mb-2 text-xs">보낸 이:
+                                        <span class="text-dark fw-bold ms-sm-2" th:text="${m.getSender()}"></span>
                                     </span>
-                                        </span>
-
-                                    <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">
-
+                                    <span class="mb-2 text-xs">Email Address:
+                                        <span class="text-dark ms-sm-2 fw-bold"> </span>
                                     </span>
-                                        </span>
-                                    <span class="text-xs">사원 번호: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
+                                    <span class="text-xs">사원 번호:
+                                        <span class="text-dark ms-sm-2 fw-bold">FRB1235476</span>
+                                    </span>
                                 </div>
                                 <div class="ms-auto text-end">
                                     <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
                                     <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
                                 </div>
                             </li>
-                            <!--                End 예시 형식 -->
-
                         </ul>
                     </div>
                 </div>
             </div>
-            <!-- End Left -->
-            <!--        Right : 메일 상세 정보 -->
-            <div class="col-md-8 mt-4">
-                <div class="card mb-4" style="height: 100vh;">
+
+            <!-- Right : 메일 상세 정보 -->
+            <div class="col-md-8">
+                <div class="card p-3 h-100">
                     <div class="card-header pb-0">
                         <h6>선택한 메일 제목</h6>
                     </div>
@@ -87,25 +87,18 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        <!-- 메일 내용 -->
                                         메일 내용
-<!--                                        메일 내용 -->
                                     </td>
                                 </tr>
-
-
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--                End Right --->
         </div>
-
     </div>
 </main>
-<!-- plugin -->
-<div th:replace="/fragments/plugin"></div>
 </body>
-
 </html>

@@ -108,3 +108,14 @@ section{
     color: #f8f9fa;
 }
 
+/* 추천검색어 목록*/
+.searchGroup{position: absolute;}
+
+.rel_search {
+    position: absolute;
+    display:flex;
+    flex-direction:column;
+    z-index: 1;
+}
+
+#autoMaker {margin-top:40px;}

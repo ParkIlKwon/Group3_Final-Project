@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/fragments/header :: header}"></head>
 
 <body class="g-sidenav-show  bg-gray-100">
-
-
 <!--   사이드 : aside -->
 <aside th:replace="/fragments/aside"></aside>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -12,22 +10,22 @@
   <nav th:replace="fragments/bodyTop"></nav>
   <!-- Start Content -->
   <div class="container-fluid py-4">
-    <!--      Left : 업무 목록 -->
+    <!-- Left : 업무 목록 -->
     <div class="row" >
-      <div class="col-md-4 mt-4">
-        <div class="card" style="height: 100vh;">
-          <div class="card-header pb-0 px-3">
-            <button type="button" class="btn bg-gradient-primary mb-0" onclick="writeForm()">새 프로젝트</button>
-            <button type="button" class="btn bg-gradient-info mb-0" onclick="#">내 할일</button>
-            <button type="button" class="btn bg-gradient-danger mb-0" onclick="#">미완료</button>
-            <button type="button" class="btn bg-gradient-secondary mb-0" onclick="#">완료</button>
-            <hr>
+      <div class="col-md-4">
+        <div class="card p-3" style="height: 100vh">
+          <div class="card-header p-0 text-center">
+            <button type="button" class="btn bg-gradient-primary p-2 mb-1" onclick="writeForm()">새 할일</button>
+            <button type="button" class="btn bg-gradient-info p-2 mb-1" onclick="#">내 할일</button>
+            <button type="button" class="btn bg-gradient-danger p-2 mb-1" onclick="#">미완료</button>
+            <button type="button" class="btn bg-gradient-secondary p-2 mb-1" onclick="#">완료</button>
+            <hr class="solid">
           </div>
 
-          <div class="card-body pt-4 p-3 task-main-left" th:with="tlist=${tlist}">
+          <div class="card-body p-0 task-main-left" th:with="tlist=${tlist}">
 <!--            <span th:text="${session.onOff}"></span>-->
 <!--            <span class="sessiontest" th:text="${session.onOff}"></span>-->
-            <h6 class="mb-0">업무 목록</h6>
+            <h6 class="my-0">업무 목록</h6>
             <ul class="list-group task-main-left-tlist-section" th:each="vo:${tlist}" onclick="showTlistContents(this)">
               <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg task-main-left-tlist-section">
                 <div class="d-flex flex-column task-main-left-tlist-section-component">
@@ -38,9 +36,8 @@
                   <input type="hidden" class="task-board-update-date" th:value="${vo.updateDate}">
                   <input type="hidden" class="task-board-start-date" th:value="${vo.startDate}">
                   <input type="hidden" class="task-board-end-date" th:value="${vo.endDate}">
-                  <div id="task-board-progress" style="border:1px solid" th:class="${vo.progress == 'TO_DO' ? 'task-status-to-do' : (vo.progress == 'IN_PROGRESS' ? 'task-status-in-progress' : 'task-status-done')}">
+                  <div id="task-board-progress" style="border:1px solid; width:fit-content" th:class="${vo.progress == 'TO_DO' ? 'task-status-to-do' : (vo.progress == 'IN_PROGRESS' ? 'task-status-in-progress' : 'task-status-done')}">
                     <span th:text="${vo.progress == 'TO_DO'} ? '할 일' : (${vo.progress == 'IN_PROGRESS'} ? '진행 중' : '완료')"></span>&nbsp;&nbsp;
-<!--                    <span class="badge bg-secondary">123</span>-->
                   </div>
                   <div class="mb-3 text-md   task-board-title" th:text="${vo.boardTitle}"></div>
                   <span class="mb-2 text-xs task-board-small-element">담당자: <span class="text-dark font-weight-bold ms-sm-2 task-board-responsibleMember" th:text="${vo.responsibleMemNum.mem_name}"></span></span>
@@ -54,13 +51,12 @@
               </li>
             </ul>
           </div>
-
         </div>
       </div>
 
-      <!--        Right : 업무 상세 정보 -->
-      <div class="col-md-8 mt-4">
-        <div class="card h-100 mb-4 task-main-right">
+      <!-- Right : 업무 상세 정보 -->
+      <div class="col-md-8">
+        <div class="card p-3 h-100 task-main-right">
           <input type="hidden" class="task-board-detail-id">
 
 <!--          <div class="card-header pb-0 px-3">-->
@@ -162,10 +158,6 @@
     </div>
   </div>
 </main>
-<!-- plugin -->
-<div th:replace="/fragments/plugin"></div>
-
-
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -356,11 +348,6 @@
   .task-status-done {
     color:gray;
     font-size:11px;
-  }
-  hr {
-    background:gray;
-    height:1px;
-    border:0;
   }
 
   .task-board-detail-task-section textarea {

@@ -1,29 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/fragments/header :: header}"></head>
 
 <body class="g-sidenav-show  bg-gray-100">
-
 <!--   사이드 : aside -->
 <aside th:replace="/fragments/aside"></aside>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
   <!-- body Top Navbar : bodyTop  -->
   <nav th:replace="fragments/bodyTop"></nav>
-  <!-- 결재리스트 페이지 -->
+  <!-- Start Content -->
   <div class="container-fluid py-4">
-
+    <!-- Left : 결재 목록 -->
     <div class="row" >
-      <!--      Left : 결재 목록 -->
-      <div class="col-md-4 mt-4">
-        <div class="card" style="height: 100vh;">
-          <div class="card-header pb-0 px-3">
-            <!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">새 기안</button>-->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#writeModal">새 기안</button>
-            <hr>
+      <div class="col-md-4">
+        <div class="card p-3" style="height: 100vh;">
+          <div class="card-header pb-0 text-center">
+            <button type="button" class="btn bg-gradient-primary p-2 mb-1" data-bs-toggle="modal" data-bs-target="#writeModal">새 기안</button>
+            <button type="button" class="btn bg-gradient-success p-2 mb-1" onclick="#">결재완료</button>
+            <button type="button" class="btn bg-gradient-secondary p-2 mb-1" onclick="#">미결재</button>
+            <hr class="solid">
           </div>
 
           <div class="card-body pt-4 p-3 approval-main-left" th:with="alist=${alist}">
-            <h6 class="mb-0">내 결재 목록</h6>
+            <h6 class="mb-0">결재 목록</h6>
             <ul class="list-group approval-main-left-alist-section" th:each="vo:${alist}" onclick="showAlistContents(this)">
               <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg approval-main-left-alist-section">
                 <div class="d-flex flex-column approval-main-left-alist-section-component">
@@ -47,15 +46,13 @@
                 </div>
               </li>
             </ul>
-
           </div>
-
         </div>
       </div>
 
       <!--        Right : 업무 상세 정보 -->
-      <div class="col-md-8 mt-4">
-        <div class="card h-100 mb-4 approval-main-right">
+      <div class="col-md-8">
+        <div class="card p-3 h-100 approval-main-right">
           <input type="hidden" class="approval-board-detail-id">
 
           <div class="card-header pb-0 px-3">
@@ -111,12 +108,8 @@
         </div>
       </div>
     </div>
-
   </div>
 </main>
-<!-- plugin -->
-<div th:replace="/fragments/plugin"></div>
-
 
 <!-- 기안 매뉴 선택 모달 -->
 <div class="modal fade" id="writeModal" tabindex="-1" role="dialog" aria-labelledby="writeModalLabel" aria-hidden="true">
@@ -149,8 +142,6 @@
     </div>
   </div>
 </div>
-
-
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -230,9 +221,6 @@
       detailContent.innerHTML+="<div>변경 요청한 퇴근시간 : " + leaveOffice + "</div>";
       detailContent.innerHTML+="<div>출퇴근 시간 변경 신청 사유 : " + reason + "</div>";
     }
-
-
-
   }
 
 </script>
@@ -275,7 +263,5 @@
     border:0;
   }
 </style>
-
 </body>
-
 </html>
