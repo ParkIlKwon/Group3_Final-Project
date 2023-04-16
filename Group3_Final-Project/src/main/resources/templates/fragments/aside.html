@@ -223,7 +223,7 @@
               <img th:src="@{'/' + ${session.user.getMem_img()}}" class="userPic" style="height:60px; border-radius:50px; float: right">
           </p>
           <p class="text-sm" th:text="${session.teamName}"></p>
-        <a href="/members/attendance" class="btn btn-white btn-sm w-100 mb-0 text-md-center fw-bold">마이 페이지</a>
+        <a href="/members/profile" class="btn btn-white btn-sm w-100 mb-0 text-md-center fw-bold">마이 페이지</a>
       </div>
     </div>
     <a class="btn bg-gradient-primary mt-3 w-100 text-md-center" href="/members/logout">LOGOUT</a>

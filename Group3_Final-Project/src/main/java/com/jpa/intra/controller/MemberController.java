@@ -4,24 +4,19 @@
     import com.jpa.intra.domain.Member;
     import com.jpa.intra.domain.Team;
     import com.jpa.intra.query.MemberDTO;
-    import com.jpa.intra.repository.Board_Repository;
     import com.jpa.intra.repository.Member_Repository;
     import com.jpa.intra.service.FileService;
-    import com.jpa.intra.service.MailService;
     import com.jpa.intra.service.MemberService;
     import com.jpa.intra.util.TeamConverter;
     import lombok.RequiredArgsConstructor;
-    import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.stereotype.Controller;
     import org.springframework.ui.Model;
     import org.springframework.validation.BindingResult;
     import org.springframework.web.bind.annotation.*;
-    import org.springframework.web.multipart.MultipartFile;
 
     import javax.servlet.http.HttpServletRequest;
     import javax.servlet.http.HttpSession;
     import javax.validation.Valid;
-    import java.io.File;
     import java.io.IOException;
     import java.util.ArrayList;
     import java.util.List;
@@ -152,10 +147,10 @@
             return "/pages/dashboard";
         }
 
-        // 마이페이지 눌렀을 때 members/attendance.html
-        @GetMapping("/attendance")
+        // 마이페이지 눌렀을 때 members/profile.html
+        @GetMapping("/profile")
         public String memberAttendance(){
-            return "/members/attendance";
+            return "members/profile";
         }
 
     }
