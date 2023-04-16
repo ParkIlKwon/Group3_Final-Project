@@ -46,6 +46,19 @@ public class ReplyController {
         return "redirect:/moveProject";
     }
 
+    @ResponseBody
+    @GetMapping("/reply/curreplylist")
+    public List<Reply> getCurrentReplyList(@RequestParam("boardId") String boardId) {
+
+        System.out.println("받아온 보드 아이디 대이터 : "+boardId);
+
+        List<Reply> curRpList=replyService.findReplyByBoardId(Long.parseLong(boardId));
+        for(int i=0;i<curRpList.size();i++){
+            System.out.println("부합하는 댓글 내용 : "+curRpList.get(i).getReplyContent());
+        }
+        return curRpList;
+    }
+
     @DeleteMapping("/deletethisreply")
     public String deleteThisReply() {
         return "";

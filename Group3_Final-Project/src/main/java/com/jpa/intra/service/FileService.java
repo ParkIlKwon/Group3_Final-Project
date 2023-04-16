@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -123,9 +124,6 @@ public class FileService {
 
         return savedFile.getId();
     }
-
-
-
 
     @Transactional
     public Long uploadProfileImage(MultipartFile files, Member m) throws IOException {
