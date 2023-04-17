@@ -29,7 +29,11 @@ public class MenuController {
     
     //대시보드 페이지 이동
     @GetMapping("/moveDashboard")
-    public String MoveDashboard(Model model){
+    public String MoveDashboard(Model model, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        if(session.getAttribute("user") == null){
+            return "login";
+        }
         //페이지 이동시 (페이지제목/사이드바 active 변경을 위한 model)
         model.addAttribute("page", "Dashboard");
         return "/dashboard/main";
