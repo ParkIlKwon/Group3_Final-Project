@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}"></head>
+
+<body class="g-sidenav-show  bg-gray-100">
+<!--   사이드 : aside -->
+<aside th:replace="fragments/aside"></aside>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+  <!-- body Top Navbar : bodyTop  -->
+  <nav th:replace="fragments/bodyTop"></nav>
+  <!-- Start Content -->
+  <div class="container-fluid py-4">
+    <!-- Left : 공지 목록 -->
+    <div class="row" >
+      <div class="col-md-4">
+        <div class="card p-3" style="height: 100vh">
+          <div th:if="${session.teamName eq '인사부'}" class="card-header p-0">
+            <button type="button" class="btn bg-gradient-primary p-2 mb-1" onclick="#">새 공지</button>
+            <hr class="solid">
+          </div>
+
+          <div class="card-body p-0 task-main-left" th:with="tlist=${tlist}">
+<!--            <span th:text="${session.onOff}"></span>-->
+<!--            <span class="sessiontest" th:text="${session.onOff}"></span>-->
+            <h6 class="mb-2">업무 목록</h6>
+            <ul class="list-group task-main-left-tlist-section" th:each="vo:${tlist}" onclick="showTlistContents(this)">
+              <li class="list-group-item border-0 d-flex p-2 px-4 mb-2 bg-gray-100 border-radius-lg task-main-left-tlist-section">
+                <div class="d-flex flex-column task-main-left-tlist-section-component">
+                  <input type="hidden" class="task-board-id" th:value="${vo.id}">
+                  <input type="hidden" class="task-board-board-writer" th:value="${vo.boardWriter}">
+                  <input type="hidden" class="task-board-content" th:value="${vo.boardContent}">
+                  <input type="hidden" class="task-board-create-date" th:value="${vo.createDate}">
+                  <input type="hidden" class="task-board-update-date" th:value="${vo.updateDate}">
+                  <input type="hidden" class="task-board-start-date" th:value="${vo.startDate}">
+                  <input type="hidden" class="task-board-end-date" th:value="${vo.endDate}">
+                  <div>
+                    <span id="task-board-progress" style="border:1px solid; padding:0 2px 0 5px" th:class="${vo.progress == 'TO_DO' ? 'task-status-to-do' : (vo.progress == 'IN_PROGRESS' ? 'task-status-in-progress' : 'task-status-done')}">
+                      <span th:text="${vo.progress == 'TO_DO'} ? '할 일' : (${vo.progress == 'IN_PROGRESS'} ? '진행 중' : '완료')"></span>
+                    </span>
+                    <span class="ms-2 mb-3 fs-5 fw-bold task-board-title" th:text="${vo.boardTitle}"></span>
+                  </div>
+                  <div>
+                    <span class="mb-2 text-xs task-board-small-element">담당자: <span class="text-dark font-weight-bold ms-sm-2 task-board-responsibleMember" th:text="${vo.responsibleMemNum.mem_name}"></span></span>
+                    <span class="ms-4 mb-2 text-xs task-board-small-element">참조부서: <span class="text-dark ms-sm-2 font-weight-bold task-board-responsibleTeam" th:text="${vo.teamNum.team_name}"></span></span>
+                  </div>
+                </div>
+                <!-- <div class="ms-auto text-end">
+                  <a class="btn btn-link text-danger text-gradient px-3 mb-0 delete-board-task" href="/board/deleteboardtask"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                  <a class="btn btn-link text-dark px-3 mb-0" href="#"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                </div>-->
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right : 업무 상세 정보 -->
+      <div class="col-md-8">
+        <div class="card p-3 h-100 task-main-right">
+          <input type="hidden" class="task-board-detail-id">
+
+<!--          <div class="card-header pb-0 px-3">-->
+<!--            <div class="row">-->
+<!--              <div class="col-md-6">-->
+<!--                <h6 class="mb-0">선택한 업무</h6>-->
+<!--              </div>-->
+<!--              <div class="col-md-6 d-flex justify-content-end align-items-center">-->
+<!--                <i class="far fa-calendar-alt me-2"></i>-->
+<!--                <small class="task-board-detail-create-date"></small>-->
+
+<!--                <select class="task-board-detail-status" id="taskStatus">-->
+<!--                  <option value="TO_DO">할일</option>-->
+<!--                  <option value="IN_PROGRESS">진행중</option>-->
+<!--                  <option value="DONE">완료</option>-->
+<!--                </select>-->
+
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="card-body pt-4 p-3">-->
+<!--            <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3 task-board-detail-title"></h6>-->
+<!--            <ul class="list-group">-->
+<!--              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">-->
+<!--                <div class="d-flex align-items-center">-->
+<!--                  <div class="d-flex flex-column">-->
+<!--                    <h6 class="mb-1 text-dark text-sm">담당자</h6>-->
+<!--                    <span class="text-xs task-board-detail-responsibleMember"></span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold task-board-detail-start-date"></div>-->
+<!--              </li>-->
+
+<!--              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">-->
+<!--                <div class="d-flex align-items-center">-->
+<!--                  <div class="d-flex flex-column">-->
+<!--                    <h6 class="mb-1 text-dark text-sm">참조부서</h6>-->
+<!--                    <span class="text-xs task-board-detail-responsibleTeam"></span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold task-board-detail-end-date"></div>-->
+<!--              </li>-->
+<!--            </ul>-->
+<!--            <hr>-->
+<!--            <h6 class="mb-0">업무 상세</h6>-->
+<!--            <br>-->
+
+<!--            <div class="task-board-detail-task-section">-->
+<!--              <section class="task-board-detail-content"></section>-->
+<!--              <div class="task-board-detail-task-reply">-->
+<!--                <hr>-->
+<!--                  <div class="card-body pt-4 p-3 task-board-detail-task-reply-list" th:with="rplist=${rplist}">-->
+<!--                    <input type="hidden" class="mb-3 text-sm task-reply-current-board-number">-->
+<!--                    <a class="collapsed" data-bs-toggle="collapse" href="#reply-list-collapse" aria-expanded="false" onclick="toggleReplyList()">-->
+<!--                      <i class="fas fa-angle-down me-2"></i>-->
+<!--                      댓글 목록-->
+<!--                    </a>-->
+
+<!--                    <div class="collapse" id="reply-list-collapse">-->
+<!--                      <ul class="list-group task-board-detail-task-reply-list-section" th:each="vo:${rplist}">-->
+<!--                        <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg task-board-detail-task-reply-list-section">-->
+<!--                          <div class="d-flex flex-column task-board-detail-task-reply-list-section-component">-->
+<!--                            <input type="hidden" class="task-reply-id" th:value="${vo.id}">-->
+<!--                            <input type="hidden" class="task-reply-create-date" th:value="${vo.createDate}">-->
+<!--                            <input type="hidden" class="task-reply-update-date" th:value="${vo.updateDate}">-->
+<!--                            <h6 class="mb-3 text-sm task-reply-writer" th:text="${vo.replyWriter}"></h6>-->
+<!--                            <span class="mb-2 text-xs task-reply-small-element"><span class="text-dark font-weight-bold ms-sm-2 task-reply-content" th:text="${vo.replyContent}"></span></span>-->
+<!--                            <span class="mb-2 text-xs task-reply-small-element"><span class="text-dark font-weight-bold ms-sm-2 task-reply-current-board" th:text="${vo.currentBoard.getId()}"></span></span>-->
+<!--                          </div>-->
+<!--                          <div class="ms-auto text-end">-->
+<!--                            <a class="btn btn-link text-danger text-gradient px-3 mb-0 delete-board-task" href="/deletethisreply"><i class="far fa-trash-alt me-2"></i>Delete</a>-->
+<!--                            <a class="btn btn-link text-dark px-3 mb-0" href="#"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>-->
+<!--                          </div>-->
+<!--                        </li>-->
+<!--                      </ul>-->
+<!--                    </div>-->
+
+
+<!--                  </div>-->
+<!--                <hr>-->
+<!--                <form action="/writeNewReply" th:object="${replyDTO}" method="POST">-->
+<!--                  <input type="hidden" name="boardId" class="task-board-detail-reply-id">-->
+<!--                  <textarea th:field="*{replyContent}" placeholder="댓글을 작성하세요"></textarea>-->
+<!--                  <button type="submit">작성</button>-->
+<!--                </form>-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--          </div>-->
+          <form action="/writeNewReply" th:object="${replyDTO}" method="POST">-->
+            <input type="hidden" name="boardId" class="task-board-detail-reply-id">
+            <textarea th:field="*{replyContent}" placeholder="댓글을 작성하세요"></textarea>
+            <button type="submit">작성</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  var replyListEnabled = true;
+  // 작성폼으로 이동
+  function writeForm() {
+    console.log();
+    location.href="/board/newtaskboard";
+  }
+
+  //게시글 클릭 시, 우측단에 게시글 상세정보 작성해주는 함수
+  function showTlistContents(data){
+
+    var curBoardId=data.querySelector('.task-board-id').value;
+    console.log(curBoardId);
+
+    $.ajax({
+      url: '/reply/curreplylist',
+      method: 'GET',
+      data: ({ "boardId": curBoardId }),
+      success(replyfindresult) {
+        alert("성공하다.")
+        console.log(replyfindresult);
+      }
+    })
+
+
+    // if(replyListEnabled==false) replyListEnabled = !replyListEnabled;
+    // var replyListCollapse = document.querySelector("#reply-list-collapse");
+    // if (replyListCollapse.classList.contains("show")) {
+    //   toggleReplyList();
+    // }
+    //
+    // $('.task-main-right').show();
+    //
+    // //업무진행도 작성
+    // var boardProgress = data.querySelector('#task-board-progress').className;
+    // var statusSelect = document.getElementById('taskStatus');
+    // if (boardProgress === 'task-status-to-do') {
+    //   statusSelect.value = 'TO_DO';
+    // }
+    // else if (boardProgress === 'task-status-in-progress') {
+    //   statusSelect.value = 'IN_PROGRESS';
+    // }
+    // else if (boardProgress === 'task-status-done') {
+    //   statusSelect.value = 'DONE';
+    // }
+    //
+    // //기타 업무정보 작성
+    // function setValue(targetSelector, sourceSelector) {
+    //   const target = document.querySelector(targetSelector);
+    //   target.innerHTML = "";
+    //   target.innerHTML = data.querySelector(sourceSelector).textContent;
+    // }
+    //
+    // setValue('.task-board-detail-title', '.task-board-title');
+    // setValue('.task-board-detail-responsibleMember', '.task-board-responsibleMember');
+    // setValue('.task-board-detail-responsibleTeam', '.task-board-responsibleTeam');
+    //
+    // var detailContent=document.querySelector('.task-board-detail-content');
+    // detailContent.innerHTML="";
+    // detailContent.innerHTML=data.querySelector('.task-board-content').value;
+    //
+    // var detailId = document.querySelector('.task-board-detail-id');
+    // detailId.value="";
+    // detailId.value=data.querySelector('.task-board-id').value;
+    //
+    // var replyCurBoardId = document.querySelector('.task-reply-current-board-number');
+    // replyCurBoardId.value="";
+    // replyCurBoardId.value=data.querySelector('.task-board-id').value;
+    //
+    // var createDate = document.querySelector('.task-board-detail-create-date');
+    // createDate.textContent="";
+    // createDate.textContent=data.querySelector('.task-board-create-date').value;
+    //
+    // var startDate = document.querySelector('.task-board-detail-start-date');
+    // startDate.textContent="";
+    // startDate.textContent="업무 시작날짜 : "+data.querySelector('.task-board-start-date').value;
+    //
+    // var endDate = document.querySelector('.task-board-detail-end-date');
+    // endDate.textContent="";
+    // endDate.textContent="업무 종료날짜 : "+data.querySelector('.task-board-end-date').value;
+    //
+    // 댓글 form태그에 전달되어야할 정보
+    var replyId = document.querySelector('.task-board-detail-reply-id');
+    replyId.value="";
+    replyId.value=data.querySelector('.task-board-id').value;
+
+  }
+
+  //게시글 삭제 ajax함수
+  $(document).ready(function() {
+    $('.delete-board-task').on('click', function(e) {
+      e.preventDefault();
+      var boardId=document.querySelector('.task-board-id').value;
+      var url = $(this).attr('href');
+      console.log("boardId : "+boardId+", url : "+url)
+
+      $.ajax({
+        url: url,
+        method: 'DELETE',
+        contentType: 'application/json',
+        data: JSON.stringify({ boardId: boardId })
+      })
+              .done(function(response) {
+                alert('게시글이 삭제되었습니다.');
+                // location.href="/moveProject";
+                location.replace("/moveProject");
+              })
+              .fail(function(jqXHR, textStatus, errorThrown) {
+                alert('게시글 삭제에 실패했습니다.');
+              });
+    });
+  });
+
+  // 업무진행도 변경 함수
+  $(document).ready(function() {
+    $(document).on('change', '.task-board-detail-status', function() {
+      var progress=$(this).val();
+      var boardId = $(this).closest('.task-main-right').find('.task-board-detail-id').val();
+      console.log("progress : "+progress+", boardId : "+boardId);
+
+      $.ajax({
+        url: "/board/changetaskprogress",
+        method: 'POST',
+        data: { boardId: boardId, boardProgress: progress }
+      })
+              .done(function(response) {
+                // location.href="/moveProject";
+                location.replace("/moveProject");
+              })
+              .fail(function(jqXHR, textStatus, errorThrown) {
+                alert('게시글 삭제에 실패했습니다.');
+              });
+
+    });
+  });
+
+  //댓글 관련 함수
+  function toggleReplyList() {
+    alert(replyListEnabled);
+    var boardNumber = document.querySelector('.task-reply-current-board-number').value;
+    console.log(boardNumber);
+
+    // 각 댓글 항목을 반복하며, 게시물 번호와 일치하지 않는 항목은 숨기기
+    var replyList = document.querySelectorAll('.task-board-detail-task-reply-list-section');
+    replyList.forEach(function(reply) {
+      var replyBoardNumber = reply.querySelector('.task-reply-current-board').innerText;
+      if (replyBoardNumber !== boardNumber) {
+        reply.style.display = replyListEnabled ? 'none' : 'block';
+      }
+    });
+
+    replyListEnabled = !replyListEnabled;
+  }
+
+
+</script>
+
+<style>
+  /*업무 게시판 리스트 스크롤바 관련*/
+  .task-main-left::-webkit-scrollbar {
+    width:0px;
+  }
+  .task-main-left::-webkit-scrollbar-thumb {
+    background:rgba(0, 0, 0, 0.5);
+  }
+  .task-main-left::-webkit-scrollbar-track {
+    background:transparent;
+  }
+  .task-main-left-tlist-section:hover {
+    background-color:#f4f6f9;
+  }
+  /*.task-main-right {*/
+  /*  display: none;*/
+  /*}*/
+  .task-board-detail-status {
+    margin-left:10px;
+  }
+  .task-status-to-do {
+    color:limegreen;
+    font-size:11px;
+  }
+  .task-status-in-progress {
+    color:blue;
+    font-size:11px;
+  }
+  .task-status-done {
+    color:gray;
+    font-size:11px;
+  }
+
+  .task-board-detail-task-section textarea {
+    width: 90%;
+  }
+</style>
+
+</body>
+
+</html>

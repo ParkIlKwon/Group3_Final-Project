@@ -30,9 +30,16 @@ public class MenuController {
     //대시보드 페이지 이동
     @GetMapping("/moveDashboard")
     public String MoveDashboard(Model model){
-        //페이지 이동시 (페이지제목/사이드바 active/top메뉴 변경을 위한 model)
+        //페이지 이동시 (페이지제목/사이드바 active 변경을 위한 model)
         model.addAttribute("page", "Dashboard");
         return "/dashboard/main";
+    }
+
+    //대시보드 페이지 이동
+    @GetMapping("/moveNotice")
+    public String MoveNotice(Model model){
+        model.addAttribute("page", "공지사항");
+        return "/dashboard/notice";
     }
 
     //프로젝트 페이지 이동
