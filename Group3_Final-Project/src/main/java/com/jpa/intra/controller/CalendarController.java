@@ -30,8 +30,6 @@ public class CalendarController {
         String userId = (String) session.getAttribute("log");
 
         List<Map<String, Object>> eventList = calendarService.getEventList(userId);
-        System.out.println("fdsdafsdafsdafsdasfda");
-        System.out.println(eventList.size());
         return eventList;
     }
 
@@ -39,17 +37,29 @@ public class CalendarController {
     //해당 일정을 보내줌.
     @PostMapping("/getSingleData")
     @ResponseBody
-    public BoardCommon getBoard (@RequestParam("title")String title, HttpServletRequest request){
+    public BoardTask getBoard (@RequestParam("title")String title, HttpServletRequest request){
         HttpSession session = request.getSession();
         String user = (String) session.getAttribute("log");
 
         //해당일정은 제목 , 현재 로그인된 회원아이디값을 넘겨줘서 찾음 .
-        System.out.println(user  + " " +title);
-        BoardCommon tc = calendarService.getSingleCalendar(user,title);
+        //System.out.println(user  + " " +title);
+        BoardTask tc = calendarService.getSingleCalendar(user,title);
 
 
         return tc;
     }
+
+
+    @PostMapping("/deleteData")
+    @ResponseBody
+    public String deleteData(@RequestParam("boardId")String boardId){
+        //System.out.println(boardId);
+        
+        return "ok";
+    }
+
+
+
 
 
 

@@ -39,8 +39,10 @@ public class CalendarService {
     }
 
 
-    public BoardCommon getSingleCalendar(String uid, String title){
-        return boardRepository.findByBoardUserIdAndTitle(uid,title);
+    public BoardTask getSingleCalendar(String uid, String title){
+        BoardCommon tempCommon = boardRepository.findByBoardUserIdAndTitle(uid,title);
+
+        return boardRepository.findTaskByBoardId(tempCommon.getId());
     }
 
 
