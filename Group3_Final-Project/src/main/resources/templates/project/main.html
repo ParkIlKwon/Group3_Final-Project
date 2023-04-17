@@ -14,7 +14,7 @@
     <div class="row" >
       <div class="col-md-4">
         <div class="card p-3" style="height: 100vh">
-          <div class="card-header p-0 text-center">
+          <div class="card-header p-0">
             <button type="button" class="btn bg-gradient-primary p-2 mb-1" onclick="writeForm()">새 할일</button>
             <button type="button" class="btn bg-gradient-info p-2 mb-1" onclick="#">내 할일</button>
             <button type="button" class="btn bg-gradient-danger p-2 mb-1" onclick="#">미완료</button>
@@ -25,9 +25,9 @@
           <div class="card-body p-0 task-main-left" th:with="tlist=${tlist}">
 <!--            <span th:text="${session.onOff}"></span>-->
 <!--            <span class="sessiontest" th:text="${session.onOff}"></span>-->
-            <h6 class="my-0">업무 목록</h6>
+            <h6 class="mb-2">업무 목록</h6>
             <ul class="list-group task-main-left-tlist-section" th:each="vo:${tlist}" onclick="showTlistContents(this)">
-              <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg task-main-left-tlist-section">
+              <li class="list-group-item border-0 d-flex p-2 px-4 mb-2 bg-gray-100 border-radius-lg task-main-left-tlist-section">
                 <div class="d-flex flex-column task-main-left-tlist-section-component">
                   <input type="hidden" class="task-board-id" th:value="${vo.id}">
                   <input type="hidden" class="task-board-board-writer" th:value="${vo.boardWriter}">
@@ -36,13 +36,16 @@
                   <input type="hidden" class="task-board-update-date" th:value="${vo.updateDate}">
                   <input type="hidden" class="task-board-start-date" th:value="${vo.startDate}">
                   <input type="hidden" class="task-board-end-date" th:value="${vo.endDate}">
-                  <div id="task-board-progress" style="border:1px solid; width:fit-content" th:class="${vo.progress == 'TO_DO' ? 'task-status-to-do' : (vo.progress == 'IN_PROGRESS' ? 'task-status-in-progress' : 'task-status-done')}">
-                    <span th:text="${vo.progress == 'TO_DO'} ? '할 일' : (${vo.progress == 'IN_PROGRESS'} ? '진행 중' : '완료')"></span>&nbsp;&nbsp;
+                  <div>
+                    <span id="task-board-progress" style="border:1px solid; padding:0 2px 0 5px" th:class="${vo.progress == 'TO_DO' ? 'task-status-to-do' : (vo.progress == 'IN_PROGRESS' ? 'task-status-in-progress' : 'task-status-done')}">
+                      <span th:text="${vo.progress == 'TO_DO'} ? '할 일' : (${vo.progress == 'IN_PROGRESS'} ? '진행 중' : '완료')"></span>
+                    </span>
+                    <span class="ms-2 mb-3 fs-5 fw-bold task-board-title" th:text="${vo.boardTitle}"></span>
                   </div>
-                  <div class="mb-3 text-md   task-board-title" th:text="${vo.boardTitle}"></div>
-                  <span class="mb-2 text-xs task-board-small-element">담당자: <span class="text-dark font-weight-bold ms-sm-2 task-board-responsibleMember" th:text="${vo.responsibleMemNum.mem_name}"></span></span>
-                  <span class="mb-2 text-xs task-board-small-element">참조부서: <span class="text-dark ms-sm-2 font-weight-bold task-board-responsibleTeam" th:text="${vo.teamNum.team_name}"></span></span>
-
+                  <div>
+                    <span class="mb-2 text-xs task-board-small-element">담당자: <span class="text-dark font-weight-bold ms-sm-2 task-board-responsibleMember" th:text="${vo.responsibleMemNum.mem_name}"></span></span>
+                    <span class="ms-4 mb-2 text-xs task-board-small-element">참조부서: <span class="text-dark ms-sm-2 font-weight-bold task-board-responsibleTeam" th:text="${vo.teamNum.team_name}"></span></span>
+                  </div>
                 </div>
                 <!-- <div class="ms-auto text-end">
                   <a class="btn btn-link text-danger text-gradient px-3 mb-0 delete-board-task" href="/board/deleteboardtask"><i class="far fa-trash-alt me-2"></i>Delete</a>
