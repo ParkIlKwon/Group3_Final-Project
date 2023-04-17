@@ -30,7 +30,8 @@ public class CalendarController {
         String userId = (String) session.getAttribute("log");
 
         List<Map<String, Object>> eventList = calendarService.getEventList(userId);
-
+        System.out.println("fdsdafsdafsdafsdasfda");
+        System.out.println(eventList.size());
         return eventList;
     }
 
