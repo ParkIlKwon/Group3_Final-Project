@@ -40,6 +40,14 @@ section{
     height: 98vh;
 }
 
+/* 말줄임 효과*/
+.truncate {
+    width: inherit;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 /* Customize container */
 @media (min-width: 768px) {
     .container {
