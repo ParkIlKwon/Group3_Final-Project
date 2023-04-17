@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<script src="https://kit.fontawesome.com/ae45516897.js" crossorigin="anonymous"></script>
+<!--<script src="https://kit.fontawesome.com/ae45516897.js" crossorigin="anonymous"></script>-->
 <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>-->
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <nav th:fragment="bodyTop" class="navbar navbar-main navbar-expand-lg pt-4 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
     <div class="container-fluid py-1 px-3">
         <!--<nav aria-label="breadcrumb">-->
@@ -10,18 +10,25 @@
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                 <!--대시보드 Top / 검색기능 JS -->
-                <div th:if="${page=='Dashboard'}" class="input-group searchGroup">
-                    <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                    <input type="text" id="search_area" class="form-control" placeholder="Search">
-                    <div class="rel_search">
-                    <ul id='autoMaker' style="list-style:none"></ul>
+                <div class="row" th:if="${page=='Dashboard'}" >
+                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">
+                        <i class="ni ni-shop fs-4"></i>
+                    </div>
+                    <div class="input-group searchGroup col ps-1">
+                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                        <input type="text" id="search_area" class="form-control" placeholder="Search">
+                        <div class="rel_search">
+                            <ul id='autoMaker' style="list-style:none"></ul>
+                        </div>
                     </div>
                 </div>
 
                 <!--프로젝트 Top / 검색기능 JS -->
-                <div class="row" th:if="${page=='프로젝트'}">
-                    <i class="fa-solid fa-envelope fs-2 m-auto col-2"></i>
-                    <div class="input-group searchGroup col">
+                <div class="row" th:if="${page=='프로젝트'}" >
+                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">
+                        <i class="ni ni-bullet-list-67 fs-4"></i>
+                    </div>
+                    <div class="input-group searchGroup col ps-1">
                         <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                         <input type="text" id="search_area" class="form-control" placeholder="Search">
                         <div class="rel_search">
@@ -32,8 +39,10 @@
 
                 <!--메일 Top / 검색기능 JS -->
                 <div class="row" th:if="${page=='메일'}" >
-                    <i class="fa-solid fa-envelope fs-2 m-auto col-2"></i>
-                    <div class="input-group searchGroup col">
+                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">
+                        <i class="fa-solid fa-envelope fs-4"></i>
+                    </div>
+                    <div class="input-group searchGroup col ps-1">
                         <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                         <input type="text" id="search_area" class="form-control" placeholder="Search">
                         <div class="rel_search">
@@ -44,8 +53,10 @@
 
                 <!--캘린더 Top / 검색기능 JS -->
                 <div class="row" th:if="${page=='캘린더'}" >
-                    <i class="fa-solid fa-envelope fs-2 m-auto col-2"></i>
-                    <div class="input-group searchGroup col">
+                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">
+                        <i class="ni ni-calendar-grid-58 fs-4"></i>
+                    </div>
+                    <div class="input-group searchGroup col ps-1">
                         <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                         <input type="text" id="search_area" class="form-control" placeholder="Search">
                         <div class="rel_search">
@@ -56,8 +67,10 @@
 
                 <!--드라이브 Top / 검색기능 JS -->
                 <div class="row" th:if="${page=='드라이브'}" >
-                    <i class="fa-solid fa-envelope fs-2 m-auto col-2"></i>
-                    <div class="input-group searchGroup col">
+                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">
+                        <i class="ni ni-cloud-upload-96 fs-4"></i>
+                    </div>
+                    <div class="input-group searchGroup col ps-1">
                         <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                         <input type="text" id="search_area" class="form-control" placeholder="Search">
                         <div class="rel_search">
@@ -68,8 +81,10 @@
 
                 <!--주소록 Top / 검색기능 JS -->
                 <div class="row" th:if="${page=='주소록'}" >
-                    <i class="fa-solid fa-envelope fs-2 m-auto col-2"></i>
-                    <div class="input-group searchGroup col">
+                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">
+                        <i class="ni ni-badge fs-4"></i>
+                    </div>
+                    <div class="input-group searchGroup col ps-1">
                         <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                         <input type="text" id="search_area" class="form-control" placeholder="Search">
                         <div class="rel_search">
@@ -80,8 +95,10 @@
 
                 <!--결재 Top / 검색기능 JS -->
                 <div class="row" th:if="${page=='결재'}" >
-                    <i class="fa-solid fa-envelope fs-2 m-auto col-2"></i>
-                    <div class="input-group searchGroup col">
+                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">
+                        <i class="ni ni-building fs-4"></i>
+                    </div>
+                    <div class="input-group searchGroup col ps-1">
                         <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                         <input type="text" id="search_area" class="form-control" placeholder="Search">
                         <div class="rel_search">
@@ -92,8 +109,10 @@
 
                 <!--관리자 Top / 검색기능 JS -->
                 <div class="row" th:if="${page=='관리자'}" >
-                    <i class="fa-solid fa-envelope fs-2 m-auto col-2"></i>
-                    <div class="input-group searchGroup col">
+                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">
+                        <i class="ni ni-chart-bar-32 fs-4"></i>
+                    </div>
+                    <div class="input-group searchGroup col ps-1">
                         <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                         <input type="text" id="search_area" class="form-control" placeholder="Search">
                         <div class="rel_search">
@@ -101,10 +120,24 @@
                         </div>
                     </div>
                 </div>
-            </div>
+
+                <!--마이페이지 Top -->
+<!--                <div class="row" th:if="${page=='마이페이지'}" >-->
+<!--                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">-->
+<!--                        <i class="ni ni-chart-bar-32 fs-4"></i>-->
+<!--                    </div>-->
+<!--                    <div class="input-group searchGroup col ps-1">-->
+<!--                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>-->
+<!--                        <input type="text" id="search_area" class="form-control" placeholder="Search">-->
+<!--                        <div class="rel_search">-->
+<!--                            <ul id='autoMaker' style="list-style:none"></ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
 
             <!--알림 버튼 : 드롭 다운-->
-            <ul class="navbar-nav  justify-content-end">
+            <ul class="navbar-nav justify-content-end ps-3">
                 <li class="nav-item dropdown pe-2 d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-bell cursor-pointer"></i>

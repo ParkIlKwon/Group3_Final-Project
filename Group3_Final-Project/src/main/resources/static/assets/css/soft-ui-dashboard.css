@@ -23312,6 +23312,7 @@ html {
 
 .navbar-vertical.bg-white .navbar-nav .nav-link .icon {
   background-image: linear-gradient(310deg, #e9ecef 0%, #e9ecef 100%);
+  color: #344767;
 }
 
 .navbar-vertical .navbar-nav .nav-link.active {
@@ -23622,7 +23623,7 @@ html {
   color: #141727;
 }
 
-.navbar-vertical .navbar-nav .nav-item .nav-link .icon i {
+.navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon i {
   color: #fff;
 }
 
