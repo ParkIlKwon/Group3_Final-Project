@@ -101,10 +101,11 @@ body {
 
 hr {
   margin: 1rem 0;
-  color: inherit;
+  /*color: inherit;*/
+  color:gray;
   border: 0;
   border-top: 1px solid;
-  opacity: 0.25;
+  opacity: 0.5;
 }
 
 h1,
@@ -21537,10 +21538,10 @@ fieldset:disabled .btn {
   padding-left: 0;
 }
 
-.input-group .form-control:not(:last-child) {
-  border-right: 0;
-  padding-right: 0;
-}
+/*.input-group .form-control:not(:last-child) {*/
+/*  border-right: 0;*/
+/*  padding-right: 0;*/
+/*}*/
 
 .input-group .form-control+.input-group-text {
   position: absolute;
@@ -22081,6 +22082,12 @@ svg.text-dark .color-background {
 hr {
   border-top: none !important;
   height: 1px;
+}
+
+hr.solid {
+  margin: 1rem 0;
+  background:gray;
+  opacity: 0.3;
 }
 
 hr.vertical {
