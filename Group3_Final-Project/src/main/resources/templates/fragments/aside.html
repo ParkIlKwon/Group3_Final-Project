@@ -89,6 +89,15 @@
           <span class="nav-link-text ms-1">결재</span>
         </a>
       </li>
+      <!-- Side_Chat -->
+      <li class="nav-item">
+      <a th:class="${page=='채팅'} ? 'nav-link active' : 'nav-link'" href="#" onclick="openPopup()">
+        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+          <i class="ni ni-chat-round fs-5"></i>
+        </div>
+        <span class="nav-link-text ms-1">회의</span>
+      </a>
+      </li>
       <!-- Side_Admin -->
       <li class="nav-item">
         <a th:class="${page=='관리자'} ? 'nav-link active' : 'nav-link'" href="/admin">
@@ -96,15 +105,6 @@
             <i class="ni ni-chart-bar-32 fs-5"></i>
           </div>
           <span class="nav-link-text ms-1">ADMIN</span>
-        </a>
-      </li>
-      <!-- Side_Chat -->
-      <li class="nav-item">
-        <a th:class="${page=='채팅'} ? 'nav-link active' : 'nav-link'" href="#" onclick="openPopup()">
-          <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="ni ni-chat-round fs-5"></i>
-          </div>
-          <span class="nav-link-text ms-1">회의</span>
         </a>
       </li>
     </ul>
