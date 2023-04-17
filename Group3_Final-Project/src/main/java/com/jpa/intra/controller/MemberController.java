@@ -150,7 +150,8 @@
         // 마이페이지 눌렀을 때 members/profile.html
         @GetMapping("/profile")
         public String memberAttendance(){
-            return "members/profile";
+            return "/members/profile";
         }
 
+        
     }
