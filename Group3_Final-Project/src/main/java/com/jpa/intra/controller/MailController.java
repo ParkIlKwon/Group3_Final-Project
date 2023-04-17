@@ -9,10 +9,7 @@ import com.jpa.intra.service.MailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -90,10 +87,18 @@ public class MailController {
         model.addAttribute("mailList",mailList);
         Mail mail = mailRepository.findById(id);
         model.addAttribute("mail",mail);
-        return "mail/read";
+        return "mail/main";
     }
 
-
+    @PostMapping("/read")
+    @ResponseBody
+    public Mail readMail2(Model model, @RequestParam("mailId") Long mailId){
+        Mail mail = mailService.getOneMail(mailId);
+        List<Mail> mailList = mailService.findLogMailList();
+        model.addAttribute("mailList",mailList);
+        model.addAttribute("mail",mail);
+        return mail;
+    }
 
 
 }
