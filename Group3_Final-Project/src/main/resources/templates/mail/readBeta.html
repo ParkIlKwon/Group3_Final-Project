@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!--        Right : 메일 상세 정보 -->
+<div class="col-md-8 mt-4">
+    <div class="card mb-4" style="height: 100vh;" th:if="${mail == null}">
+      <div class="card-header pb-0">
+        <h6>메일을 선택하여 내용을 볼 수 있습니다.</h6>
+      </div>
+    </div>
+
+  <div class="card mb-4" style="height: 100vh;" th:if="${mail != null}">
+    <div class="card-header pb-0">
+      <h6 th:text="${mail.getTitle()}">선택한 메일 제목</h6>
+    </div>
+    <div class="card-body px-0 pt-0 pb-2">
+      <div class="table-responsive p-0">
+        <table class="table align-items-center mb-0">
+          <thead>
+          <tr>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><a>REPLAY</a></th>  <!--누르면 답장 기능 -->
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <div class="d-flex px-2 py-1">
+                <div class="d-flex flex-column justify-content-center">
+                  <h6 class="mb-0 text-sm" th:text="${mail.getSender_name()}">보낸 이 이름</h6>   <!-- 보낸 이  -->
+                  <p class="text-xs text-secondary mb-0" th:text="${mail.getSender_email()}">보낸 이 이메일</p>  <!-- 보낸 사람 이메일 -->
+                  <p class="text-xs text-secondary mb-0" th:text="${mail.getSendDate()}">보낸 날짜</p>  <!-- 보낸 날짜 -->
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+
+              <!--                                        메일 내용 -->
+              <div th:utext="${mail.getBody()}"></div>
+            </td>
+          </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!--                End Right --->

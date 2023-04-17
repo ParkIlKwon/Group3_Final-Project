@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/fragments/header :: header}"></head>
-
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" defer></script>
 <body class="g-sidenav-show  bg-gray-100">
 <!--   사이드 : aside -->
 <aside th:replace="/fragments/aside"></aside>
@@ -16,7 +16,9 @@
                 <div class="card" style="height: 100vh;">
                     <div class="card-header pb-0 px-3">
                         <h6 class="mb-0">메일 목록</h6>
-                        <button class="btn btn-sm bg-gradient-info mb-0" style="float: right" onclick="location.href='#'">메일 쓰기</button>
+                        <button class="btn btn-sm bg-gradient-info mb-0" style="float: right" onclick="location.href='/mail/mailForm'">메일 쓰기</button>
+                        <button class="btn btn-sm bg-gradient-info mb-0" style="float: right" onclick="location.href='/mail/mailForm'">메일 쓰기</button>
+                        <button class="btn btn-sm bg-gradient-info mb-0" style="float: right" onclick="location.href='/mail/mailForm'">메일 쓰기</button>
                     </div>
 
                     <div class="card-body pt-4 p-3">
@@ -32,23 +34,22 @@
                             <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg"
                             th:each="m:${mailList}">
                                 <div class="d-flex flex-column">
-                                    <h6 class="mb-3 text-sm">메일 제목</h6>
-                                    <p th:text="${m.title}"></p>
+                                    <h6 class="mb-3 text-sm" th:text="${m.title}">메일 제목</h6>
                                     <span class="mb-2 text-xs">보낸 이: <span class="text-dark font-weight-bold ms-sm-2"
-                                    th:text="${m.getSender()}">
-
+                                    th:text="${m.getSender_name()}">
                                     </span>
                                         </span>
-
                                     <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">
-
+                                            test
                                     </span>
                                         </span>
-                                    <span class="text-xs">사원 번호: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
                                 </div>
+                                <input class="mail-id" type="hidden" th:value="${m.id}">
                                 <div class="ms-auto text-end">
-                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                                    <a class="btn btn-link text-dark px-3 mb-0" th:onclick="|window.location.href='/mail/read/${m.id}'|">Read</a>
+                                    <a class="read-btn btn btn-link text-dark px-3 mb-0">Read2</a>
+<!--                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>-->
+<!--                                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>-->
                                 </div>
                             </li>
                             <!--                End 예시 형식 -->
@@ -60,9 +61,15 @@
             <!-- End Left -->
             <!--        Right : 메일 상세 정보 -->
             <div class="col-md-8 mt-4">
-                <div class="card mb-4" style="height: 100vh;">
+                <div class="card mb-4" style="height: 100vh;" th:if="${mail == null}">
                     <div class="card-header pb-0">
-                        <h6>선택한 메일 제목</h6>
+                        <h6>메일을 선택하여 내용을 볼 수 있습니다.</h6>
+                    </div>
+                </div>
+
+                <div class="card mb-4" style="height: 100vh;" th:if="${mail != null}">
+                    <div class="card-header pb-0">
+                        <h6 id="read-title">선택한 메일 제목</h6>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -76,20 +83,19 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
-                                            <div>
-                                                <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">  <!-- 사진 -->
-                                            </div>
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">John Michael</h6>   <!-- 보낸 이  -->
-                                                <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>  <!-- 이메일 -->
+                                                <h6 class="mb-0 text-sm" th:text="${mail.getSender_name()}">보낸 이 이름</h6>   <!-- 보낸 이  -->
+                                                <p class="text-xs text-secondary mb-0" th:text="${mail.getSender_email()}">보낸 이 이메일</p>  <!-- 보낸 사람 이메일 -->
+                                                <p class="text-xs text-secondary mb-0" th:text="${mail.getSendDate()}">보낸 날짜</p>  <!-- 보낸 날짜 -->
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        메일 내용
-<!--                                        메일 내용 -->
+
+                                        <!--                                        메일 내용 -->
+                                        <div th:utext="${mail.getBody()}"></div>
                                     </td>
                                 </tr>
 
@@ -107,6 +113,38 @@
 </main>
 <!-- plugin -->
 <div th:replace="/fragments/plugin"></div>
+
+<!-- read script-->
+<script>
+    window.onload = function() {
+        let readBtn = document.querySelectorAll('.read-btn');
+        let mailId = document.querySelectorAll('.mail-id');
+        for(let i=0; i<readBtn.length; i++){
+            readBtn[i].addEventListener('click',()=>{
+                let data = mailId[i].value;
+
+                $.ajax({
+                   url:"/mail/read",
+                   type:"POST",
+                   data:{mailId:data},
+                   success:function (x) {
+                       alert("s "+x);
+                       $('#read-title').text(x.getTitle());
+                   },
+                    error:function (x){
+                       alert("er " + x);
+                    }
+                });
+
+            });
+        }
+
+    };
+
+
+</script>
+
+
 </body>
 
 </html>
