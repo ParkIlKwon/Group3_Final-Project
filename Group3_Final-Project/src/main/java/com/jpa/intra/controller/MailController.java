@@ -5,6 +5,7 @@ import com.jpa.intra.domain.Member;
 import com.jpa.intra.query.MailDTO;
 import com.jpa.intra.repository.Mail_Repository;
 import com.jpa.intra.service.MailSendService;
+import com.jpa.intra.service.MailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,8 @@ import java.util.List;
 public class MailController {
 
     private final Mail_Repository mailRepository;
+    private final MailService mailService;
+
     @GetMapping("/main")
     public String mailMain(Model model){
         List<Mail> mailList = new ArrayList<>();

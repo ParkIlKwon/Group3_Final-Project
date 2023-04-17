@@ -1,16 +1,7 @@
 package com.jpa.intra.service;
 
-import java.io.UnsupportedEncodingException;
-import java.util.List;
-import java.util.Random;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMessage.RecipientType;
-import javax.servlet.http.HttpServletRequest;
-
 import com.jpa.intra.domain.Mail;
+import com.jpa.intra.domain.Member;
 import com.jpa.intra.repository.Mail_Repository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +9,16 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.Random;
 
 @Service
 @Transactional(readOnly = true)
@@ -113,7 +114,17 @@ public class MailService{
         return ePw; // 메일로 보냈던 인증 코드를 서버로 반환
     }
 
-   
+    // 선택한 메일
+    public Mail getOneMail(Long id){
+        return mail_repository.findById(id);
+    }
+
+    // session "user" 참조 : 전체 메일
+   public List<Mail> findLogMailList(){
+       HttpSession session = request.getSession();
+       Member member = (Member) session.getAttribute("user");
+       return mail_repository.findLogMailList(member);
+   }
 
 
 
