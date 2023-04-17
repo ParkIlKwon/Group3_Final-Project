@@ -2,6 +2,7 @@ package com.jpa.intra.service;
 
 import com.jpa.intra.domain.board.BoardCommon;
 import com.jpa.intra.domain.board.BoardTask;
+import com.jpa.intra.query.BoardTaskDTO;
 import com.jpa.intra.repository.Board_Repository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,20 @@ public class CalendarService {
         return boardRepository.findTaskByBoardId(tempCommon.getId());
     }
 
+    @Transactional
+    public void EditTask(BoardTaskDTO taskDTO){
+        //수정할 보드에 해당되는 객체를 불러와서 수정할 내용만 넣어서 영속성객체로 넘김
 
+        BoardTask temp = boardService.findTaskByBoardId(taskDTO.getBoardId());
+        temp.setBoardTitle(taskDTO.getBoardTitle());
+        temp.setBoardContent(taskDTO.getBoardContent());
+        temp.setStartDate(taskDTO.getStartDate());
+        temp.setEndDate(taskDTO.getEndDate());
+        System.out.println("=========================================" +
+                "=============================================");
+        System.out.println(temp.getBoardContent());
+        boardRepository.update(temp);
+    }
 
 
 }

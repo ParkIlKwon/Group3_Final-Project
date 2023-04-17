@@ -2,6 +2,7 @@ package com.jpa.intra.controller;
 
 import com.jpa.intra.domain.board.BoardCommon;
 import com.jpa.intra.domain.board.BoardTask;
+import com.jpa.intra.query.BoardTaskDTO;
 import com.jpa.intra.service.BoardService;
 import com.jpa.intra.service.CalendarService;
 import lombok.RequiredArgsConstructor;
@@ -53,13 +54,20 @@ public class CalendarController {
     @PostMapping("/deleteData")
     @ResponseBody
     public String deleteData(@RequestParam("boardId")String boardId){
-        //System.out.println(boardId);
-        
+        //System.out.println(boardId); //보드 아이디(pk)로 삭제
+        boardService.deleteBoardTaskById(Long.parseLong(boardId));
         return "ok";
     }
 
-
-
+    @PostMapping("/editData")
+    @ResponseBody
+    public String editData(BoardTaskDTO taskDTO){ 
+        //DTO로 내가 받고 싶은 필드만 넣어줘서 받아옴 .
+        //서비스에서 수정로직으로 DTO 를 넘겨주고
+        System.out.println(taskDTO.getBoardContent());
+        calendarService.EditTask(taskDTO);
+        return "ok";
+    } //수정할 필드만 따로 서비스에서 정해서 DB에 반영 .
 
 
 

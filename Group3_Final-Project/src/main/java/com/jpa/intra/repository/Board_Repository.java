@@ -76,4 +76,24 @@ public class Board_Repository {
         }
     }
 
+    public void update(BoardTask t) { //업데이트 문
+        //제목 , 내용 , 일자만 바꿀것이므로 set에 수정할 쿼리문 작성 
+        //UPDATE 테이블이름 객체이름 SET 수정할 내용 WHERE 해당되는 쿼리문 조건 (PK사용) 식으로 작성
+        //. setParameter 로 각각의 파라미터를 넘겨줌. 최종적으로 executeUpdate 로 업데이트 명시
+        em.createQuery("UPDATE BoardTask t SET t.boardTitle =:title" +
+                ",t.boardContent =:content ,t.startDate =:startDate,t.endDate=:endDate WHERE t.id = :boardID")
+                .setParameter("title",t.getBoardTitle())
+                .setParameter("content",t.getBoardContent())
+                .setParameter("startDate",t.getStartDate())
+                .setParameter("endDate",t.getEndDate())
+                .setParameter("boardID",t.getId())
+                .executeUpdate();
+    }
+
+
+
+
+
+
+
 }
