@@ -17,6 +17,8 @@
                     <div class="card-header pb-0 px-3">
                         <h6 class="mb-0">메일 목록</h6>
                         <button class="btn btn-sm bg-gradient-info mb-0" style="float: right" onclick="location.href='/mail/mailForm'">메일 쓰기</button>
+                        <button class="btn btn-sm bg-gradient-info mb-0" style="float: right" onclick="location.href='/mail/mailForm'">메일 쓰기</button>
+                        <button class="btn btn-sm bg-gradient-info mb-0" style="float: right" onclick="location.href='/mail/mailForm'">메일 쓰기</button>
                     </div>
 
                     <div class="card-body pt-4 p-3">
@@ -32,23 +34,21 @@
                             <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg"
                             th:each="m:${mailList}">
                                 <div class="d-flex flex-column">
-                                    <h6 class="mb-3 text-sm">메일 제목</h6>
-                                    <p th:text="${m.title}"></p>
+                                    <h6 class="mb-3 text-sm" th:text="${m.title}">메일 제목</h6>
                                     <span class="mb-2 text-xs">보낸 이: <span class="text-dark font-weight-bold ms-sm-2"
-                                    th:text="${m.getSender()}">
-
+                                    th:text="${m.getSender_name()}">
                                     </span>
                                         </span>
-
                                     <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">
-
+                                            test
                                     </span>
                                         </span>
-                                    <span class="text-xs">사원 번호: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
                                 </div>
                                 <div class="ms-auto text-end">
-                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                                    <a class="read-btn btn btn-link text-dark px-3 mb-0" th:onclick="|window.location.href='/mail/read/${m.id}'|">Read</a>
+                                    <a class="read-btn btn btn-link text-dark px-3 mb-0" th:onclick="test(${m.id})">Read2</a>
+<!--                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>-->
+<!--                                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>-->
                                 </div>
                             </li>
                             <!--                End 예시 형식 -->
@@ -59,7 +59,7 @@
             </div>
             <!-- End Left -->
             <!--        Right : 메일 상세 정보 -->
-            <div class="col-md-8 mt-4">
+            <div class="col-md-8 mt-4" th:replace="mail/readBeta.html">
                 <div class="card mb-4" style="height: 100vh;">
                     <div class="card-header pb-0">
                         <h6>선택한 메일 제목</h6>
@@ -107,6 +107,29 @@
 </main>
 <!-- plugin -->
 <div th:replace="/fragments/plugin"></div>
+
+<!-- read script-->
+<script>
+    window.onload = function() {
+        let readBtn = document.querySelectorAll('.read-btn');
+        for(let i=0; i<readBtn.length; i++){
+            readBtn[i].addEventListener('click',()=>{
+
+            });
+        }
+        function test(mailId) {
+            $.ajax({
+                url:"/mail/read/" + mailId,
+                type:"POST",
+                data:"",
+                success:""
+            });
+        }
+    }
+
+</script>
+
+
 </body>
 
 </html>
