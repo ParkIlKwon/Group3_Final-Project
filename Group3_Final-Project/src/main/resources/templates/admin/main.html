@@ -1,168 +1,122 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/fragments/header :: header}"></head>
 
 <body class="g-sidenav-show  bg-gray-100">
 <!--   사이드 : aside -->
 <aside th:replace="/fragments/aside"></aside>
-<
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
   <!-- body Top Navbar : bodyTop  -->
   <nav th:replace="fragments/bodyTop"></nav>
   <!-- Start Content -->
   <div class="container-fluid py-4">
-    <!--      Left : 업무 목록 -->
-    <div class="row" >
-      <div class="col-md-4 mt-4">
-        <div class="card" style="height: 100vh;">
-          <div class="card-header pb-0 px-3">
-            <h6 class="mb-0">업무 목록</h6>
+    <div class="row">
+      <div class="col-12">
+        <div class="card px-4" style="height: 100vh;">
+          <div class="card-header pb-0">
+            <h6 class="fw-bold" style="float: left">사원 목록</h6>
+            <!-- 사원 등록 -->
+            <button class="btn btn-sm bg-gradient-info mb-0" style="float: right" onclick="location.href='/admin/join'">사원 등록</button>
           </div>
+          <div class="card-body px-0 pt-0 pb-2">
+            <div class="table-responsive p-0">
+              <table class="table align-items-center mb-0">
 
-          <div class="card-body pt-4 p-3">
-            <ul class="list-group">
-              <!--                Start 예시 형식    -->
-              <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
-                <div class="d-flex flex-column">
-                  <h6 class="mb-3 text-sm">Oliver Liam</h6>
-                  <span class="mb-2 text-xs">Company Name: <span class="text-dark font-weight-bold ms-sm-2">Viking Burrito</span></span>
-                  <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">oliver@burrito.com</span></span>
-                  <span class="text-xs">VAT Number: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
-                </div>
-                <div class="ms-auto text-end">
-                  <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                  <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                </div>
-              </li>
-              <!--                End 예시 형식 -->
-              <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
-                <div class="d-flex flex-column">
-                  <h6 class="mb-3 text-sm">Lucas Harper</h6>
-                  <span class="mb-2 text-xs">Company Name: <span class="text-dark font-weight-bold ms-sm-2">Stone Tech Zone</span></span>
-                  <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">lucas@stone-tech.com</span></span>
-                  <span class="text-xs">VAT Number: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
-                </div>
-                <div class="ms-auto text-end">
-                  <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                  <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                </div>
-              </li>
-              <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
-                <div class="d-flex flex-column">
-                  <h6 class="mb-3 text-sm">Ethan James</h6>
-                  <span class="mb-2 text-xs">Company Name: <span class="text-dark font-weight-bold ms-sm-2">Fiber Notion</span></span>
-                  <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">ethan@fiber.com</span></span>
-                  <span class="text-xs">VAT Number: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
-                </div>
-                <div class="ms-auto text-end">
-                  <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                  <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                </div>
-              </li>
-            </ul>
+                <thead>
+                <tr class="text-center">
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">이름</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">연락처</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">회사번호</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">이메일</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">부서/직급</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">출근현황</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">수정</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">삭제</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="member:${memberList}" class="text-center">
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div>
+                        <img th:src="@{'/' + ${member.getMem_img()}}" class="avatar avatar-md me-3 text-center" alt="user1">  <!-- 사진 -->
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm" th:text="${member.getMem_name()}">이름</h6>   <!-- 이름 -->
+                      </div>
+                    </div>
+                  </td>
+                  <!-- 연락처 -->
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal" th:text="${member.getOutline_tel}">연락처</a></h6>
+                      </div>
+                    </div>
+                  </td>
+                  <!-- 회사번호 -->
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal" th:text="${member.getInline_tel}">회사번호</a></h6>
+                      </div>
+                    </div>
+                  </td>
+                  <!-- 이메일 -->
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal" th:text="${member.getEmail()}">이메일</a></h6>
+                      </div>
+                    </div>
+                  </td>
+                  <!-- 부서/직급 -->
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0" th:text="${member.getTeam().getTeam_name()}">부서</p>
+                    <p class="text-xs text-secondary mb-0" th:text="${member.getEmp_type()}">직급</p> <!-- 직급 -->
+                  </td>
+                  <!-- 출 퇴근 현황 -->
+                  <td class="align-middle text-center text-sm">
+                    <span class="badge badge-sm bg-gradient-success">Online</span>
+                  </td>
+                  <!-- 사원정보 수정 : Modal -->
+                  <td class="align-middle text-center text-sm">
+                    <button class="btn bg-gradient-warning px-3 py-1 mb-0">수정</button>
+                  </td>
+                  <!-- 사원 삭제 -->
+                  <td class="align-middle text-center text-sm">
+                    <button class="btn bg-gradient-danger px-3 py-1 mb-0">삭제</button>
+                  </td>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!--        Right : 업무 상세 정보 -->
-      <div class="col-md-8 mt-4">
-        <div class="card h-100 mb-4">
-          <div class="card-header pb-0 px-3">
-            <div class="row">
-              <div class="col-md-6">
-                <h6 class="mb-0">선택한 업무</h6>
-              </div>
-              <div class="col-md-6 d-flex justify-content-end align-items-center">
-                <i class="far fa-calendar-alt me-2"></i>
-                <small>23 - 30 March 2020</small>
-              </div>
-            </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">정보</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="card-body pt-4 p-3">
-            <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">Newest</h6>
-            <ul class="list-group">
-              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                <div class="d-flex align-items-center">
-                  <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-down"></i></button>
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark text-sm">Netflix</h6>
-                    <span class="text-xs">27 March 2020, at 12:30 PM</span>
-                  </div>
-                </div>
-                <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
-                  - $ 2,500
-                </div>
-              </li>
-              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                <div class="d-flex align-items-center">
-                  <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-up"></i></button>
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark text-sm">Apple</h6>
-                    <span class="text-xs">27 March 2020, at 04:30 AM</span>
-                  </div>
-                </div>
-                <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-                  + $ 2,000
-                </div>
-              </li>
-            </ul>
-            <h6 class="text-uppercase text-body text-xs font-weight-bolder my-3">Yesterday</h6>
-            <ul class="list-group">
-              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                <div class="d-flex align-items-center">
-                  <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-up"></i></button>
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark text-sm">Stripe</h6>
-                    <span class="text-xs">26 March 2020, at 13:45 PM</span>
-                  </div>
-                </div>
-                <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-                  + $ 750
-                </div>
-              </li>
-              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                <div class="d-flex align-items-center">
-                  <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-up"></i></button>
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark text-sm">HubSpot</h6>
-                    <span class="text-xs">26 March 2020, at 12:30 PM</span>
-                  </div>
-                </div>
-                <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-                  + $ 1,000
-                </div>
-              </li>
-              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                <div class="d-flex align-items-center">
-                  <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-up"></i></button>
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark text-sm">Creative Tim</h6>
-                    <span class="text-xs">26 March 2020, at 08:30 AM</span>
-                  </div>
-                </div>
-                <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-                  + $ 2,500
-                </div>
-              </li>
-              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                <div class="d-flex align-items-center">
-                  <button class="btn btn-icon-only btn-rounded btn-outline-dark mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-exclamation"></i></button>
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark text-sm">Webflow</h6>
-                    <span class="text-xs">26 March 2020, at 05:00 AM</span>
-                  </div>
-                </div>
-                <div class="d-flex align-items-center text-dark text-sm font-weight-bold">
-                  Pending
-                </div>
-              </li>
-            </ul>
+          <div class="modal-body">
+            Society has put up so many boundaries, so many limitations on what’s right and wrong that it’s almost impossible to get a pure thought out.
+            <br><br>
+            It’s like a little kid, a little boy, looking at colors, and no one told him what colors are good, before somebody tells you you shouldn’t like pink because that’s for girls, or you’d instantly become a gay two-year-old.
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn bg-gradient-dark" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn bg-gradient-primary">Save changes</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </main>
-
 </body>
 </html>

@@ -28,12 +28,7 @@ public class MailImageService {
 	}
 	
 	public MailUploadFile store(MultipartFile file) throws Exception {
-		//		 fileName : 예류2.jpg
-		//		 filePath : d:/images/uuid-예류2.jpg
-		//		 saveFileName : uuid-예류2.png
-		//		 contentType : image/jpeg
-		//		 size : 4994942
-		//		 registerDate : 2020-02-06 22:29:57.748
+
 		try {
 			if(file.isEmpty()) {
 				throw new Exception("Failed to store empty file " + file.getOriginalFilename());

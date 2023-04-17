@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/fragments/header :: header}"></head>
 
 <!--<script src="/fullcalendar/Main.js" defer> </script>-->
@@ -25,94 +24,173 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
-                <div class="card mb-4">
-                    <div class="card-header pb-0">
-                        <h6>달력</h6>
+                <div class="card p-3" style="height: 850px">
+                    <div class="card-header p-0">
+                        <button type="button" class="btn bg-gradient-info p-2 mb-1" onclick="">프로젝트</button>
+                        <button type="button" class="btn bg-gradient-success p-2 mb-1" onclick="">연차</button>
+                        <button type="button" class="btn bg-gradient-danger p-2 mb-1" onclick="">기념일</button>
+                        <button type="button" class="btn bg-gradient-primary p-2 mb-1" onclick="">전체일정</button>
+                        <hr class="solid">
                     </div>
-                    <div class="card-body px-0 pt-0 pb-2">
+
+                    <div class="card-body p-0">
                         <section>
-                            <div class="row">
-                                <!--    사이드바 -->
-
-                            </div>
-                            <!--    -->
                             <div class="col" style="background-color: #ffffff;">
-
                                 <div id='external-events'>
-                                    <h4>Draggable Events   WORK IN PROGRESS  </h4>
-                                    <div id='external-events-list'></div>
-
+                                    <div id='external-events-list'/>
                                 </div>
+                                <div id='calendar' style="display: inherit">
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        //var Draggable = FullCalendarInteraction.Draggable;
+                                        var calendarEl = document.getElementById('calendar');
+                                        let CalData;
+                                        $.ajax({
+                                            type:"GET", //겟으로 받아옴 .
+                                            url:"/Calendar/getCalendarData",
+                                            async: false, //비동기 -> 동기로 바꿈 . 전역변수에 값 넣어서 쓸수 있게됨
+                                            success:function (res){
+                                                console.log(res);
+                                                CalData = res;
+                                            }
+                                        });
 
-                                <div id='calendar'>
+                                        console.log(CalData);
 
-                                    <script>
+                                        var calendar = new FullCalendar.Calendar(calendarEl, {
+                                            initialView: 'dayGridMonth',
+                                            droppable: true,
 
+                                            editable: false, // 수정 가능?
+                                            nowIndicator: true, // 현재 시간 마크
+                                            dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
+                                            locale: 'ko', // 한국어 설정
 
-                                        document.addEventListener('DOMContentLoaded', function() {
-                                            //var Draggable = FullCalendarInteraction.Draggable;
-                                            var calendarEl = document.getElementById('calendar');
-                                            let CalData;
-                                            $.ajax({
-                                                type:"GET", //겟으로 받아옴 .
-                                                url:"/Calendar",
-                                                async: false, //비동기 -> 동기로 바꿈 . 전역변수에 값 넣어서 쓸수 있게됨
-                                                success:function (res){
-                                                    console.log(res);
-                                                    CalData = res;
-                                                }
-                                            })
+                                            eventClick : function(info) {
+                                                let object =  info.event;
 
-                                            console.log(CalData);
+                                                $.ajax({
+                                                    type:"POST",
+                                                    url:"/Calendar/getSingleData",
+                                                    data:{"title":object.title},
+                                                    success:function (res) {
+                                                        if(res != ''){
+                                                            $('#calModal').modal('show'); /*모달 띄우면서*/
+                                                            $('#calModalTitle').html(res.boardTitle); //제목 내용 집어넣음
+                                                            $('#calModalBody').val(res.boardContent);
+                                                            $('#boardNum').val(res.id);
+                                                            $('#startDate').val(res.startDate);
+                                                            $('#endDate').val(res.endDate);
+                                                        }
 
-                                            var calendar = new FullCalendar.Calendar(calendarEl, {
-                                                initialView: 'dayGridMonth',
-                                                droppable: true,
-
-                                                editable: false, // 수정 가능?
-                                                nowIndicator: true, // 현재 시간 마크
-                                                dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
-                                                locale: 'ko', // 한국어 설정
-
-                                                eventClick : function(info) {
-                                                    let object =  info.event;
-                                                    alert(object.title);
-                                                    alert(object.value);
-                                                }
-                                                ,
-                                                events: CalData,
-                                                googleCalendarApiKey : "AIzaSyBWS_eq3DEHprUaxOZe-mxmfl8laq2W5wg",
-                                                eventSources :[
-                                                    {
-                                                        googleCalendarId : 'ko.south_korea.official#holiday@group.v.calendar.google.com'
-                                                        , color: '#F76200'   // an option!
-                                                        , textColor: 'white' // an option!
                                                     }
-                                                ]
+                                                });
 
-                                            });
 
-                                            calendar.render();
+                                            }
+                                            ,
+                                            events: CalData,
+                                            googleCalendarApiKey : "AIzaSyBWS_eq3DEHprUaxOZe-mxmfl8laq2W5wg",
+                                            eventSources :[
+                                                {
+                                                    googleCalendarId : 'ko.south_korea.official#holiday@group.v.calendar.google.com'
+                                                    , color: '#F76200'   // an option!
+                                                    , textColor: 'white' // an option!
+                                                }
+                                            ]
+                                        });
+                                        calendar.render('#calModalTitle');
+                                    });
+
+                                    function delAction() {
+                                        $('#calModal').modal('hide');
+                                        let boardId = $('#boardNum').val();
+                                        $.ajax({
+                                            type:"POST",
+                                            url:"/Calendar/deleteData",
+                                            data:{"boardId":boardId},
+                                            success:function () {
+                                                window.location.reload();
+                                            }
 
                                         });
 
-                                    </script>
+                                    }
 
+                                    function editAction(){
+                                        $('#calModal').modal('hide');
+                                        let boardId = $('#boardNum').val();
+
+                                        let title = $('#calModalTitle').html();
+                                        let content =  $('#calModalBody').val();
+                                        let startDate = $('#startDate').val();
+                                        let endDate = $('#endDate').val();
+
+
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "/Calendar/editData",
+                                            data: {
+                                                "boardId": boardId,
+                                                "boardTitle": title,
+                                                "boardContent": content,
+                                                "startDate": startDate,
+                                                "endDate": endDate
+                                            },
+                                            success: function() {
+                                                window.location.reload();
+                                            }
+                                        });
+
+                                    }
+
+
+
+
+                                </script>
                                 </div>
-
                             </div>
-
                     </section>
-
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-</main>
-<!-- plugin -->
-<div th:replace="/fragments/plugin"></div>
-</body>
 
+    <!-- 모달 -->
+
+    <div class="modal fade" id="calModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <input type="text" id="boardNum" hidden/>
+                    <h5 class="modal-title" id="calModalTitle">Modal title</h5> <!-- 일정 제목이 들어갈 부분 -->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3"> <!-- 일정 내용이 들어갈 부분 -->
+                        일정내용:
+                        <textarea class="form-control" id="calModalBody"></textarea>
+                        시작일 : <input type="date" id="startDate">
+                        마감일 : <input type="date" id="endDate">
+                    </div>
+
+                </div>
+
+
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" onclick="delAction()">DelDATE</button>
+                    <button type="button" class="btn btn-primary" onclick="editAction()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</main>
+</body>
 </html>

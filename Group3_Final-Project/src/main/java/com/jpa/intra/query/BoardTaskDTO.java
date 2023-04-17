@@ -19,4 +19,5 @@ public class BoardTaskDTO {
     private String endDate;
     private Team teamNum;
     private String progress;
+    private Long boardId;
 }

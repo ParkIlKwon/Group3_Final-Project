@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/header :: header}"></head>
+
+<body class="g-sidenav-show  bg-gray-100">
+<!--   사이드 : aside -->
+<aside th:replace="/fragments/aside"></aside>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+  <!-- body Top Navbar : bodyTop  -->
+  <nav th:replace="fragments/bodyTop"></nav>
+  <!-- Start Content -->
+  <div class="container-fluid py-4">
+    <div class="row">
+<!--    Left : profile    -->
+        <div class="col-md-4 mt-4">
+            <div class="card px-4" style="height: 85vh;">
+                <div class="card-header pb-0 p-3">
+                    <div class="row">
+                        <div class="col-md-8 d-flex align-items-center">
+                            <h6 class="mb-0">당신의 정보</h6>
+                        </div>
+<!--                        <div class="col-md-4 text-end">-->
+<!--                            <a href="javascript:;">-->
+<!--                                <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Profile"></i>-->
+<!--                            </a>-->
+<!--                        </div>-->
+                    </div>
+                </div>
+                <div class="card-body p-3">
+                    <div class="row gx-4">
+                    <div class="col-auto">
+                        <div class="avatar avatar-xl position-relative">
+                            <img src="../assets/img/bruce-mars.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                        </div>
+                    </div>
+                    <div class="col-auto my-auto">
+                        <div class="h-100">
+                            <h5 class="mb-1">
+                                이름
+                            </h5>
+                            <p class="mb-0 font-weight-bold text-sm">
+                                부서 / 직급
+                            </p>
+                        </div>
+                    </div>
+                    </div>
+<!--                    <p class="text-sm">-->
+<!--                        Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality).-->
+<!--                    </p>-->
+                    <hr class="horizontal gray-light my-4">
+                    <ul class="list-group">
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">사원 번호:</strong> &nbsp; Alec M. Thompson</li>
+                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Tel:</strong> &nbsp; (44) 123 1234 123</li>
+                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Mobile:</strong> &nbsp; (44) 123 1234 123</li>
+                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; alecthompson@mail.com</li>
+                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Location:</strong> &nbsp; USA</li>
+                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">생일:</strong> &nbsp; (44) 123 1234 123</li>
+                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">입사일:</strong> &nbsp; (44) 123 1234 123</li>
+                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">연차:</strong> &nbsp; (44) 123 1234 123</li>
+                        <li class="list-group-item border-0 ps-0 pb-0">
+                            <strong class="text-dark text-sm">Social:</strong> &nbsp;
+                            <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:;">
+                                <i class="fab fa-facebook fa-lg"></i>
+                            </a>
+                            <a class="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:;">
+                                <i class="fab fa-twitter fa-lg"></i>
+                            </a>
+                            <a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:;">
+                                <i class="fab fa-instagram fa-lg"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+<!--    Mid : 근태 정보-->
+      <div class="col-md-4 mt-4">
+        <div class="card px-4" style="height: 85vh;">
+          <div class="card-header pb-0">
+            <h6 class="fw-bold" style="float: left">당신의 근태 상황</h6>
+<!--            &lt;!&ndash; 사원 등록 &ndash;&gt;-->
+<!--            <button class="btn btn-sm bg-gradient-info mb-0" style="float: right" onclick="location.href='/admin/join'">사원 등록</button>-->
+          </div>
+          <div class="card-body px-0 pt-0 pb-2">
+            <div class="table-responsive p-0">
+              <table class="table align-items-center mb-0">
+
+                <thead>
+                <tr class="text-center">
+<!--                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">이름</th>-->
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">날짜</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">출근 시간</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">퇴근 시간</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">비고</th>
+<!--                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">출근현황</th>-->
+<!--                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">수정</th>-->
+<!--                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">삭제</th>-->
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr class="text-center">
+                  <!-- 연락처 -->
+<!--                  <td>-->
+<!--                    <div class="d-flex px-2 py-1">-->
+<!--                      <div class="d-flex flex-column justify-content-center">-->
+<!--                        <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal">당신</a></h6>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </td>-->
+                  <!-- 회사번호 -->
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal">2000.20.20</a></h6>
+                      </div>
+                    </div>
+                  </td>
+                  <!-- 이메일 -->
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal">9:00</a></h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal">18:00</a></h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal">비고</a></h6>
+                        </div>
+                    </div>
+                  </td>
+
+<!--                  &lt;!&ndash; 출 퇴근 현황 &ndash;&gt;-->
+<!--                  <td class="align-middle text-center text-sm">-->
+<!--                    <span class="badge badge-sm bg-gradient-success">Online</span>-->
+<!--                  </td>-->
+<!--                  &lt;!&ndash; 사원정보 수정 : Modal &ndash;&gt;-->
+<!--                  <td class="align-middle text-center text-sm">-->
+<!--                    <button class="btn bg-gradient-warning px-3 py-1 mb-0">수정</button>-->
+<!--                  </td>-->
+<!--                  &lt;!&ndash; 사원 삭제 &ndash;&gt;-->
+<!--                  <td class="align-middle text-center text-sm">-->
+<!--                    <button class="btn bg-gradient-danger px-3 py-1 mb-0">삭제</button>-->
+<!--                  </td>-->
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<!-- Right : 같은 부서 사람 목록 -->
+      <div class="col-md-4 mt-4">
+          <div class="card px-4" style="height: 85vh;">
+              <div class="card-header pb-0 p-3">
+                  <h6 class="mb-0">팀원</h6>
+              </div>
+              <div class="card-body p-3">
+                  <ul class="list-group">
+                      <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                          <div class="avatar me-3">
+                              <img src="../assets/img/kal-visuals-square.jpg" alt="kal" class="border-radius-lg shadow">
+                          </div>
+                          <div class="d-flex align-items-start flex-column justify-content-center">
+                              <h6 class="mb-0 text-sm">Sophie B.</h6>
+                              <p class="mb-0 text-xs">Hi! I need more information..</p>
+                          </div>
+                          <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a>
+                      </li>
+                      <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                          <div class="avatar me-3">
+                              <img src="../assets/img/marie.jpg" alt="kal" class="border-radius-lg shadow">
+                          </div>
+                          <div class="d-flex align-items-start flex-column justify-content-center">
+                              <h6 class="mb-0 text-sm">Anne Marie</h6>
+                              <p class="mb-0 text-xs">Awesome work, can you..</p>
+                          </div>
+                          <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a>
+                      </li>
+                      <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                          <div class="avatar me-3">
+                              <img src="../assets/img/ivana-square.jpg" alt="kal" class="border-radius-lg shadow">
+                          </div>
+                          <div class="d-flex align-items-start flex-column justify-content-center">
+                              <h6 class="mb-0 text-sm">Ivanna</h6>
+                              <p class="mb-0 text-xs">About files I can..</p>
+                          </div>
+                          <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a>
+                      </li>
+                      <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                          <div class="avatar me-3">
+                              <img src="../assets/img/team-4.jpg" alt="kal" class="border-radius-lg shadow">
+                          </div>
+                          <div class="d-flex align-items-start flex-column justify-content-center">
+                              <h6 class="mb-0 text-sm">Peterson</h6>
+                              <p class="mb-0 text-xs">Have a great afternoon..</p>
+                          </div>
+                          <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a>
+                      </li>
+                      <li class="list-group-item border-0 d-flex align-items-center px-0">
+                          <div class="avatar me-3">
+                              <img src="../assets/img/team-3.jpg" alt="kal" class="border-radius-lg shadow">
+                          </div>
+                          <div class="d-flex align-items-start flex-column justify-content-center">
+                              <h6 class="mb-0 text-sm">Nick Daniel</h6>
+                              <p class="mb-0 text-xs">Hi! I need more information..</p>
+                          </div>
+                          <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a>
+                      </li>
+                  </ul>
+              </div>
+
+          </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+<!--    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--      <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <h5 class="modal-title" id="exampleModalLabel">정보</h5>-->
+<!--            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--          </div>-->
+<!--          <div class="modal-body">-->
+<!--            Society has put up so many boundaries, so many limitations on what’s right and wrong that it’s almost impossible to get a pure thought out.-->
+<!--            <br><br>-->
+<!--            It’s like a little kid, a little boy, looking at colors, and no one told him what colors are good, before somebody tells you you shouldn’t like pink because that’s for girls, or you’d instantly become a gay two-year-old.-->
+<!--          </div>-->
+<!--          <div class="modal-footer justify-content-between">-->
+<!--            <button type="button" class="btn bg-gradient-dark" data-bs-dismiss="modal">Close</button>-->
+<!--            <button type="button" class="btn bg-gradient-primary">Save changes</button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+  </div>
+</main>
+
+</body>
+</html>
