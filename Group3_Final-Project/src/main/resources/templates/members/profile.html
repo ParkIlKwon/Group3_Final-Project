@@ -27,11 +27,10 @@
                     </div>
                     <div class="col-auto my-auto">
                         <div class="h-100">
-                            <h5 class="mb-1">
-                                이름
+                            <h5 class="mb-1" th:text="${session.user.getMem_name()}">
                             </h5>
                             <p class="mb-0 font-weight-bold text-sm">
-                                부서 / 직급
+                                <span th:text="${session.user.getTeam().getTeam_name()}"> / </span>
                             </p>
                         </div>
                     </div>
@@ -41,14 +40,14 @@
 <!--                    </p>-->
                     <hr class="horizontal gray-light my-4">
                     <ul class="list-group">
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">사원 번호:</strong> &nbsp; Alec M. Thompson</li>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">사원 번호:</strong> <span th:text="${session.user.getId()}"></span></li>
                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Tel:</strong> &nbsp; (44) 123 1234 123</li>
                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Mobile:</strong> &nbsp; (44) 123 1234 123</li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; alecthompson@mail.com</li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Location:</strong> &nbsp; USA</li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">생일:</strong> &nbsp; (44) 123 1234 123</li>
+                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; <span th:text="${session.user.getEmail()}"></span> </li>
+                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Location:</strong> &nbsp;<span th:text="${session.user.getAddress().getAddress_name()}"></span></li>
+                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">생일:</strong> &nbsp; <span th:text="${session.user.getBirthday()}"></span> </li>
                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">입사일:</strong> &nbsp; (44) 123 1234 123</li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">연차:</strong> &nbsp; (44) 123 1234 123</li>
+                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">연차:</strong>  <span th:text="${session.user.getVacation()}"></span>&nbsp;/ 180</li>
                         <li class="list-group-item border-0 ps-0 pb-0">
                             <strong class="text-dark text-sm">Social:</strong> &nbsp;
                             <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:;">
