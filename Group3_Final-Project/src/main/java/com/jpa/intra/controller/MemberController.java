@@ -143,15 +143,15 @@
 
             service.Update(m); //리포지토리 JPQL 문에서 업데이트 , 저장 시켜줌 .
             session.setAttribute("user",m); //다시 업데이트 된 유저 정보를 반영 view 로 보내줌 .
-
-            return "/pages/dashboard";
+            return "redirect:/moveDashboard";
+//            return "/dashboard/main";
         }
 
         // 마이페이지 눌렀을 때 members/profile.html
         @GetMapping("/profile")
-        public String memberAttendance(){
-            return "/members/profile";
+        public String memberAttendance(Model model){
+            model.addAttribute("page", "마이페이지");
+            return "members/profile";
         }
 
-        
     }
