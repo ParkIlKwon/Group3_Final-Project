@@ -4,7 +4,10 @@ import com.jpa.intra.domain.FileEntity;
 import com.jpa.intra.domain.Member;
 import com.jpa.intra.domain.Reply;
 import com.jpa.intra.domain.board.BoardApproval;
+import com.jpa.intra.domain.board.BoardNotice;
 import com.jpa.intra.domain.board.BoardTask;
+import com.jpa.intra.query.BoardNoticeDTO;
+import com.jpa.intra.query.BoardTaskDTO;
 import com.jpa.intra.query.ReplyDTO;
 import com.jpa.intra.repository.File_Repository;
 import com.jpa.intra.repository.Member_Repository;
@@ -39,11 +42,14 @@ public class MenuController {
         return "/dashboard/main";
     }
 
-    //대시보드 페이지 이동
+    //공지 페이지 이동
     @GetMapping("/moveNotice")
     public String MoveNotice(Model model){
         model.addAttribute("page", "공지사항");
-        return "dashboard/notice";
+        //공지사항 리스트
+        List<BoardNotice> nlist=boardService.getNoticeList();
+        model.addAttribute("nlist", nlist);
+        return "board/notice";
     }
 
     //프로젝트 페이지 이동
