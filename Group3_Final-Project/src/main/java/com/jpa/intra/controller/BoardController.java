@@ -212,11 +212,45 @@ public class BoardController {
 //        boardService.createBoardApproval1(boardApproval);
 //        return "redirect:/moveApproval";
 //    }
-    @PostMapping("/board/newapprovalvacationboard")
-    @ResponseBody
-    public String writeNewBoardApprovalForm1Ajax(HttpSession session, Long memberId, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
+//    @PostMapping("/board/newapprovalvacationboard")
+//    @ResponseBody
+//    public String writeNewBoardApprovalForm1Ajax(HttpSession session, Long memberId, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
 //        BoardApproval boardApproval = createNewBoardApproval(session, memberId, boardApprovalDTO, boardApprovalInfoDTO, "approval vacation title", "VACATION");
 //        boardService.createBoardApproval1(boardApproval);
+//        return "success";
+//    }
+
+    @PostMapping("/board/newapprovalvacationboard")
+    @ResponseBody
+    public String writeNewBoardApprovalForm1Ajax(HttpSession session, @RequestParam("memberId") String memberId, @RequestParam("boardContent") String boardContent, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("deduction") String deduction) {
+        System.out.println((String)session.getAttribute("log"));
+        System.out.println("맴버 아이디 : "+memberId);
+        System.out.println("보드 컨탠트 : "+boardContent);
+        System.out.println("스타트 대이트 : "+startDate);
+        System.out.println("앤드 대이트 : "+endDate);
+        System.out.println("디덕션 : "+deduction);
+
+        System.out.println("폼에서 받아온 정보 : "+memberId+", "+boardContent+", "+startDate+", "+endDate+", "+deduction);
+
+        BoardApprovalDTO boardApprovalDTO=new BoardApprovalDTO();
+        BoardApprovalInfoDTO boardApprovalInfoDTO=new BoardApprovalInfoDTO();
+
+        boardApprovalDTO.setBoardContent(boardContent);
+        boardApprovalInfoDTO.setStartDate(startDate);
+        boardApprovalInfoDTO.setEndDate(endDate);
+        boardApprovalInfoDTO.setDeduction(deduction);
+
+        System.out.println("뉴디티오에 집어넣은 보드컨탠트를 확인하다 : "+boardApprovalDTO.getBoardContent());
+        System.out.println("뉴인포디티오에 집어넣은 스타트대이트를 확인하다 : "+boardApprovalInfoDTO.getStartDate());
+        System.out.println("뉴인포디티오에 집어넣은 앤드대이트를 확인하다 : "+boardApprovalInfoDTO.getEndDate());
+        System.out.println("뉴인포디티오에 집어넣은 디덕션을 확인하다 : "+boardApprovalInfoDTO.getDeduction());
+
+        BoardApproval boardApproval = createNewBoardApproval(session, Long.parseLong(memberId), boardApprovalDTO, boardApprovalInfoDTO, "approval vacation title", "VACATION");
+
+        System.out.println("크리애이트뉴보드어프루벌 크리애이트대이트 체크 : "+boardApproval.getCreateDate());
+        System.out.println("크리애이트뉴보드어프루벌 어프루벌맴넘 체크 : "+boardApproval.getApproverMemNum());
+        boardService.createBoardApproval1(boardApproval);
+
         return "success";
     }
 
@@ -260,16 +294,16 @@ public class BoardController {
         return "redirect:/moveProject";
     }
 
-    @PostMapping("/test")
-    @ResponseBody
-    public String selfcloseTest(){
-        System.out.println("This is selfcloseTest please check this message, i'll show my data");
-
-
-        System.out.println("sry, null");
-
-       return "test";
-    }
+//    @PostMapping("/test")
+//    @ResponseBody
+//    public String selfcloseTest(){
+//        System.out.println("This is selfcloseTest please check this message, i'll show my data");
+//
+//
+//        System.out.println("sry, null");
+//
+//       return "test";
+//    }
 
 
 }

@@ -7,39 +7,38 @@
 </head>
 <body>
 <div>
-    <form id="q" action="/test" method="POST">
-        <input type="hidden" name="memberId" th:value="${hrGuy.id}">
+    <form id="vacation-frm">
+        <input type="text" id="memberId" name="memberId" th:value="${hrGuy.id}">
         <div class="form-group" th:object="${boardApprovalDTO}">
             <div class="form-group">
                 <label th:for="boardContent">휴가 신청 사유</label>
-                <textarea th:field="*{boardContent}" placeholder="사유를 입력하다."></textarea>
+                <textarea id="boardContent" th:field="*{boardContent}" placeholder="사유를 입력하다."></textarea>
             </div>
         </div>
 
         <div class="form-group" th:object="${boardApprovalInfoDTO}">
             <div class="form-group">
                 <label th:for="startDate">휴가 시작일</label>
-                <input type="date" th:field="*{startDate}" placeholder="시작일을 입력하다.">
+                <input type="date" id="startDate" th:field="*{startDate}" placeholder="시작일을 입력하다.">
             </div>
             <div class="form-group">
                 <label th:for="endDate">휴가 복귀일</label>
-                <input type="date" th:field="*{endDate}" placeholder="복귀일을 입력하다.">
+                <input type="date" id="endDate" th:field="*{endDate}" placeholder="복귀일을 입력하다.">
             </div>
             <div class="form-group">
                 <label th:for="deduction">연차 차감 시간</label>
                 <input type="number" id="deduction" th:field="*{deduction}" placeholder="연차 차감 시간" readonly>
             </div>
         </div>
-<!--        <input type="submit" onclick="submitForm()">제출</input>-->
-        <button onclick="submitForm()">제출
+        <button type="button" onclick="submitForm()">제출</button>
     </form>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
     let parentWindow = window.opener;
     console.log(parentWindow)
-
     let startDateInput=document.querySelector('input[name="startDate"]');
     let endDateInput=document.querySelector('input[name="endDate"]');
     let deductionInput=document.querySelector('input[name="deduction"]');
@@ -107,121 +106,43 @@
 
 
     function submitForm() {
-        // form submit
-        // document.getElementById("#q").submit();
 
-        // 부모창에 대한 참조 가져오기
-        // const parentWindow = window.opener;
-        //
-        // // 부모창이 존재하는 경우
-        // if (parentWindow) {
-        //     // 부모창의 함수 호출
-        //     parentWindow.onChildWindowClose();
-        //
-        //     // 자식창 닫기
-        //     window.close();
-        // }
-        //let formData=document.getElementById("#q").serialize();
-        let deduction = $("#deduction").val();
+
+        let memberId=$("#memberId").val();
+        let boardContent=$("#boardContent").val();
+        let startDate=$("#startDate").val();
+        let endDate=$("#endDate").val();
+        let deduction=$("#deduction").val();
         $.ajax({
             url: "/board/newapprovalvacationboard",
-            type: "Post",
-            data:{"deduction" : deduction},
+            type: "POST",
+            data:{"memberId":memberId,"boardContent":boardContent ,"startDate":startDate,"endDate":endDate,"deduction" : deduction},
             success: function (data) {
-                console.log("tst1");
                 alert("data=" + data);
                 self.close();
                 opener.location.reload();
-
-                // window.close();
-                // if (data === "success") {
-                //     alert("성공하다.");s
-                //     // 데이터 처리가 완료되면 창을 닫고 부모 창을 다시 로드합니다.
-                //     window.close();
-                //     window.opener.location.reload();
-                // } else {
-                //     alert("처리 도중 오류가 발생했습니다.");
-                // }
             },
             error:function(request,status,error){
                 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                 self.close();
             }
-        }).done(function () {
-                console.log("tst2")
-            }
-        );
+        })
     }
 
+    // function deleteMember(id){
+    //     fetch('/member/'+id ,{ method: 'DELETE'} )
+    //         .then((response) => response.text())
+    //         .then((data) => refresh(data));
+    // }
+    //
+    // function refresh(data){
+    //     if(data=="ok"){
+    //         alert("회원탈퇴 성공");
+    //         location.href="/member/members";
+    //     }
+    // }
 
-  //   $(document).ready(function() {
-  //
-  //       $('#vacationForm').submit(function(e) {
-  //           e.preventDefault();
-  //
-  //       var formData = document.getElementById("#q").serialize();
-  //       alert(formData)
-  //       $.ajax({
-  //           url: "/test",
-  //           type: "Post",
-  //           data : formData,
-  //           success: function (data) {
-  //               console.log("tst1")
-  //               alert("data=" + data);
-  //               self.close();
-  //               // window.close();
-  //               // if (data === "success") {
-  //               //     alert("성공하다.");
-  //               //     // 데이터 처리가 완료되면 창을 닫고 부모 창을 다시 로드합니다.
-  //               //     window.close();
-  //               //     window.opener.location.reload();
-  //               // } else {
-  //               //     alert("처리 도중 오류가 발생했습니다.");
-  //               // }
-  //           },
-  //           error:function(request,status,error){
-  //               alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-  //           }
-  //       }).done(function () {
-  //               console.log("tst2")
-  //               window.close();
-  //           }
-  //       );
-  //
-  // });
-  //  });
-
-
-
-
-
-
-
-
-
-
-    // const form = document.getElementById('board-approval-form');
-    // $(document).ready(function() {
-    //     $("form").submit(function(event) {
-    //         event.preventDefault(); // 기본적인 submit 이벤트 동작을 막음
-    //         var form = $(this);
-    //         var url = form.attr("action");
-    //         var method = form.attr("method");
-    //         $.ajax({
-    //             url: url,
-    //             type: method,
-    //             data: form.serialize(),
-    //             success: function() {
-    //                 // 부모창(main.html)을 이동시킴
-    //                 window.opener.location.href = "/moveApproval";
-    //                 window.close(); // 현재 창(appvacation.html)을 닫음
-    //             },
-    //             error: function() {
-    //                 alert("Error submitting form");
-    //             }
-    //         });
-    //     });
-    // });
 
 </script>
 
