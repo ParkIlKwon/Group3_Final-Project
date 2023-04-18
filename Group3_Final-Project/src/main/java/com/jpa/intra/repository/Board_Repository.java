@@ -3,10 +3,7 @@ package com.jpa.intra.repository;
 import com.jpa.intra.domain.Member;
 import com.jpa.intra.domain.Reply;
 import com.jpa.intra.domain.Team;
-import com.jpa.intra.domain.board.BoardApproval;
-import com.jpa.intra.domain.board.BoardCommon;
-import com.jpa.intra.domain.board.BoardFree;
-import com.jpa.intra.domain.board.BoardTask;
+import com.jpa.intra.domain.board.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +20,7 @@ public class Board_Repository {
 
     public void createBoardFree(BoardFree boardFree) {em.persist(boardFree);}
     public void createBoardTask(BoardTask boardTask) {em.persist(boardTask);}
+    public void createBoardNotice(BoardNotice boardNotice) {em.persist(boardNotice);}
 
     public List<BoardTask> findBoardTaskById(String id){
         return em.createQuery("select t from BoardTask t where t.boardWriter = :id")
@@ -90,10 +88,7 @@ public class Board_Repository {
                 .executeUpdate();
     }
 
-
-
-
-
-
+    public List<BoardNotice> findAllNotice() {
+        return em.createQuery("SELECT t FROM BoardNotice t order by t.id desc ", BoardNotice.class).getResultList();}
 
 }

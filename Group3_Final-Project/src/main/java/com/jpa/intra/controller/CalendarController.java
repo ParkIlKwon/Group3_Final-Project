@@ -69,7 +69,4 @@ public class CalendarController {
         return "ok";
     } //수정할 필드만 따로 서비스에서 정해서 DB에 반영 .
 
-
-
-
 }
