@@ -276,6 +276,17 @@ public class BoardController {
         return hrGuy;
     }
 
+    // 결재게시판 삭제
+    @DeleteMapping("/board/deleteboardapproval")
+    public ResponseEntity<Void> deleteBoardApproval(@RequestBody Map<String, Object> reqData) {
+        System.out.println("this is deleteBoardApproval");
+        Long boardId = Long.parseLong(reqData.get("boardId").toString());
+        System.out.println("Welcome to another world episode of ajax, This is deleteBoardApproval Method. I can help you with delete Approval board number "+boardId);
+
+        boardService.deleteBoardApprovalById(boardId);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/board/changeSession")
     public String sessionChange(HttpServletRequest req){
         System.out.println("you ve reached here");
@@ -287,16 +298,7 @@ public class BoardController {
         return "redirect:/moveProject";
     }
 
-//    @PostMapping("/test")
-//    @ResponseBody
-//    public String selfcloseTest(){
-//        System.out.println("This is selfcloseTest please check this message, i'll show my data");
-//
-//
-//        System.out.println("sry, null");
-//
-//       return "test";
-//    }
+
 
 
 }

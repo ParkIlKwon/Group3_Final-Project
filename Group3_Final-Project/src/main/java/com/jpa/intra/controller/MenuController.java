@@ -95,11 +95,12 @@ public class MenuController {
 
     //결재 페이지 이동
     @GetMapping("/moveApproval")
-    public String MoveConfirm(Model model){
-
+    public String MoveConfirm(HttpSession session, Model model){
+        Member curUser=(Member)session.getAttribute("user");
         List<BoardApproval> alist = boardService.findApproval1();
         model.addAttribute("alist", alist);
         model.addAttribute("page", "결재");
+        model.addAttribute("curUser",curUser);
         return "/approval/main";
     }
 
