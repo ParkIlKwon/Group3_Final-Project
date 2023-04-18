@@ -154,4 +154,9 @@
             return "members/profile";
         }
 
+        @PostMapping("/findPw")
+        @ResponseBody
+        public Member findMemberPw(@RequestParam("memberId")String memberId, @RequestParam("email")String email){
+            return service.updateDefaultPw(memberId, email);
+        }
     }

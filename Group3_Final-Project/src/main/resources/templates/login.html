@@ -36,7 +36,7 @@
                                     <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
                                     <label class="form-check-label" for="rememberMe">아이디 저장</label>
                                     </div>
-                                    <a href="#" data-target="#emailVal" data-toggle="modal"> 비밀번호가 기억이 안 나십니까 ? 이곳을 클릭해주세요.</a>
+                                    <a href="#" data-bs-target="#emailVal" data-bs-toggle="modal"> 비밀번호가 기억이 안 나십니까 ? 이곳을 클릭해주세요.</a>
                                     <div class="text-center"> <!-- 로그인 버튼 -->
                                         <button type="submit" id="loginBtn" class="btn bg-gradient-info w-100 mt-4 mb-0">LOG IN</button>
                                     </div>
@@ -53,15 +53,48 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">비밀번호 찾기</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <form action="" method="post">
+                    <div class="card-body px-3">
+                        <div class="mb-3">
+                            <label>I D</label>
+                            <input type="text" class="form-control" placeholder="ID" name="modal-id" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label>이메일</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control col-9" style="height: 40px;
+                                         border-radius: 7px 0px 0px 7px !important;" placeholder="Email" id="memail" name="memail">
+                                <input type="button" class="btn btn-outline-secondary col-3 mb-0" style="height: 40px; font-size: 80%" id="checkEmail"
+                                       value="인증번호 전송"/>
+                            </div>
+                        </div>
+
+                        <!-- <span>이메일 인증번호</span> -->
+                        <div class="mb-3">
+                            <label>이메일 인증번호를 입력해주세요</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control col-9" style="height: 40px;
+                                         border-radius: 7px 0px 0px 7px !important;" id="memailconfirm" name="memailconfirm">
+                                <button type="button" class="btn btn-outline-secondary col-3 mb-0" style="height: 40px; font-size: 80%">
+                                    인증번호 확인</button>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <h6> • ID 와 등록된 Email 주소를 입력해주세요. </h6>
+                        </div>
+                    </div>
+                    </form>
                 </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
+                    <button type="button" class="btn btn-primary" onclick="checkForm(form)">Understood</button>
+                    <input type="button" class="btn btn-primary"
+                           value="사원등록" onclick="checkForm(form)"/>
                 </div>
             </div>
         </div>
@@ -76,9 +109,9 @@
 <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
 <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
 
-<!-- remember id -->
-<script type="text/javascript">
 
+<script type="text/javascript">
+    <!-- remember id -->
     window.onload = function() {
 
         // 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 쿠키값 없으면 공백.
@@ -111,6 +144,27 @@
                 setCookie("userLoginId", userLoginId, 30); // 30일 동안 쿠키 보관
             }
         })
+
+        let code = "";
+        $('#checkEmail').click(function() {
+            let email = $('#memail').val();
+            $.ajax({
+                type : "POST",
+                url : "/admin/mailConfirm",
+                async : false ,
+                data : {
+                    "email" : email
+                },
+                success : function(data){
+                    alert("해당 이메일로 인증번호 발송이 완료되었습니다. \n 확인부탁드립니다.")
+                    //console.log("data : "+data); 자바에서 생성된 코드 확인
+                    code = data;
+                }
+            })
+        })
+
+
+
     }
     // cookie 저장
     function setCookie(cookieName, value, exdays){
@@ -160,7 +214,34 @@
         });
     })
 
+    // 메일 인증
 
+
+    function checkForm(form){
+        let modalId = document.getElementById('modal-id');
+        let modalEmail = document.getElementById('memail');
+        if(code === ""){
+            alert("코드를 받아와 주세요.");
+        }else if(code != $('#memailconfirm').val()){
+            alert("메일코드가 일치 하지않습니다.")
+        }else{
+            $.ajax({
+               url:"/members/findPw",
+               type:"POST",
+               data:{memberId : modalId, email: modalEmail},
+               success:function (member) {
+                   if(member != null){
+                       alert('비밀번호가 초기화 되었습니다.');
+                   } else {
+                       alert('등록되지 않은 사원 정보 입니다.');
+                   }
+               },
+                error:function () {
+                    alert('errorororo');
+                }
+            });
+        }
+    }
 </script>
 
 </body>

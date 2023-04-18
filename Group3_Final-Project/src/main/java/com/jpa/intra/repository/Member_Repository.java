@@ -54,5 +54,12 @@ public class Member_Repository {
                 .executeUpdate();
     }
 
+    public Member getMember(String memberId, String email){
+        TypedQuery<Member> query = em.createQuery("SELECT m from Member m where m.mem_id = :memberId and m.email = :email", Member.class);
+        query.setParameter("memberId", memberId);
+        query.setParameter("email", email);
+        return query.getSingleResult();
+    }
+
 
 }
