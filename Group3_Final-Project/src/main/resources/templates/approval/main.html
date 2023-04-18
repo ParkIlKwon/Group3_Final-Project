@@ -154,12 +154,7 @@
     const top = window.screen.height / 2 - height / 2;
     var menu = $('input[name="approval-menu"]:checked').val();  // 선택한 메뉴 가져오기
     if (menu === "vacation") {
-      let newWindow = window.open('/board/newapprovalvacationboard', '휴가신청 양식', `width=${width},height=${height},left=${left},top=${top}`);
-
-      newWindow.onload = function() {
-        console.log("휴가신청 양식");
-      };
-      window.open(newWindow);
+      window.open('/board/newapprovalvacationboard', '야간근무 신청 기안', `width=${width},height=${height},left=${left},top=${top}`);
       // window.location.href = "/board/newapprovalvacationboard";
     } else if (menu === "overtime") {
       // window.open('/board/newapprovalovertimeboard', '야간근무 신청 기안', `width=${width},height=${height},left=${left},top=${top}`);

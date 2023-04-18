@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -204,21 +205,19 @@ public class BoardController {
         return boardApproval;
     }
 
-    @PostMapping("/board/newapprovalvacationboard")
-    public String writeNewBoardApprovalForm1(HttpSession session, Long memberId, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
-        BoardApproval boardApproval=createNewBoardApproval(session, memberId, boardApprovalDTO, boardApprovalInfoDTO, "approval vacation title", "VACATION");
-        boardService.createBoardApproval1(boardApproval);
-        return "redirect:/moveApproval";
-    }
 //    @PostMapping("/board/newapprovalvacationboard")
-//    @ResponseBody
-//    public Map<String, String> writeNewBoardApprovalForm1Ajax(HttpSession session, Long memberId, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
-//        BoardApproval boardApproval = createNewBoardApproval(session, memberId, boardApprovalDTO, boardApprovalInfoDTO, "approval vacation title", "VACATION");
+//    public String writeNewBoardApprovalForm1(HttpSession session, Long memberId, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
+//        BoardApproval boardApproval=createNewBoardApproval(session, memberId, boardApprovalDTO, boardApprovalInfoDTO, "approval vacation title", "VACATION");
 //        boardService.createBoardApproval1(boardApproval);
-//        Map<String, String> response = new HashMap<>();
-//        response.put("status", "success");
-//        return response;
+//        return "redirect:/moveApproval";
 //    }
+    @PostMapping("/board/newapprovalvacationboard")
+    @ResponseBody
+    public String writeNewBoardApprovalForm1Ajax(HttpSession session, Long memberId, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
+        BoardApproval boardApproval = createNewBoardApproval(session, memberId, boardApprovalDTO, boardApprovalInfoDTO, "approval vacation title", "VACATION");
+        boardService.createBoardApproval1(boardApproval);
+        return "success";
+    }
 
     @PostMapping("/board/newapprovalovertimeboard")
     public String writeNewBoardApprovalForm2(HttpSession session, Long memberId, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {

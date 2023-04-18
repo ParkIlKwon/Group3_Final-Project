@@ -27,7 +27,7 @@
             </div>
             <div class="form-group">
                 <label th:for="deduction">연차 차감 시간</label>
-                <input type="number" th:field="*{deduction}" placeholder="연차차감시간을 입력하다." readonly>
+                <input type="number" th:field="*{deduction}" placeholder="연차 차감 시간" readonly>
             </div>
         </div>
         <button type="submit" onclick="submitForm()">제출</button>
@@ -39,14 +39,9 @@
     let parentWindow = window.opener;
     console.log(parentWindow)
 
-    // startDate 입력 폼 요소를 가져옵니다.
-    let startDateInput = document.querySelector('input[name="startDate"]');
-
-    // endDate 입력 폼 요소를 가져옵니다.
-    let endDateInput = document.querySelector('input[name="endDate"]');
-
-    // deduction 입력 폼 요소를 가져옵니다.
-    let deductionInput = document.querySelector('input[name="deduction"]');
+    let startDateInput=document.querySelector('input[name="startDate"]');
+    let endDateInput=document.querySelector('input[name="endDate"]');
+    let deductionInput=document.querySelector('input[name="deduction"]');
 
     // endDate 입력 폼을 비활성화합니다.
     endDateInput.disabled = true;
@@ -87,7 +82,7 @@
         deductionInput.value = deductionDays;
     });
 
-    // endDate 입력 폼의 값이 변경될 때마다, 차감일수(deduction)를 자동으로 계산하여 할당합니다.
+    // endDate 입력 폼의 값이 변경될 때마다, 차감일수(deduction)를 자동으로 계산하여 할당하다.
     endDateInput.addEventListener('input', function() {
         // startDate와 endDate 사이의 일수를 계산하여 차감일수(deduction)를 계산합니다.
         let diffDays = calculateDays(startDateInput, endDateInput);
@@ -110,48 +105,55 @@
     }
 
 
-    function submitForm() {
-        // form submit
-        document.getElementById("vacationForm").submit();
-
-        // 부모창에 대한 참조 가져오기
-        const parentWindow = window.opener;
-
-        // 부모창이 존재하는 경우
-        if (parentWindow) {
-            // 부모창의 함수 호출
-            parentWindow.onChildWindowClose();
-
-            // 자식창 닫기
-            window.close();
-        }
-    }
-    // $(document).ready(function() {
-    //     $('#vacationForm').submit(function(e) {
-    //         e.preventDefault();
-    //         var formData = $(this).serialize();
+    // function submitForm() {
+    //     // form submit
+    //     document.getElementById("vacationForm").submit();
     //
-    //         $.ajax({
-    //             url: "/board/newapprovalvacationboard",
-    //             type: "POST",
-    //             data: formData,
-    //             success: function(data) {
-    //                 if (data.status === "success") {
-    //                     alert("성공하다.");
-    //                     // 데이터 처리가 완료되면 창을 닫고 부모 창을 다시 로드합니다.
-    //                     window.close();
-    //                     window.opener.location.reload();
-    //                 } else {
-    //                     alert("처리 도중 오류가 발생했습니다.");
-    //                 }
-    //             },
-    //             error: function() {
-    //                 alert("요청 처리 중 오류가 발생했습니다.");
-    //             }
-    //         });
+    //     // 부모창에 대한 참조 가져오기
+    //     const parentWindow = window.opener;
     //
-    //     });
-    // });
+    //     // 부모창이 존재하는 경우
+    //     if (parentWindow) {
+    //         // 부모창의 함수 호출
+    //         parentWindow.onChildWindowClose();
+    //
+    //         // 자식창 닫기
+    //         window.close();
+    //     }
+    // }
+    $(document).ready(function() {
+        $('#vacationForm').submit(function(e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+
+            $.ajax({
+                url: "/board/newapprovalvacationboard",
+                type: "POST",
+                data: formData,
+                success: function(data) {
+                    console.log("tst1")
+                    alert("data="+ data);
+                    // window.close();
+                    // if (data === "success") {
+                    //     alert("성공하다.");
+                    //     // 데이터 처리가 완료되면 창을 닫고 부모 창을 다시 로드합니다.
+                    //     window.close();
+                    //     window.opener.location.reload();
+                    // } else {
+                    //     alert("처리 도중 오류가 발생했습니다.");
+                    // }
+                },
+                error: function() {
+                    alert("요청 처리 중 오류가 발생했습니다.");
+                }
+            }).done(function () {
+                console.log("tst2")
+                    window.close();
+                }
+            );
+
+        });
+    });
 
 
 
