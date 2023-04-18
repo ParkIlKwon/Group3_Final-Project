@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -61,9 +62,19 @@ public class BoardService {
         return boardApproval.getId();
     }
 
-    public List<BoardApproval> findApproval1() {return bBoardRepository.findAllBoardApproval1();}
+    public List<BoardApproval> findApproval() {return bBoardRepository.findAllBoardApproval();}
+
 
     @Transactional
     public void deleteBoardApprovalById(Long boardId) {bBoardRepository.deleteBoardApprovalById(boardId);}
 
+    public List<BoardApproval> findMyApprovalList(List<BoardApproval> boardApprovalList, String memberId) {
+        List<BoardApproval> myApprovalList = new ArrayList<>();
+        for (BoardApproval boardApproval : boardApprovalList) {
+            if (boardApproval.getBoardWriter().equals(memberId)) {
+                myApprovalList.add(boardApproval);
+            }
+        }
+        return myApprovalList;
+    }
 }

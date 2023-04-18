@@ -16,19 +16,21 @@
         <div class="card p-3" style="height: 100vh;">
           <div class="card-header pb-0 text-center">
             <span th:text="${curUser.mem_id}"></span>
+            <span th:text="${curUser.team.team_name}"></span>
             <button type="button" class="btn bg-gradient-primary p-2 mb-1" data-bs-toggle="modal" data-bs-target="#writeModal">새 기안</button>
             <button type="button" class="btn bg-gradient-success p-2 mb-1" onclick="#">결재완료</button>
             <button type="button" class="btn bg-gradient-secondary p-2 mb-1" onclick="#">미결재</button>
             <hr class="solid">
           </div>
 
+          <!--<div class="card-body pt-4 p-3 approval-main-left">
+            <h6 class="mb-0">결재 목록</h6>
+            <ul class="list-group approval-main-left-alist-section" th:with="list=${curUser.team.team_name} == '인사부' ? ${alist} : ${myAList}" th:each="vo:${list}" onclick="showAlistContents(this)">-->
           <div class="card-body pt-4 p-3 approval-main-left" th:with="alist=${alist}">
             <h6 class="mb-0">결재 목록</h6>
-            <ul class="list-group approval-main-left-alist-section">
-              <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg approval-main-left-alist-section"
-                  th:each="vo:${alist}"
-                  th:if="${curUser.team.team_name} == '인사부' || ${vo.boardWriter} == ${curUser.mem_id}"
-                  onclick="showAlistContents(this)">
+            <ul class="list-group approval-main-left-alist-section" th:each="vo:${alist}" onclick="showAlistContents(this)">
+              <!-- 기존의 내용 -->
+              <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg approval-main-left-alist-section">
                 <div class="d-flex flex-column approval-main-left-alist-section-component">
                   <input type="hidden" class="approval-board-id" th:value="${vo.id}">
                   <input type="hidden" class="approval-board-writer" th:value="${vo.boardWriter}">
