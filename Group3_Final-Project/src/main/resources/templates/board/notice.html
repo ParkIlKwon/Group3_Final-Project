@@ -15,7 +15,7 @@
 <!--        <div class="col-12">-->
           <div class="card p-3" style="height: 85vh">
             <div class="card-header p-0" th:if="${session.user.getTeam().getTeam_name() eq '인사부'}">
-                <button id="addbd" class="btn bg-gradient-primary p-2 mb-1" data-bs-toggle="modal" data-bs-target="#addBoard">새 공지</button>
+                <button class="btn bg-gradient-primary p-2 mb-1" data-bs-toggle="modal" data-bs-target="#addBoard">새 공지</button>
                 <hr class="solid">
             </div>
             <div class="card-body pt-2 px-5">
@@ -36,7 +36,8 @@
                     <div class="accordion-body row bg-gray-100 border-radius-md p-3 mx-4">
                       <div class="col-9" th:text="${n.getBoardContent()}">공지 본문</div>
                       <div class="col-3 text-end" th:if="${session.user.getTeam().getTeam_name() eq '인사부'}">
-                        <button class="btn bg-gradient-info mb-0" onclick="editboard('${n.getId()}')">수정</button>
+                        <button class="btn bg-gradient-info mb-0" data-bs-toggle="modal" data-bs-target="#delBoard">수정</button>
+<!--                        <button class="btn bg-gradient-info mb-0" onclick="editboard('${n.getId()}')">수정</button>-->
                         <button class="btn bg-gradient-danger mb-0" onclick="boardDelete('${n.getId()}')">삭제</button>
                       </div>
                     </div>
@@ -154,12 +155,8 @@
 <div class="modal fade" id="addBoard" tabindex="-1" aria-labelledby="addBdModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content" style="width:800px; margin-left:-30%">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5 fw-bold" id="addBdModal">새 공지 작성</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div id="container" style="max-width: 650px" text-align="center">
+      <div class="modal-header fs-5 fw-bold" id="addBdModal">새 공지 작성</div>
+      <div class="modal-body" id="container" style="max-width: 100%">
           <div class="col" style="border: 2px solid #f9e7cb; border-radius: 5px">
             <div class="row p-3 pb-0">
               <div class="col-2 fw-bold">공지 제목</div>
@@ -175,7 +172,6 @@
               </div>
             </div>
           </div>
-        </div>
       </div>
       <div class="modal-footer">
         <button class="btn-basic" onclick="addBoard()">등록</button>
