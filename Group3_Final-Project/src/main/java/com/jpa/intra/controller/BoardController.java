@@ -6,9 +6,11 @@ import com.jpa.intra.domain.Member;
 import com.jpa.intra.domain.Reply;
 import com.jpa.intra.domain.board.BoardApproval;
 import com.jpa.intra.domain.board.BoardFree;
-import com.jpa.intra.domain.board.BoardNotice;
 import com.jpa.intra.domain.board.BoardTask;
-import com.jpa.intra.query.*;
+import com.jpa.intra.query.BoardApprovalDTO;
+import com.jpa.intra.query.BoardApprovalInfoDTO;
+import com.jpa.intra.query.BoardFreeDTO;
+import com.jpa.intra.query.BoardTaskDTO;
 import com.jpa.intra.repository.Member_Repository;
 import com.jpa.intra.service.BoardService;
 import com.jpa.intra.service.ReplyService;
@@ -130,31 +132,37 @@ public class BoardController {
 
     // 결재게시판으로 이동
     @GetMapping("/board/newapprovalvacationboard")
-    public String callBoardApprovalWriteForm1(Model model) {
+    public String callBoardApprovalWriteForm1(HttpSession session, Model model) {
+        Member curMember=(Member)session.getAttribute("user");
         List<Member> mlist = member_repository.getAllMemberList();
         Member hrGuy = pickOneHrGuy(mlist);
         model.addAttribute("boardApprovalDTO", new BoardApprovalDTO());
         model.addAttribute("boardApprovalInfoDTO", new BoardApprovalInfoDTO());
+        model.addAttribute("curMember",curMember);
         model.addAttribute("hrGuy", hrGuy);
         return "approval/appvacation";
     }
 
     @GetMapping("/board/newapprovalovertimeboard")
-    public String callBoardApprovalWriteForm2(Model model) {
+    public String callBoardApprovalWriteForm2(HttpSession session, Model model) {
+        Member curMember=(Member)session.getAttribute("user");
         List<Member> mlist = member_repository.getAllMemberList();
         Member hrGuy = pickOneHrGuy(mlist);
         model.addAttribute("boardApprovalDTO", new BoardApprovalDTO());
         model.addAttribute("boardApprovalInfoDTO", new BoardApprovalInfoDTO());
+        model.addAttribute("curMember",curMember);
         model.addAttribute("hrGuy", hrGuy);
         return "approval/appovertime";
     }
 
     @GetMapping("/board/newapprovalwocboard")
-    public String callBoardApprovalWriteForm3(Model model) {
+    public String callBoardApprovalWriteForm3(HttpSession session, Model model) {
+        Member curMember=(Member)session.getAttribute("user");
         List<Member> mlist = member_repository.getAllMemberList();
         Member hrGuy = pickOneHrGuy(mlist);
         model.addAttribute("boardApprovalDTO", new BoardApprovalDTO());
         model.addAttribute("boardApprovalInfoDTO", new BoardApprovalInfoDTO());
+        model.addAttribute("curMember",curMember);
         model.addAttribute("hrGuy", hrGuy);
         return "approval/appwoc";
     }
@@ -204,32 +212,9 @@ public class BoardController {
         return boardApproval;
     }
 
-//    @PostMapping("/board/newapprovalvacationboard")
-//    public String writeNewBoardApprovalForm1(HttpSession session, Long memberId, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
-//        BoardApproval boardApproval=createNewBoardApproval(session, memberId, boardApprovalDTO, boardApprovalInfoDTO, "approval vacation title", "VACATION");
-//        boardService.createBoardApproval1(boardApproval);
-//        return "redirect:/moveApproval";
-//    }
-//    @PostMapping("/board/newapprovalvacationboard")
-//    @ResponseBody
-//    public String writeNewBoardApprovalForm1Ajax(HttpSession session, Long memberId, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
-//        BoardApproval boardApproval = createNewBoardApproval(session, memberId, boardApprovalDTO, boardApprovalInfoDTO, "approval vacation title", "VACATION");
-//        boardService.createBoardApproval1(boardApproval);
-//        return "success";
-//    }
-
     @PostMapping("/board/newapprovalvacationboard")
     @ResponseBody
-    public String writeNewBoardApprovalForm1Ajax(HttpSession session, @RequestParam("memberId") String memberId, @RequestParam("boardContent") String boardContent, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("deduction") String deduction) {
-        System.out.println((String)session.getAttribute("log"));
-        System.out.println("맴버 아이디 : "+memberId);
-        System.out.println("보드 컨탠트 : "+boardContent);
-        System.out.println("스타트 대이트 : "+startDate);
-        System.out.println("앤드 대이트 : "+endDate);
-        System.out.println("디덕션 : "+deduction);
-
-        System.out.println("폼에서 받아온 정보 : "+memberId+", "+boardContent+", "+startDate+", "+endDate+", "+deduction);
-
+    public String writeNewBoardApprovalForm1(HttpSession session, @RequestParam("memberId") String memberId, @RequestParam("boardContent") String boardContent, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("deduction") String deduction) {
         BoardApprovalDTO boardApprovalDTO=new BoardApprovalDTO();
         BoardApprovalInfoDTO boardApprovalInfoDTO=new BoardApprovalInfoDTO();
 
@@ -238,33 +223,43 @@ public class BoardController {
         boardApprovalInfoDTO.setEndDate(endDate);
         boardApprovalInfoDTO.setDeduction(deduction);
 
-        System.out.println("뉴디티오에 집어넣은 보드컨탠트를 확인하다 : "+boardApprovalDTO.getBoardContent());
-        System.out.println("뉴인포디티오에 집어넣은 스타트대이트를 확인하다 : "+boardApprovalInfoDTO.getStartDate());
-        System.out.println("뉴인포디티오에 집어넣은 앤드대이트를 확인하다 : "+boardApprovalInfoDTO.getEndDate());
-        System.out.println("뉴인포디티오에 집어넣은 디덕션을 확인하다 : "+boardApprovalInfoDTO.getDeduction());
-
-        BoardApproval boardApproval = createNewBoardApproval(session, Long.parseLong(memberId), boardApprovalDTO, boardApprovalInfoDTO, "approval vacation title", "VACATION");
-
-        System.out.println("크리애이트뉴보드어프루벌 크리애이트대이트 체크 : "+boardApproval.getCreateDate());
-        System.out.println("크리애이트뉴보드어프루벌 어프루벌맴넘 체크 : "+boardApproval.getApproverMemNum());
+        BoardApproval boardApproval=createNewBoardApproval(session, Long.parseLong(memberId), boardApprovalDTO, boardApprovalInfoDTO, "approval vacation title", "VACATION");
         boardService.createBoardApproval1(boardApproval);
 
         return "success";
     }
 
-
     @PostMapping("/board/newapprovalovertimeboard")
-    public String writeNewBoardApprovalForm2(HttpSession session, Long memberId, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
-        BoardApproval boardApproval=createNewBoardApproval(session, memberId, boardApprovalDTO, boardApprovalInfoDTO, "approval overtime title", "OVERTIME");
+    @ResponseBody
+    public String writeNewBoardApprovalForm2(HttpSession session, @RequestParam("memberId") String memberId, @RequestParam("boardContent") String boardContent, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("endTime") String endTime, @RequestParam("bonusAllowance") String bonusAllowance) {
+        BoardApprovalDTO boardApprovalDTO=new BoardApprovalDTO();
+        BoardApprovalInfoDTO boardApprovalInfoDTO=new BoardApprovalInfoDTO();
+
+        boardApprovalDTO.setBoardContent(boardContent);
+        boardApprovalInfoDTO.setStartDate(startDate);
+        boardApprovalInfoDTO.setEndDate(endDate);
+        boardApprovalInfoDTO.setEndTime(endTime);
+        boardApprovalInfoDTO.setBonusAllowance(bonusAllowance);
+
+        BoardApproval boardApproval=createNewBoardApproval(session, Long.parseLong(memberId), boardApprovalDTO, boardApprovalInfoDTO, "approval overtime title", "OVERTIME");
         boardService.createBoardApproval2(boardApproval);
-        return "redirect:/moveApproval";
+
+        return "success";
     }
 
     @PostMapping("/board/newapprovalwocboard")
-    public String writeNewBoardApprovalForm3(HttpSession session, Long memberId, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
-        BoardApproval boardApproval=createNewBoardApproval(session, memberId, boardApprovalDTO, boardApprovalInfoDTO, "approval overtime title", "WORK_HOUR_CHANGE");
+    @ResponseBody
+    public String writeNewBoardApprovalForm3(HttpSession session, @RequestParam("memberId") String memberId, @RequestParam("boardContent") String boardContent, @RequestParam("goToOffice") String goToOffice, @RequestParam("leaveOffice") String leaveOffice) {
+        BoardApprovalDTO boardApprovalDTO=new BoardApprovalDTO();
+        BoardApprovalInfoDTO boardApprovalInfoDTO=new BoardApprovalInfoDTO();
+
+        boardApprovalDTO.setBoardContent(boardContent);
+        boardApprovalInfoDTO.setGoToOffice(goToOffice);
+        boardApprovalInfoDTO.setLeaveOffice(leaveOffice);
+
+        BoardApproval boardApproval=createNewBoardApproval(session, Long.parseLong(memberId), boardApprovalDTO, boardApprovalInfoDTO, "approval overtime title", "WORK_HOUR_CHANGE");
         boardService.createBoardApproval3(boardApproval);
-        return "redirect:/moveApproval";
+        return "success";
     }
 
     public Member pickOneHrGuy(List<Member> mlist) {
@@ -281,6 +276,17 @@ public class BoardController {
         return hrGuy;
     }
 
+    // 결재게시판 삭제
+    @DeleteMapping("/board/deleteboardapproval")
+    public ResponseEntity<Void> deleteBoardApproval(@RequestBody Map<String, Object> reqData) {
+        System.out.println("this is deleteBoardApproval");
+        Long boardId = Long.parseLong(reqData.get("boardId").toString());
+        System.out.println("Welcome to another world episode of ajax, This is deleteBoardApproval Method. I can help you with delete Approval board number "+boardId);
+
+        boardService.deleteBoardApprovalById(boardId);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/board/changeSession")
     public String sessionChange(HttpServletRequest req){
         System.out.println("you ve reached here");
@@ -292,63 +298,7 @@ public class BoardController {
         return "redirect:/moveProject";
     }
 
-    // 작성된 공지 데이터로 추가
-    @PostMapping("/board/newnotice")
-    public String writeNewBoardNotice(BoardNoticeDTO boardNoticeDTO) {
 
-        BoardNotice boardNotice=new BoardNotice();    //boardNotice객체
-        boardNotice.setBoardTitle(boardNoticeDTO.getBoardTitle());  //제목
-        boardNotice.setBoardContent(boardNoticeDTO.getBoardContent());  //내용
-        boardNotice.setCreateDate(formattedDate); //작성일
-        boardNotice.setBoardWriter("ADMIN"); // 작성자 ADMIN으로 고정
-
-        boardService.createBoardNotice(boardNotice);
-        // 데이터 추가 완료 후 공지페이지로 이동
-        return "redirect:/moveNotice";
-    }
-
-//     //공지 작성 게시판으로 이동
-//    @GetMapping("/board/newnotice")
-//    public String callBoardNoticeWriteForm(Model model) {
-//        model.addAttribute("boardNoticeDTO", new BoardNoticeDTO());
-//        return "board/boardNoticeWriteForm";
-//    }
-
-//    // 공지 리스트
-//    @GetMapping("/board/boardnoticelist")
-//    public String boardNoticeList(Model model) {
-//        List<BoardNotice> nlist=boardService.getNoticeList();
-//        List<Reply> rplist=replyService.findReply();
-//        model.addAttribute("nlist", nlist);
-//        return "board/notice";
-//    }
-
-    //    // 공지 삭제
-//    @DeleteMapping("/board/deleteboardNotice")
-//    public ResponseEntity<Void> deleteBoardNotice(@RequestBody Map<String, Object> reqData) {
-//        Long boardId = Long.parseLong(reqData.get("boardId").toString());
-//
-//        boardService.deleteBoardTaskById(boardId);
-//        return ResponseEntity.noContent().build();
-//    }
-//
-//    // 공지 변경
-//    @PostMapping("/board/changetaskprogress")
-//    public ResponseEntity<Void> changeTaskProgress(@RequestParam Long boardId, @RequestParam String boardProgress) {
-//        boardService.changeTaskProgress(boardId, boardProgress);
-//        return ResponseEntity.noContent().build();
-//    }
-//
-//    @PostMapping("/test")
-//    @ResponseBody
-//    public String selfcloseTest(){
-//        System.out.println("This is selfcloseTest please check this message, i'll show my data");
-//
-//
-//        System.out.println("sry, null");
-//
-//       return "test";
-//    }
 
 
 }

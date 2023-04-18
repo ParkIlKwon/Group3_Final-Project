@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/header :: header}"></head>
+
+<!--<script src="/fullcalendar/Main.js" defer> </script>-->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+<!-- fullcalendar CDN -->
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js' defer></script>
+<!-- fullcalendar 언어 CDN  -->
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js' defer></script>
+
+<!-- calendarscript 스크립트 <나중에하기>.-->
+<!--<script src='/js/calenderscript.js' defer></script>-->
+
+<body class="g-sidenav-show  bg-gray-100">
+<!--   사이드 : aside -->
+<aside th:replace="/fragments/aside"></aside>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+  <!-- body Top Navbar : bodyTop  -->
+  <nav th:replace="fragments/bodyTop"></nav>
+  <!-- Start Content -->
+  <div class="container-fluid py-4">
+    <div class="row">
+      <div class="col-12">
+        <div class="card p-3" style="height: 850px">
+          <div class="card-header p-0">
+            <button type="button" class="btn bg-gradient-info p-2 mb-1" onclick="location.href= '/projectCalendar'">프로젝트</button>
+            <button type="button" class="btn bg-gradient-success p-2 mb-1" onclick="">연차</button>
+            <button type="button" class="btn bg-gradient-danger p-2 mb-1" onclick="location.href='/holidayCalendar'">기념일</button>
+            <button type="button" class="btn bg-gradient-primary p-2 mb-1" onclick="location.href='/moveCalendar'">전체일정</button>
+            <hr class="solid">
+          </div>
+
+          <div class="card-body p-0">
+            <section>
+              <div class="col" style="background-color: #ffffff;">
+                <div id='external-events'>
+                  <div id='external-events-list'/>
+                </div>
+                <div id='calendar' style="display: inherit">
+                  <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                      //var Draggable = FullCalendarInteraction.Draggable;
+                      var calendarEl = document.getElementById('calendar');
+                      let CalData;
+                      $.ajax({
+                        type:"GET", //겟으로 받아옴 .
+                        url:"/Calendar/getCalendarData",
+                        async: false, //비동기 -> 동기로 바꿈 . 전역변수에 값 넣어서 쓸수 있게됨
+                        success:function (res){
+                          console.log(res);
+                          CalData = res;
+                        }
+                      });
+
+                      console.log(CalData);
+
+                      var calendar = new FullCalendar.Calendar(calendarEl, {
+                        initialView: 'dayGridMonth',
+                        droppable: true,
+
+                        editable: false, // 수정 가능?
+                        nowIndicator: true, // 현재 시간 마크
+                        dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
+                        locale: 'ko', // 한국어 설정
+
+                        eventClick : function(info) {
+                          let object =  info.event;
+
+                          $.ajax({
+                            type:"POST",
+                            url:"/Calendar/getSingleData",
+                            data:{"title":object.title},
+                            success:function (res) {
+                              if(res != ''){
+                                $('#calModal').modal('show'); /*모달 띄우면서*/
+                                $('#calModalTitle').html(res.boardTitle); //제목 내용 집어넣음
+                                $('#calModalBody').val(res.boardContent);
+                                $('#boardNum').val(res.id);
+                                $('#startDate').val(res.startDate);
+                                $('#endDate').val(res.endDate);
+                              }
+
+                            }
+                          });
+
+
+                        }
+                        ,
+                        events: CalData,
+
+                      });
+                      calendar.render('#calModalTitle');
+                    });
+
+                    function delAction() {
+                      $('#calModal').modal('hide');
+                      let boardId = $('#boardNum').val();
+                      $.ajax({
+                        type:"POST",
+                        url:"/Calendar/deleteData",
+                        data:{"boardId":boardId},
+                        success:function () {
+                          window.location.reload();
+                        }
+
+                      });
+
+                    }
+
+                    function editAction(){
+                      $('#calModal').modal('hide');
+                      let boardId = $('#boardNum').val();
+
+                      let title = $('#calModalTitle').html();
+                      let content =  $('#calModalBody').val();
+                      let startDate = $('#startDate').val();
+                      let endDate = $('#endDate').val();
+
+
+                      $.ajax({
+                        type: "POST",
+                        url: "/Calendar/editData",
+                        data: {
+                          "boardId": boardId,
+                          "boardTitle": title,
+                          "boardContent": content,
+                          "startDate": startDate,
+                          "endDate": endDate
+                        },
+                        success: function() {
+                          window.location.reload();
+                        }
+                      });
+
+                    }
+
+
+                    function getProject(){
+
+                    }
+
+
+                  </script>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 모달 -->
+
+  <div class="modal fade" id="calModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <input type="text" id="boardNum" hidden/>
+          <h5 class="modal-title" id="calModalTitle">Modal title</h5> <!-- 일정 제목이 들어갈 부분 -->
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3"> <!-- 일정 내용이 들어갈 부분 -->
+            일정내용:
+            <textarea class="form-control" id="calModalBody"></textarea>
+            시작일 : <input type="date" id="startDate">
+            마감일 : <input type="date" id="endDate">
+          </div>
+
+        </div>
+
+
+
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" onclick="delAction()">DelDATE</button>
+          <button type="button" class="btn btn-primary" onclick="editAction()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</main>
+</body>
+</html>

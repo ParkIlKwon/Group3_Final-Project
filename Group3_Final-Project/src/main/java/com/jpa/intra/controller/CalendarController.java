@@ -34,6 +34,7 @@ public class CalendarController {
         return eventList;
     }
 
+
     //현재 로그인 된 회원의 캘린더에서 클릭이벤트 발생시
     //해당 일정을 보내줌.
     @PostMapping("/getSingleData")
@@ -68,5 +69,7 @@ public class CalendarController {
         calendarService.EditTask(taskDTO);
         return "ok";
     } //수정할 필드만 따로 서비스에서 정해서 DB에 반영 .
+
+
 
 }
