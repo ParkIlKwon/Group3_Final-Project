@@ -27,7 +27,7 @@
             </div>
             <div class="form-group">
                 <label th:for="deduction">연차 차감 시간</label>
-                <input type="number" th:field="*{deduction}" placeholder="연차 차감 시간" readonly>
+                <input type="number" id="deduction" th:field="*{deduction}" placeholder="연차 차감 시간" readonly>
             </div>
         </div>
 <!--        <input type="submit" onclick="submitForm()">제출</input>-->
@@ -121,15 +121,18 @@
         //     // 자식창 닫기
         //     window.close();
         // }
-        let formData=document.getElementById("#q").serialize();
+        //let formData=document.getElementById("#q").serialize();
+        let deduction = $("#deduction").val();
         $.ajax({
-            url: "/test",
+            url: "/board/newapprovalvacationboard",
             type: "Post",
-            data : formData,
+            data:{"deduction" : deduction},
             success: function (data) {
-                console.log("tst1")
+                console.log("tst1");
                 alert("data=" + data);
                 self.close();
+                opener.location.reload();
+
                 // window.close();
                 // if (data === "success") {
                 //     alert("성공하다.");s

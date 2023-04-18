@@ -70,19 +70,19 @@ public class imginit {
     public void makeProfileImg(int index,Member m){
         String currentPath = "\\src\\main\\resources\\mem_img\\" + index + ".jpg"; //그뒤 나머지 경로
 
-        if(index == 1){
-            Path testPath = Paths.get(File.separatorChar + "mem_img", File.separatorChar + "1.jpg");
-            Path testPath2 = Paths.get(rootPath + currentPath);
-
-            File file = new File(testPath2.toString());
-            System.out.println(file.exists());
-            Resource resource = new InputStreamResource(getClass().getResourceAsStream(testPath2.toString()));
-
-            System.out.println(resource);
-            System.out.println(resource.getFilename());
-            System.out.println("===================================================");
-            System.out.println("===================================================");
-        }
+//        if(index == 1){
+//            Path testPath = Paths.get(File.separatorChar + "mem_img", File.separatorChar + "1.jpg");
+//            Path testPath2 = Paths.get(rootPath + currentPath);
+//
+//            File file = new File(testPath2.toString());
+//            System.out.println(file.exists());
+//            Resource resource = new InputStreamResource(getClass().getResourceAsStream(testPath2.toString()));
+//
+//            System.out.println(resource);
+//            System.out.println(resource.getFilename());
+//            System.out.println("===================================================");
+//            System.out.println("===================================================");
+//        }
 
 
 
