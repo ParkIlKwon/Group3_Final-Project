@@ -249,7 +249,7 @@ public class BoardController {
 
         System.out.println("크리애이트뉴보드어프루벌 크리애이트대이트 체크 : "+boardApproval.getCreateDate());
         System.out.println("크리애이트뉴보드어프루벌 어프루벌맴넘 체크 : "+boardApproval.getApproverMemNum());
-//        boardService.createBoardApproval1(boardApproval);
+        boardService.createBoardApproval1(boardApproval);
 
         return "success";
     }

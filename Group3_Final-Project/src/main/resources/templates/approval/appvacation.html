@@ -7,7 +7,6 @@
 </head>
 <body>
 <div>
-<!--    <form id="q" action="/test" method="POST">-->
     <form id="vacation-frm">
         <input type="text" id="memberId" name="memberId" th:value="${hrGuy.id}">
         <div class="form-group" th:object="${boardApprovalDTO}">
@@ -31,16 +30,15 @@
                 <input type="number" id="deduction" th:field="*{deduction}" placeholder="연차 차감 시간" readonly>
             </div>
         </div>
-<!--        <input type="submit" onclick="submitForm()">제출</input>-->
-        <button onclick="submitForm()">제출
+        <button type="button" onclick="submitForm()">제출</button>
     </form>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
     let parentWindow = window.opener;
     console.log(parentWindow)
-
     let startDateInput=document.querySelector('input[name="startDate"]');
     let endDateInput=document.querySelector('input[name="endDate"]');
     let deductionInput=document.querySelector('input[name="deduction"]');
@@ -108,6 +106,8 @@
 
 
     function submitForm() {
+
+
         let memberId=$("#memberId").val();
         let boardContent=$("#boardContent").val();
         let startDate=$("#startDate").val();
@@ -118,7 +118,6 @@
             type: "POST",
             data:{"memberId":memberId,"boardContent":boardContent ,"startDate":startDate,"endDate":endDate,"deduction" : deduction},
             success: function (data) {
-                console.log("tst1");
                 alert("data=" + data);
                 self.close();
                 opener.location.reload();
@@ -130,6 +129,19 @@
             }
         })
     }
+
+    // function deleteMember(id){
+    //     fetch('/member/'+id ,{ method: 'DELETE'} )
+    //         .then((response) => response.text())
+    //         .then((data) => refresh(data));
+    // }
+    //
+    // function refresh(data){
+    //     if(data=="ok"){
+    //         alert("회원탈퇴 성공");
+    //         location.href="/member/members";
+    //     }
+    // }
 
 
 </script>
