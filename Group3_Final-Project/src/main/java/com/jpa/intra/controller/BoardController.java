@@ -6,11 +6,9 @@ import com.jpa.intra.domain.Member;
 import com.jpa.intra.domain.Reply;
 import com.jpa.intra.domain.board.BoardApproval;
 import com.jpa.intra.domain.board.BoardFree;
+import com.jpa.intra.domain.board.BoardNotice;
 import com.jpa.intra.domain.board.BoardTask;
-import com.jpa.intra.query.BoardApprovalDTO;
-import com.jpa.intra.query.BoardApprovalInfoDTO;
-import com.jpa.intra.query.BoardFreeDTO;
-import com.jpa.intra.query.BoardTaskDTO;
+import com.jpa.intra.query.*;
 import com.jpa.intra.repository.Member_Repository;
 import com.jpa.intra.service.BoardService;
 import com.jpa.intra.service.ReplyService;
@@ -294,6 +292,53 @@ public class BoardController {
         return "redirect:/moveProject";
     }
 
+    // 작성된 공지 데이터로 추가
+    @PostMapping("/board/newnotice")
+    public String writeNewBoardNotice(BoardNoticeDTO boardNoticeDTO) {
+
+        BoardNotice boardNotice=new BoardNotice();    //boardNotice객체
+        boardNotice.setBoardTitle(boardNoticeDTO.getBoardTitle());  //제목
+        boardNotice.setBoardContent(boardNoticeDTO.getBoardContent());  //내용
+        boardNotice.setCreateDate(formattedDate); //작성일
+        boardNotice.setBoardWriter("ADMIN"); // 작성자 ADMIN으로 고정
+
+        boardService.createBoardNotice(boardNotice);
+        // 데이터 추가 완료 후 공지페이지로 이동
+        return "redirect:/moveNotice";
+    }
+
+//     //공지 작성 게시판으로 이동
+//    @GetMapping("/board/newnotice")
+//    public String callBoardNoticeWriteForm(Model model) {
+//        model.addAttribute("boardNoticeDTO", new BoardNoticeDTO());
+//        return "board/boardNoticeWriteForm";
+//    }
+
+//    // 공지 리스트
+//    @GetMapping("/board/boardnoticelist")
+//    public String boardNoticeList(Model model) {
+//        List<BoardNotice> nlist=boardService.getNoticeList();
+//        List<Reply> rplist=replyService.findReply();
+//        model.addAttribute("nlist", nlist);
+//        return "board/notice";
+//    }
+
+    //    // 공지 삭제
+//    @DeleteMapping("/board/deleteboardNotice")
+//    public ResponseEntity<Void> deleteBoardNotice(@RequestBody Map<String, Object> reqData) {
+//        Long boardId = Long.parseLong(reqData.get("boardId").toString());
+//
+//        boardService.deleteBoardTaskById(boardId);
+//        return ResponseEntity.noContent().build();
+//    }
+//
+//    // 공지 변경
+//    @PostMapping("/board/changetaskprogress")
+//    public ResponseEntity<Void> changeTaskProgress(@RequestParam Long boardId, @RequestParam String boardProgress) {
+//        boardService.changeTaskProgress(boardId, boardProgress);
+//        return ResponseEntity.noContent().build();
+//    }
+//
 //    @PostMapping("/test")
 //    @ResponseBody
 //    public String selfcloseTest(){
