@@ -58,8 +58,19 @@ public class Member_Repository {
         TypedQuery<Member> query = em.createQuery("SELECT m from Member m where m.mem_id = :memberId and m.email = :email", Member.class);
         query.setParameter("memberId", memberId);
         query.setParameter("email", email);
-        return query.getSingleResult();
+        try{
+            Member member = query.getSingleResult();
+            return member;
+        }catch (NoResultException e){
+            return null;
+        }
     }
 
+    public void rePassword(String memberId, String email){
+        em.createQuery("update Member m set m.mem_pw = '321' where m.mem_id = :memberId and m.email = :email")
+                .setParameter("memberId", memberId)
+                .setParameter("email", email)
+                .executeUpdate();
+    }
 
 }

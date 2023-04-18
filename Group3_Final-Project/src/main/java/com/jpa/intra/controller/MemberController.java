@@ -156,7 +156,10 @@
 
         @PostMapping("/findPw")
         @ResponseBody
-        public Member findMemberPw(@RequestParam("memberId")String memberId, @RequestParam("email")String email){
-            return service.updateDefaultPw(memberId, email);
+        public String findMemberPw(@RequestParam("memberId")String memberId, @RequestParam("email")String email){
+            service.rePassword(memberId, email);
+            return "비밀번호가 초기화 됬습니다.";
         }
+
+
     }

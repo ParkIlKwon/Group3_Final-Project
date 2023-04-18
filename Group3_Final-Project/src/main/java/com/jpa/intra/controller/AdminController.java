@@ -4,6 +4,7 @@ import com.jpa.intra.domain.Member;
 import com.jpa.intra.query.MemberDTO;
 import com.jpa.intra.repository.Member_Repository;
 import com.jpa.intra.service.MailService;
+import com.jpa.intra.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import java.util.List;
 public class AdminController {
 
     private final Member_Repository member_repository;
+    private final MemberService memberService;
 
     //관리자_메인_페이지 (사원관리 페이지)
     @GetMapping()
@@ -41,8 +43,20 @@ public class AdminController {
     MailService registerMail;
     @PostMapping("/mailConfirm")
     @ResponseBody
-    String mailConfirm(@RequestParam("email") String email) throws Exception {
+    public String mailConfirm(@RequestParam("email") String email) throws Exception {
 
+        String code = registerMail.sendSimpleMessage(email);
+        System.out.println("인증코드 : " + code);
+        return code;
+    }
+
+    @PostMapping("/mailConfirmForFindPw")
+    @ResponseBody
+    public String mailConfirmForFindPw(@RequestParam("email") String email, @RequestParam("modalId") String modalId) throws Exception {
+        Member member = memberService.updateDefaultPw(modalId, email);
+        if(member == null) {
+            return "error";
+        }
         String code = registerMail.sendSimpleMessage(email);
         System.out.println("인증코드 : " + code);
         return code;

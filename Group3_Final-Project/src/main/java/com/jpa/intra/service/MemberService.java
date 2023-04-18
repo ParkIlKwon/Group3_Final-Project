@@ -38,4 +38,9 @@ public class MemberService {
     public Member updateDefaultPw(String memberId, String email){
         return aMemberRepository.getMember(memberId, email);
     }
+
+
+    public void rePassword(String memberId, String email){
+        aMemberRepository.rePassword(memberId, email);
+    }
 }
