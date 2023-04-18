@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}"></head>
+
+<body class="g-sidenav-show  bg-gray-100">
+<!--   사이드 : aside -->
+<aside th:replace="fragments/aside"></aside>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+  <!-- body Top Navbar : bodyTop  -->
+  <nav th:replace="fragments/bodyTop"></nav>
+  <!-- Start Content -->
+  <div class="container-fluid py-4">
+    <!-- Left : 공지 목록 -->
+    <div class="row" >
+      <div class="col-md-4">
+        <div class="card p-3" style="height: 100vh">
+          <div th:if="${session.user.getTeam().getTeam_name() eq '인사부'}" class="card-header p-0">
+            <button type="button" class="btn bg-gradient-primary p-2 mb-1" onclick="location.href='#'">새 공지</button>
+            <hr class="solid">
+          </div>
+
+<!--          <div class="card-body p-0 task-main-left" th:with="ntlist=${noticeList}">-->
+          <h6 class="mb-2">업무 목록</h6>
+          <div class="card-body p-0 task-main-left">
+            <ul class="list-group">
+<!--            <ul class="list-group" th:each="vo:${tlist}" onclick="showTlistContents(this)">-->
+              <li class="list-group-item border-0 d-flex p-2 px-4 mb-2 bg-gray-100 border-radius-lg"
+                  th:each="i : ${#numbers.sequence(1,3)}">
+                <div class="d-flex flex-column">
+                  <div>
+<!--                    <span class="mb-2 text-xs task-board-small-element">등록일: <span class="text-dark font-weight-bold ms-sm-2 task-board-responsibleMember" th:text="${}"></span></span>-->
+<!--                    <span class="ms-4 mb-2 text-xs task-board-small-element">등록자: <span class="text-dark ms-sm-2 font-weight-bold task-board-responsibleTeam" th:text="${}"></span></span>-->
+                    <span class="mb-2 text-xs task-board-small-element">등록일: <span class="text-dark font-weight-bold ms-sm-2 task-board-responsibleMember">2023-04-17</span></span>
+                    <span class="ms-4 mb-2 text-xs task-board-small-element">등록자: <span class="text-dark ms-sm-2 font-weight-bold task-board-responsibleTeam">Admin</span></span>
+                  </div>
+                  <div class="ms-2 mb-3 fs-5 fw-bold task-board-title" th:text="${i}+'. 공지'+${i}"/>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right : 업무 상세 정보 -->
+      <div class="col-md-8">
+        <div class="card p-3 h-100 task-main-right">
+          /////
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  var replyListEnabled = true;
+  // 작성폼으로 이동
+  function writeForm() {
+    console.log();
+    location.href="/board/newtaskboard";
+  }
+
+  //게시글 클릭 시, 우측단에 게시글 상세정보 작성해주는 함수
+  function showTlistContents(data){
+
+    var curBoardId=data.querySelector('.task-board-id').value;
+    console.log(curBoardId);
+
+    $.ajax({
+      url: '/reply/curreplylist',
+      method: 'GET',
+      data: ({ "boardId": curBoardId }),
+      success(replyfindresult) {
+        alert("성공하다.")
+        console.log(replyfindresult);
+      }
+    })
+
+    var replyId = document.querySelector('.task-board-detail-reply-id');
+    replyId.value="";
+    replyId.value=data.querySelector('.task-board-id').value;
+  }
+
+  //게시글 삭제 ajax함수
+  $(document).ready(function() {
+    $('.delete-board-task').on('click', function(e) {
+      e.preventDefault();
+      var boardId=document.querySelector('.task-board-id').value;
+      var url = $(this).attr('href');
+      console.log("boardId : "+boardId+", url : "+url)
+
+      $.ajax({
+        url: url,
+        method: 'DELETE',
+        contentType: 'application/json',
+        data: JSON.stringify({ boardId: boardId })
+      })
+              .done(function(response) {
+                alert('게시글이 삭제되었습니다.');
+                // location.href="/moveProject";
+                location.replace("/moveProject");
+              })
+              .fail(function(jqXHR, textStatus, errorThrown) {
+                alert('게시글 삭제에 실패했습니다.');
+              });
+    });
+  });
+
+</script>
+
+</body>
+</html>

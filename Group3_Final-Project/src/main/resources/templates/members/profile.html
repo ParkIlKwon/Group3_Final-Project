@@ -10,21 +10,13 @@
   <nav th:replace="fragments/bodyTop"></nav>
   <!-- Start Content -->
   <div class="container-fluid py-4">
-    <div class="row">
-<!--    Left : profile    -->
-        <div class="col-md-4 mt-4">
-            <div class="card px-4" style="height: 85vh;">
-                <div class="card-header pb-0 p-3">
-                    <div class="row">
-                        <div class="col-md-8 d-flex align-items-center">
-                            <h6 class="mb-0">당신의 정보</h6>
-                        </div>
-<!--                        <div class="col-md-4 text-end">-->
-<!--                            <a href="javascript:;">-->
-<!--                                <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Profile"></i>-->
-<!--                            </a>-->
-<!--                        </div>-->
-                    </div>
+      <!-- Left : profile -->
+      <div class="row">
+        <div class="col-md-4">
+            <div class="card p-3" style="height: 85vh;">
+
+                <div class="card-header pb-0">
+                    <h6 class="fw-bold" >회원 정보</h6>
                 </div>
                 <div class="card-body p-3">
                     <div class="row gx-4">
@@ -74,96 +66,96 @@
             </div>
         </div>
 <!--    Mid : 근태 정보-->
-      <div class="col-md-4 mt-4">
-        <div class="card px-4" style="height: 85vh;">
-          <div class="card-header pb-0">
-            <h6 class="fw-bold" style="float: left">당신의 근태 상황</h6>
-<!--            &lt;!&ndash; 사원 등록 &ndash;&gt;-->
-<!--            <button class="btn btn-sm bg-gradient-info mb-0" style="float: right" onclick="location.href='/admin/join'">사원 등록</button>-->
-          </div>
-          <div class="card-body px-0 pt-0 pb-2">
-            <div class="table-responsive p-0">
-              <table class="table align-items-center mb-0">
+          <div class="col-md-4">
+            <div class="card h-100 p-3">
+              <div class="card-header pb-0">
+                <h6 class="fw-bold" style="float: left">출퇴근 현황</h6>
+    <!--            &lt;!&ndash; 사원 등록 &ndash;&gt;-->
+    <!--            <button class="btn btn-sm bg-gradient-info mb-0" style="float: right" onclick="location.href='/admin/join'">사원 등록</button>-->
+              </div>
+              <div class="card-body p-3">
+                <div class="table-responsive p-0">
+                  <table class="table align-items-center mb-0">
 
-                <thead>
-                <tr class="text-center">
-<!--                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">이름</th>-->
-                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">날짜</th>
-                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">출근 시간</th>
-                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">퇴근 시간</th>
-                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">비고</th>
-<!--                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">출근현황</th>-->
-<!--                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">수정</th>-->
-<!--                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">삭제</th>-->
-                </tr>
-                </thead>
+                    <thead>
+                    <tr class="text-center">
+    <!--                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">이름</th>-->
+                      <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">날짜</th>
+                      <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">출근 시간</th>
+                      <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">퇴근 시간</th>
+                      <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">비고</th>
+    <!--                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">출근현황</th>-->
+    <!--                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">수정</th>-->
+    <!--                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">삭제</th>-->
+                    </tr>
+                    </thead>
 
-                <tbody>
-                <tr class="text-center">
-                  <!-- 연락처 -->
-<!--                  <td>-->
-<!--                    <div class="d-flex px-2 py-1">-->
-<!--                      <div class="d-flex flex-column justify-content-center">-->
-<!--                        <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal">당신</a></h6>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </td>-->
-                  <!-- 회사번호 -->
-                  <td>
-                    <div class="d-flex px-2 py-1">
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal">2000.20.20</a></h6>
-                      </div>
-                    </div>
-                  </td>
-                  <!-- 이메일 -->
-                  <td>
-                    <div class="d-flex px-2 py-1">
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal">9:00</a></h6>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="d-flex px-2 py-1">
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal">18:00</a></h6>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal">비고</a></h6>
+                    <tbody>
+                    <tr class="text-center">
+                      <!-- 연락처 -->
+    <!--                  <td>-->
+    <!--                    <div class="d-flex px-2 py-1">-->
+    <!--                      <div class="d-flex flex-column justify-content-center">-->
+    <!--                        <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal">당신</a></h6>-->
+    <!--                      </div>-->
+    <!--                    </div>-->
+    <!--                  </td>-->
+                      <!-- 회사번호 -->
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal">2000.20.20</a></h6>
+                          </div>
                         </div>
-                    </div>
-                  </td>
+                      </td>
+                      <!-- 이메일 -->
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal">9:00</a></h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal">18:00</a></h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                            <div class="d-flex flex-column justify-content-center">
+                                <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal">비고</a></h6>
+                            </div>
+                        </div>
+                      </td>
 
-<!--                  &lt;!&ndash; 출 퇴근 현황 &ndash;&gt;-->
-<!--                  <td class="align-middle text-center text-sm">-->
-<!--                    <span class="badge badge-sm bg-gradient-success">Online</span>-->
-<!--                  </td>-->
-<!--                  &lt;!&ndash; 사원정보 수정 : Modal &ndash;&gt;-->
-<!--                  <td class="align-middle text-center text-sm">-->
-<!--                    <button class="btn bg-gradient-warning px-3 py-1 mb-0">수정</button>-->
-<!--                  </td>-->
-<!--                  &lt;!&ndash; 사원 삭제 &ndash;&gt;-->
-<!--                  <td class="align-middle text-center text-sm">-->
-<!--                    <button class="btn bg-gradient-danger px-3 py-1 mb-0">삭제</button>-->
-<!--                  </td>-->
-                </tr>
-                </tbody>
-              </table>
+    <!--                  &lt;!&ndash; 출 퇴근 현황 &ndash;&gt;-->
+    <!--                  <td class="align-middle text-center text-sm">-->
+    <!--                    <span class="badge badge-sm bg-gradient-success">Online</span>-->
+    <!--                  </td>-->
+    <!--                  &lt;!&ndash; 사원정보 수정 : Modal &ndash;&gt;-->
+    <!--                  <td class="align-middle text-center text-sm">-->
+    <!--                    <button class="btn bg-gradient-warning px-3 py-1 mb-0">수정</button>-->
+    <!--                  </td>-->
+    <!--                  &lt;!&ndash; 사원 삭제 &ndash;&gt;-->
+    <!--                  <td class="align-middle text-center text-sm">-->
+    <!--                    <button class="btn bg-gradient-danger px-3 py-1 mb-0">삭제</button>-->
+    <!--                  </td>-->
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
 <!-- Right : 같은 부서 사람 목록 -->
-      <div class="col-md-4 mt-4">
-          <div class="card px-4" style="height: 85vh;">
-              <div class="card-header pb-0 p-3">
-                  <h6 class="mb-0">팀원</h6>
+      <div class="col-md-4">
+          <div class="card p-3 h-100">
+              <div class="card-header pb-0">
+                  <h6 class="mb-0">My Team</h6>
               </div>
               <div class="card-body p-3">
                   <ul class="list-group">
