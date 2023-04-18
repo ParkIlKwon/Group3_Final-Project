@@ -215,8 +215,8 @@ public class BoardController {
     @PostMapping("/board/newapprovalvacationboard")
     @ResponseBody
     public String writeNewBoardApprovalForm1Ajax(HttpSession session, Long memberId, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
-        BoardApproval boardApproval = createNewBoardApproval(session, memberId, boardApprovalDTO, boardApprovalInfoDTO, "approval vacation title", "VACATION");
-        boardService.createBoardApproval1(boardApproval);
+//        BoardApproval boardApproval = createNewBoardApproval(session, memberId, boardApprovalDTO, boardApprovalInfoDTO, "approval vacation title", "VACATION");
+//        boardService.createBoardApproval1(boardApproval);
         return "success";
     }
 
