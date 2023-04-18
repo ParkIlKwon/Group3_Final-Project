@@ -1,13 +1,13 @@
 
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{/fragments/header :: header}"></head>
+<head th:replace="~{fragments/header :: header}"></head>
 
 <body class="g-sidenav-show  bg-gray-100">
 <button onclick="writeForm()">writeT</button>
 
 <!--   사이드 : aside -->
-<aside th:replace="/fragments/aside"></aside>
+<aside th:replace="fragments/aside"></aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- body Top Navbar : bodyTop  -->
     <nav th:replace="fragments/bodyTop"></nav>
@@ -110,12 +110,12 @@
       </div>
 
 <!-- footer -->
-      <footer th:replace="/fragments/footer"></footer>
+      <footer th:replace="fragments/footer"></footer>
 
     </div>
   </main>
 <!-- plugin -->
-<div th:replace="/fragments/plugin"></div>
+<div th:replace="fragments/plugin"></div>
 
 
 
