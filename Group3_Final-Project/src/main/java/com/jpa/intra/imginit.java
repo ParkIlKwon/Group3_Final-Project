@@ -6,11 +6,15 @@ import com.jpa.intra.service.FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.File;
-import java.io.IOException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.*;
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -70,36 +74,38 @@ public class imginit {
     public void makeProfileImg(int index,Member m){
         String currentPath = "\\src\\main\\resources\\mem_img\\" + index + ".jpg"; //그뒤 나머지 경로
 
-//        if(index == 1){
-//            Path testPath = Paths.get(File.separatorChar + "mem_img", File.separatorChar + "1.jpg");
-//            Path testPath2 = Paths.get(rootPath + currentPath);
-//
-//            File file = new File(testPath2.toString());
-//            System.out.println(file.exists());
-//            Resource resource = new InputStreamResource(getClass().getResourceAsStream(testPath2.toString()));
-//
-//            System.out.println(resource);
-//            System.out.println(resource.getFilename());
-//            System.out.println("===================================================");
-//            System.out.println("===================================================");
-//        }
+        Resource resource = null;
+        String filePath = "";
 
+        if(index == 1){
 
+            try {
+                Path testPath = Paths.get(File.separatorChar + "mem_img", File.separatorChar + "1.jpg");
+                Path testPath2 = Paths.get(rootPath + currentPath);
+                resource = new UrlResource("file:"+testPath2);
+                System.out.println("resource = " + resource.getFile());
+                filePath = resource.getFile().toString();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+            System.out.println("===================================================");
+            System.out.println("===================================================");
+        }
 
-        String filePath = rootPath + currentPath;
-
-        File file = new File(filePath);
-
+        System.out.println(filePath);
+//        String filePath = resource.getFile();
+        if(resource != null){
+            File file = new File(filePath);
             try {
                 fileService.saveProfileImage(file,m);
             } catch (IOException e) {
                 e.getStackTrace();
             }
+        }
+
+
 
     }
     
 
-    
-    
-    
 }
