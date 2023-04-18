@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -27,21 +26,24 @@ public class MailController {
 
     @GetMapping("/main")
     public String mailMain(Model model){
-        List<Mail> mailList = new ArrayList<>();
-        mailList = mailRepository.findAllMailList();
-        model.addAttribute("mailList",mailList);
+//        List<Mail> mailList = new ArrayList<>();
+//        mailList = mailRepository.findAllMailList();
+//        model.addAttribute("mailList",mailList);
         model.addAttribute("page", "메일");
+        List<Mail> mailList = mailService.findLogMailList();
+        model.addAttribute("mailList",mailList);
         return "mail/main";
     }
 
     @GetMapping("/mailForm")
     public String mailForm(Model model){
 
-        List<Mail> mailList = new ArrayList<>();
-        mailList = mailRepository.findAllMailList();
-        System.out.println(mailList.size() +"사이즈");
-        model.addAttribute("mailList",mailList);
-        model.addAttribute("page", "메일");
+//        List<Mail> mailList = new ArrayList<>();
+//        mailList = mailRepository.findAllMailList();
+//        System.out.println(mailList.size() +"사이즈");
+//        model.addAttribute("mailList",mailList);
+//        model.addAttribute("page", "메일");
+
         return "mail/mailForm";
     }
 
@@ -77,18 +79,20 @@ public class MailController {
         mailSendService.sendMail(resMail);
 
 
-        return "redirect:/mail/mailForm";
+//        return "redirect:/mail/mailForm";
+            return "mail/mailForm";
     }
 
-    @GetMapping("/read/{id}")
-    public String readMail(Model model, @PathVariable Long id){
-        List<Mail> mailList = new ArrayList<>();
-        mailList = mailRepository.findAllMailList();
-        model.addAttribute("mailList",mailList);
-        Mail mail = mailRepository.findById(id);
-        model.addAttribute("mail",mail);
-        return "mail/main";
-    }
+
+//    @GetMapping("/read/{id}")
+//    public String readMail(Model model, @PathVariable Long id){
+//        List<Mail> mailList = new ArrayList<>();
+//        mailList = mailRepository.findAllMailList();
+//        model.addAttribute("mailList",mailList);
+//        Mail mail = mailRepository.findById(id);
+//        model.addAttribute("mail",mail);
+//        return "mail/main";
+//    }
 
     @PostMapping("/read")
     @ResponseBody
@@ -100,5 +104,10 @@ public class MailController {
         return mail;
     }
 
+    @GetMapping("/reply")
+    public String replyMail(Model model, @RequestParam("reply")String reply) {
+        model.addAttribute("reply",reply);
+        return "mail/mailForm";
+    }
 
 }
