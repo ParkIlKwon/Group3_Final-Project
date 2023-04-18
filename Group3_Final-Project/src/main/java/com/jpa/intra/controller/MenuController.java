@@ -39,7 +39,7 @@ public class MenuController {
     @GetMapping("/moveNotice")
     public String MoveNotice(Model model){
         model.addAttribute("page", "공지사항");
-        return "/dashboard/notice";
+        return "dashboard/notice";
     }
 
     //프로젝트 페이지 이동

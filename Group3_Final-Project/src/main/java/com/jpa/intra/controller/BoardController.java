@@ -208,10 +208,17 @@ public class BoardController {
     public String writeNewBoardApprovalForm1(HttpSession session, Long memberId, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
         BoardApproval boardApproval=createNewBoardApproval(session, memberId, boardApprovalDTO, boardApprovalInfoDTO, "approval vacation title", "VACATION");
         boardService.createBoardApproval1(boardApproval);
-//        return "redirect:/moveApproval";
-//        return "<script>window.opener.location.reload(); window.close();</script>";
-        return "";
+        return "redirect:/moveApproval";
     }
+//    @PostMapping("/board/newapprovalvacationboard")
+//    @ResponseBody
+//    public Map<String, String> writeNewBoardApprovalForm1Ajax(HttpSession session, Long memberId, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
+//        BoardApproval boardApproval = createNewBoardApproval(session, memberId, boardApprovalDTO, boardApprovalInfoDTO, "approval vacation title", "VACATION");
+//        boardService.createBoardApproval1(boardApproval);
+//        Map<String, String> response = new HashMap<>();
+//        response.put("status", "success");
+//        return response;
+//    }
 
     @PostMapping("/board/newapprovalovertimeboard")
     public String writeNewBoardApprovalForm2(HttpSession session, Long memberId, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
@@ -248,7 +255,7 @@ public class BoardController {
         String onOff=(String)session.getAttribute("onOff");
         onOff="on";
         session.setAttribute("onOff",onOff);
-        System.out.println("test");
+        System.out.println("bno");
         return "redirect:/moveProject";
     }
 
