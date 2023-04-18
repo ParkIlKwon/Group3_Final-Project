@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -219,6 +220,7 @@ public class BoardController {
         return "success";
     }
 
+
     @PostMapping("/board/newapprovalovertimeboard")
     public String writeNewBoardApprovalForm2(HttpSession session, Long memberId, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO) {
         BoardApproval boardApproval=createNewBoardApproval(session, memberId, boardApprovalDTO, boardApprovalInfoDTO, "approval overtime title", "OVERTIME");
@@ -257,5 +259,17 @@ public class BoardController {
         System.out.println("bno");
         return "redirect:/moveProject";
     }
+
+    @PostMapping("/test")
+    @ResponseBody
+    public String selfcloseTest(){
+        System.out.println("This is selfcloseTest please check this message, i'll show my data");
+
+
+        System.out.println("sry, null");
+
+       return "test";
+    }
+
 
 }

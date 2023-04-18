@@ -7,7 +7,7 @@
 </head>
 <body>
 <div>
-    <form action="/board/newapprovalvacationboard" method="POST">
+    <form id="q" action="/test" method="POST">
         <input type="hidden" name="memberId" th:value="${hrGuy.id}">
         <div class="form-group" th:object="${boardApprovalDTO}">
             <div class="form-group">
@@ -30,7 +30,8 @@
                 <input type="number" th:field="*{deduction}" placeholder="연차 차감 시간" readonly>
             </div>
         </div>
-        <button type="submit" onclick="submitForm()">제출</button>
+<!--        <input type="submit" onclick="submitForm()">제출</input>-->
+        <button onclick="submitForm()">제출
     </form>
 </div>
 
@@ -43,117 +44,149 @@
     let endDateInput=document.querySelector('input[name="endDate"]');
     let deductionInput=document.querySelector('input[name="deduction"]');
 
-    // endDate 입력 폼을 비활성화합니다.
-    endDateInput.disabled = true;
+    // endDate 입력 폼을 비활성화하다.
+    endDateInput.disabled=true;
 
-    // startDate 입력 폼의 최소 날짜를 현재 날짜로 설정합니다.
-    let today = new Date();
-    startDateInput.min = today.toISOString().split('T')[0];
+    // startDate 입력 폼의 최소 날짜를 현재 날짜로 설정해주다.
+    let today=new Date();
+    startDateInput.min=today.toISOString().split('T')[0];
 
-    // startDate 입력 폼의 값이 변경될 때마다, endDate 입력 폼의 최소 날짜를 startDate 값으로 설정합니다.
+    // startDate 입력 폼의 값이 변경될 때마다 endDate 입력 폼의 최소 날짜를 startDate 값으로 설정해주다.
     startDateInput.addEventListener('change', function() {
-        endDateInput.min = startDateInput.value;
+        endDateInput.min=startDateInput.value;
 
-        // endDate 입력 폼을 활성화합니다.
-        endDateInput.disabled = false;
+        // endDate 입력 폼을 활성화하다.
+        endDateInput.disabled=false;
 
-        // startDate와 endDate를 비교하여 endDate가 startDate보다 작은 경우, endDate 값을 startDate와 동일하게 설정합니다.
-        if (new Date(endDateInput.value) < new Date(startDateInput.value)) {
-            endDateInput.value = startDateInput.value;
+        // startDate와 endDate를 비교하여 endDate가 startDate보다 작은 경우, endDate 값을 startDate와 동일하게 설정하다.
+        if(new Date(endDateInput.value) < new Date(startDateInput.value)) {
+            endDateInput.value=startDateInput.value;
         }
 
-        // startDate와 endDate 사이의 일수를 계산하여 차감일수(deduction)를 계산합니다.
-        let diffDays = calculateDays(startDateInput, endDateInput);
-        let deductionDays = diffDays * 8;
-        if (diffDays === 0) {
-            deductionDays = 4;
+        // startDate와 endDate 사이의 일수를 계산하여 차감일수(deduction)를 보여주다.
+        let diffDays=calculateDays(startDateInput, endDateInput);
+        let deductionDays=diffDays * 8;
+        if(diffDays===0) {
+            deductionDays=4;
         }
-        deductionInput.value = deductionDays;
+        deductionInput.value=deductionDays;
     });
 
-    // endDate 입력 폼의 값이 변경될 때마다, 차감일수(deduction)를 자동으로 계산하여 할당합니다.
+    // endDate 입력 폼의 값이 변경될 때마다, 차감일수(deduction)를 자동으로 계산하여 할당해주다.
     endDateInput.addEventListener('change', function() {
-        // startDate와 endDate 사이의 일수를 계산하여 차감일수(deduction)를 계산합니다.
-        let diffDays = calculateDays(startDateInput, endDateInput);
-        let deductionDays = diffDays * 8;
-        if (diffDays === 0) {
-            deductionDays = 4;
+        let diffDays=calculateDays(startDateInput, endDateInput);
+        let deductionDays=diffDays*8;
+        if(diffDays===0) {
+            deductionDays=4;
         }
-        deductionInput.value = deductionDays;
+        deductionInput.value=deductionDays;
     });
 
-    // endDate 입력 폼의 값이 변경될 때마다, 차감일수(deduction)를 자동으로 계산하여 할당하다.
+    // endDate 입력 폼의 값이 변경될 때마다, 차감일수(deduction)를 자동으로 계산하여 할당다.
     endDateInput.addEventListener('input', function() {
-        // startDate와 endDate 사이의 일수를 계산하여 차감일수(deduction)를 계산합니다.
-        let diffDays = calculateDays(startDateInput, endDateInput);
-        let deductionDays = diffDays * 8;
-        if (diffDays === 0) {
-            deductionDays = 4;
+        let diffDays=calculateDays(startDateInput, endDateInput);
+        let deductionDays=diffDays*8;
+        if (diffDays===0) {
+            deductionDays=4;
         }
-        deductionInput.value = deductionDays;
+        deductionInput.value=deductionDays;
     });
 
-    // startDate와 endDate 사이의 일수를 계산하는 함수입니다.
+    // startDate와 endDate 사이의 일수를 계산하는 함수
     function calculateDays(startDateInput, endDateInput) {
-        let startDate = new Date(startDateInput.value);
-        let endDate = new Date(endDateInput.value);
-        let diffMs = endDate.getTime() - startDate.getTime();
-        let diffDays = diffMs / (1000 * 60 * 60 * 24);
-        diffDays = Math.round(diffDays);
+        let startDate=new Date(startDateInput.value);
+        let endDate=new Date(endDateInput.value);
+        let diffMs=endDate.getTime()-startDate.getTime();
+        let diffDays=diffMs/(1000*60*60*24);
+        diffDays=Math.round(diffDays);
 
         return diffDays;
     }
 
 
-    // function submitForm() {
-    //     // form submit
-    //     document.getElementById("vacationForm").submit();
-    //
-    //     // 부모창에 대한 참조 가져오기
-    //     const parentWindow = window.opener;
-    //
-    //     // 부모창이 존재하는 경우
-    //     if (parentWindow) {
-    //         // 부모창의 함수 호출
-    //         parentWindow.onChildWindowClose();
-    //
-    //         // 자식창 닫기
-    //         window.close();
-    //     }
-    // }
-    $(document).ready(function() {
-        $('#vacationForm').submit(function(e) {
-            e.preventDefault();
-            var formData = $(this).serialize();
 
-            $.ajax({
-                url: "/board/newapprovalvacationboard",
-                type: "POST",
-                data: formData,
-                success: function(data) {
-                    console.log("tst1")
-                    alert("data="+ data);
-                    // window.close();
-                    // if (data === "success") {
-                    //     alert("성공하다.");
-                    //     // 데이터 처리가 완료되면 창을 닫고 부모 창을 다시 로드합니다.
-                    //     window.close();
-                    //     window.opener.location.reload();
-                    // } else {
-                    //     alert("처리 도중 오류가 발생했습니다.");
-                    // }
-                },
-                error: function() {
-                    alert("요청 처리 중 오류가 발생했습니다.");
-                }
-            }).done(function () {
+
+    function submitForm() {
+        // form submit
+        // document.getElementById("#q").submit();
+
+        // 부모창에 대한 참조 가져오기
+        // const parentWindow = window.opener;
+        //
+        // // 부모창이 존재하는 경우
+        // if (parentWindow) {
+        //     // 부모창의 함수 호출
+        //     parentWindow.onChildWindowClose();
+        //
+        //     // 자식창 닫기
+        //     window.close();
+        // }
+        let formData=document.getElementById("#q").serialize();
+        $.ajax({
+            url: "/test",
+            type: "Post",
+            data : formData,
+            success: function (data) {
+                console.log("tst1")
+                alert("data=" + data);
+                self.close();
+                // window.close();
+                // if (data === "success") {
+                //     alert("성공하다.");s
+                //     // 데이터 처리가 완료되면 창을 닫고 부모 창을 다시 로드합니다.
+                //     window.close();
+                //     window.opener.location.reload();
+                // } else {
+                //     alert("처리 도중 오류가 발생했습니다.");
+                // }
+            },
+            error:function(request,status,error){
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                self.close();
+            }
+        }).done(function () {
                 console.log("tst2")
-                    window.close();
-                }
-            );
+            }
+        );
+    }
 
-        });
-    });
+
+  //   $(document).ready(function() {
+  //
+  //       $('#vacationForm').submit(function(e) {
+  //           e.preventDefault();
+  //
+  //       var formData = document.getElementById("#q").serialize();
+  //       alert(formData)
+  //       $.ajax({
+  //           url: "/test",
+  //           type: "Post",
+  //           data : formData,
+  //           success: function (data) {
+  //               console.log("tst1")
+  //               alert("data=" + data);
+  //               self.close();
+  //               // window.close();
+  //               // if (data === "success") {
+  //               //     alert("성공하다.");
+  //               //     // 데이터 처리가 완료되면 창을 닫고 부모 창을 다시 로드합니다.
+  //               //     window.close();
+  //               //     window.opener.location.reload();
+  //               // } else {
+  //               //     alert("처리 도중 오류가 발생했습니다.");
+  //               // }
+  //           },
+  //           error:function(request,status,error){
+  //               alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+  //           }
+  //       }).done(function () {
+  //               console.log("tst2")
+  //               window.close();
+  //           }
+  //       );
+  //
+  // });
+  //  });
 
 
 
