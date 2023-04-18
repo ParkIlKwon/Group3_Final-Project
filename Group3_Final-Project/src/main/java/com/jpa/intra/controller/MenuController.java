@@ -58,15 +58,30 @@ public class MenuController {
         HttpSession session=req.getSession();
         String onOff="off";
         session.setAttribute("onOff",onOff);
-        return "/project/main";
+        return "project/main";
     }
 
     //캘린더 페이지 이동
     @GetMapping("/moveCalendar")
     public String MoveCalender(Model model){
         model.addAttribute("page", "캘린더");
-       return "/calendar/main";
+       return "calendar/main";
     }
+
+    @GetMapping("/projectCalendar")
+    public String projectCalendar(Model model){
+        model.addAttribute("page", "캘린더");
+        return "calendar/getProject";
+    }
+
+    @GetMapping("/holidayCalendar")
+    public String holidayCalendar(Model model){
+        model.addAttribute("page", "캘린더");
+        return "calendar/holiday";
+    }
+
+
+
 
     final private File_Repository fileRepository;
     //드라이브 페이지 이동
