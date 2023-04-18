@@ -7,8 +7,10 @@
 </head>
 <body>
 <div>
-    <form id="vacation-frm">
-        <input type="text" id="memberId" name="memberId" th:value="${hrGuy.id}">
+    <form>
+        <h3>휴가 신청 기안</h3>
+        <input type="text" id="memberVacation" name="memberVacation" th:value="${curMember.vacation}">
+        <input type="hidden" id="memberId" name="memberId" th:value="${hrGuy.id}">
         <div class="form-group" th:object="${boardApprovalDTO}">
             <div class="form-group">
                 <label th:for="boardContent">휴가 신청 사유</label>
@@ -36,9 +38,6 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-
-    let parentWindow = window.opener;
-    console.log(parentWindow)
     let startDateInput=document.querySelector('input[name="startDate"]');
     let endDateInput=document.querySelector('input[name="endDate"]');
     let deductionInput=document.querySelector('input[name="deduction"]');
@@ -102,23 +101,18 @@
         return diffDays;
     }
 
-
-
-
     function submitForm() {
-
-
         let memberId=$("#memberId").val();
         let boardContent=$("#boardContent").val();
         let startDate=$("#startDate").val();
         let endDate=$("#endDate").val();
         let deduction=$("#deduction").val();
         $.ajax({
-            url: "/board/newapprovalvacationboard",
-            type: "POST",
+            url:"/board/newapprovalvacationboard",
+            type:"POST",
             data:{"memberId":memberId,"boardContent":boardContent ,"startDate":startDate,"endDate":endDate,"deduction" : deduction},
             success: function (data) {
-                alert("data=" + data);
+                alert("결재가 성공적으로 등록되다.");
                 self.close();
                 opener.location.reload();
             },
@@ -129,19 +123,6 @@
             }
         })
     }
-
-    // function deleteMember(id){
-    //     fetch('/member/'+id ,{ method: 'DELETE'} )
-    //         .then((response) => response.text())
-    //         .then((data) => refresh(data));
-    // }
-    //
-    // function refresh(data){
-    //     if(data=="ok"){
-    //         alert("회원탈퇴 성공");
-    //         location.href="/member/members";
-    //     }
-    // }
 
 
 </script>
