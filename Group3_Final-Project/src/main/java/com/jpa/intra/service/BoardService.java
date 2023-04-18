@@ -63,4 +63,7 @@ public class BoardService {
 
     public List<BoardApproval> findApproval1() {return bBoardRepository.findAllBoardApproval1();}
 
+    @Transactional
+    public void deleteBoardApprovalById(Long boardId) {bBoardRepository.deleteBoardApprovalById(boardId);}
+
 }

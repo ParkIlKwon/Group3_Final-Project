@@ -90,6 +90,12 @@ public class Board_Repository {
                 .executeUpdate();
     }
 
+    public void deleteBoardApprovalById(Long boardId) {
+        BoardApproval boardApproval = em.getReference(BoardApproval.class, boardId);
+        em.remove(boardApproval); // 목록에서 얘만 지워줌 . commit 만 되어 있는 상태
+        em.flush(); //적용
+    }
+
 
 
 
