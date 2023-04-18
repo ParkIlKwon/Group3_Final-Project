@@ -3,6 +3,7 @@ package com.jpa.intra.service;
 import com.jpa.intra.domain.Reply;
 import com.jpa.intra.domain.board.BoardApproval;
 import com.jpa.intra.domain.board.BoardFree;
+import com.jpa.intra.domain.board.BoardNotice;
 import com.jpa.intra.domain.board.BoardTask;
 import com.jpa.intra.repository.Board_Repository;
 import lombok.RequiredArgsConstructor;
@@ -65,5 +66,16 @@ public class BoardService {
 
     @Transactional
     public void deleteBoardApprovalById(Long boardId) {bBoardRepository.deleteBoardApprovalById(boardId);}
+
+    public List<BoardNotice> getNoticeList() {
+        return bBoardRepository.findAllNotice();
+    }
+
+    @Transactional
+    public Long createBoardNotice(BoardNotice boardNotice) {
+        bBoardRepository.createBoardNotice(boardNotice);
+        return boardNotice.getId();
+    }
+
 
 }
