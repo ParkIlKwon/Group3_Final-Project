@@ -72,12 +72,12 @@
                                     <!-- 다운로드 -->
                                     <td class="align-middle text-center text-sm">
                                         <button class="btn bg-gradient-info px-3 py-1 mb-0"
-                                                th:onclick="|location.href='@{/downloadFile(id=${file.getId()})}'|">다운로드</button>
+                                                th:onclick="#">다운로드</button>
                                     </td>
                                     <!-- 파일 삭제 -->
                                     <td class="align-middle text-center text-sm">
                                         <button class="btn bg-gradient-danger px-3 py-1 mb-0"
-                                                th:onclick="|location.href='@{/delete(path=${file.getSavedPath()})}'|">삭제</button>
+                                                th:onclick="#">삭제</button>
                                     </td>
                                 </tr>
                                 </tbody>

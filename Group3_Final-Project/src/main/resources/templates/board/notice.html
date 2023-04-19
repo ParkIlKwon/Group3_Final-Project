@@ -15,7 +15,7 @@
 <!--        <div class="col-12">-->
           <div class="card p-3" style="height: 85vh">
             <div class="card-header p-0" th:if="${session.user.getTeam().getTeam_name() eq '인사부'}">
-                <button id="addbd" class="btn bg-gradient-primary p-2 mb-1" data-bs-toggle="modal" data-bs-target="#addBoard">새 공지</button>
+                <button class="btn bg-gradient-primary p-2 mb-1" data-bs-toggle="modal" data-bs-target="#addBoard">새 공지</button>
                 <hr class="solid">
             </div>
             <div class="card-body pt-2 px-5">
@@ -34,9 +34,11 @@
                   <!--공지본문-->
                   <div th:id="'idd'+${n.getId()}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faq-group-1">
                     <div class="accordion-body row bg-gray-100 border-radius-md p-3 mx-4">
-                      <div class="col-9" th:text="${n.getBoardContent()}">공지 본문</div>
+                  <!--본문 줄바꿈 처리 &lt;br&gt; ==> <br>-->
+                      <div class="col-9" th:utext="${n.getBoardContent().replaceAll('\n', '&lt;br&gt;')}">공지 본문</div>
                       <div class="col-3 text-end" th:if="${session.user.getTeam().getTeam_name() eq '인사부'}">
-                        <button class="btn bg-gradient-info mb-0" onclick="editboard('${n.getId()}')">수정</button>
+                        <button class="btn bg-gradient-info mb-0" data-bs-toggle="modal" data-bs-target="#modiBoard">수정</button>
+<!--                        <button class="btn bg-gradient-info mb-0" onclick="editboard('${n.getId()}')">수정</button>-->
                         <button class="btn bg-gradient-danger mb-0" onclick="boardDelete('${n.getId()}')">삭제</button>
                       </div>
                     </div>
@@ -140,10 +142,12 @@
       $.ajax({
         type : "POST",
         url : "/board/newnotice",
-        data :{"boardTitle":boardTitle, "boardContent":boardContent},
-        success : function(){
-          alert("공지가 등록되었습니다.");
-          location.reload();
+        data : {
+          "boardTitle": boardTitle, "boardContent": boardContent,
+          success: function () {
+            alert("공지가 등록되었습니다.");
+            location.reload();
+          }
         }
       });
     }
@@ -151,28 +155,53 @@
 </script>
 
 <!-- 모달 -->
+<!--공지 등록용 모달-->
 <div class="modal fade" id="addBoard" tabindex="-1" aria-labelledby="addBdModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content" style="width:800px; margin-left:-30%">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5 fw-bold" id="addBdModal">새 공지 작성</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div id="container" style="max-width: 650px" text-align="center">
+      <div class="modal-header fs-5 fw-bold" id="addBdModal">새 공지 작성</div>
+      <div class="modal-body" id="container" style="max-width: 100%">
           <div class="col" style="border: 2px solid #f9e7cb; border-radius: 5px">
             <div class="row p-3 pb-0">
-              <div class="col-2 fw-bold">공지 제목</div>
+              <div class="col-2 fw-bold text-center">공지 제목</div>
               <div class="col ps-0 pe-3">
                 <input class="input-basic col-12" type="text" id="bTitle"/>
               </div>
             </div>
             <hr class="text-basic">
             <div class="row p-3 pt-0">
-              <div class="col-2 fw-bold">공지 내용</div>
+              <div class="col-2 fw-bold text-center">공지 내용</div>
               <div class="col ps-0 pe-3">
-                <textarea class="input-basic col-12" id="bContents" rows="10"></textarea>
+                <textarea class="input-basic col-12" id="bContents" rows="10" style="white-space: pre-wrap"></textarea>
               </div>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-basic" onclick="addBoard()">등록</button>
+        <button class="btn-cancel" data-bs-dismiss="modal" onclick="clearBd()">취소</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--공지 수정용 모달-->
+<div class="modal fade" id="modiBoard" tabindex="-1" aria-labelledby="addBdModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width:800px; margin-left:-30%">
+      <div class="modal-header fs-5 fw-bold" id="modibdModal">공지 수정</div>
+      <div class="modal-body" style="max-width: 100%">
+        <div class="col" style="border: 2px solid #f9e7cb; border-radius: 5px">
+          <div class="row p-3 pb-0">
+            <div class="col-2 fw-bold text-center">공지 제목</div>
+            <div class="col ps-0 pe-3">
+              <input class="input-basic col-12" type="text" id="mTitle"/>
+            </div>
+          </div>
+          <hr class="text-basic">
+          <div class="row p-3 pt-0">
+            <div class="col-2 fw-bold text-center">공지 내용</div>
+            <div class="col ps-0 pe-3">
+              <textarea class="input-basic col-12" id="bContents" rows="10" style="white-space: pre-wrap"></textarea>
             </div>
           </div>
         </div>
