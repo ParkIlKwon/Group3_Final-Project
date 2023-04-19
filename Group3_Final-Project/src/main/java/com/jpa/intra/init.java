@@ -39,7 +39,7 @@ public class init {
     @PostConstruct
     public void init() {
         initService.noticeDummy();
-        initService.mailDummy();
+//        initService.mailDummy();
 
         Random ran = new Random();
 
