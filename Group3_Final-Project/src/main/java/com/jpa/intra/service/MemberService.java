@@ -32,7 +32,15 @@ public class MemberService {
     @Transactional
     public void Update(Member m){
         aMemberRepository.update(m); //리포지 >> 업데이트 로직
-            }
+    }
 
+    // 비밀번호 찾기
+    public Member updateDefaultPw(String memberId, String email){
+        return aMemberRepository.getMember(memberId, email);
+    }
 
+    // 비밀번호 재설정
+    public void rePassword(String memberId, String email){
+        aMemberRepository.rePassword(memberId, email);
+    }
 }
