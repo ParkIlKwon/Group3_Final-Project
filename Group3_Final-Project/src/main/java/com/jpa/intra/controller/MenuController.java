@@ -130,7 +130,8 @@ public class MenuController {
     public String MoveConfirm(HttpSession session, Model model){
         Member curUser=(Member)session.getAttribute("user");
         List<BoardApproval> alist = boardService.findApproval();
-        List<BoardApproval> myAList = boardService.findMyApprovalList(alist,curUser.getMem_id());
+        //모든 결재리스트를 불러와서 현재 로그인된 회원에 해당되는 결재객체만 뽑아서 담아주는 로직
+        List<BoardApproval> myAList = boardService.findMyApprovalList(alist,curUser.getMem_name());
 
         if(curUser.getTeam().getTeam_name().equals("인사부")) model.addAttribute("alist", alist);
         else model.addAttribute("alist", myAList);

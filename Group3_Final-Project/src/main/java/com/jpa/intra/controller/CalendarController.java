@@ -1,5 +1,6 @@
 package com.jpa.intra.controller;
 
+import com.jpa.intra.domain.Member;
 import com.jpa.intra.domain.board.BoardCommon;
 import com.jpa.intra.domain.board.BoardTask;
 import com.jpa.intra.query.BoardTaskDTO;
@@ -28,9 +29,9 @@ public class CalendarController {
     public List<Map<String, Object>> getEventList(HttpServletRequest request) {
 
         HttpSession session = request.getSession();
-        String userId = (String) session.getAttribute("log");
+        Member m = (Member) session.getAttribute("user");
 
-        List<Map<String, Object>> eventList = calendarService.getEventList(userId);
+        List<Map<String, Object>> eventList = calendarService.getEventList(m);
         return eventList;
     }
 
@@ -44,11 +45,11 @@ public class CalendarController {
             return null;
         }
         HttpSession session = request.getSession();
-        String user = (String) session.getAttribute("log");
+        Member m = (Member) session.getAttribute("user");
 
-        //해당일정은 제목 , 현재 로그인된 회원아이디값을 넘겨줘서 찾음 .
+        //해당일정은 제목 , 현재 로그인된 회원이름값을 넘겨줘서 찾음 .
         //System.out.println(user  + " " +title);
-        BoardTask tc = calendarService.getSingleCalendar(user,title);
+        BoardTask tc = calendarService.getSingleCalendar(m.getMem_name(),title);
 
         return tc;
     }

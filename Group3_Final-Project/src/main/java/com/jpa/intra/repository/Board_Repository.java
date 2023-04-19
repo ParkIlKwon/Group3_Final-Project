@@ -28,6 +28,12 @@ public class Board_Repository {
                 .getResultList();
     }
 
+    public List<BoardTask> findBoardTaskByName(String name){
+        return em.createQuery("select t from BoardTask t where t.boardWriter = :name")
+                .setParameter("name",name)
+                .getResultList();
+    }
+
 
     public List<BoardTask> findAllBoardTask() {return em.createQuery("SELECT t FROM BoardTask t", BoardTask.class).getResultList();}
 
@@ -69,10 +75,10 @@ public class Board_Repository {
     // EntityManager의 내장 함수 find로 아이디 값을 참조하여 BoardCommon 객체를 뽑음
     public BoardCommon findByBoardId(Long id) {return em.find(BoardCommon.class, id);}
 
-    public BoardCommon findByBoardUserIdAndTitle(String uid,String title) {
+    public BoardCommon findByBoardUserIdAndTitle(String name,String title) {
         TypedQuery<BoardCommon> query = em.createQuery( //멤버 아이디와 패스워드 동시에 일치 하면 멤버 받아오는 로직
-                "SELECT b FROM BoardCommon b WHERE b.boardWriter = :id AND b.boardTitle = :title", BoardCommon.class);
-        query.setParameter("id", uid);
+                "SELECT b FROM BoardCommon b WHERE b.boardWriter = :name AND b.boardTitle = :title", BoardCommon.class);
+        query.setParameter("name", name);
         query.setParameter("title", title);
         try {
             return query.getSingleResult(); //성공시 하나의 일정(boardCommon)객체 받아옴

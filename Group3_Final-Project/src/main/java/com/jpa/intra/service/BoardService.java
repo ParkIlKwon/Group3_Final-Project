@@ -87,10 +87,10 @@ public class BoardService {
         }
     }
 
-    public List<BoardApproval> findMyApprovalList(List<BoardApproval> boardApprovalList, String memberId) {
+    public List<BoardApproval> findMyApprovalList(List<BoardApproval> boardApprovalList, String name) {
         List<BoardApproval> myApprovalList = new ArrayList<>();
         for (BoardApproval boardApproval : boardApprovalList) {
-            if (boardApproval.getBoardWriter().equals(memberId)) {
+            if (boardApproval.getBoardWriter().equals(name)) {
                 myApprovalList.add(boardApproval);
             }
         }

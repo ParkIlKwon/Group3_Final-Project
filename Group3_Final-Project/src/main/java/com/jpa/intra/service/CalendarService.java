@@ -22,13 +22,12 @@ public class CalendarService {
 
     private final BoardService boardService;
     private final Board_Repository boardRepository;
-    private final Member_Repository memberRepository;
-    public List<Map<String, Object>> getEventList(String userId){
+    public List<Map<String, Object>> getEventList(Member m){
 
         Map<String, Object> event ;
         List<Map<String, Object>> eventList = new ArrayList<Map<String, Object>>();
 
-        List<BoardTask> boardTaskList = boardService.findTasks(userId);
+        List<BoardTask> boardTaskList = boardRepository.findBoardTaskByName(m.getMem_name());
 
         for (BoardTask t: boardTaskList) {
             event = new HashMap<String, Object>();
@@ -39,7 +38,6 @@ public class CalendarService {
             eventList.add(event);
         }
 
-        Member m =  memberRepository.getMemberByUserId(userId);
 
         event = new HashMap<String,Object>();
         event.put("title","birthday");
@@ -52,8 +50,8 @@ public class CalendarService {
     }
 
 
-    public BoardTask getSingleCalendar(String uid, String title){
-        BoardCommon tempCommon = boardRepository.findByBoardUserIdAndTitle(uid,title);
+    public BoardTask getSingleCalendar(String name, String title){
+        BoardCommon tempCommon = boardRepository.findByBoardUserIdAndTitle(name,title);
 
         return boardRepository.findTaskByBoardId(tempCommon.getId());
     }
