@@ -42,64 +42,64 @@
     let endDateInput=document.querySelector('input[name="endDate"]');
     let deductionInput=document.querySelector('input[name="deduction"]');
 
-    // endDate 입력 폼을 비활성화하다.
-    endDateInput.disabled=true;
-
-    // startDate 입력 폼의 최소 날짜를 현재 날짜로 설정해주다.
-    let today=new Date();
-    startDateInput.min=today.toISOString().split('T')[0];
-
-    // startDate 입력 폼의 값이 변경될 때마다 endDate 입력 폼의 최소 날짜를 startDate 값으로 설정해주다.
-    startDateInput.addEventListener('change', function() {
-        endDateInput.min=startDateInput.value;
-
-        // endDate 입력 폼을 활성화하다.
-        endDateInput.disabled=false;
-
-        // startDate와 endDate를 비교하여 endDate가 startDate보다 작은 경우, endDate 값을 startDate와 동일하게 설정하다.
-        if(new Date(endDateInput.value) < new Date(startDateInput.value)) {
-            endDateInput.value=startDateInput.value;
-        }
-
-        // startDate와 endDate 사이의 일수를 계산하여 차감일수(deduction)를 보여주다.
-        let diffDays=calculateDays(startDateInput, endDateInput);
-        let deductionDays=diffDays * 8;
-        if(diffDays===0) {
-            deductionDays=4;
-        }
-        deductionInput.value=deductionDays;
-    });
-
-    // endDate 입력 폼의 값이 변경될 때마다, 차감일수(deduction)를 자동으로 계산하여 할당해주다.
-    endDateInput.addEventListener('change', function() {
-        let diffDays=calculateDays(startDateInput, endDateInput);
-        let deductionDays=diffDays*8;
-        if(diffDays===0) {
-            deductionDays=4;
-        }
-        deductionInput.value=deductionDays;
-    });
-
-    // endDate 입력 폼의 값이 변경될 때마다, 차감일수(deduction)를 자동으로 계산하여 할당다.
-    endDateInput.addEventListener('input', function() {
-        let diffDays=calculateDays(startDateInput, endDateInput);
-        let deductionDays=diffDays*8;
-        if (diffDays===0) {
-            deductionDays=4;
-        }
-        deductionInput.value=deductionDays;
-    });
-
-    // startDate와 endDate 사이의 일수를 계산하는 함수
-    function calculateDays(startDateInput, endDateInput) {
-        let startDate=new Date(startDateInput.value);
-        let endDate=new Date(endDateInput.value);
-        let diffMs=endDate.getTime()-startDate.getTime();
-        let diffDays=diffMs/(1000*60*60*24);
-        diffDays=Math.round(diffDays);
-
-        return diffDays;
-    }
+    // // endDate 입력 폼을 비활성화하다.
+    // endDateInput.disabled=true;
+    //
+    // // startDate 입력 폼의 최소 날짜를 현재 날짜로 설정해주다.
+    // let today=new Date();
+    // startDateInput.min=today.toISOString().split('T')[0];
+    //
+    // // startDate 입력 폼의 값이 변경될 때마다 endDate 입력 폼의 최소 날짜를 startDate 값으로 설정해주다.
+    // startDateInput.addEventListener('change', function() {
+    //     endDateInput.min=startDateInput.value;
+    //
+    //     // endDate 입력 폼을 활성화하다.
+    //     endDateInput.disabled=false;
+    //
+    //     // startDate와 endDate를 비교하여 endDate가 startDate보다 작은 경우, endDate 값을 startDate와 동일하게 설정하다.
+    //     if(new Date(endDateInput.value) < new Date(startDateInput.value)) {
+    //         endDateInput.value=startDateInput.value;
+    //     }
+    //
+    //     // startDate와 endDate 사이의 일수를 계산하여 차감일수(deduction)를 보여주다.
+    //     let diffDays=calculateDays(startDateInput, endDateInput);
+    //     let deductionDays=diffDays * 8;
+    //     if(diffDays===0) {
+    //         deductionDays=4;
+    //     }
+    //     deductionInput.value=deductionDays;
+    // });
+    //
+    // // endDate 입력 폼의 값이 변경될 때마다, 차감일수(deduction)를 자동으로 계산하여 할당해주다.
+    // endDateInput.addEventListener('change', function() {
+    //     let diffDays=calculateDays(startDateInput, endDateInput);
+    //     let deductionDays=diffDays*8;
+    //     if(diffDays===0) {
+    //         deductionDays=4;
+    //     }
+    //     deductionInput.value=deductionDays;
+    // });
+    //
+    // // endDate 입력 폼의 값이 변경될 때마다, 차감일수(deduction)를 자동으로 계산하여 할당다.
+    // endDateInput.addEventListener('input', function() {
+    //     let diffDays=calculateDays(startDateInput, endDateInput);
+    //     let deductionDays=diffDays*8;
+    //     if (diffDays===0) {
+    //         deductionDays=4;
+    //     }
+    //     deductionInput.value=deductionDays;
+    // });
+    //
+    // // startDate와 endDate 사이의 일수를 계산하는 함수
+    // function calculateDays(startDateInput, endDateInput) {
+    //     let startDate=new Date(startDateInput.value);
+    //     let endDate=new Date(endDateInput.value);
+    //     let diffMs=endDate.getTime()-startDate.getTime();
+    //     let diffDays=diffMs/(1000*60*60*24);
+    //     diffDays=Math.round(diffDays);
+    //
+    //     return diffDays;
+    // }
 
     function submitForm() {
         let memberId=$("#memberId").val();

@@ -53,6 +53,25 @@ public class Member_Repository {
                 .setParameter("memberId", m.getId())
                 .executeUpdate();
     }
-
+    
+    // 메일과 아이디로 멤버 객체 값 가져오기, 일치 없으면 null 값 호출
+    public Member getMember(String memberId, String email){
+        TypedQuery<Member> query = em.createQuery("SELECT m from Member m where m.mem_id = :memberId and m.email = :email", Member.class);
+        query.setParameter("memberId", memberId);
+        query.setParameter("email", email);
+        try{
+            Member member = query.getSingleResult();
+            return member;
+        }catch (NoResultException e){
+            return null;
+        }
+    }
+//  메일과 아이디가 일치하는 멤버 , 비밀번호를 '321' 으로 업데이트
+    public void rePassword(String memberId, String email){
+        em.createQuery("update Member m set m.mem_pw = '321' where m.mem_id = :memberId and m.email = :email")
+                .setParameter("memberId", memberId)
+                .setParameter("email", email)
+                .executeUpdate();
+    }
 
 }

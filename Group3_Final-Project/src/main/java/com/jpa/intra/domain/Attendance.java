@@ -11,14 +11,14 @@ import javax.persistence.*;
 @Setter
 @Entity
 @ToString
-public class MemberDetail {
+public class Attendance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "mem_num")
-    private Long id; //멤버 고유번호
+    @Column(name = "Attendance_ID")
+    private Long id; //출석 고유번호 1 2 3
 
-    private String member_id; //맴버
-
-    private String todayInWorkTime;
-    private String todayOutWorkTime;
+    private String userId; //맴버 ID
+ 
+    private String todayInWorkTime; //출근한 시간
+    private String todayOutWorkTime; //퇴근한 시간
 }

@@ -39,7 +39,7 @@ public class init {
         }
 
 //        initService.makeTaskDummy();
-
+        initService.KBJMemberDummy();
     }
 
     @Component
@@ -93,6 +93,19 @@ public class init {
 
         }
 
+
+//       KBJ 테스트 더미
+        public void KBJMemberDummy(){
+            Member member = new Member();
+            Address address = new Address("지번주소라네","도로명주소라네");
+            member.setAddress(address);
+            member.setEmail("kimbj0117@gmail.com");
+            member.setMem_id("1");
+            member.setMem_name("kbj");
+            member.setMem_pw("2");
+            em.persist(member);
+
+        }
     }
 }
 
