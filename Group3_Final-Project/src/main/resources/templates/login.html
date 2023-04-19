@@ -92,9 +92,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="findPw()">Understood</button>
-                    <input type="button" class="btn btn-primary" onclick="findPw()" value="tets"/>
+                    <button type="button" class="btn btn-primary" onclick="findPw()">완료</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                 </div>
             </div>
         </div>
@@ -111,7 +110,7 @@
 
 
 <script type="text/javascript">
-    <!-- remember id -->
+    <!-- remember id 아이디 저장 : 쿠키 이용 -->
     window.onload = function() {
 
         // 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 쿠키값 없으면 공백.
@@ -246,7 +245,7 @@
         }
     }
 
-    // 비밀번호 찾기 완료
+    // 비밀번호 찾기 완료 버튼 클릭 시
     function findPw(){
         if(emailCheck === true){
             let modalId = document.getElementById('modal-id').value;
@@ -257,6 +256,8 @@
                 data:{memberId : modalId, email : email},
                 success: function (msg) {
                     alert(msg);
+                    $('.modal').modal('hide');
+                    location.reload();
                 }
             });
         } else {

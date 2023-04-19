@@ -16,13 +16,13 @@
                 <div class="card p-3" style="height: 100vh;">
                     <div class="card-header p-0">
                         <button class="btn bg-gradient-primary p-2 mb-1" onclick="popWriteMail()">메일 쓰기</button>
-                        <button class="btn bg-gradient-info p-2 mb-1" onclick="location.href='/mail/mailForm'">받은 메일</button>
+                        <button class="btn bg-gradient-info p-2 mb-1" onclick="testtest()">받은 메일</button>
                         <button class="btn bg-gradient-success p-2 mb-1" onclick="location.href='/mail/mailForm'">보낸 메일</button>
                         <hr class="solid">
                     </div>
 
-                    <div class="card-body p-0">
-                        <h6 class="mb-0">메일 목록</h6>
+                    <div class="card-body p-0" id="mailListAll">
+<!--                        <h6 class="mb-0">메일 목록</h6>-->
                         <ul class="list-group">
                         <!-- 메일함이 비었을 때-->
                             <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg"
@@ -156,6 +156,12 @@
         let email = $('#read-sender-email').text();
         popup =window.open("/mail/reply?reply="+email,'새 메일', 'width=1040px,height=900px,scrollbars=yes');
     }
+
+    function testtest(){
+        let mailListAll = document.getElementById('mailListAll');
+        mailListAll.hide();
+    }
+
 </script>
 </body>
 </html>

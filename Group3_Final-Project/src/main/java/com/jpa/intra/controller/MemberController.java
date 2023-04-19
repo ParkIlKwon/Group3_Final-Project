@@ -154,6 +154,7 @@
             return "members/profile";
         }
 
+        // 비밀번호 찾기에서 인증 완료 후 비밀번호 재설정
         @PostMapping("/findPw")
         @ResponseBody
         public String findMemberPw(@RequestParam("memberId")String memberId, @RequestParam("email")String email){

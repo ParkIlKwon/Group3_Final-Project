@@ -50,6 +50,7 @@ public class AdminController {
         return code;
     }
 
+//  비밀번호 찾기시 이메일 인증 : 아이디와 이메일 값이 등록된 정보와 일치해야만 인증 코드가 발송 , 아닐 시 error 리턴
     @PostMapping("/mailConfirmForFindPw")
     @ResponseBody
     public String mailConfirmForFindPw(@RequestParam("email") String email, @RequestParam("modalId") String modalId) throws Exception {
