@@ -32,6 +32,7 @@
                 <div class="d-flex flex-column approval-main-left-alist-section-component">
                   <input type="hidden" class="approval-board-id" th:value="${vo.id}">
                   <input type="hidden" class="approval-board-writer" th:value="${vo.boardWriter}">
+                  <input type="hidden" class="approval-board-login-user-team-information" th:value="${curUser.team.team_name}">
                   <input type="hidden" class="approval-board-content" th:value="${vo.boardContent}">
                   <input type="hidden" class="approval-board-create-date" th:value="${vo.createDate}">
                   <input type="hidden" class="approval-board-update-date" th:value="${vo.updateDate}">
@@ -40,8 +41,8 @@
                   <span class="mb-2 text-xs approval-board-small-element">요청된 기안 : <span class="text-dark font-weight-bold ms-sm-2 approval-board-approval-type" th:text="${vo.approvalType == 'VACATION'} ? '휴가신청' : (${vo.approvalType == 'OVERTIME'} ? '연장근무신청' : '근무시간변경')"></span></span>
                   <span class="mb-2 text-xs approval-board-small-element">결재 요청자: <span class="text-dark font-weight-bold ms-sm-2 approval-board-requestorMemNum" th:text="${vo.boardWriter}"></span></span>
                   <span class="mb-2 text-xs approval-board-small-element">결재 승인자: <span class="text-dark ms-sm-2 font-weight-bold approval-board-approverMemNum" th:text="${vo.approverMemNum.mem_name}"></span></span>
-                  <h6 id="approval-board-progress" th:class="${vo.approvalStatus == 'APPROVED' ? 'approval-status-approved' : (vo.approvalStatus == 'REJECTED' ? 'approval-status-rejected' : 'approval-status-requested')}">
-                    <span th:text="${vo.approvalStatus == 'REQUESTED'} ? '요청됨' : (${vo.approvalStatus == 'APPROVED'} ? '승인됨' : '반려됨')"></span>&nbsp;&nbsp;
+                  <h6 id="approval-board-status" th:class="${vo.approvalStatus == 'APPROVED' ? 'approval-status-approved' : (vo.approvalStatus == 'REJECTED' ? 'approval-status-rejected' : 'approval-status-requested')}">
+                    <span class="approval-board-status-text" th:text="${vo.approvalStatus == 'REQUESTED'} ? '요청됨' : (${vo.approvalStatus == 'APPROVED'} ? '승인됨' : '반려됨')"></span>&nbsp;&nbsp;
                     <span class="badge bg-secondary"></span>
                   </h6>
                 </div>
@@ -61,7 +62,7 @@
           <input type="hidden" class="approval-board-detail-id">
 
           <div class="card-header pb-0 px-3">
-            <div class="row">
+            <div class="row approval-main-right-detail-header">
               <div class="col-md-6 d-flex justify-content-end align-items-center">
                 <i class="far fa-calendar-alt me-2"></i>
                 <small class="approval-board-detail-create-date"></small>
@@ -72,7 +73,6 @@
                   <option value="REQUESTED">요청됨</option>
                   <option value="APPROVED">승인됨</option>
                   <option value="REJECTED">반려됨</option>
-                  <option value="EXPIRED">만료됨</option>
                 </select>
 
 
@@ -202,6 +202,30 @@
     // db에 저장된 json문자열을 뽑아오다.
     let jsonString=data.querySelector('.approval-board-approval-info').value;
     let jsonObj=JSON.parse(jsonString);
+
+    //결재진행도 작성
+    let curUserTeamInfo=data.querySelector('.approval-board-login-user-team-information').value;
+    if(curUserTeamInfo === '인사부') {
+      let approvalStatus=data.querySelector('#approval-board-status').className;
+      let statusSelect=document.getElementById('approval-status');
+      if(approvalStatus === 'approval-status-requested') {
+        statusSelect.value='REQUESTED';
+      }
+      else if(approvalStatus === 'approval-status-approved') {
+        statusSelect.value='APPROVED';
+      }
+      else if(approvalStatus === 'approval-status-rejected') {
+        statusSelect.value='REJECTED';
+      }
+    }
+    else {
+      let statusText=document.getElementById('approvalStatus');
+      statusText.innerHTML="";
+      statusText.innerHTML=data.querySelector('.approval-board-status-text').textContent;
+    }
+
+
+
 
     //기본적인 결재문서 정보 작성 (요청자, 승인자, 요청된 날짜, 승인기간)
     function setValue(targetSelector, sourceSelector) {
@@ -345,6 +369,56 @@
     background:gray;
     height:1px;
     border:0;
+  }
+  .approval-main-right-detail-header {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 0;
+    padding-right: 3px;
+  }
+  /*콤보박스관련*/
+  select {
+    appearance: none;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    padding: 0.5rem;
+    font-size: 12px;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    width: 100%;
+    max-width: 75px; /* 최대 너비 설정 */
+    border-radius: 0.25rem;
+    box-shadow: 0 0 0 1px #e3e3e3;
+  }
+
+  select::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0.5rem;
+    transform: translateY(-50%);
+    width: 0.75rem;
+    height: 0.75rem;
+    border: 0.125rem solid #333;
+    border-top: none;
+    border-right: none;
+    transition: all 0.2s ease-in-out;
+    pointer-events: none;
+  }
+
+  select:hover::after {
+    border-color: #555;
+  }
+
+  select:focus {
+    box-shadow: 0 0 0 1px #555;
+  }
+
+  select option {
+    background-color: #fff;
+    color: #333;
   }
 </style>
 </body>

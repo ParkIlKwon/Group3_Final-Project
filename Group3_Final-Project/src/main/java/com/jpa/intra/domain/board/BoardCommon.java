@@ -1,5 +1,9 @@
 package com.jpa.intra.domain.board;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jpa.intra.domain.Member;
+import com.jpa.intra.util.MemberConverter;
+import com.jpa.intra.util.TeamConverter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +27,13 @@ public abstract class BoardCommon {
     private String boardContent;
     private String createDate;
     private String updateDate;
+
+
+    @ManyToOne
+    @JoinColumn(name="mem_num")
+    @Convert(converter = MemberConverter.class)
+    private Member boardWriterObject;
+
     private String boardWriter;
 
 }

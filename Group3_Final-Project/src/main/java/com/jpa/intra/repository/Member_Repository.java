@@ -85,4 +85,19 @@ public class Member_Repository {
                 .executeUpdate();
     }
 
+    public void updateMemberVacation(Member member, String startDate, String endDate, int updatedVacation) {
+        member.setVacationStart(startDate);
+        member.setVacationEnd(endDate);
+        member.setVacation(updatedVacation);
+        em.merge(member);
+        em.flush();
+    }
+
+    public void updateMemberWOC(Member member, String inWorkTime, String outWorkTime) {
+        member.setInWorkTime(inWorkTime);
+        member.setOutWorkTime(outWorkTime);
+        em.merge(member);
+        em.flush();
+    }
+
 }
