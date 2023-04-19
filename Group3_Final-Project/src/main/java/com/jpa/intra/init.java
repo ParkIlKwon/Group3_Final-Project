@@ -38,8 +38,8 @@ public class init {
     //생성자가 만들어지면 바로 호출하는 메서드
     @PostConstruct
     public void init() {
-        initService.noticeDummy();
-        initService.mailDummy();
+//        initService.noticeDummy();
+//        initService.mailDummy();
 
         Random ran = new Random();
 
@@ -48,9 +48,9 @@ public class init {
             initService.makeMemberDummy(num);
         }
 
-        for (int i = 0; i < 5; i++) {
-            initService.makeMemberDummy2(i);
-        }
+//        for (int i = 0; i < 5; i++) {
+//            initService.makeMemberDummy2(i);
+//        }
         // initService.makeTaskDummy();
 
     }

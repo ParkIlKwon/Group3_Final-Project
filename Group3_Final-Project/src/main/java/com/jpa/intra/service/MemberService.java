@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -54,4 +56,11 @@ public class MemberService {
         aMemberRepository.updateMemberWOC(member, inWorkTime, outWorkTime);
     }
 
+    public List<Member> searchByName(String query) {
+        return aMemberRepository.findByMemNameContainingIgnoreCase(query);
+    }
+
+    public Member findByMemName(String memName) {
+        return aMemberRepository.findByMemName(memName);
+    }
 }
