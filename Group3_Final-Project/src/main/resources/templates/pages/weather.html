@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}">
+<!--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+</head>
+<body style="background-color: #f8f9fa; min-width: 1200px">
+<main class="main-content  mt-0">
+    <section>
+        <span id="nowtime"></span>
+
+        <Span class="fs-3 fw-bold">서울&nbsp;</Span>
+        <Span class="fs-3 text-primary fw-bold" id="wthNowtemp"></span>
+        <h3 id="wthIcon"></h3>
+<!--        <h3 id="wthNowtemp">현재기온:</h3>-->
+<!--        <h3 id="wthLowtemp">최저기온:</h3>-->
+<!--        <h3 id="wthHightemp">최대기온:</h3>-->
+        <h3 id="wthHumidity"></h3>
+    </section>
+</main>
+
+<script>
+    //오늘 날짜출력
+    // window.onload=function () {
+    $(document).ready(function () {
+        function getDayName(day) {
+            const dayName = ['일', '월', '화', '수', '목', '금', '토'];
+            return dayName[day];
+        }
+
+        function convertTime() {
+            let now = new Date();
+            let month = now.getMonth() + 1;
+            let date = now.getDate();
+            let day = now.getDay();
+            let dayName = getDayName(day);
+            return month + '월' + date + '일 (' + dayName + '요일)';
+        }
+        let currentDate = convertTime();
+        $('#nowtime').append(currentDate);
+
+        //날씨 가져오기 JSON
+        $.getJSON('https://api.openweathermap.org/data/2.5/weather?lat=37.5833&lon=127&appid=7151cab8bdaa6f1af8c70e70243e8f02',
+            function (WeatherResult) {
+                //기온출력
+                $('#wthNowtemp').append(Math.floor(WeatherResult.main.temp-273.15)+'℃');
+                // $('#wthLowtemp').append(Math.floor(WeatherResult.main.temp_min-273.15)+'℃');
+                // $('#wthHightemp').append(WeatherResult.main.temp_max-273.15);
+                $('#wthHumidity').append(WeatherResult.main.humidity+'%');
+
+                //날씨아이콘출력
+                //WeatherResult.weater[0].icon
+                let weathericonUrl =
+                    '<img style="width: 50px; object-fit: cover" src= "https://openweathermap.org/img/wn/'
+                    + WeatherResult.weather[0].icon +
+                    '.png" alt="' + WeatherResult.weather[0].description + '"/>'
+
+                $('#wthIcon').html(weathericonUrl);
+            });
+    });
+
+
+
+</script>
+
+</body>
+</html>

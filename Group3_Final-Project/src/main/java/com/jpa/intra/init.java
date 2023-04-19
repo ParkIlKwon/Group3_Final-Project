@@ -38,7 +38,7 @@ public class init {
     //생성자가 만들어지면 바로 호출하는 메서드
     @PostConstruct
     public void init() {
-//        initService.noticeDummy();
+        initService.noticeDummy();
 //        initService.mailDummy();
 
         Random ran = new Random();
