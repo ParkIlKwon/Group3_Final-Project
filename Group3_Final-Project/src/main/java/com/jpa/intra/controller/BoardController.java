@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.jpa.intra.domain.Mail;
 import com.jpa.intra.domain.Member;
-import com.jpa.intra.domain.Reply;
 import com.jpa.intra.domain.Team;
 import com.jpa.intra.domain.board.BoardApproval;
 import com.jpa.intra.domain.board.BoardFree;
@@ -25,7 +24,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +31,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -368,6 +365,7 @@ public class BoardController {
 
             approvedMail.setTitle(requestor.getMem_name()+"님의 휴가 신청 결재안이 승인되다.");
             approvedMail.setBody("안녕하세요 "+requestor.getMem_name()+"님,<br><br>인사 담당자 "+approver.getMem_name()+"입니다. 먼저, 귀하께서 요청하신 휴가 신청에 대한 결재 결과를 안내드리게 되어 기쁩니다. <br>"+requestor.getMem_name()+"님이 요청하신 휴가 신청 결재가 승인되었음을 알려드립니다.<br><br>요청하신 휴가 기간은 "+startDate+"부터 "+endDate+"까지입니다. 승인에 따라 귀하의 총 연차 시간에서 "+deduction+"시간이 차감되었음을 알려드립니다. <br>이에 따라 남은 연차 시간을 확인하시기 바랍니다.<br><br>마지막으로, 휴가 기간 동안 편안한 시간 보내시기를 바라며, 필요한 사항이 있으시면 언제든지 연락주시기 바랍니다. 감사합니다.<br><br>인사 담당자 "+approver.getMem_name()+" 드림");
+//            approvedMail.setBody("안녕하세요 ");
             approvedMail.setSendDate(formattedDate);
             approvedMail.setView(0);
             approvedMail.setSender(approver.getMem_id());
@@ -403,6 +401,7 @@ public class BoardController {
 
             approvedMail.setTitle(requestor.getMem_name()+"님의 연장근무 신청 결재안이 승인되다.");
             approvedMail.setBody("안녕하세요 "+requestor.getMem_name()+"님,<br><br>인사 담당자 "+approver.getMem_name()+"입니다. 먼저, 귀하께서 요청하신 추가근무 신청에 대한 결재 결과를 안내드리게 되어 기쁩니다. <br>"+requestor.getMem_name()+"님이 요청하신 추가근무 신청 결재가 승인되었음을 알려드립니다.<br><br>요청하신 추가근무 기간은 "+startDate+"부터 "+endDate+"까지이며, 해당 기간동안, 퇴근 시간으로부터 "+endTime+"까지의 추가근무가 승인되었습니다. 승인에 따라, 추가근무 기간동안 귀하에게 "+bonusAllowance+"원의 추가수당이 매일 지급됨을 알려드립니다. <br><br>마지막으로, 추가 근무 기간 동안 성실히 업무를 수행해주시길 부탁드리며, 회사의 발전과 성장에 기여하는데 있어 더욱 중요한 역할을 담당하시리라 믿습니다. <br>귀하의 헌신적인 노력과 성실함에 대해 깊이 감사드리며, 앞으로도 지속적인 발전과 성공을 기원하겠습니다. 또한, 필요한 사항이 있으시면 언제든지 연락주시기 바랍니다. 감사합니다.<br><br>인사 담당자 "+approver.getMem_name()+" 드림");
+//            approvedMail.setBody("안녕하세요 ");
             approvedMail.setSendDate(formattedDate);
             approvedMail.setView(0);
             approvedMail.setSender(approver.getMem_id());
@@ -429,6 +428,7 @@ public class BoardController {
 
             approvedMail.setTitle(requestor.getMem_name()+"님의 출퇴근시간 변경 신청 결재안이 승인되다.");
             approvedMail.setBody("안녕하세요 "+requestor.getMem_name()+"님,<br><br>인사 담당자 "+approver.getMem_name()+"입니다. 먼저, 귀하께서 요청하신 출퇴근시간 변경 신청에 대한 결재 결과를 안내드리게 되어 기쁩니다. <br>"+requestor.getMem_name()+"님이 요청하신 출퇴근시간 변경 신청 결재가 승인되었음을 알려드립니다.<br><br>현 시간부로, 귀하의 변경된 업무시간은 "+goToOffice+"부터 "+leaveOffice+"까지입니다. <br>아울러, 필요한 사항이 있으시면 언제든지 연락주시기 바랍니다. 감사합니다.<br><br>인사 담당자 "+approver.getMem_name()+" 드림");
+//            approvedMail.setBody("안녕하세요 ");
             approvedMail.setSendDate(formattedDate);
             approvedMail.setView(0);
             approvedMail.setSender(approver.getMem_id());
@@ -451,6 +451,7 @@ public class BoardController {
 
             approvedMail.setTitle(requestor.getMem_name()+"님의 휴가 신청 결재안이 반려되다.");
             approvedMail.setBody(requestor.getMem_name()+"님,<br><br>인사 담당자 "+approver.getMem_name()+"입니다. 귀하께서 요청하신 휴가 신청에 대한 결재 결과를 안내드립니다. "+requestor.getMem_name()+"님이 요청하신 휴가 신청 결재가 반려되었습니다.<br><br>당신은 꿀을 빨아도 너무 심하게 빨았기 때문에 반려되었습니다.<br><br>무튼, 필요한 사항이 있으시면 언제든지 연락주시기 바랍니다. 감사합니다.<br><br>인사 담당자 "+approver.getMem_name()+" 드림");
+//            approvedMail.setBody("안녕하세요 ");
             approvedMail.setSendDate(formattedDate);
             approvedMail.setView(0);
             approvedMail.setSender(approver.getMem_id());
@@ -463,6 +464,7 @@ public class BoardController {
         else if(boardApproval.getApprovalType().equals("OVERTIME")) {
             approvedMail.setTitle(requestor.getMem_name()+"님의 연장근무 신청 결재안이 반려되다.");
             approvedMail.setBody(requestor.getMem_name()+"님,<br><br>인사 담당자 "+approver.getMem_name()+"입니다. 귀하께서 요청하신 추가근무 신청에 대한 결재 결과를 안내드립니다. "+requestor.getMem_name()+"님이 요청하신 추가근무 신청 결재가 반려되었습니다.<br><br>당신이 뭐가 예쁘다고 당신에게 저희가 돈을 왜 더 줘야됩니까?<br><br>무튼, 필요한 사항이 있으시면 언제든지 연락주시기 바랍니다. 감사합니다.<br><br>인사 담당자 "+approver.getMem_name()+" 드림");
+//            approvedMail.setBody("안녕하세요 ");
             approvedMail.setSendDate(formattedDate);
             approvedMail.setView(0);
             approvedMail.setSender(approver.getMem_id());
@@ -476,6 +478,7 @@ public class BoardController {
 
             approvedMail.setTitle(requestor.getMem_name()+"님의 출퇴근시간 변경 신청 결재안이 반려되다.");
             approvedMail.setBody(requestor.getMem_name()+"님,<br><br>인사 담당자 "+approver.getMem_name()+"입니다. 귀하께서 요청하신 출퇴근시간 변경 신청에 대한 결재 결과를 안내드립니다. "+requestor.getMem_name()+"님이 요청하신 출퇴근시간 변경 신청 결재가 반려되었습니다.<br><br>필요한 사항이 있으시면 언제든지 연락주시기 바랍니다. 감사합니다.<br><br>인사 담당자 "+approver.getMem_name()+" 드림");
+//            approvedMail.setBody("안녕하세요 ");
             approvedMail.setSendDate(formattedDate);
             approvedMail.setView(0);
             approvedMail.setSender(approver.getMem_id());

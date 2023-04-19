@@ -14,7 +14,8 @@ public class Mail {
         private Long id;
 
         private String title; //메일(쪽지) 제목 (필수)
-        @Lob
+//        @Lob
+        @Column(columnDefinition = "TEXT")
         private String body; //메일(쪽지) 내용 (필수)
         private String content; //메일(쪽지)파일,업로드 (선택)
 
