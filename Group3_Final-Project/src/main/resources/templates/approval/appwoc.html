@@ -9,7 +9,7 @@
 <div>
     <form>
         <h3>출퇴근 시간 변경 신청 기안</h3>
-        <input type="text" id="gender" name="gender" th:value="${curMember.gender}">
+        <input type="hidden" id="gender" name="gender" th:value="${curMember.gender}">
         <input type="hidden" id="memberId" name="memberId" th:value="${hrGuy.id}">
         <div class="form-group" th:object="${boardApprovalDTO}">
             <div class="form-group">
@@ -28,7 +28,7 @@
                 <input type="time" id="leaveOffice" th:field="*{leaveOffice}" placeholder="변경할 퇴근시간을 입력하다.">
             </div>
         </div>
-        <button type="button" onclick="submitForm()">제출</button>
+        <button type="button" onclick="submitForm()">상신하다</button>
     </form>
 </div>
 

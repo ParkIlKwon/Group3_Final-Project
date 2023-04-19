@@ -9,7 +9,7 @@
 <div>
     <form>
         <h3>연장근무 신청 기안</h3>
-        <input type="text" id="salary" name="salary" th:value="${curMember.salary}">
+        <input type="hidden" id="salary" name="salary" th:value="${curMember.salary}">
         <input type="hidden" id="memberId" name="memberId" th:value="${hrGuy.id}">
         <div class="form-group" th:object="${boardApprovalDTO}">
             <div class="form-group">
@@ -36,7 +36,7 @@
                 <input type="number" id="bonusAllowance" th:field="*{bonusAllowance}" placeholder="연장근무 추가 수당">
             </div>
         </div>
-        <button type="button" onclick="submitForm()">제출</button>
+        <button type="button" onclick="submitForm()">상신하다</button>
     </form>
 </div>
 

@@ -2,10 +2,7 @@ package com.jpa.intra.domain;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data //기본적으로 게터 세터 생성자 생성등이 들어가 있음
 @Entity //엔터티 생성 테이블에 매핑하는 JPA 엔터티로 클래스를 표시
@@ -17,6 +14,7 @@ public class Mail {
         private Long id;
 
         private String title; //메일(쪽지) 제목 (필수)
+        @Lob
         private String body; //메일(쪽지) 내용 (필수)
         private String content; //메일(쪽지)파일,업로드 (선택)
 

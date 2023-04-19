@@ -1,9 +1,11 @@
 package com.jpa.intra.service;
 
+import com.jpa.intra.domain.Member;
 import com.jpa.intra.domain.board.BoardCommon;
 import com.jpa.intra.domain.board.BoardTask;
 import com.jpa.intra.query.BoardTaskDTO;
 import com.jpa.intra.repository.Board_Repository;
+import com.jpa.intra.repository.Member_Repository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,7 @@ public class CalendarService {
 
     private final BoardService boardService;
     private final Board_Repository boardRepository;
+    private final Member_Repository memberRepository;
     public List<Map<String, Object>> getEventList(String userId){
 
         Map<String, Object> event ;
@@ -35,6 +38,15 @@ public class CalendarService {
             event.put("color","orange");
             eventList.add(event);
         }
+
+        Member m =  memberRepository.getMemberByUserId(userId);
+
+        event = new HashMap<String,Object>();
+        event.put("title","birthday");
+        event.put("start", m.getBirthday());
+        event.put("end",m.getBirthday());
+        event.put("color","skyblue");
+        eventList.add(event);
 
         return eventList;
     }
@@ -55,9 +67,7 @@ public class CalendarService {
         temp.setBoardContent(taskDTO.getBoardContent());
         temp.setStartDate(taskDTO.getStartDate());
         temp.setEndDate(taskDTO.getEndDate());
-        System.out.println("=========================================" +
-                "=============================================");
-        System.out.println(temp.getBoardContent());
+
         boardRepository.update(temp);
     }
 

@@ -66,12 +66,38 @@ public class Member_Repository {
             return null;
         }
     }
+
+    public Member getMemberByUserId(String memberId) {
+        TypedQuery<Member> query = em.createQuery("SELECT m from Member m where m.mem_id = :memberId", Member.class);
+        query.setParameter("memberId", memberId);
+        return query.getSingleResult();
+    }
+
+
+
+
+
 //  메일과 아이디가 일치하는 멤버 , 비밀번호를 '321' 으로 업데이트
     public void rePassword(String memberId, String email){
         em.createQuery("update Member m set m.mem_pw = '321' where m.mem_id = :memberId and m.email = :email")
                 .setParameter("memberId", memberId)
                 .setParameter("email", email)
                 .executeUpdate();
+    }
+
+    public void updateMemberVacation(Member member, String startDate, String endDate, int updatedVacation) {
+        member.setVacationStart(startDate);
+        member.setVacationEnd(endDate);
+        member.setVacation(updatedVacation);
+        em.merge(member);
+        em.flush();
+    }
+
+    public void updateMemberWOC(Member member, String inWorkTime, String outWorkTime) {
+        member.setInWorkTime(inWorkTime);
+        member.setOutWorkTime(outWorkTime);
+        em.merge(member);
+        em.flush();
     }
 
 }
