@@ -1,10 +1,12 @@
     package com.jpa.intra.controller;
 
     import com.jpa.intra.domain.Address;
+    import com.jpa.intra.domain.Attendance;
     import com.jpa.intra.domain.Member;
     import com.jpa.intra.domain.Team;
     import com.jpa.intra.query.MemberDTO;
     import com.jpa.intra.repository.Member_Repository;
+    import com.jpa.intra.service.AttendanceService;
     import com.jpa.intra.service.FileService;
     import com.jpa.intra.service.MemberService;
     import com.jpa.intra.util.TeamConverter;
@@ -13,12 +15,15 @@
     import org.springframework.ui.Model;
     import org.springframework.validation.BindingResult;
     import org.springframework.web.bind.annotation.*;
+    import java.text.SimpleDateFormat;
 
     import javax.servlet.http.HttpServletRequest;
     import javax.servlet.http.HttpSession;
     import javax.validation.Valid;
     import java.io.IOException;
+    import java.time.LocalDateTime;
     import java.util.ArrayList;
+    import java.util.Date;
     import java.util.List;
 
 
@@ -131,26 +136,50 @@
             return null;
         }
 
+        private final AttendanceService attendanceService;
         @GetMapping("/AttendanceControl") //출퇴근 로직
         public String gettingStart(HttpServletRequest request){
+
             HttpSession session = request.getSession();
             Member m = (Member)session.getAttribute("user"); //현재 세션에 저장된 유저 객체를 불러와서
+            Attendance attendance = new Attendance(); //출석부 객체 생성 필드 == (유저아이디,출근시간,퇴근시간 )
+
+            Date now = new Date(); //시간데이터 받아옴 .
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd a HH:mm:ss");
+            //0000년 00 월 00일 오후 00시 00분
+            attendance.setUserId(m.getMem_id());
+
             if(m.getStatus().equals("offline")){ //오프라인이면 온라인으로 그 반대면 반대로 .
+
+                attendance.setTodayInWorkTime(simpleDateFormat.format(now));
+                attendanceService.addAttendance(attendance); //출석부에 시간 데이터랑 현재 유저 넣어줌.
                 m.setStatus("online");
             }else{
+
+                attendance.setTodayOutWorkTime(simpleDateFormat.format(now));
+                attendanceService.setoutTime(attendance);
+                //퇴근시에는 출근데이터에 퇴근시간 데이터를 set 해줌 .
                 m.setStatus("offline");
             }
+
+
+            
+           
+
 
             service.Update(m); //리포지토리 JPQL 문에서 업데이트 , 저장 시켜줌 .
             session.setAttribute("user",m); //다시 업데이트 된 유저 정보를 반영 view 로 보내줌 .
             return "redirect:/moveDashboard";
-//            return "/dashboard/main";
         }
 
         // 마이페이지 눌렀을 때 members/profile.html
         @GetMapping("/profile")
-        public String memberAttendance(Model model){
+        public String memberAttendance(Model model , HttpServletRequest request){ //마이페이지로 가는 로직
+            HttpSession session = request.getSession();
+            String userId = (String) session.getAttribute("log");
             model.addAttribute("page", "마이페이지");
+            model.addAttribute("AttendList" , attendanceService.getAllAttendList(userId));
+
             return "members/profile";
         }
 
