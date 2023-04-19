@@ -55,16 +55,13 @@ public class MenuController {
 
     //프로젝트 페이지 이동
     @GetMapping("/moveProject")
-    public String MoveProject(HttpServletRequest req, Model model){
+    public String MoveProject(Model model){
         List<BoardTask> tlist=boardService.findTasks();
         List<Reply> rplist=replyService.findReply();
         model.addAttribute("tlist", tlist);
         model.addAttribute("replyDTO", new ReplyDTO());
         model.addAttribute("page","프로젝트");
         model.addAttribute("rplist", rplist);
-        HttpSession session=req.getSession();
-        String onOff="off";
-        session.setAttribute("onOff",onOff);
         return "project/main";
     }
 
