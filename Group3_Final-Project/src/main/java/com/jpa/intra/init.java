@@ -3,6 +3,7 @@ package com.jpa.intra;
 import com.jpa.intra.domain.Address;
 import com.jpa.intra.domain.Member;
 import com.jpa.intra.domain.Team;
+import com.jpa.intra.domain.board.BoardNotice;
 import com.jpa.intra.domain.board.BoardTask;
 import com.jpa.intra.query.BoardTaskDTO;
 import com.jpa.intra.service.FileService;
@@ -27,7 +28,6 @@ public class init {
 
     private final InitService initService;
 
-
     //생성자가 만들어지면 바로 호출하는 메서드
     @PostConstruct
     public void init() {
@@ -39,7 +39,8 @@ public class init {
         }
 
 //        initService.makeTaskDummy();
-        initService.KBJMemberDummy();
+//        initService.KBJMemberDummy();
+        initService.noticeDummy();
     }
 
     @Component
@@ -93,19 +94,25 @@ public class init {
 
         }
 
+        //공지사항 더미
+        public void noticeDummy(){
+            BoardNotice n1 = new BoardNotice();
+            n1.setCreateDate("2023-04-27");
+            n1.setBoardWriter("ADMIN");
+            n1.setBoardTitle("[작업공지] 2023-04-27 시스템 보안 점검 작업");
+            n1.setBoardContent("작업 일시 : 2023-04-27 00:00~00:30 \n작업 상세 : 시스템 보안 점검 작업\n"+
+            "담당자 : 인프라팀 이성권 책임\n연락처 : 02-456-7890");
+            em.persist(n1);
 
-//       KBJ 테스트 더미
-        public void KBJMemberDummy(){
-            Member member = new Member();
-            Address address = new Address("지번주소라네","도로명주소라네");
-            member.setAddress(address);
-            member.setEmail("kimbj0117@gmail.com");
-            member.setMem_id("1");
-            member.setMem_name("kbj");
-            member.setMem_pw("2");
-            em.persist(member);
-
+            BoardNotice n2 = new BoardNotice();
+            n2.setCreateDate("2023-05-05");
+            n2.setBoardWriter("ADMIN");
+            n2.setBoardTitle("[행사공지] 2023-05-05 전사 체육대회");
+            n2.setBoardContent("행사 일시 : 2023-05-05 09:00~16:00 \n행사 장소 : 상암 월드컵경기장\n"+
+                    "행사 담당 : 마케팅팀 김지영 선임\n연락처 : 02-789-6543");
+            em.persist(n2);
         }
+
     }
 }
 
