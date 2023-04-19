@@ -113,9 +113,13 @@ public class BoardController {
     @PostMapping("/board/newtaskboard")
     @ResponseBody
     public String writeNewBoardTask(HttpSession session, @RequestParam("boardTitle") String boardTitle, @RequestParam("boardContent") String boardContent, @RequestParam("responsibleMemNum") String responsibleMemNum, @RequestParam("teamNum") String teamNum, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate) {
-        Member memberObject=(Member)session.getAttribute("user");
-        Member responsibleMember=member_repository.findById(Long.parseLong(responsibleMemNum));
-        Team referenceTeam=bBoardRepository.findById(Long.parseLong(teamNum));
+//        Member memberObject=(Member)session.getAttribute("user");
+
+//        Member responsibleMember=member_repository.findById(Long.parseLong(responsibleMemNum));
+//        Team referenceTeam=bBoardRepository.findById(Long.parseLong(teamNum));
+
+        Member responsibleMember = member_repository.findByMemName(responsibleMemNum);
+        Team referenceTeam = bBoardRepository.findByTeamName(teamNum);
 
         System.out.println(responsibleMember.getMem_name());
         System.out.println(referenceTeam.getTeam_name());
@@ -381,7 +385,7 @@ public class BoardController {
             System.out.println(approvedMail.getSender_name());
             System.out.println(approvedMail.getReceiver());
 
-//            mailSendService.sendMail(approvedMail);
+            mailSendService.sendMail(approvedMail);
         }
         else if(boardApproval.getApprovalType().equals("OVERTIME")) {
 

@@ -151,4 +151,14 @@ public class Board_Repository {
         em.flush(); //적용
     }
 
+    public Team findByTeamName(String teamName) {
+        TypedQuery<Team> query = em.createQuery("SELECT t FROM Team t WHERE t.team_name = :teamName", Team.class);
+        query.setParameter("teamName", teamName);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
 }

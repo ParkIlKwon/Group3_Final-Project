@@ -1,6 +1,7 @@
 package com.jpa.intra.service;
 
 import com.jpa.intra.domain.Reply;
+import com.jpa.intra.domain.Team;
 import com.jpa.intra.domain.board.BoardApproval;
 import com.jpa.intra.domain.board.BoardFree;
 import com.jpa.intra.domain.board.BoardNotice;
@@ -126,6 +127,10 @@ public class BoardService {
     @Transactional
     public void deleteNotice(Long id) {
        bBoardRepository.delNoticeDB(id);
+    }
+
+    public Team findByTeamName(String teamName) {
+        return bBoardRepository.findByTeamName(teamName);
     }
 
 }

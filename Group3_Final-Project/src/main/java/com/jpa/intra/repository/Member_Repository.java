@@ -109,4 +109,21 @@ public class Member_Repository {
         em.flush();
     }
 
+    public List<Member> findByMemNameContainingIgnoreCase(String query) {
+        return em.createQuery("SELECT m FROM Member m WHERE lower(m.mem_name) LIKE lower(concat('%', :query, '%'))", Member.class)
+                .setParameter("query", query)
+                .getResultList();
+    }
+
+    public Member findByMemName(String memName) {
+        TypedQuery<Member> query = em.createQuery("SELECT m FROM Member m WHERE m.mem_name = :memName", Member.class);
+        query.setParameter("memName", memName);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+
 }
