@@ -53,6 +53,13 @@ public class Member_Repository {
                 .setParameter("memberId", m.getId())
                 .executeUpdate();
     }
+
+    public void updateImg(Member m) { //이미지 업데이트 문
+        em.createQuery("UPDATE Member m SET m.mem_img = :img WHERE m.id = :memberId")
+                .setParameter("img",m.getMem_img())
+                .setParameter("memberId",m.getId())
+                .executeUpdate();
+    }
     
     // 메일과 아이디로 멤버 객체 값 가져오기, 일치 없으면 null 값 호출
     public Member getMember(String memberId, String email){
