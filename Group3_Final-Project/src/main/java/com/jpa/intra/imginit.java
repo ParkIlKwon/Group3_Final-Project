@@ -4,25 +4,21 @@ import com.jpa.intra.domain.Member;
 import com.jpa.intra.repository.Member_Repository;
 import com.jpa.intra.service.FileService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.*;
 import java.net.URI;
-import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
 @Component
 @RequiredArgsConstructor
+@Service
+@Transactional
 public class imginit {
 
     private final FileService fileService;
@@ -32,7 +28,7 @@ public class imginit {
 
     public void run(){
 
-        initFolder(new File("C:\\profile"));
+        //initFolder(new File("C:\\profile"));
 
         initFolder(new File("C:\\download"));
 
@@ -46,10 +42,10 @@ public class imginit {
             makeProfileImg(i,allMemberList.get(i));
             System.out.println(i);
 
-            
+
         }
     }
-    
+
     //폴더 지워주는 재생성해주는 로직
     //만든이유 : 계속 실행을 하다보면 폴더에 파일들이 쌓임 . ※ 폴더 내부에 파일을 모두 지워야 폴더삭제가능.
     //파일 객체를 받아와서 지워줌
@@ -72,7 +68,7 @@ public class imginit {
 
 
     }
-    
+
 
     @Transactional
     public void makeProfileImg(int index,Member m){
@@ -86,21 +82,58 @@ public class imginit {
         try (InputStream in = URI.create(url).toURL().openStream()){
 
             Files.copy(in, Paths.get(fileName));
+
+            File file = new File(fileName);
+
+            try {
+                fileService.saveProfileImage(file,m);
+            } catch (IOException e) {
+                System.out.println("이미 있기 때문에 재생성");
+                String fileDir = "C:\\profile\\";
+
+                // 원래 파일 이름 추출
+                String origName = "tempFile"+index+".jpg";
+
+                // 파일을 불러올 때 사용할 파일 경로
+                String savedPath = fileDir + origName;
+
+                Member mem = new Member();
+                String tid = index + "";
+                mem.setId(Long.parseLong(tid));
+                mem.setMem_img(savedPath);
+                repository.updateImg(mem);
+
+//                m.setMem_img(savedPath);
+
+            }
+
         }catch (IOException e){
-            e.printStackTrace();
+            System.out.println("이미 있기 때문에 재생성");
+            String fileDir = "C:\\profile\\";
+
+            // 원래 파일 이름 추출
+            String origName = "tempFile"+index+".jpg";
+
+            // 파일을 불러올 때 사용할 파일 경로
+            String savedPath = fileDir + origName;
+
+            Member mem = new Member();
+            String tid = index + "";
+            mem.setId(Long.parseLong(tid));
+            mem.setMem_img(savedPath);
+            repository.updateImg(mem);
+
+            //m.setMem_img(savedPath);
+
+
         }
 
 
-        File file = new File(fileName);
-        try {
-            fileService.saveProfileImage(file,m);
-        } catch (IOException e) {
-            e.getStackTrace();
-        }
+
 
 
 
     }
-    
+
 
 }

@@ -46,4 +46,25 @@ public class Mail_Repository {
         query.setParameter("receiver",sender_email);
         return query.getResultList();
     }
+
+//    public void updateMailView(Member member){
+//        String receiver = member.getEmail();
+//        em.createQuery("update Mail mail set mail.view = 1 where mail.receiver=:receiver")
+//                .setParameter("receiver",receiver)
+//                .executeUpdate();
+//    }
+//public void updateMailView(Mail mail, Member member){
+//    String receiver = member.getEmail();
+//    int mailId = Math.toIntExact(mail.getId());
+//    em.createQuery("update Mail mail set mail.view = 1 where mail.receiver=:receiver and mail.id=:id")
+//            .setParameter("receiver",receiver)
+//            .setParameter("id",mailId)
+//            .executeUpdate();
+//}
+public void updateMailView(Long mailId, String receiver){
+    em.createQuery("update Mail mail set mail.view = 1 where mail.id=:id and mail.receiver=:receiver")
+            .setParameter("id",mailId)
+            .setParameter("receiver",receiver)
+            .executeUpdate();
+}
 }

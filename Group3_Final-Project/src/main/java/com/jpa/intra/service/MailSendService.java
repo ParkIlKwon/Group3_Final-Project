@@ -14,7 +14,7 @@ public class MailSendService {
 
     @Transactional
     public void sendMail(Mail mail){
-        mailRepository.sendMail(mail); 
+        mailRepository.sendMail(mail);
         //리포지에서 따로 persist 해주고 여기서 DB에 쏴주는 역활
     }
 

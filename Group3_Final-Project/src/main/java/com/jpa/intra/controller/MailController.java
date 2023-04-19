@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -62,8 +63,9 @@ public class MailController {
         Mail resMail = new Mail();
         resMail.setTitle(m.getTitle()); //제목 
         resMail.setBody(newBody); //내용
-        resMail.setSendDate(now.toString()); //현재 날짜 (2023-04-11T12:22:08.845386100)
-
+//        resMail.setSendDate(now.toString()); //현재 날짜 (2023-04-11T12:22:08.845386100)
+        String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        resMail.setSendDate(formatDate);
         resMail.setView(0); //열람여부 0 -> false , 1 -> true
 
         resMail.setSender((String) session.getAttribute("log")); //보내는 사람 id (현재 로그인된 사람 불러옴)
@@ -96,10 +98,15 @@ public class MailController {
 
     @PostMapping("/read")
     @ResponseBody
-    public Mail readMail2(Model model, @RequestParam("mailId") Long mailId){
+    public Mail readMail2(Model model, @RequestParam("mailId") Long mailId, HttpServletRequest request){
         Mail mail = mailService.getOneMail(mailId);
-        List<Mail> mailList = mailService.findLogMailList();
-        model.addAttribute("mailList",mailList);
+//        List<Mail> mailList = mailService.findLogMailList();
+//        model.addAttribute("mailList",mailList);
+        HttpSession session = request.getSession();
+        Member member = (Member) session.getAttribute("user");
+        if(mail.getReceiver().equals(member.getEmail())){
+            mailService.updateMailView(mailId,member.getEmail());
+        }
         model.addAttribute("mail",mail);
         return mail;
     }
@@ -108,6 +115,14 @@ public class MailController {
     public String replyMail(Model model, @RequestParam("reply")String reply) {
         model.addAttribute("reply",reply);
         return "mail/mailForm";
+    }
+
+    @GetMapping("/dashBoard")
+    @ResponseBody
+    public String mailDashBoard(Model model){
+        List<Mail> mailList = mailService.findLogMailList();
+        model.addAttribute("mailList",mailList);
+        return "메일대쉬보드";
     }
 
 }
