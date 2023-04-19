@@ -27,6 +27,8 @@ public class Board_Repository {
                 .setParameter("id",id)
                 .getResultList();
     }
+
+
     public List<BoardTask> findAllBoardTask() {return em.createQuery("SELECT t FROM BoardTask t", BoardTask.class).getResultList();}
 
     public BoardTask findTaskByBoardId(Long boardId) {

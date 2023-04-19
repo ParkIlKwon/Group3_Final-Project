@@ -6,7 +6,7 @@ var ref = [
     {key:4, name:'드라이브'},
     {key:5, name:'주소록'},
     {key:6, name:'결재'},
-    {key:7, name:'ADMIN'},
+    {key:7, name:'어드민'},
     {key:8, name:'회의'},
     {key:9, name:'새프로젝트'},
     {key:10, name:'공지사항'},
