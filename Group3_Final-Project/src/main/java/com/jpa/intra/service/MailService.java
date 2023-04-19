@@ -17,6 +17,7 @@ import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -125,7 +126,10 @@ public class MailService{
        Member member = (Member) session.getAttribute("user");
        return mail_repository.findLogMailList(member);
    }
-
+    @Transactional
+    public void updateMailView(Long mailId, String receiver){
+        mail_repository.updateMailView(mailId, receiver);
+    }
 
 
 

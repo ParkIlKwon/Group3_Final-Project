@@ -1,6 +1,7 @@
 package com.jpa.intra.controller;
 
 import com.jpa.intra.domain.FileEntity;
+import com.jpa.intra.domain.Mail;
 import com.jpa.intra.domain.Member;
 import com.jpa.intra.domain.Reply;
 import com.jpa.intra.domain.board.BoardApproval;
@@ -12,6 +13,7 @@ import com.jpa.intra.query.ReplyDTO;
 import com.jpa.intra.repository.File_Repository;
 import com.jpa.intra.repository.Member_Repository;
 import com.jpa.intra.service.BoardService;
+import com.jpa.intra.service.MailService;
 import com.jpa.intra.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -28,6 +30,7 @@ import java.util.List;
 public class MenuController {
     private final BoardService boardService;
     private final ReplyService replyService;
+    private final MailService mailService;
     
     private final Member_Repository member_repository;
     
@@ -40,6 +43,8 @@ public class MenuController {
         }
         //페이지 이동시 (페이지제목/사이드바 active 변경을 위한 model)
         model.addAttribute("page", "Dashboard");
+        List<Mail> mailList = mailService.findLogMailList();
+        model.addAttribute("mailList",mailList);
         return "/dashboard/main";
     }
 
