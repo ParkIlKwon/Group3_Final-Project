@@ -84,7 +84,9 @@ public class BoardController {
     // 업무게시판작성 폼을 불러오다
     @GetMapping("/board/newtaskboard")
     public String callBoardTaskWriteForm(Model model) {
+        List<Member> mlist = member_repository.getAllMemberList();
         model.addAttribute("boardTaskDTO", new BoardTaskDTO());
+        model.addAttribute("mlist", mlist);
         return "project/boardTaskWriteForm";
     }
 
@@ -317,6 +319,7 @@ public class BoardController {
     @PostMapping("/board/changeapprovalstatus")
     public ResponseEntity<Void> changeApprovalStatus(HttpSession session, @RequestParam Long boardId, @RequestParam String approvalStatus) {
         Member memberObject=(Member)session.getAttribute("user");
+        System.out.println(memberObject.getMem_name());
 
         boardService.changeApprovalStatus(boardId, approvalStatus);
         BoardApproval boardApproval=boardService.findApprovalByBoardId(boardId);
@@ -334,8 +337,10 @@ public class BoardController {
     // 결재가 승인된 후에 후속처리될 로직들을 작성한 메서드
     private void doApprove(Member approver, BoardApproval boardApproval) {
         Member requestor=member_repository.findById(boardApproval.getBoardWriterObject().getId());
+        System.out.println(requestor.getMem_name());
 
         String approvalInfo=boardApproval.getApprovalInfo();
+        System.out.println(approvalInfo);
         ObjectMapper mapper=new ObjectMapper();
 
         Mail approvedMail=new Mail();
@@ -370,7 +375,13 @@ public class BoardController {
             approvedMail.setSender_email(approver.getEmail());
             approvedMail.setReceiver(requestor.getEmail());
 
-            mailSendService.sendMail(approvedMail);
+            System.out.println(approvedMail.getBody());
+            System.out.println(approvedMail.getSender());
+            System.out.println(approvedMail.getSender_email());
+            System.out.println(approvedMail.getSender_name());
+            System.out.println(approvedMail.getReceiver());
+
+//            mailSendService.sendMail(approvedMail);
         }
         else if(boardApproval.getApprovalType().equals("OVERTIME")) {
 
