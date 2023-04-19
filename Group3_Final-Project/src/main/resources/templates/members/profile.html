@@ -76,10 +76,10 @@
                 <div class="table-responsive p-0">
                   <table class="table align-items-center mb-0">
 
+
                     <thead>
-                    <tr class="text-center">
+                    <tr class="text-center" >
     <!--                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">이름</th>-->
-                      <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">날짜</th>
                       <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">출근 시간</th>
                       <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">퇴근 시간</th>
                       <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">비고</th>
@@ -89,59 +89,35 @@
                     </tr>
                     </thead>
 
-                    <tbody>
-                    <tr class="text-center">
-                      <!-- 연락처 -->
-    <!--                  <td>-->
-    <!--                    <div class="d-flex px-2 py-1">-->
-    <!--                      <div class="d-flex flex-column justify-content-center">-->
-    <!--                        <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal">당신</a></h6>-->
-    <!--                      </div>-->
-    <!--                    </div>-->
-    <!--                  </td>-->
-                      <!-- 회사번호 -->
+                    <tbody th:with=" list= ${AttendList}">
+                    <tr class="text-center" th:each="vo:${list}">
+
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal">2000.20.20</a></h6>
+                            <h6 class="mb-0 text-sm" th:text="${vo.getTodayInWorkTime()}" th:if="${vo.getTodayInWorkTime()} != null"></h6>
                           </div>
                         </div>
                       </td>
-                      <!-- 이메일 -->
+
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal">9:00</a></h6>
+                            <h6 class="mb-0 text-sm" th:text="${vo.getTodayOutWorkTime()}" th:if="${vo.getTodayOutWorkTime()} != null"></h6>
                           </div>
                         </div>
                       </td>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal">18:00</a></h6>
-                          </div>
-                        </div>
-                      </td>
+
+
                       <td>
                         <div class="d-flex px-2 py-1">
                             <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm"><a data-bs-toggle="modal" data-bs-target="#exampleModal">비고</a></h6>
+                                <h6 class="mb-0 text-sm"></h6>
                             </div>
                         </div>
                       </td>
 
-    <!--                  &lt;!&ndash; 출 퇴근 현황 &ndash;&gt;-->
-    <!--                  <td class="align-middle text-center text-sm">-->
-    <!--                    <span class="badge badge-sm bg-gradient-success">Online</span>-->
-    <!--                  </td>-->
-    <!--                  &lt;!&ndash; 사원정보 수정 : Modal &ndash;&gt;-->
-    <!--                  <td class="align-middle text-center text-sm">-->
-    <!--                    <button class="btn bg-gradient-warning px-3 py-1 mb-0">수정</button>-->
-    <!--                  </td>-->
-    <!--                  &lt;!&ndash; 사원 삭제 &ndash;&gt;-->
-    <!--                  <td class="align-middle text-center text-sm">-->
-    <!--                    <button class="btn bg-gradient-danger px-3 py-1 mb-0">삭제</button>-->
-    <!--                  </td>-->
+
                     </tr>
                     </tbody>
                   </table>

@@ -7,27 +7,148 @@
 </head>
 <body>
 <div>
-    <form action="/board/newapprovalwocboard" method="POST">
-        <input type="hidden" name="memberId" th:value="${hrGuy.id}">
+    <form>
+        <h3>출퇴근 시간 변경 신청 기안</h3>
+        <input type="text" id="gender" name="gender" th:value="${curMember.gender}">
+        <input type="hidden" id="memberId" name="memberId" th:value="${hrGuy.id}">
         <div class="form-group" th:object="${boardApprovalDTO}">
             <div class="form-group">
                 <label th:for="boardContent">출퇴근 시간 변경신청 사유</label>
-                <textarea th:field="*{boardContent}" placeholder="사유를 입력하다."></textarea>
+                <textarea id="boardContent" th:field="*{boardContent}" placeholder="사유를 입력하다."></textarea>
             </div>
         </div>
 
         <div class="form-group" th:object="${boardApprovalInfoDTO}">
             <div class="form-group">
-                <label th:for="startDate">변경할 출근시간</label>
-                <input type="time" th:field="*{goToOffice}" placeholder="시작일을 입력하다.">
+                <label th:for="goToOffice">변경할 출근시간</label>
+                <input type="time" id="goToOffice" th:field="*{goToOffice}" placeholder="변경할 출근시간을 입력하다.">
             </div>
             <div class="form-group">
-                <label th:for="time">변경할 퇴근시간</label>
-                <input type="time" th:field="*{leaveOffice}" placeholder="복귀일을 입력하다.">
+                <label th:for="leaveOffice">변경할 퇴근시간</label>
+                <input type="time" id="leaveOffice" th:field="*{leaveOffice}" placeholder="변경할 퇴근시간을 입력하다.">
             </div>
         </div>
-        <button type="submit">제출</button>
+        <button type="button" onclick="submitForm()">제출</button>
     </form>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    let goToOfficeInput=document.querySelector('input[name="goToOffice"]');
+    let leaveOfficeInput=document.querySelector('input[name="leaveOffice"]');
+
+    function calculateWorkingHours(goToOffice, leaveOffice) {
+        const goToOfficeDate=new Date(`1970-01-01T${goToOffice}:00`);
+        const leaveOfficeDate=new Date(`1970-01-01T${leaveOffice}:00`);
+
+        if(leaveOfficeDate<=goToOfficeDate) {
+            leaveOfficeDate.setDate(leaveOfficeDate.getDate()+1); // 다음 날로 설정
+        }
+
+        const difference=leaveOfficeDate-goToOfficeDate;
+        const hours=difference / (1000*60*60);
+
+        return hours;
+    }
+
+    function validateWorkingHours(goToOfficeD, leaveOfficeC) {
+        const hours = calculateWorkingHours(goToOfficeD, leaveOfficeC);
+        if(hours<4) {
+            alert("총 근무시간이 4시간을 넘어야 합니다.");
+            return false;
+        }
+        return true;
+    }
+
+
+    function submitForm() {
+        const goToOfficeC=goToOfficeInput.value;
+        const leaveOfficeC=leaveOfficeInput.value;
+
+        if (!validateWorkingHours(goToOfficeC, leaveOfficeC)) {
+            return;
+        }
+
+        let memberId=$("#memberId").val();
+        let boardContent=$("#boardContent").val();
+        let goToOffice=$("#goToOffice").val();
+        let leaveOffice=$("#leaveOffice").val();
+        $.ajax({
+            url:"/board/newapprovalwocboard",
+            type:"POST",
+            data:{"memberId":memberId,"boardContent":boardContent ,"goToOffice":goToOffice,"leaveOffice" : leaveOffice},
+            success: function (data) {
+                alert("결재가 성공적으로 등록되다.");
+                self.close();
+                opener.location.reload();
+            },
+            error:function(request,status,error){
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                self.close();
+            }
+        })
+    }
+</script>
+
+<style>
+    body {
+        font-family: 'Noto Sans KR', sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .container {
+        width: 90%;
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        max-height: 90%;
+        overflow-y: auto;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    input, textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 14px;
+        color: #333;
+        resize: none;
+    }
+    textarea {
+        height: 100px;
+        max-width: 100%;
+    }
+    button {
+        width: 100%;
+        padding: 12px;
+        background-color: #007BFF;
+        border: none;
+        border-radius: 3px;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
 </body>
 </html>

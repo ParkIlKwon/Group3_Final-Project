@@ -1,12 +1,7 @@
 package com.jpa.intra.repository;
 
-import com.jpa.intra.domain.Member;
-import com.jpa.intra.domain.Reply;
 import com.jpa.intra.domain.Team;
-import com.jpa.intra.domain.board.BoardApproval;
-import com.jpa.intra.domain.board.BoardCommon;
-import com.jpa.intra.domain.board.BoardFree;
-import com.jpa.intra.domain.board.BoardTask;
+import com.jpa.intra.domain.board.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.TypedQuery;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Repository
@@ -23,6 +20,7 @@ public class Board_Repository {
 
     public void createBoardFree(BoardFree boardFree) {em.persist(boardFree);}
     public void createBoardTask(BoardTask boardTask) {em.persist(boardTask);}
+    public void createBoardNotice(BoardNotice boardNotice) {em.persist(boardNotice);}
 
     public List<BoardTask> findBoardTaskById(String id){
         return em.createQuery("select t from BoardTask t where t.boardWriter = :id")
@@ -56,7 +54,7 @@ public class Board_Repository {
 
     public void createBoardApproval3(BoardApproval boardApproval) {em.persist(boardApproval);}
 
-    public List<BoardApproval> findAllBoardApproval1() {return em.createQuery("SELECT a FROM BoardApproval a", BoardApproval.class).getResultList();}
+    public List<BoardApproval> findAllBoardApproval() {return em.createQuery("SELECT a FROM BoardApproval a", BoardApproval.class).getResultList();}
 
     // EntityManager의 내장 함수 find로 아이디 값을 참조하여 Team 객체를 뽑음
     public Team findById(Long id) {return em.find(Team.class, id);}
@@ -90,7 +88,34 @@ public class Board_Repository {
                 .executeUpdate();
     }
 
+    public void deleteBoardApprovalById(Long boardId) {
+        BoardApproval boardApproval = em.getReference(BoardApproval.class, boardId);
+        em.remove(boardApproval); // 목록에서 얘만 지워줌 . commit 만 되어 있는 상태
+        em.flush(); //적용
+    }
 
+    public void changeApprovalStatus(Long boardId, String approvalStatus) {
+        BoardApproval boardApproval = em.find(BoardApproval.class, boardId);
+        boardApproval.setApprovalStatus(approvalStatus);
+        em.merge(boardApproval);
+        em.flush();
+    }
+
+    public List<BoardApproval> findByApprovalStatusAndDueDateBefore(String approvalStatus, String dueDate) {
+        System.out.println("레퍼지토리 문제없이 실행되다");
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분");
+        LocalDateTime dueDateTime = LocalDateTime.parse(dueDate, formatter);
+
+        return em.createQuery("SELECT a FROM BoardApproval a WHERE a.approvalStatus = :approvalStatus AND a.dueDate <= :dueDate")
+                .setParameter("approvalStatus", approvalStatus)
+                .setParameter("dueDate", dueDateTime)
+                .getResultList();
+    }
+
+    public List<BoardNotice> findAllNotice() {
+        return em.createQuery("SELECT t FROM BoardNotice t order by t.id desc ", BoardNotice.class).getResultList();
+    }
 
 
 

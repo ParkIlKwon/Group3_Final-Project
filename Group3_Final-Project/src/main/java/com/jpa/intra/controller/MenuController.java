@@ -4,7 +4,10 @@ import com.jpa.intra.domain.FileEntity;
 import com.jpa.intra.domain.Member;
 import com.jpa.intra.domain.Reply;
 import com.jpa.intra.domain.board.BoardApproval;
+import com.jpa.intra.domain.board.BoardNotice;
 import com.jpa.intra.domain.board.BoardTask;
+import com.jpa.intra.query.BoardNoticeDTO;
+import com.jpa.intra.query.BoardTaskDTO;
 import com.jpa.intra.query.ReplyDTO;
 import com.jpa.intra.repository.File_Repository;
 import com.jpa.intra.repository.Member_Repository;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -39,11 +43,14 @@ public class MenuController {
         return "/dashboard/main";
     }
 
-    //대시보드 페이지 이동
+    //공지 페이지 이동
     @GetMapping("/moveNotice")
     public String MoveNotice(Model model){
         model.addAttribute("page", "공지사항");
-        return "dashboard/notice";
+        //공지사항 리스트
+        List<BoardNotice> nlist=boardService.getNoticeList();
+        model.addAttribute("nlist", nlist);
+        return "board/notice";
     }
 
     //프로젝트 페이지 이동
@@ -58,15 +65,30 @@ public class MenuController {
         HttpSession session=req.getSession();
         String onOff="off";
         session.setAttribute("onOff",onOff);
-        return "/project/main";
+        return "project/main";
     }
 
     //캘린더 페이지 이동
     @GetMapping("/moveCalendar")
     public String MoveCalender(Model model){
         model.addAttribute("page", "캘린더");
-       return "/calendar/main";
+       return "calendar/main";
     }
+
+    @GetMapping("/projectCalendar")
+    public String projectCalendar(Model model){
+        model.addAttribute("page", "캘린더");
+        return "calendar/getProject";
+    }
+
+    @GetMapping("/holidayCalendar")
+    public String holidayCalendar(Model model){
+        model.addAttribute("page", "캘린더");
+        return "calendar/holiday";
+    }
+
+
+
 
     final private File_Repository fileRepository;
     //드라이브 페이지 이동
@@ -95,11 +117,17 @@ public class MenuController {
 
     //결재 페이지 이동
     @GetMapping("/moveApproval")
-    public String MoveConfirm(Model model){
+    public String MoveConfirm(HttpSession session, Model model){
+        Member curUser=(Member)session.getAttribute("user");
+        List<BoardApproval> alist = boardService.findApproval();
+        List<BoardApproval> myAList = boardService.findMyApprovalList(alist,curUser.getMem_id());
 
-        List<BoardApproval> alist = boardService.findApproval1();
-        model.addAttribute("alist", alist);
+        if(curUser.getTeam().getTeam_name().equals("인사부")) model.addAttribute("alist", alist);
+        else model.addAttribute("alist", myAList);
+
         model.addAttribute("page", "결재");
+        model.addAttribute("curUser",curUser);
+
         return "/approval/main";
     }
 

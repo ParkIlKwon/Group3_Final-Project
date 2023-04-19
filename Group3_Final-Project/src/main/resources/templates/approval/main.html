@@ -21,12 +21,17 @@
             <hr class="solid">
           </div>
 
+          <!--<div class="card-body pt-4 p-3 approval-main-left">
+            <h6 class="mb-0">결재 목록</h6>
+            <ul class="list-group approval-main-left-alist-section" th:with="list=${curUser.team.team_name} == '인사부' ? ${alist} : ${myAList}" th:each="vo:${list}" onclick="showAlistContents(this)">-->
           <div class="card-body pt-4 p-3 approval-main-left" th:with="alist=${alist}">
             <h6 class="mb-0">결재 목록</h6>
             <ul class="list-group approval-main-left-alist-section" th:each="vo:${alist}" onclick="showAlistContents(this)">
+              <!-- 기존의 내용 -->
               <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg approval-main-left-alist-section">
                 <div class="d-flex flex-column approval-main-left-alist-section-component">
                   <input type="hidden" class="approval-board-id" th:value="${vo.id}">
+                  <input type="hidden" class="approval-board-writer" th:value="${vo.boardWriter}">
                   <input type="hidden" class="approval-board-content" th:value="${vo.boardContent}">
                   <input type="hidden" class="approval-board-create-date" th:value="${vo.createDate}">
                   <input type="hidden" class="approval-board-update-date" th:value="${vo.updateDate}">
@@ -61,7 +66,15 @@
                 <i class="far fa-calendar-alt me-2"></i>
                 <small class="approval-board-detail-create-date"></small>
 
-                <span class="text-xs approval-board-detail-status"id="approvalStatus">요청됨</span>
+                <span class="text-xs approval-board-detail-status" id="approvalStatus" th:if="${curUser.team.team_name} != '인사부'">요청됨</span>
+
+                <select class="approval-board-detail-status" id="approval-status" th:if="${curUser.team.team_name} == '인사부'">
+                  <option value="REQUESTED">요청됨</option>
+                  <option value="APPROVED">승인됨</option>
+                  <option value="REJECTED">반려됨</option>
+                  <option value="EXPIRED">만료됨</option>
+                </select>
+
 
               </div>
             </div>
@@ -148,30 +161,36 @@
 
   // 선택한 기안메뉴에 따라 적절한 작성페이지로 이동시켜주다.
   function redirectToPage() {
-    const width = 800;
-    const height = 600;
-    const left = window.screen.width / 2 - width / 2;
-    const top = window.screen.height / 2 - height / 2;
-    var menu = $('input[name="approval-menu"]:checked').val();  // 선택한 메뉴 가져오기
-    if (menu === "vacation") {
-      window.open('/board/newapprovalvacationboard', '야간근무 신청 기안', `width=${width},height=${height},left=${left},top=${top}`);
-      // window.location.href = "/board/newapprovalvacationboard";
-    } else if (menu === "overtime") {
-      // window.open('/board/newapprovalovertimeboard', '야간근무 신청 기안', `width=${width},height=${height},left=${left},top=${top}`);
-      window.location.href = "/board/newapprovalovertimeboard";
-    } else if (menu === "work-hour-change") {
-      // window.open('/board/newapprovalwocboard', '출퇴근 시간 변경 기안', `width=${width},height=${height},left=${left},top=${top}`);
-      window.location.href = "/board/newapprovalwocboard";
-    } else {
-      // 메뉴를 선택하지 않은 경우, 경고창 표시
+    const width=800;
+    const height=600;
+    const left=window.screen.width/2 - width/2;
+    const top=window.screen.height/2 - height/2;
+    let menu=$('input[name="approval-menu"]:checked').val();  // 선택한 메뉴 가져오기
+    let newWindow;
+    if(menu==="vacation") {
+      newWindow=window.open('/board/newapprovalvacationboard','휴가 신청 기안',`width=${width},height=${height},left=${left},top=${top}`);
+    }
+    else if(menu==="overtime") {
+      newWindow=window.open('/board/newapprovalovertimeboard','연장근무 신청 기안',`width=${width},height=${height},left=${left},top=${top}`);
+    }
+    else if(menu==="work-hour-change") {
+      newWindow=window.open('/board/newapprovalwocboard','출퇴근 시간 변경 신청 기안',`width=${width},height=${height},left=${left},top=${top}`);
+    }
+    else {
       alert("기안 유형을 선택해 주세요");
+    }
+
+    if(newWindow) {
+      newWindow.addEventListener('beforeunload', function () {
+        location.reload();
+      });
     }
 
     $("#writeModal").modal("hide");
   }
 
   window.addEventListener("message", function(event) {
-    if (event.data === "submit_success") {
+    if(event.data==="submit_success") {
       window.location.reload();
     }
   });
@@ -181,12 +200,12 @@
     $('.approval-main-right').show();
 
     // db에 저장된 json문자열을 뽑아오다.
-    var jsonString=data.querySelector('.approval-board-approval-info').value;
-    var jsonObj=JSON.parse(jsonString);
+    let jsonString=data.querySelector('.approval-board-approval-info').value;
+    let jsonObj=JSON.parse(jsonString);
 
     //기본적인 결재문서 정보 작성 (요청자, 승인자, 요청된 날짜, 승인기간)
     function setValue(targetSelector, sourceSelector) {
-      const target = document.querySelector(targetSelector);
+      const target=document.querySelector(targetSelector);
       target.innerHTML="";
       target.innerHTML=data.querySelector(sourceSelector).textContent;
     }
@@ -194,24 +213,28 @@
     setValue('.approval-board-detail-requestorMemNum', '.approval-board-requestorMemNum');
     setValue('.approval-board-detail-approverMemNum', '.approval-board-approverMemNum');
 
-    var createDate = document.querySelector('.approval-board-detail-create-date');
+    let createDate=document.querySelector('.approval-board-detail-create-date');
     createDate.textContent="";
     createDate.textContent=data.querySelector('.approval-board-create-date').value;
 
-    var requestDate = document.querySelector('.approval-board-detail-request-date');
+    let requestDate=document.querySelector('.approval-board-detail-request-date');
     requestDate.textContent="";
     requestDate.textContent=data.querySelector('.approval-board-create-date').value+" ~ "+data.querySelector('.approval-board-due-date').value;
 
+    let detailId = document.querySelector('.approval-board-detail-id');
+    detailId.value="";
+    detailId.value=data.querySelector('.approval-board-id').value;
+
     // 문서 타입에 따른 결재문서 상세 정보 설정
-    var approvalType=data.querySelector('.approval-board-approval-type').textContent;
-    var detailContent=document.querySelector('.approval-board-detail-content');
+    let approvalType=data.querySelector('.approval-board-approval-type').textContent;
+    let detailContent=document.querySelector('.approval-board-detail-content');
     detailContent.innerHTML="";
 
     if(approvalType=="휴가신청") {
-      var startDate=jsonObj.startDate;
-      var endDate=jsonObj.endDate;
-      var deduction=jsonObj.deduction;
-      var reason=data.querySelector('.approval-board-content').value;
+      let startDate=jsonObj.startDate;
+      let endDate=jsonObj.endDate;
+      let deduction=jsonObj.deduction;
+      let reason=data.querySelector('.approval-board-content').value;
 
       detailContent.innerHTML+="<div>휴가 시작일 : " + startDate + "</div>";
       detailContent.innerHTML+="<div>휴가 종료일 : " + endDate + "</div>";
@@ -219,18 +242,18 @@
       detailContent.innerHTML+="<div>휴가 신청 사유 : " + reason + "</div>";
     }
     else if(approvalType == "연장근무신청") {
-      var endTime=jsonObj.endTime;
-      var bonusAllowance=jsonObj.bonusAllowance;
-      var reason=data.querySelector('.approval-board-content').value;
+      let endTime=jsonObj.endTime;
+      let bonusAllowance=jsonObj.bonusAllowance;
+      let reason=data.querySelector('.approval-board-content').value;
 
       detailContent.innerHTML+="<div>연장근무 종료 시간 : " + endTime + "</div>";
       detailContent.innerHTML+="<div>연장근무 추가 수당 : " + bonusAllowance + "</div>";
       detailContent.innerHTML+="<div>연장근무 신청 사유 : " + reason + "</div>";
     }
     else {
-      var goToOffice=jsonObj.goToOffice;
-      var leaveOffice=jsonObj.leaveOffice;
-      var reason=data.querySelector('.approval-board-content').value;
+      let goToOffice=jsonObj.goToOffice;
+      let leaveOffice=jsonObj.leaveOffice;
+      let reason=data.querySelector('.approval-board-content').value;
 
       detailContent.innerHTML+="<div>변경 요청한 출근시간 : " + goToOffice + "</div>";
       detailContent.innerHTML+="<div>변경 요청한 퇴근시간 : " + leaveOffice + "</div>";
@@ -238,10 +261,56 @@
     }
   }
 
+  //게시글 삭제 ajax함수
+  $(document).ready(function() {
+    $('.delete-board-approval').on('click', function(e) {
+      e.preventDefault();
+      let boardId=document.querySelector('.approval-board-id').value;
+      let url=$(this).attr('href');
+
+      $.ajax({
+        url: url,
+        method: 'DELETE',
+        contentType: 'application/json',
+        data: JSON.stringify({ boardId: boardId })
+      })
+      .done(function(response) {
+        alert('요청한 결재가 삭제되다.');
+        location.replace("/moveApproval");
+      })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+        alert('요청한 결재 삭제에 실패하다.');
+      });
+
+    });
+  });
+
+  // 결재상태 변경 함수
+  $(document).ready(function() {
+    $(document).on('change', '#approval-status', function() {
+      let status=$(this).val();
+      let boardId = $(this).closest('.approval-main-right').find('.approval-board-detail-id').val();
+
+      $.ajax({
+        url: "/board/changeapprovalstatus",
+        method: 'POST',
+        data: { boardId: boardId, approvalStatus: status }
+      })
+      .done(function(response) {
+        // 여유되면 메일보내는 함수 만들어보기
+        location.replace("/moveApproval");
+      })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+        alert('결재상태 변경에 실패하다.');
+      });
+
+    });
+  });
+
 </script>
 
 <style>
-  /*업무 게시판 리스트 스크롤바 관련*/
+  /*결재 게시판 리스트 스크롤바 관련*/
   .approval-main-left::-webkit-scrollbar {
     width:0px;
   }

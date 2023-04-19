@@ -35,6 +35,10 @@ public class Member {
     private int vacation; //멤버 연차
     private int salary; //멤버 연봉
     private String emp_type; //직급 .
+    private String inWorkTime;
+    private String outWorkTime;
+    private String vacationStart;
+    private String vacationEnd;
     
     private String status; //현재 상태 (출퇴)
     //offline (퇴근) , online (출근) , holiday(휴가)
