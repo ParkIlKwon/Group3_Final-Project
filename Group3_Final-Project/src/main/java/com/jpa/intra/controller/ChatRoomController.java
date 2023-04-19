@@ -20,34 +20,34 @@ public class ChatRoomController {
     @Autowired
     private ChatRepository chatRepository;
 
-    @GetMapping("/moveMeeting")
-    public String goChatRoom(Model model){
-
-        model.addAttribute("list", chatRepository.findAllRoom());
-//        model.addAttribute("user", "hey");
-        log.info("SHOW ALL ChatList {}", chatRepository.findAllRoom());
-        model.addAttribute("page", "회의");
-        return "/meeting/roomlist";
-    }
+//    @GetMapping("/moveMeeting")
+//    public String goChatRoom(Model model){
+//
+//        model.addAttribute("list", chatRepository.findAllRoom());
+////        model.addAttribute("user", "hey");
+//        log.info("SHOW ALL ChatList {}", chatRepository.findAllRoom());
+//        model.addAttribute("page", "회의");
+//        return "/meeting/roomlist";
+//    }
 
     // 채팅방 생성
-    @PostMapping("/chat/createroom")
-    public String createRoom(@RequestParam String roomName, RedirectAttributes rttr) {
-        ChatRoomDTO room = chatRepository.createChatRoom(roomName);
-        log.info("CREATE Chat Room {}", room);
-        rttr.addFlashAttribute("roomName", room);
-        return "redirect:/moveMeeting";
-    }
+//    @PostMapping("/chat/createroom")
+//    public String createRoom(@RequestParam String roomName, RedirectAttributes rttr) {
+//        ChatRoomDTO room = chatRepository.createChatRoom(roomName);
+//        log.info("CREATE Chat Room {}", room);
+//        rttr.addFlashAttribute("roomName", room);
+//        return "redirect:/moveMeeting";
+//    }
 
     // 채팅방 입장 화면
     // 파라미터로 넘어오는 roomId 를 확인후 해당 roomId 를 기준으로
     // 채팅방을 찾아서 클라이언트를 chatroom 으로 보낸다.
-    @GetMapping("/chat/room")
-    public String roomDetail(Model model, String roomId){
-
-        log.info("roomId {}", roomId);
-        model.addAttribute("room", chatRepository.findRoomById(roomId));
-        return "meeting/chatroom";
-    }
+//    @GetMapping("/chat/room")
+//    public String roomDetail(Model model, String roomId){
+//
+//        log.info("roomId {}", roomId);
+//        model.addAttribute("room", chatRepository.findRoomById(roomId));
+//        return "meeting/chatroom";
+//    }
 
 }
