@@ -122,14 +122,8 @@ public class MenuController {
         List<BoardApproval> alist = boardService.findApproval();
         List<BoardApproval> myAList = boardService.findMyApprovalList(alist,curUser.getMem_id());
 
-        for(int i=0;i<myAList.size();i++){
-            System.out.println("마이 에이리스트 보드컨탠트 : "+myAList.get(i).getBoardContent());
-            System.out.println("마이 에이리스트 보드롸이터 : "+myAList.get(i).getBoardWriter());
-        }
-
         if(curUser.getTeam().getTeam_name().equals("인사부")) model.addAttribute("alist", alist);
         else model.addAttribute("alist", myAList);
-
 
         model.addAttribute("page", "결재");
         model.addAttribute("curUser",curUser);
