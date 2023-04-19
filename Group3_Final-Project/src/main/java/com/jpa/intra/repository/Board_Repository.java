@@ -52,7 +52,7 @@ public class Board_Repository {
 
     public void createBoardApproval3(BoardApproval boardApproval) {em.persist(boardApproval);}
 
-    public List<BoardApproval> findAllBoardApproval1() {return em.createQuery("SELECT a FROM BoardApproval a", BoardApproval.class).getResultList();}
+    public List<BoardApproval> findAllBoardApproval() {return em.createQuery("SELECT a FROM BoardApproval a", BoardApproval.class).getResultList();}
 
     // EntityManager의 내장 함수 find로 아이디 값을 참조하여 Team 객체를 뽑음
     public Team findById(Long id) {return em.find(Team.class, id);}

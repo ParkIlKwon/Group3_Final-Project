@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -118,10 +119,21 @@ public class MenuController {
     @GetMapping("/moveApproval")
     public String MoveConfirm(HttpSession session, Model model){
         Member curUser=(Member)session.getAttribute("user");
-        List<BoardApproval> alist = boardService.findApproval1();
-        model.addAttribute("alist", alist);
+        List<BoardApproval> alist = boardService.findApproval();
+        List<BoardApproval> myAList = boardService.findMyApprovalList(alist,curUser.getMem_id());
+
+        for(int i=0;i<myAList.size();i++){
+            System.out.println("마이 에이리스트 보드컨탠트 : "+myAList.get(i).getBoardContent());
+            System.out.println("마이 에이리스트 보드롸이터 : "+myAList.get(i).getBoardWriter());
+        }
+
+        if(curUser.getTeam().getTeam_name().equals("인사부")) model.addAttribute("alist", alist);
+        else model.addAttribute("alist", myAList);
+
+
         model.addAttribute("page", "결재");
         model.addAttribute("curUser",curUser);
+
         return "/approval/main";
     }
 
