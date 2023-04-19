@@ -146,20 +146,15 @@
         <div class="card h-100 p-3">
           <div class="row">
             <span class="col-6 mb-1 fs-5 fw-bold text-white">E-mail</span>
-            <a class="col text-light text-sm mt-1 icon-move-right text-end" href="/mail/main">
+            <a class="col text-body text-sm mt-1 icon-move-right text-end" href="/mail/main">
               메일 자세히
               <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
             </a>
           </div>
-          <div class="card-header p-0">
-<!--            <button class="btn bg-gradient-primary p-2 mb-1" onclick="popWriteMail()">메일 쓰기</button>-->
-<!--            <button class="receive-mail-list-button btn bg-gradient-info p-2 mb-1" >받은 메일</button>-->
-<!--            <button class="sent-mail-list-button btn bg-gradient-success p-2 mb-1" >보낸 메일</button>-->
-<!--            <hr class="solid">-->
-          </div>
-          <!--                    전체 메일 -->
+<!--          <div class="card-header p-0">-->
+<!--          </div>-->
+          <!-- 전체 메일 -->
           <div class="card-body p-0" id="allMailList">
-            <!--                        <h6 class="mb-0">메일 목록</h6>-->
             <ul class="list-group">
               <!-- 메일함이 비었을 때-->
               <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg"
@@ -178,22 +173,14 @@
                     <a th:if="${mail.getSender_email() == session.user.getEmail()}" th:text="'[보낸 메일]&nbsp;&nbsp;'+${mail.title}" style="color: orangered">메일 제목</a>
                     <a th:if="${mail.getSender_email() != session.user.getEmail()}" th:text="'[받은 메일]&nbsp;&nbsp;'+${mail.title}">메일 제목</a>
                   </h6>
-<!--                  <span class="mb-2 text-xs">보낸 이: <span class="text-dark font-weight-bold ms-sm-2"-->
-<!--                                                         >-->
-<!--                                    </span>-->
-<!--                                        </span>-->
-<!--                  <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold"-->
-<!--                                                                  >-->
-<!--                                    </span>-->
-<!--                                        </span>-->
                 </div>
-                <input class="mail-id" type="hidden">
-                <div class="ms-auto text-end">
-                  <!--                                    <a class="btn btn-link text-dark px-3 mb-0" th:onclick="|window.location.href='/mail/read/${m.id}'|">Read</a>-->
-                  <a class="read-btn btn btn-link text-dark px-3 mb-0">Read</a>
-                  <!--                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>-->
-                  <!--                                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>-->
-                </div>
+<!--                <input class="mail-id" type="hidden">-->
+<!--                <div class="ms-auto text-end">-->
+<!--                  &lt;!&ndash;                                    <a class="btn btn-link text-dark px-3 mb-0" th:onclick="|window.location.href='/mail/read/${m.id}'|">Read</a>&ndash;&gt;-->
+<!--                  <a class="read-btn btn btn-link text-dark px-3 mb-0">Read</a>-->
+<!--                  &lt;!&ndash;                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>&ndash;&gt;-->
+<!--                  &lt;!&ndash;                                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>&ndash;&gt;-->
+<!--                </div>-->
               </li>
               <!--                End 예시 형식 -->
 
