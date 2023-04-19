@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<head th:replace="~{/fragments/header :: header}"></head>
+<head th:replace="~{fragments/header :: header}"></head>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
 <script src="http://code.jquery.com/jquery.min.js"></script>
 
 <body class="g-sidenav-show  bg-gray-100">
 <!--   사이드 : aside -->
-<aside th:replace="/fragments/aside"></aside>
+<aside th:replace="fragments/aside"></aside>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- body Top Navbar : bodyTop  -->
     <nav th:replace="fragments/bodyTop"></nav>

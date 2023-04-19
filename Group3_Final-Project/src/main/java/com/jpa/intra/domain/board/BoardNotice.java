@@ -8,22 +8,21 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
-@DiscriminatorValue("NOTICE")
 @Getter
 @Setter
-public class BoardNotice extends BoardCommon {
-//    @ManyToOne
-//    @JoinColumn(name="mem_num")
-//    @Convert(converter = MemberConverter.class)
-//    private Member responsibleMemNum;
+public class BoardNotice{
 
-//    @ManyToOne
-//    @JoinColumn(name="team_num")
-//    @Convert(converter = TeamConverter.class)
-//    private Team teamNum;
-//    private String progress;
-//    private String startDate;
-//    private String endDate;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "not_num")
+    private Long boardId;
+
+    private String boardTitle;
+    private String boardContent;
+    private String createDate;
+    private String boardWriter;
+
 }

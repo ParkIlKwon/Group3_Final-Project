@@ -12,113 +12,54 @@
   <div class="container-fluid py-4">
     <!-- Left : 공지 목록 -->
     <div class="row" >
-<!--        <div class="col-12">-->
-          <div class="card p-3" style="height: 85vh">
-            <div class="card-header p-0" th:if="${session.user.getTeam().getTeam_name() eq '인사부'}">
-                <button class="btn bg-gradient-primary p-2 mb-1" data-bs-toggle="modal" data-bs-target="#addBoard">새 공지</button>
-                <hr class="solid">
-            </div>
-            <div class="card-body pt-2 px-5">
-              <div class="accordion accordion-flush" id="faq-group-1">
-                <div class="accordion-item" th:each="n : ${nlist}">
-                  <!--공지 제목-->
-                  <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button collapsed py-2" th:data-bs-target="'#idd'+${n.getId()}"
-                      data-bs-toggle="collapse" aria-expanded="false" th:aria-controls="'idd'+${n.getId()}">
-                      <div class="row">
-                        <div style="font-size:0.9rem" th:text="${n.getCreateDate()}+' / '+${n.getBoardWriter()}">등록일/등록자</div>
-                        <div class="fw-bold ms-4 p-1" th:text="${n.getBoardTitle()}">공지제목</div>
-                      </div>
-                    </button>
-                  </h2>
-                  <!--공지본문-->
-                  <div th:id="'idd'+${n.getId()}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faq-group-1">
-                    <div class="accordion-body row bg-gray-100 border-radius-md p-3 mx-4">
-                  <!--본문 줄바꿈 처리 &lt;br&gt; ==> <br>-->
-                      <div class="col-9" th:utext="${n.getBoardContent().replaceAll('\n', '&lt;br&gt;')}">공지 본문</div>
-                      <div class="col-3 text-end" th:if="${session.user.getTeam().getTeam_name() eq '인사부'}">
-                        <button class="btn bg-gradient-info mb-0" data-bs-toggle="modal" data-bs-target="#modiBoard">수정</button>
-<!--                        <button class="btn bg-gradient-info mb-0" onclick="editboard('${n.getId()}')">수정</button>-->
-                        <button class="btn bg-gradient-danger mb-0" onclick="boardDelete('${n.getId()}')">삭제</button>
-                      </div>
-                    </div>
+      <div class="card p-3" style="height: 85vh">
+        <div class="card-header p-0" th:if="${session.user.getTeam().getTeam_name() eq '인사부'}">
+            <button class="btn bg-gradient-primary p-2 mb-1" data-bs-toggle="modal" data-bs-target="#addBoard">새 공지</button>
+            <hr class="solid">
+        </div>
+        <div class="card-body pt-2 px-5">
+          <div class="accordion accordion-flush" id="faq-group-1">
+            <div class="accordion-item" th:each="n : ${nlist}">
+              <!--공지 제목-->
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed py-1" th:data-bs-target="'#idd'+${n.getBoardId()}"
+                  data-bs-toggle="collapse" aria-expanded="false" th:aria-controls="'idd'+${n.getBoardId()}">
+                  <div class="row">
+                    <div style="font-size:0.9rem" th:text="${n.getCreateDate()}+'  ['+${n.getBoardWriter()}+']'">등록일/등록자</div>
+                    <div class="nTitle fw-bold ms-4 p-1" th:text="${n.getBoardTitle()}">공지제목</div>
                   </div>
-                  <hr class="solid mx-3">
-                </span>
+                </button>
+              </h2>
+              <!--공지본문-->
+              <div th:id="'idd'+${n.getBoardId()}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faq-group-1">
+                <div class="accordion-body row bg-gray-100 border-radius-md p-3 mx-4">
+              <!--본문 줄바꿈 처리 &lt;br&gt; ==> <br>-->
+                  <div class="nContent col-9" th:utext="${n.getBoardContent().replaceAll('\n', '&lt;br&gt;')}">공지 본문</div>
+                  <div class="col-3 text-end" th:if="${session.user.getTeam().getTeam_name() eq '인사부'}">
+                    <span th:with="uId=${n.getBoardId()}, uTitle=${n.getBoardTitle()}, uContent=${n.getBoardContent()}">
+                    <input class="nid" type="hidden" th:value="${n.getBoardId()}">
+                    <button class="changeBtn btn bg-gradient-info mb-0">수정</button>
+<!--                    <button class="changeBtn btn bg-gradient-info mb-0" onclick="changeNotice()">수정</button>-->
+<!--                    <button class="deleteBtn btn bg-gradient-danger mb-0" onclick="delNotice()">삭제</button>-->
+                    <button class="deleteBtn btn bg-gradient-danger mb-0">삭제</button>
+                    </span>
+                  </div>
+                </div>
               </div>
+              <hr class="solid mx-3">
             </div>
           </div>
-<!--        </div>-->
+        </div>
+      </div>
     </div>
   </div>
 </main>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-  var replyListEnabled = true;
-  // 작성폼으로 이동
-  function writeForm() {
-    console.log();
-    location.href="/board/newtaskboard";
-  }
-
-  //게시글 클릭 시, 우측단에 게시글 상세정보 작성해주는 함수
-  function showTlistContents(data){
-
-    var curBoardId=data.querySelector('.task-board-id').value;
-    console.log(curBoardId);
-
-    $.ajax({
-      url: '/reply/curreplylist',
-      method: 'GET',
-      data: ({ "boardId": curBoardId }),
-      success(replyfindresult) {
-        alert("성공하다.")
-        console.log(replyfindresult);
-      }
-    })
-
-    var replyId = document.querySelector('.task-board-detail-reply-id');
-    replyId.value="";
-    replyId.value=data.querySelector('.task-board-id').value;
-  }
-
-  //게시글 삭제 ajax함수
-  $(document).ready(function() {
-    $('.delete-board-task').on('click', function(e) {
-      e.preventDefault();
-      var boardId=document.querySelector('.task-board-id').value;
-      var url = $(this).attr('href');
-      console.log("boardId : "+boardId+", url : "+url)
-
-      $.ajax({
-        url: url,
-        method: 'DELETE',
-        contentType: 'application/json',
-        data: JSON.stringify({ boardId: boardId })
-      })
-              .done(function(response) {
-                alert('게시글이 삭제되었습니다.');
-                // location.href="/moveProject";
-                location.replace("/moveProject");
-              })
-              .fail(function(jqXHR, textStatus, errorThrown) {
-                alert('게시글 삭제에 실패했습니다.');
-              });
-    });
-  });
-
   // let popup;
   // function popWriteNotice(){
   //   popup = window.open("/board/newnotice",'공지 작성', 'width=1040px,height=900px,scrollbars=yes');
-  // }
-
-  // function popReplyMail() {
-  //   let test = document.getElementById('read-sender-name').value;
-  //   // alert(test);
-  //   // alert($('#read-title').text());
-  //   let email = $('#read-sender-email').text();
-  //   popup =window.open("/mail/reply?reply="+email,'새 메일', 'width=1040px,height=900px,scrollbars=yes');
   // }
 
   //공지작성 취소시 입력칸 초기화
@@ -142,16 +83,121 @@
       $.ajax({
         type : "POST",
         url : "/board/newnotice",
-        data : {
-          "boardTitle": boardTitle, "boardContent": boardContent,
-          success: function () {
-            alert("공지가 등록되었습니다.");
-            location.reload();
-          }
+        data : ({"boardTitle": boardTitle, "boardContent": boardContent}),
+        success: function () {
+          alert("공지가 등록되었습니다.");
+          location.reload();
         }
       });
     }
   }
+
+  let pid;
+
+  window.onload = function() {
+    //공지 수정팝업에 기존 내용 받아오기
+    let ids = document.querySelectorAll('.nid');
+    let chgBtn = document.querySelectorAll('.changeBtn');
+
+    for(let i=0; i<chgBtn.length; i++){
+      chgBtn[i].addEventListener('click',()=>{
+        pid = ids[i].value;
+        $.ajax({
+              url:"/board/getNotice",
+              type:"post",
+              data:{"id":pid},
+              async:true,
+              success:function (res){
+                // noticeObj=res;  //수정처리를 위해 전역변수로 Object 값받기
+                $("#eTitle").val(res['boardTitle']);
+                $("#eContents").val(res['boardContent']);
+                $('#editBoard').modal('show');
+              }
+            });
+      });
+    }
+
+    //공지 삭제
+    let delBtn = document.querySelectorAll('.deleteBtn');
+    for(let i=0; i<delBtn.length; i++){
+      delBtn[i].addEventListener('click',()=> {
+        pid = ids[i].value;
+        // function delNotice(){
+        $.ajax({
+          type: "POST",
+          url: "/board/delNotice",
+          data: {"id": pid},
+          success: function () {
+            alert("공지가 삭제되었습니다.");
+            location.reload();
+          }
+        });
+      });
+    }
+ }
+
+  //공지 수정 처리
+  function fixBoard(){
+    let title =$("#eTitle").val();
+    let contents =$("#eContents").val();
+
+    if(title.trim() == ''){
+      alert("제목을 입력해주세요.");
+      return;
+    }else if(contents.trim() == ''){
+      alert("내용을 입력해주세요.");
+      return;
+    }else{
+      $.ajax({
+        type : "POST",
+        url : "/board/changeNotice",
+        data :{"id":pid, "boardTitle": title, "boardContent": contents},
+        success : function(){
+          alert("공지가 수정되었습니다.");
+          location.reload();
+        }
+      });
+    }
+  }
+
+
+
+  // window.onload=function (){
+  //   let nid = document.querySelectorAll('.nid');
+    // for(let i=0; i<id.length; i++){
+    //   id[i].addEventListener('click',()=>{
+    //     $.ajax({
+    //           url:"/board/getNotice",
+    //           type:"post",
+    //           data:{"id":id},
+    //           async:true,
+    //           success:function (res){
+    //             // noticeObj=res;  //수정처리를 위해 전역변수로 Object 값받기
+    //             $("#eTitle").val(res['boardTitle']);
+    //             $("#eContents").val(res['boardContent']);
+    //             $('#editBoard').modal('show');
+    //           }
+    //         });
+    //   });
+    // }
+  // }
+
+  // function changeNotice(){
+  //   let id = nid.value;
+  //   $.ajax({
+  //     url:"/board/getNotice",
+  //     type:"post",
+  //     data:{"id":id},
+  //     async:true,
+  //     success:function (res){
+  //       // noticeObj=res;  //수정처리를 위해 전역변수로 Object 값받기
+  //       $("#eTitle").val(res['boardTitle']);
+  //       $("#eContents").val(res['boardContent']);
+  //       $('#editBoard').modal('show');
+  //     }
+  //   });
+  // }
+
 </script>
 
 <!-- 모달 -->
@@ -185,34 +231,35 @@
   </div>
 </div>
 <!--공지 수정용 모달-->
-<!--<div class="modal fade" id="modiBoard" tabindex="-1" aria-labelledby="addBdModal" aria-hidden="true">-->
-<!--  <div class="modal-dialog">-->
-<!--    <div class="modal-content" style="width:800px; margin-left:-30%">-->
-<!--      <div class="modal-header fs-5 fw-bold" id="modibdModal">공지 수정</div>-->
-<!--      <div class="modal-body" style="max-width: 100%">-->
-<!--        <div class="col" style="border: 2px solid #f9e7cb; border-radius: 5px">-->
-<!--          <div class="row p-3 pb-0">-->
-<!--            <div class="col-2 fw-bold text-center">공지 제목</div>-->
-<!--            <div class="col ps-0 pe-3">-->
-<!--              <input class="input-basic col-12" type="text" id="mTitle"/>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <hr class="text-basic">-->
-<!--          <div class="row p-3 pt-0">-->
-<!--            <div class="col-2 fw-bold text-center">공지 내용</div>-->
-<!--            <div class="col ps-0 pe-3">-->
-<!--              <textarea class="input-basic col-12" id="bContents" rows="10" style="white-space: pre-wrap"></textarea>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="modal-footer">-->
-<!--        <button class="btn-basic" onclick="addBoard()">등록</button>-->
-<!--        <button class="btn-cancel" data-bs-dismiss="modal" onclick="clearBd()">취소</button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+<div class="modal fade" id="editBoard" tabindex="-1" aria-labelledby="editBoard" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width:800px; margin-left:-30%">
+      <div class="modal-header fs-5 fw-bold" id="editBdModal">공지 수정</div>
+      <div class="modal-body" style="max-width: 100%">
+        <div class="col" style="border: 2px solid #f9e7cb; border-radius: 5px">
+          <div class="row p-3 pb-0">
+            <div class="col-2 fw-bold text-center">공지 제목</div>
+            <div class="col ps-0 pe-3">
+              <input class="input-basic col-12" type="text" id="eTitle" value=""/>
+            </div>
+          </div>
+          <hr class="text-basic">
+          <div class="row p-3 pt-0">
+            <div class="col-2 fw-bold text-center">공지 내용</div>
+            <div class="col ps-0 pe-3">
+              <textarea class="input-basic col-12" id="eContents" rows="10" style="white-space: pre-wrap"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <input type="hidden" id="idval"/>
+        <button class="btn-basic" onclick="fixBoard()">수정</button>
+        <button class="btn-cancel" data-bs-dismiss="modal" onclick="clearBd()">취소</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

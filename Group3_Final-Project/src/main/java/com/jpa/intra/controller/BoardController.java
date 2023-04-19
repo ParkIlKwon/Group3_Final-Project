@@ -7,11 +7,13 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.jpa.intra.domain.Mail;
 import com.jpa.intra.domain.Member;
 import com.jpa.intra.domain.Reply;
+import com.jpa.intra.domain.Team;
 import com.jpa.intra.domain.board.BoardApproval;
 import com.jpa.intra.domain.board.BoardFree;
 import com.jpa.intra.domain.board.BoardNotice;
 import com.jpa.intra.domain.board.BoardTask;
 import com.jpa.intra.query.*;
+import com.jpa.intra.repository.Board_Repository;
 import com.jpa.intra.repository.Member_Repository;
 import com.jpa.intra.service.BoardService;
 import com.jpa.intra.service.MailSendService;
@@ -43,6 +45,7 @@ public class BoardController {
 
     private final MemberService memberService;
     private final BoardService boardService;
+    private final Board_Repository bBoardRepository;
     private final MailSendService mailSendService;
     private final ReplyService replyService;
     private final Member_Repository member_repository;
@@ -78,21 +81,16 @@ public class BoardController {
         return "redirect:/";
     }
 
-    // 업무게시판으로 이동
+    // 업무게시판작성 폼을 불러오다
     @GetMapping("/board/newtaskboard")
     public String callBoardTaskWriteForm(Model model) {
         model.addAttribute("boardTaskDTO", new BoardTaskDTO());
-        return "board/boardTaskWriteForm";
+        return "project/boardTaskWriteForm";
     }
 
     // 업무게시판 작성
-    @PostMapping("/board/newtaskboard")
-    public String writeNewBoardTask(HttpSession session, BoardTaskDTO boardTaskDTO) {
-
+    private BoardTask createNewBoardTask(HttpSession session, BoardTaskDTO boardTaskDTO) {
         Member memberObject=(Member)session.getAttribute("user");
-
-        System.out.println("유저라는 세션에 들어와있는 맴버객채의 계정아이디를 확인하다 : "+memberObject.getMem_name());
-        System.out.println("유저라는 세션에 들어와있는 맴버객채의 성별을 확인하다 : "+memberObject.getGender());
 
         BoardTask boardTask=new BoardTask();    //boardTask객체
         boardTask.setBoardTitle(boardTaskDTO.getBoardTitle());  //제목
@@ -107,20 +105,34 @@ public class BoardController {
         boardTask.setTeamNum(boardTaskDTO.getTeamNum());    //담당자의 팀번호
         boardTask.setProgress("TO_DO");  //진행상황("TO_DO","IN_PROGRESS","DONE") : 최초 저장은 무조건 "할 일"이기 때문에 "TO_DO"고정
 
+        return boardTask;
+    }
+
+    @PostMapping("/board/newtaskboard")
+    @ResponseBody
+    public String writeNewBoardTask(HttpSession session, @RequestParam("boardTitle") String boardTitle, @RequestParam("boardContent") String boardContent, @RequestParam("responsibleMemNum") String responsibleMemNum, @RequestParam("teamNum") String teamNum, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate) {
+        Member memberObject=(Member)session.getAttribute("user");
+        Member responsibleMember=member_repository.findById(Long.parseLong(responsibleMemNum));
+        Team referenceTeam=bBoardRepository.findById(Long.parseLong(teamNum));
+
+        System.out.println(responsibleMember.getMem_name());
+        System.out.println(referenceTeam.getTeam_name());
+
+        BoardTaskDTO boardTaskDTO=new BoardTaskDTO();
+
+        boardTaskDTO.setBoardTitle(boardTitle);
+        boardTaskDTO.setBoardContent(boardContent);
+        boardTaskDTO.setResponsibleMemNum(responsibleMember);
+        boardTaskDTO.setTeamNum(referenceTeam);
+        boardTaskDTO.setStartDate(startDate);
+        boardTaskDTO.setEndDate(endDate);
+
+        BoardTask boardTask=createNewBoardTask(session, boardTaskDTO);
         boardService.createBoardTask(boardTask);
 
-        return "redirect:/moveProject";
+        return "success";
     }
 
-    // 업무게시판 리스트
-    @GetMapping("/board/boardtasklist")
-    public String boardTaskList(Model model) {
-        List<BoardTask> tlist=boardService.findTasks();
-        List<Reply> rplist=replyService.findReply();
-        model.addAttribute("tlist", tlist);
-        model.addAttribute("rplist", rplist);
-        return "board/boardTaskList";
-    }
 
     // 업무게시판 삭제
     @DeleteMapping("/board/deleteboardtask")
@@ -139,7 +151,7 @@ public class BoardController {
         return ResponseEntity.noContent().build();
     }
 
-    // 결재게시판으로 이동
+    // 결재게시판작성폼 호출
     @GetMapping("/board/newapprovalvacationboard")
     public String callBoardApprovalWriteForm1(HttpSession session, Model model) {
         Member curMember=(Member)session.getAttribute("user");
@@ -176,6 +188,7 @@ public class BoardController {
         return "approval/appwoc";
     }
 
+    // 공통된 결재게시판 작성로직
     private BoardApproval createNewBoardApproval(HttpSession session, Long memberId, BoardApprovalDTO boardApprovalDTO, BoardApprovalInfoDTO boardApprovalInfoDTO, String boardTitle, String approvalType) {
         Member memberObject=(Member)session.getAttribute("user");
 
@@ -226,6 +239,7 @@ public class BoardController {
         return boardApproval;
     }
 
+    // 각각의 결재게시판 작성로직
     @PostMapping("/board/newapprovalvacationboard")
     @ResponseBody
     public String writeNewBoardApprovalForm1(HttpSession session, @RequestParam("memberId") String memberId, @RequestParam("boardContent") String boardContent, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("deduction") String deduction) {
@@ -277,17 +291,16 @@ public class BoardController {
         return "success";
     }
 
+    // 결재를 담당할 인사부 멤버 찾는 메서드
     public Member pickOneHrGuy(List<Member> mlist) {
-        // "인사부" 팀에 속한 멤버들을 찾다.
         List<Member> hrMembers=mlist.stream()
                 .filter(member->member.getTeam().getTeam_name().equals("인사부"))
                 .collect(Collectors.toList());
 
-        // 추출된 멤버들 중에서 랜덤으로 하나를 선택하다.
+        // 뽑아온 인사부 멤버들 중에서 랜덤으로 하나를 선택하다.
         int r=(int)(Math.random()*hrMembers.size());
         Member hrGuy=hrMembers.get(r);
 
-        System.out.println("랜덤 인사부 사원 이름 : "+hrGuy.getMem_name());
         return hrGuy;
     }
 
@@ -318,6 +331,7 @@ public class BoardController {
         return ResponseEntity.noContent().build();
     }
 
+    // 결재가 승인된 후에 후속처리될 로직들을 작성한 메서드
     private void doApprove(Member approver, BoardApproval boardApproval) {
         Member requestor=member_repository.findById(boardApproval.getBoardWriterObject().getId());
 
@@ -416,6 +430,7 @@ public class BoardController {
 
     }
 
+    // 결재가 반려된 후에 후속처리될 로직들을 작성한 메서드
     private void doReject(Member approver, BoardApproval boardApproval) {
         Member requestor=member_repository.findById(boardApproval.getBoardWriterObject().getId());
 
@@ -462,7 +477,8 @@ public class BoardController {
         
     }
 
-    @Scheduled(cron = "0 0 0 * * ?")
+    // 결재 확인 기간(7일)을 넘었는데도 여전히 상태가 요청중(REQUESTED)인 결재는 만료됨(EXPIRED)으로 자동으로 변경해버리다.
+    @Scheduled(cron = "0 0 0 * * ?") // 매일 자정에 자동으로 이 메서드를 실행하게 해주다.
     public void expireApprovals() {
         System.out.println("컨트롤러 문제없이 실행되다.");
         boardService.expireApprovals();
@@ -479,6 +495,11 @@ public class BoardController {
         return "redirect:/moveProject";
     }
 
+////// 공지 게시판 ///////////////////////////////////
+    // 현재 날짜와 시간 정보를 LocalDateTime을 통해 가져오고 Formatter를 이용하여 필요한 형식으로 치환하다.
+    LocalDateTime today = LocalDateTime.now();
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    String simpleDate = today.format(format);
 
     // 작성된 공지 데이터로 추가
     @PostMapping("/board/newnotice")
@@ -487,7 +508,7 @@ public class BoardController {
         BoardNotice boardNotice=new BoardNotice();    //boardNotice객체
         boardNotice.setBoardTitle(boardNoticeDTO.getBoardTitle());  //제목
         boardNotice.setBoardContent(boardNoticeDTO.getBoardContent());  //내용
-        boardNotice.setCreateDate(formattedDate); //작성일
+        boardNotice.setCreateDate(simpleDate); //작성일
         boardNotice.setBoardWriter("ADMIN"); // 작성자 ADMIN으로 고정
 
         boardService.createBoardNotice(boardNotice);
@@ -495,37 +516,26 @@ public class BoardController {
         return "redirect:/moveNotice";
     }
 
-//     //공지 작성 게시판으로 이동
-//    @GetMapping("/board/newnotice")
-//    public String callBoardNoticeWriteForm(Model model) {
-//        model.addAttribute("boardNoticeDTO", new BoardNoticeDTO());
-//        return "board/boardNoticeWriteForm";
-//    }
+    // 공지 객체 받아오기
+    @PostMapping("/board/getNotice")
+    @ResponseBody
+    public BoardNotice getNotice(@RequestParam("id") Long boardId) {
+//        Long id=Long.parseLong(boardId);
+        return boardService.getOneNotice(boardId);
+    }
 
-//    // 공지 리스트
-//    @GetMapping("/board/boardnoticelist")
-//    public String boardNoticeList(Model model) {
-//        List<BoardNotice> nlist=boardService.getNoticeList();
-//        List<Reply> rplist=replyService.findReply();
-//        model.addAttribute("nlist", nlist);
-//        return "board/notice";
-//    }
+    // 공지 수정
+    @PostMapping("/board/changeNotice")
+    @ResponseBody
+    public void setNotice(@RequestParam("id") Long id, @RequestParam("boardTitle") String title, @RequestParam("boardContent") String contents) {
+        boardService.modifyNotice(id,title,contents);
+    }
 
-    //    // 공지 삭제
-//    @DeleteMapping("/board/deleteboardNotice")
-//    public ResponseEntity<Void> deleteBoardNotice(@RequestBody Map<String, Object> reqData) {
-//        Long boardId = Long.parseLong(reqData.get("boardId").toString());
-//
-//        boardService.deleteBoardTaskById(boardId);
-//        return ResponseEntity.noContent().build();
-//    }
-//
-//    // 공지 변경
-//    @PostMapping("/board/changetaskprogress")
-//    public ResponseEntity<Void> changeTaskProgress(@RequestParam Long boardId, @RequestParam String boardProgress) {
-//        boardService.changeTaskProgress(boardId, boardProgress);
-//        return ResponseEntity.noContent().build();
-//    }
-
+    // 공지 삭제
+    @PostMapping("/board/delNotice")
+    @ResponseBody
+    public void delNotice(@RequestParam("id") Long id) {
+        boardService.deleteNotice(id);
+    }
 
 }

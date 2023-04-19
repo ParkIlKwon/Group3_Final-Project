@@ -96,16 +96,35 @@ public class BoardService {
         return myApprovalList;
     }
 
+    //공지 리스트 전달
     public List<BoardNotice> getNoticeList() {
         return bBoardRepository.findAllNotice();
     }
 
+    //공지 등록
     @Transactional
     public Long createBoardNotice(BoardNotice boardNotice) {
         bBoardRepository.createBoardNotice(boardNotice);
-        return boardNotice.getId();
+        return boardNotice.getBoardId();
     }
 
+    //공지 가져오기
+    @Transactional
+    public BoardNotice getOneNotice(Long boardId) {
+        BoardNotice b = new BoardNotice();
+        return bBoardRepository.getOneNoticeRps(boardId);
+    }
 
+    //공지 수정
+    @Transactional
+    public void modifyNotice(Long id, String title, String contents) {
+       bBoardRepository.modiNotice(id, title, contents);
+    }
+
+    //공지 삭제
+    @Transactional
+    public void deleteNotice(Long id) {
+       bBoardRepository.delNoticeDB(id);
+    }
 
 }
