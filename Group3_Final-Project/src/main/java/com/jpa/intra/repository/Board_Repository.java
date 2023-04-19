@@ -56,6 +56,11 @@ public class Board_Repository {
 
     public List<BoardApproval> findAllBoardApproval() {return em.createQuery("SELECT a FROM BoardApproval a", BoardApproval.class).getResultList();}
 
+    public BoardApproval findApprovalByBoardId(Long boardId) {
+        return em.createQuery("SELECT a FROM BoardApproval a WHERE a.id = :boardId", BoardApproval.class)
+                .setParameter("boardId", boardId).getSingleResult();
+    }
+
     // EntityManager의 내장 함수 find로 아이디 값을 참조하여 Team 객체를 뽑음
     public Team findById(Long id) {return em.find(Team.class, id);}
 
@@ -101,13 +106,12 @@ public class Board_Repository {
         em.flush();
     }
 
+
     public List<BoardApproval> findByApprovalStatusAndDueDateBefore(String approvalStatus, String dueDate) {
-        System.out.println("레퍼지토리 문제없이 실행되다");
-        LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분");
         LocalDateTime dueDateTime = LocalDateTime.parse(dueDate, formatter);
 
-        return em.createQuery("SELECT a FROM BoardApproval a WHERE a.approvalStatus = :approvalStatus AND a.dueDate <= :dueDate")
+        return em.createQuery("SELECT a FROM BoardApproval a WHERE a.approvalStatus = :approvalStatus AND a.dueDate <= :dueDate", BoardApproval.class)
                 .setParameter("approvalStatus", approvalStatus)
                 .setParameter("dueDate", dueDateTime)
                 .getResultList();

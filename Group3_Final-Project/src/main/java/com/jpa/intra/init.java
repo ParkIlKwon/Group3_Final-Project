@@ -39,7 +39,7 @@ public class init {
         }
 
 //        initService.makeTaskDummy();
-        initService.KBJMemberDummy();
+//        initService.KBJMemberDummy();
     }
 
     @Component

@@ -43,4 +43,15 @@ public class MemberService {
     public void rePassword(String memberId, String email){
         aMemberRepository.rePassword(memberId, email);
     }
+
+    @Transactional
+    public void updateMemberVacation(Member member, String startDate, String endDate, int updatedVacation) {
+        aMemberRepository.updateMemberVacation(member, startDate, endDate, updatedVacation);
+    }
+
+    @Transactional
+    public void updateMemberWOC(Member member, String inWorkTime, String outWorkTime) {
+        aMemberRepository.updateMemberWOC(member, inWorkTime, outWorkTime);
+    }
+
 }
