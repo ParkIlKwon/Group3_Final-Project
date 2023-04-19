@@ -40,13 +40,15 @@ public class CalendarController {
     @PostMapping("/getSingleData")
     @ResponseBody
     public BoardTask getBoard (@RequestParam("title")String title, HttpServletRequest request){
+        if(title.equals("birthday")){
+            return null;
+        }
         HttpSession session = request.getSession();
         String user = (String) session.getAttribute("log");
 
         //해당일정은 제목 , 현재 로그인된 회원아이디값을 넘겨줘서 찾음 .
         //System.out.println(user  + " " +title);
         BoardTask tc = calendarService.getSingleCalendar(user,title);
-
 
         return tc;
     }

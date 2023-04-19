@@ -61,7 +61,6 @@
             m.setEmail(getmember.getMemail());
 
             Team t = tc.convert("1");
-            System.out.println(t.getTeam_name());
 
 
             fileService.uploadProfileImage(getmember.getProfileFile(),m);

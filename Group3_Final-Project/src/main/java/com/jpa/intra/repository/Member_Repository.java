@@ -66,6 +66,17 @@ public class Member_Repository {
             return null;
         }
     }
+
+    public Member getMemberByUserId(String memberId) {
+        TypedQuery<Member> query = em.createQuery("SELECT m from Member m where m.mem_id = :memberId", Member.class);
+        query.setParameter("memberId", memberId);
+        return query.getSingleResult();
+    }
+
+
+
+
+
 //  메일과 아이디가 일치하는 멤버 , 비밀번호를 '321' 으로 업데이트
     public void rePassword(String memberId, String email){
         em.createQuery("update Member m set m.mem_pw = '321' where m.mem_id = :memberId and m.email = :email")

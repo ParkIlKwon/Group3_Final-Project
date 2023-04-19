@@ -14,7 +14,9 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.*;
+import java.net.URI;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -35,6 +37,8 @@ public class imginit {
         initFolder(new File("C:\\download"));
 
         initFolder(new File("C:\\Storage"));
+
+        initFolder(new File("C:\\tempImg"));
 
 
         List<Member> allMemberList = repository.getAllMemberList();
@@ -77,30 +81,21 @@ public class imginit {
         Resource resource = null;
         String filePath = "";
 
-        if(index == 1){
+        String url = "https://previews.123rf.com/images/aomarch/aomarch1509/aomarch150900162/45571489-%EC%82%AC%EB%9E%8C%EB%93%A4%EC%9D%B4-%ED%94%84%EB%A1%9C%ED%95%84-%EC%8B%A4%EB%A3%A8%EC%97%A3-%EB%B2%A1%ED%84%B0-%EC%9D%BC%EB%9F%AC%EC%8A%A4%ED%8A%B8-%EB%A0%88%EC%9D%B4-%EC%85%98.jpg";
+        String fileName =  "C:\\tempImg\\tempFile" + index + ".jpg";
+        try (InputStream in = URI.create(url).toURL().openStream()){
 
-            try {
-                Path testPath = Paths.get(File.separatorChar + "mem_img", File.separatorChar + "1.jpg");
-                Path testPath2 = Paths.get(rootPath + currentPath);
-                resource = new UrlResource("file:"+testPath2);
-                System.out.println("resource = " + resource.getFile());
-                filePath = resource.getFile().toString();
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-            System.out.println("===================================================");
-            System.out.println("===================================================");
+            Files.copy(in, Paths.get(fileName));
+        }catch (IOException e){
+            e.printStackTrace();
         }
 
-        System.out.println(filePath);
-//        String filePath = resource.getFile();
-        if(resource != null){
-            File file = new File(filePath);
-            try {
-                fileService.saveProfileImage(file,m);
-            } catch (IOException e) {
-                e.getStackTrace();
-            }
+
+        File file = new File(fileName);
+        try {
+            fileService.saveProfileImage(file,m);
+        } catch (IOException e) {
+            e.getStackTrace();
         }
 
 
