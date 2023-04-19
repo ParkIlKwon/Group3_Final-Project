@@ -15,6 +15,7 @@ import com.jpa.intra.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
@@ -96,7 +97,6 @@ public class BoardController {
 
         boardService.createBoardTask(boardTask);
 
-        // 글 작성이 완료되면 경로이동
         return "redirect:/moveProject";
     }
 
@@ -113,11 +113,9 @@ public class BoardController {
     // 업무게시판 삭제
     @DeleteMapping("/board/deleteboardtask")
     public ResponseEntity<Void> deleteBoardTask(@RequestBody Map<String, Object> reqData) {
-        System.out.println("this is deleteBoardTask");
         Long boardId = Long.parseLong(reqData.get("boardId").toString());
-        System.out.println("Welcome to another world episode of ajax, This is deleteBoardTask Method. I can help you with delete task board number "+boardId);
-
         boardService.deleteBoardTaskById(boardId);
+
         return ResponseEntity.noContent().build();
     }
 
@@ -125,6 +123,7 @@ public class BoardController {
     @PostMapping("/board/changetaskprogress")
     public ResponseEntity<Void> changeTaskProgress(@RequestParam Long boardId, @RequestParam String boardProgress) {
         boardService.changeTaskProgress(boardId, boardProgress);
+
         return ResponseEntity.noContent().build();
     }
 
@@ -198,10 +197,12 @@ public class BoardController {
         BoardApproval boardApproval=new BoardApproval();
         boardApproval.setBoardTitle(boardTitle);
         boardApproval.setBoardContent(boardApprovalDTO.getBoardContent());
-        boardApproval.setCreateDate(formattedDate); // 작성일, 즉 기안 확인 시작날짜
+//        boardApproval.setCreateDate(formattedDate); // 작성일, 즉 기안 확인 시작날짜
+        boardApproval.setCreateDate("2022 12월 19일 03시 12분"); // 작성일, 즉 기안 확인 시작날짜
         boardApproval.setUpdateDate(null);  // 수정일
         boardApproval.setBoardWriter(boardWriter);  //requestorMember
-        boardApproval.setDueDate(sevenFormattedDate); // 기안 확인 마감날짜 (작성일로부터 7일)
+//        boardApproval.setDueDate(sevenFormattedDate); // 기안 확인 마감날짜 (작성일로부터 7일)
+        boardApproval.setDueDate("2022 12월 16일 03시 12분"); // 기안 확인 마감날짜 (작성일로부터 7일)
         boardApproval.setApprovalType(approvalType);
         boardApproval.setApprovalStatus("REQUESTED");
         boardApproval.setApproverMemNum(hrGuy);  // 승인하는 사람의 정보를 담은 맴버객체
@@ -257,6 +258,7 @@ public class BoardController {
 
         BoardApproval boardApproval=createNewBoardApproval(session, Long.parseLong(memberId), boardApprovalDTO, boardApprovalInfoDTO, "approval overtime title", "WORK_HOUR_CHANGE");
         boardService.createBoardApproval3(boardApproval);
+
         return "success";
     }
 
@@ -266,7 +268,7 @@ public class BoardController {
                 .filter(member->member.getTeam().getTeam_name().equals("인사부"))
                 .collect(Collectors.toList());
 
-        // 추출된 멤버들 중에서 랜덤으로 하나를 선택합니다.
+        // 추출된 멤버들 중에서 랜덤으로 하나를 선택하다.
         int r=(int)(Math.random()*hrMembers.size());
         Member hrGuy=hrMembers.get(r);
 
@@ -277,12 +279,25 @@ public class BoardController {
     // 결재게시판 삭제
     @DeleteMapping("/board/deleteboardapproval")
     public ResponseEntity<Void> deleteBoardApproval(@RequestBody Map<String, Object> reqData) {
-        System.out.println("this is deleteBoardApproval");
         Long boardId = Long.parseLong(reqData.get("boardId").toString());
-        System.out.println("Welcome to another world episode of ajax, This is deleteBoardApproval Method. I can help you with delete Approval board number "+boardId);
-
         boardService.deleteBoardApprovalById(boardId);
+
         return ResponseEntity.noContent().build();
+    }
+
+    // 결재상태 변경
+    @PostMapping("/board/changeapprovalstatus")
+    public ResponseEntity<Void> changeApprovalStatus(@RequestParam Long boardId, @RequestParam String approvalStatus) {
+        boardService.changeApprovalStatus(boardId, approvalStatus);
+
+        return ResponseEntity.noContent().build();
+    }
+
+//    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "0 0/1 * 1/1 * ? *")
+    public void expireApprovals() {
+        System.out.println("컨트롤러 문제없이 실행되다.");
+        boardService.expireApprovals();
     }
 
     @GetMapping("/board/changeSession")
@@ -342,17 +357,6 @@ public class BoardController {
 //    public ResponseEntity<Void> changeTaskProgress(@RequestParam Long boardId, @RequestParam String boardProgress) {
 //        boardService.changeTaskProgress(boardId, boardProgress);
 //        return ResponseEntity.noContent().build();
-//    }
-//
-//    @PostMapping("/test")
-//    @ResponseBody
-//    public String selfcloseTest(){
-//        System.out.println("This is selfcloseTest please check this message, i'll show my data");
-//
-//
-//        System.out.println("sry, null");
-//
-//       return "test";
 //    }
 
 

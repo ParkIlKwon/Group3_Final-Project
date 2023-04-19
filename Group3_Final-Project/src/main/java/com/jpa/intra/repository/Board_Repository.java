@@ -9,6 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.TypedQuery;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Repository
@@ -90,6 +92,25 @@ public class Board_Repository {
         BoardApproval boardApproval = em.getReference(BoardApproval.class, boardId);
         em.remove(boardApproval); // 목록에서 얘만 지워줌 . commit 만 되어 있는 상태
         em.flush(); //적용
+    }
+
+    public void changeApprovalStatus(Long boardId, String approvalStatus) {
+        BoardApproval boardApproval = em.find(BoardApproval.class, boardId);
+        boardApproval.setApprovalStatus(approvalStatus);
+        em.merge(boardApproval);
+        em.flush();
+    }
+
+    public List<BoardApproval> findByApprovalStatusAndDueDateBefore(String approvalStatus, String dueDate) {
+        System.out.println("레퍼지토리 문제없이 실행되다");
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분");
+        LocalDateTime dueDateTime = LocalDateTime.parse(dueDate, formatter);
+
+        return em.createQuery("SELECT a FROM BoardApproval a WHERE a.approvalStatus = :approvalStatus AND a.dueDate <= :dueDate")
+                .setParameter("approvalStatus", approvalStatus)
+                .setParameter("dueDate", dueDateTime)
+                .getResultList();
     }
 
     public List<BoardNotice> findAllNotice() {

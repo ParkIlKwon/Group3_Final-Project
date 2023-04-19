@@ -15,8 +15,6 @@
       <div class="col-md-4">
         <div class="card p-3" style="height: 100vh;">
           <div class="card-header pb-0 text-center">
-            <span th:text="${curUser.mem_id}"></span>
-            <span th:text="${curUser.team.team_name}"></span>
             <button type="button" class="btn bg-gradient-primary p-2 mb-1" data-bs-toggle="modal" data-bs-target="#writeModal">새 기안</button>
             <button type="button" class="btn bg-gradient-success p-2 mb-1" onclick="#">결재완료</button>
             <button type="button" class="btn bg-gradient-secondary p-2 mb-1" onclick="#">미결재</button>
@@ -223,6 +221,10 @@
     requestDate.textContent="";
     requestDate.textContent=data.querySelector('.approval-board-create-date').value+" ~ "+data.querySelector('.approval-board-due-date').value;
 
+    let detailId = document.querySelector('.approval-board-detail-id');
+    detailId.value="";
+    detailId.value=data.querySelector('.approval-board-id').value;
+
     // 문서 타입에 따른 결재문서 상세 정보 설정
     let approvalType=data.querySelector('.approval-board-approval-type').textContent;
     let detailContent=document.querySelector('.approval-board-detail-content');
@@ -265,7 +267,6 @@
       e.preventDefault();
       let boardId=document.querySelector('.approval-board-id').value;
       let url=$(this).attr('href');
-      console.log("boardId : "+boardId+", url : "+url)
 
       $.ajax({
         url: url,
@@ -284,10 +285,32 @@
     });
   });
 
+  // 결재상태 변경 함수
+  $(document).ready(function() {
+    $(document).on('change', '#approval-status', function() {
+      let status=$(this).val();
+      let boardId = $(this).closest('.approval-main-right').find('.approval-board-detail-id').val();
+
+      $.ajax({
+        url: "/board/changeapprovalstatus",
+        method: 'POST',
+        data: { boardId: boardId, approvalStatus: status }
+      })
+      .done(function(response) {
+        // 여유되면 메일보내는 함수 만들어보기
+        location.replace("/moveApproval");
+      })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+        alert('결재상태 변경에 실패하다.');
+      });
+
+    });
+  });
+
 </script>
 
 <style>
-  /*업무 게시판 리스트 스크롤바 관련*/
+  /*결재 게시판 리스트 스크롤바 관련*/
   .approval-main-left::-webkit-scrollbar {
     width:0px;
   }
