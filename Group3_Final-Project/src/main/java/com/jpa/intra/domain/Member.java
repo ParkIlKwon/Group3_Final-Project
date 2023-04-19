@@ -24,7 +24,7 @@ public class Member {
     private String mem_name; //멤버 이름
     private String mem_img; //멤버 이미지
     private String gender; //멤버 성별
-    LocalDate birthday; //멤버 생일
+    private String birthday; //멤버 생일
     LocalDate reg_date;
 
     private String email; //멤버 이메일
@@ -39,7 +39,7 @@ public class Member {
     private String outWorkTime;
     private String vacationStart;
     private String vacationEnd;
-    
+
     private String status; //현재 상태 (출퇴)
     //offline (퇴근) , online (출근) , holiday(휴가)
 

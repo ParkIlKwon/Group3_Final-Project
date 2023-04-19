@@ -65,6 +65,8 @@ public class BoardService {
 
     public List<BoardApproval> findApproval() {return bBoardRepository.findAllBoardApproval();}
 
+    public BoardApproval findApprovalByBoardId(Long boardId) {return bBoardRepository.findApprovalByBoardId(boardId);}
+
 
     @Transactional
     public void deleteBoardApprovalById(Long boardId) {bBoardRepository.deleteBoardApprovalById(boardId);}
@@ -74,7 +76,6 @@ public class BoardService {
 
     @Transactional
     public void expireApprovals() {
-        System.out.println("서비스 문제없이 실행되다");
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분");
         String formattedNow = now.format(formatter);
