@@ -495,6 +495,11 @@ public class BoardController {
         return "redirect:/moveProject";
     }
 
+////// 공지 게시판 ///////////////////////////////////
+    // 현재 날짜와 시간 정보를 LocalDateTime을 통해 가져오고 Formatter를 이용하여 필요한 형식으로 치환하다.
+    LocalDateTime today = LocalDateTime.now();
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    String simpleDate = today.format(format);
 
     // 작성된 공지 데이터로 추가
     @PostMapping("/board/newnotice")
@@ -503,7 +508,7 @@ public class BoardController {
         BoardNotice boardNotice=new BoardNotice();    //boardNotice객체
         boardNotice.setBoardTitle(boardNoticeDTO.getBoardTitle());  //제목
         boardNotice.setBoardContent(boardNoticeDTO.getBoardContent());  //내용
-        boardNotice.setCreateDate(formattedDate); //작성일
+        boardNotice.setCreateDate(simpleDate); //작성일
         boardNotice.setBoardWriter("ADMIN"); // 작성자 ADMIN으로 고정
 
         boardService.createBoardNotice(boardNotice);
@@ -511,37 +516,26 @@ public class BoardController {
         return "redirect:/moveNotice";
     }
 
-//     //공지 작성 게시판으로 이동
-//    @GetMapping("/board/newnotice")
-//    public String callBoardNoticeWriteForm(Model model) {
-//        model.addAttribute("boardNoticeDTO", new BoardNoticeDTO());
-//        return "board/boardNoticeWriteForm";
-//    }
+    // 공지 객체 받아오기
+    @PostMapping("/board/getNotice")
+    @ResponseBody
+    public BoardNotice getNotice(@RequestParam("id") Long boardId) {
+//        Long id=Long.parseLong(boardId);
+        return boardService.getOneNotice(boardId);
+    }
 
-//    // 공지 리스트
-//    @GetMapping("/board/boardnoticelist")
-//    public String boardNoticeList(Model model) {
-//        List<BoardNotice> nlist=boardService.getNoticeList();
-//        List<Reply> rplist=replyService.findReply();
-//        model.addAttribute("nlist", nlist);
-//        return "board/notice";
-//    }
+    // 공지 수정
+    @PostMapping("/board/changeNotice")
+    @ResponseBody
+    public void setNotice(@RequestParam("id") Long id, @RequestParam("boardTitle") String title, @RequestParam("boardContent") String contents) {
+        boardService.modifyNotice(id,title,contents);
+    }
 
-    //    // 공지 삭제
-//    @DeleteMapping("/board/deleteboardNotice")
-//    public ResponseEntity<Void> deleteBoardNotice(@RequestBody Map<String, Object> reqData) {
-//        Long boardId = Long.parseLong(reqData.get("boardId").toString());
-//
-//        boardService.deleteBoardTaskById(boardId);
-//        return ResponseEntity.noContent().build();
-//    }
-//
-//    // 공지 변경
-//    @PostMapping("/board/changetaskprogress")
-//    public ResponseEntity<Void> changeTaskProgress(@RequestParam Long boardId, @RequestParam String boardProgress) {
-//        boardService.changeTaskProgress(boardId, boardProgress);
-//        return ResponseEntity.noContent().build();
-//    }
-
+    // 공지 삭제
+    @PostMapping("/board/delNotice")
+    @ResponseBody
+    public void delNotice(@RequestParam("id") Long id) {
+        boardService.deleteNotice(id);
+    }
 
 }

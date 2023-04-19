@@ -117,12 +117,30 @@ public class Board_Repository {
                 .getResultList();
     }
 
+    //공지리스트 DB에서 추출
     public List<BoardNotice> findAllNotice() {
         return em.createQuery("SELECT t FROM BoardNotice t order by t.id desc ", BoardNotice.class).getResultList();
     }
 
+    //수정할 공지 가져오기
+    public BoardNotice getOneNoticeRps(Long boardId) {
+       return em.find(BoardNotice.class, boardId);
+    }
 
+    //공지 수정
+    public void modiNotice(Long id, String title, String contents) { //업데이트 문
+        em.createQuery("UPDATE BoardNotice n SET n.boardTitle =:title , n.boardContent =:content WHERE n.id = :boardID")
+                .setParameter("boardID",id)
+                .setParameter("title",title)
+                .setParameter("content",contents)
+                .executeUpdate();
+    }
 
-
+    //공지 삭제
+    public void delNoticeDB(Long id){
+        BoardNotice notice=em.find(BoardNotice.class, id);
+        em.remove(notice); // 목록에서 얘만 지워줌 . commit 만 되어 있는 상태
+        em.flush(); //적용
+    }
 
 }
