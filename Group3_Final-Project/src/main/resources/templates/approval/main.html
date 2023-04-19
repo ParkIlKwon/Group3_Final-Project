@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{/fragments/header :: header}"></head>
+<head th:replace="~{fragments/header :: header}"></head>
 
 <body class="g-sidenav-show  bg-gray-100">
 <!--   사이드 : aside -->
-<aside th:replace="/fragments/aside"></aside>
+<aside th:replace="fragments/aside"></aside>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
   <!-- body Top Navbar : bodyTop  -->
   <nav th:replace="fragments/bodyTop"></nav>
@@ -14,7 +14,7 @@
     <div class="row" >
       <div class="col-md-4">
         <div class="card p-3" style="height: 100vh;">
-          <div class="card-header pb-0 text-center">
+          <div class="card-header p-0">
             <button type="button" class="btn bg-gradient-primary p-2 mb-1" data-bs-toggle="modal" data-bs-target="#writeModal">새 기안</button>
             <button type="button" class="btn bg-gradient-success p-2 mb-1" onclick="#">결재완료</button>
             <button type="button" class="btn bg-gradient-secondary p-2 mb-1" onclick="#">미결재</button>
@@ -24,11 +24,11 @@
           <!--<div class="card-body pt-4 p-3 approval-main-left">
             <h6 class="mb-0">결재 목록</h6>
             <ul class="list-group approval-main-left-alist-section" th:with="list=${curUser.team.team_name} == '인사부' ? ${alist} : ${myAList}" th:each="vo:${list}" onclick="showAlistContents(this)">-->
-          <div class="card-body pt-4 p-3 approval-main-left" th:with="alist=${alist}">
-            <h6 class="mb-0">결재 목록</h6>
+          <div class="card-body p-0 approval-main-left" th:with="alist=${alist}">
+            <h6 class="mb-2">결재 목록</h6>
             <ul class="list-group approval-main-left-alist-section" th:each="vo:${alist}" onclick="showAlistContents(this)">
               <!-- 기존의 내용 -->
-              <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg approval-main-left-alist-section">
+              <li class="list-group-item border-0 d-flex p-2 px-4 mb-2 bg-gray-100 border-radius-lg approval-main-left-alist-section">
                 <div class="d-flex flex-column approval-main-left-alist-section-component">
                   <input type="hidden" class="approval-board-id" th:value="${vo.id}">
                   <input type="hidden" class="approval-board-writer" th:value="${vo.boardWriter}">

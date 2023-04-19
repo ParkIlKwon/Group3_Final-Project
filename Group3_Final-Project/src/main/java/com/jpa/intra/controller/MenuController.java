@@ -33,7 +33,7 @@ public class MenuController {
     private final MailService mailService;
     
     private final Member_Repository member_repository;
-    
+
     //대시보드 페이지 이동
     @GetMapping("/moveDashboard")
     public String MoveDashboard(Model model, HttpServletRequest request){
@@ -43,8 +43,16 @@ public class MenuController {
         }
         //페이지 이동시 (페이지제목/사이드바 active 변경을 위한 model)
         model.addAttribute("page", "Dashboard");
+
+        //대시보드에 노출되는 메일 목록
         List<Mail> mailList = mailService.findLogMailList();
         model.addAttribute("mailList",mailList);
+        //대시보드에 노출되는 공지 목록
+        List<BoardNotice> noticeList = boardService.getNoticeList();
+        model.addAttribute("notiList",noticeList);
+        //대시보드에 노출되는 프로젝트 목록
+        List<BoardTask> tlist=boardService.findTasks();
+        model.addAttribute("tlist", tlist);
         return "/dashboard/main";
     }
 
