@@ -9,116 +9,125 @@
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                 <!--대시보드 Top / 검색기능 JS -->
-                <div class="row" th:if="${page=='Dashboard'}" >
+<!--                <div class="row" th:if="${page=='Dashboard'}" >-->
+                <div class="row">
                     <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">
-                        <i class="ni ni-shop fs-4"></i>
+                        <i th:if="${page=='Dashboard'}" class="ni ni-shop fs-4"></i>
+                        <i th:if="${page=='프로젝트'}" class="ni ni-bullet-list-67 fs-4"></i>
+                        <i th:if="${page=='메일'}" class="ni ni-email-83 fs-4"></i>
+                        <i th:if="${page=='캘린더'}" class="ni ni-calendar-grid-58 fs-4"></i>
+                        <i th:if="${page=='드라이브'}" class="ni ni-cloud-upload-96 fs-4"></i>
+                        <i th:if="${page=='주소록'}" class="ni ni-badge fs-4"></i>
+                        <i th:if="${page=='결재'}" class="ni ni-building fs-4"></i>
+                        <i th:if="${page=='관리자'}" class="ni ni-chart-bar-32 fs-4"></i>
+
                     </div>
                     <div class="input-group searchGroup col ps-1">
                         <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                         <input type="text" id="search_area" class="form-control" placeholder="Search">
                         <div class="rel_search" onclick="Searching()">
-                            <ul id='autoMaker' style="list-style:none"></ul>
+                            <ul id='autoMaker' class="mt-5 pe-4 bg-light border-radius-md" style="list-style:none"></ul>
                         </div>
                     </div>
                 </div>
 
                 <!--프로젝트 Top / 검색기능 JS -->
-                <div class="row" th:if="${page=='프로젝트'}" >
-                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">
-                        <i class="ni ni-bullet-list-67 fs-4"></i>
-                    </div>
-                    <div class="input-group searchGroup col ps-1">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" id="search_area" class="form-control" placeholder="Search">
-                        <div class="rel_search">
-                            <ul id='autoMaker' style="list-style:none"></ul>
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="row" th:if="${page=='프로젝트'}" >-->
+<!--                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">-->
+<!--                        <i class="ni ni-bullet-list-67 fs-4"></i>-->
+<!--                    </div>-->
+<!--                    <div class="input-group searchGroup col ps-1">-->
+<!--                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>-->
+<!--                        <input type="text" id="search_area" class="form-control" placeholder="Search">-->
+<!--                        <div class="rel_search">-->
+<!--                            <ul id='autoMaker' class="mt-5 pe-4 bg-light border-radius-md" style="list-style:none"></ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <!--메일 Top / 검색기능 JS -->
-                <div class="row" th:if="${page=='메일'}" >
-                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">
-                        <i class="ni ni-email-83 fs-4"></i>
-                    </div>
-                    <div class="input-group searchGroup col ps-1">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" id="search_area" class="form-control" placeholder="Search">
-                        <div class="rel_search">
-                            <ul id='autoMaker' style="list-style:none"></ul>
-                        </div>
-                    </div>
-                </div>
+<!--                &lt;!&ndash;메일 Top / 검색기능 JS &ndash;&gt;-->
+<!--                <div class="row" th:if="${page=='메일'}" >-->
+<!--                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">-->
+<!--                        <i class="ni ni-email-83 fs-4"></i>-->
+<!--                    </div>-->
+<!--                    <div class="input-group searchGroup col ps-1">-->
+<!--                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>-->
+<!--                        <input type="text" id="search_area" class="form-control" placeholder="Search">-->
+<!--                        <div class="rel_search">-->
+<!--                            <ul id='autoMaker' class="mt-5 pe-4 bg-light border-radius-md" style="list-style:none"></ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <!--캘린더 Top / 검색기능 JS -->
-                <div class="row" th:if="${page=='캘린더'}" >
-                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">
-                        <i class="ni ni-calendar-grid-58 fs-4"></i>
-                    </div>
-                    <div class="input-group searchGroup col ps-1">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" id="search_area" class="form-control" placeholder="Search">
-                        <div class="rel_search">
-                            <ul id='autoMaker' style="list-style:none"></ul>
-                        </div>
-                    </div>
-                </div>
+<!--                &lt;!&ndash;캘린더 Top / 검색기능 JS &ndash;&gt;-->
+<!--                <div class="row" th:if="${page=='캘린더'}" >-->
+<!--                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">-->
+<!--                        <i class="ni ni-calendar-grid-58 fs-4"></i>-->
+<!--                    </div>-->
+<!--                    <div class="input-group searchGroup col ps-1">-->
+<!--                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>-->
+<!--                        <input type="text" id="search_area" class="form-control" placeholder="Search">-->
+<!--                        <div class="rel_search">-->
+<!--                            <ul id='autoMaker' class="mt-5 pe-4 bg-light border-radius-md" style="list-style:none"></ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <!--드라이브 Top / 검색기능 JS -->
-                <div class="row" th:if="${page=='드라이브'}" >
-                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">
-                        <i class="ni ni-cloud-upload-96 fs-4"></i>
-                    </div>
-                    <div class="input-group searchGroup col ps-1">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" id="search_area" class="form-control" placeholder="Search">
-                        <div class="rel_search">
-                            <ul id='autoMaker' style="list-style:none"></ul>
-                        </div>
-                    </div>
-                </div>
+<!--                &lt;!&ndash;드라이브 Top / 검색기능 JS &ndash;&gt;-->
+<!--                <div class="row" th:if="${page=='드라이브'}" >-->
+<!--                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">-->
+<!--                        <i class="ni ni-cloud-upload-96 fs-4"></i>-->
+<!--                    </div>-->
+<!--                    <div class="input-group searchGroup col ps-1">-->
+<!--                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>-->
+<!--                        <input type="text" id="search_area" class="form-control" placeholder="Search">-->
+<!--                        <div class="rel_search">-->
+<!--                            <ul id='autoMaker' class="mt-5 pe-4 bg-light border-radius-md" style="list-style:none"></ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <!--주소록 Top / 검색기능 JS -->
-                <div class="row" th:if="${page=='주소록'}" >
-                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">
-                        <i class="ni ni-badge fs-4"></i>
-                    </div>
-                    <div class="input-group searchGroup col ps-1">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" id="search_area" class="form-control" placeholder="Search">
-                        <div class="rel_search">
-                            <ul id='autoMaker' style="list-style:none"></ul>
-                        </div>
-                    </div>
-                </div>
+<!--                &lt;!&ndash;주소록 Top / 검색기능 JS &ndash;&gt;-->
+<!--                <div class="row" th:if="${page=='주소록'}" >-->
+<!--                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">-->
+<!--                        <i class="ni ni-badge fs-4"></i>-->
+<!--                    </div>-->
+<!--                    <div class="input-group searchGroup col ps-1">-->
+<!--                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>-->
+<!--                        <input type="text" id="search_area" class="form-control" placeholder="Search">-->
+<!--                        <div class="rel_search">-->
+<!--                            <ul id='autoMaker' class="mt-5 pe-4 bg-light border-radius-md" style="list-style:none"></ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <!--결재 Top / 검색기능 JS -->
-                <div class="row" th:if="${page=='결재'}" >
-                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">
-                        <i class="ni ni-building fs-4"></i>
-                    </div>
-                    <div class="input-group searchGroup col ps-1">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" id="search_area" class="form-control" placeholder="Search">
-                        <div class="rel_search">
-                            <ul id='autoMaker' style="list-style:none"></ul>
-                        </div>
-                    </div>
-                </div>
+<!--                &lt;!&ndash;결재 Top / 검색기능 JS &ndash;&gt;-->
+<!--                <div class="row" th:if="${page=='결재'}" >-->
+<!--                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">-->
+<!--                        <i class="ni ni-building fs-4"></i>-->
+<!--                    </div>-->
+<!--                    <div class="input-group searchGroup col ps-1">-->
+<!--                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>-->
+<!--                        <input type="text" id="search_area" class="form-control" placeholder="Search">-->
+<!--                        <div class="rel_search">-->
+<!--                            <ul id='autoMaker' class="mt-5 pe-4 bg-light border-radius-md" style="list-style:none"></ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <!--관리자 Top / 검색기능 JS -->
-                <div class="row" th:if="${page=='관리자'}" >
-                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">
-                        <i class="ni ni-chart-bar-32 fs-4"></i>
-                    </div>
-                    <div class="input-group searchGroup col ps-1">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" id="search_area" class="form-control" placeholder="Search">
-                        <div class="rel_search">
-                            <ul id='autoMaker' style="list-style:none"></ul>
-                        </div>
-                    </div>
-                </div>
+<!--                &lt;!&ndash;관리자 Top / 검색기능 JS &ndash;&gt;-->
+<!--                <div class="row" th:if="${page=='관리자'}" >-->
+<!--                    <div class="icon icon-shape bg-gradient-secondary shadow text-center border-radius-md">-->
+<!--                        <i class="ni ni-chart-bar-32 fs-4"></i>-->
+<!--                    </div>-->
+<!--                    <div class="input-group searchGroup col ps-1">-->
+<!--                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>-->
+<!--                        <input type="text" id="search_area" class="form-control" placeholder="Search">-->
+<!--                        <div class="rel_search">-->
+<!--                            <ul id='autoMaker' class="mt-5 pe-4 bg-light border-radius-md" style="list-style:none"></ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
         </div>
     </div>
 </nav>

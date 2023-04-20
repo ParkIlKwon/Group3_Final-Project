@@ -112,9 +112,10 @@
 <hr>
 <table class="table table-hover" id="chat-room-list">
     <tr>
-        <th scope="col">채팅방명</th>
+        <th scope="col">회의방 이름</th>
         <th scope="col">잠금 여부</th>
         <th scope="col">참여 인원</th>
+        <th scope="col">호스트</th>
     </tr>
     <th:block th:fragment="content">
         <tr th:each="room : ${crlist}">
@@ -135,6 +136,9 @@
             </td>
             <td>
                 <span class="badge bg-primary rounded-pill">[[${room.curUserCnt}]]/[[${room.maxUserCnt}]]</span>
+            </td>
+            <td>
+                <span th:text="${room.creator.mem_name}"></span>
             </td>
         </tr>
     </th:block>

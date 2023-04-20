@@ -44,9 +44,9 @@ public class init {
             initService.makeMemberDummy2(i);
         }
          //initService.makeTaskDummy();
-        for(int i=0;i<4;i++) {
-            initService.makeTaskDummy(i);
-        }
+//        for(int i=0;i<4;i++) {
+//            initService.makeTaskDummy(i);
+//        }
     }
 
     @Component

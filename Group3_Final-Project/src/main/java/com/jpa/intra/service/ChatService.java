@@ -30,4 +30,10 @@ public class ChatService {
 
         return realPwd.equals(reqPwd);
     }
+
+    @Transactional
+    public void updateChatRoom(ChatRoom chatRoom) {
+        cChatRepository.updateChatRoom(chatRoom);
+    }
+
 }

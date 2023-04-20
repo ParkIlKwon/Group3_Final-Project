@@ -56,9 +56,11 @@
             Address address = new Address(getmember.getAddress_name(),getmember.getAddress_road());
             m.setAddress(address); //Address 객체생성후 받아온 주소정보 각각 넣어줌
             m.setStatus("offline");
-            m.setVacation(180);
+            m.setVacation(120);
             m.setGender(getmember.getGender());
             m.setEmail(getmember.getMemail());
+
+
 
             Team t = tc.convert("1");
 

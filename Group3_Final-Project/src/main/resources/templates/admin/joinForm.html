@@ -92,11 +92,11 @@
                                 </div>
                                 <div class="mb-3">
                                     <label>휴대폰 번호</label>
-                                    <input type="text"  class="form-control" placeholder="HP" name="HP" />
+                                    <input type="text"  class="form-control" placeholder="HP" name="innum" />
                                 </div>
                                 <div class="mb-3">
                                     <label>회사 번호</label>
-                                    <input type="text" class="form-control" placeholder="Phone" name="phone" />
+                                    <input type="text" class="form-control" placeholder="Phone" name="outnum" />
                                 </div>
                                 <div class="mb-3">
                                     <label>이메일</label>
@@ -115,7 +115,7 @@
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control col-9" style="height: 40px;
                                          border-radius: 7px 0px 0px 7px !important;" id="memailconfirm" name="memailconfirm">
-                                        <button type="button" class="btn btn-outline-secondary col-3 mb-0" style="height: 40px">
+                                        <button type="button" class="btn btn-outline-secondary col-3 mb-0" style="height: 40px" onclick="codechk()">
                                             인증번호 확인</button>
                                     </div>
                                 </div>
@@ -170,15 +170,25 @@
     function checkForm(form){
         if(code === ""){
             alert("코드를 받아와 주세요.");
-        }else if(code != $('#memailconfirm').val()){
-            alert("메일코드가 일치 하지않습니다.")
+        }else if(CheckEmail == false){
+            alert("메일코드를 확인 하여주세요.")
         }else{
             form.submit();
         }
         return;
     }
 
+    function codechk(){
 
+        if(code != $('#memailconfirm').val()){
+            alert("메일코드가 일치 하지않습니다.");
+        }else {
+            CheckEmail = true;
+        }
+
+
+
+    }
 
 
 </script>

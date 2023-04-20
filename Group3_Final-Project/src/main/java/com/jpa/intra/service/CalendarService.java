@@ -52,7 +52,7 @@ public class CalendarService {
         event.put("start",m.getVacationStart());
         event.put("end",m.getVacationEnd());
         event.put("color","gray");
-
+        eventList.add(event);
 
 
 

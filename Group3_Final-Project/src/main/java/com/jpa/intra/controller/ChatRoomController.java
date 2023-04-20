@@ -76,6 +76,14 @@ public class ChatRoomController {
         Map<String, Object> response = new HashMap<>();
         response.put("valid", isValid);
 
+        countUp(Long.parseLong(roomNum));
+
         return ResponseEntity.ok(response);
+    }
+
+    private void countUp(Long roomId) {
+        ChatRoom currentRoom=chatService.findRoomByRoomId(roomId);
+        currentRoom.setCurUserCnt(currentRoom.getCurUserCnt()+1);
+        chatService.updateChatRoom(currentRoom);
     }
 }
