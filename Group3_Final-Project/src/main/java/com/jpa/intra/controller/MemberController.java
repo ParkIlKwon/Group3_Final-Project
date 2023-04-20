@@ -187,6 +187,16 @@
             model.addAttribute("page", "마이페이지");
             model.addAttribute("AttendList" , attendanceService.getAllAttendList(userId));
 
+            // 부서 사람들
+            List<Member> memberList = member_repository.getAllMemberList();
+            Member member = (Member) session.getAttribute("user");
+            List<Member> teamMemberList = new ArrayList<>();
+            for(int i=0; i<memberList.size(); i++){
+                if(memberList.get(i).getTeam().getTeam_name().equals(member.getTeam().getTeam_name())){
+                    teamMemberList.add(memberList.get(i));
+                }
+            }
+            model.addAttribute("teamMemberList",teamMemberList);
             return "members/profile";
         }
 

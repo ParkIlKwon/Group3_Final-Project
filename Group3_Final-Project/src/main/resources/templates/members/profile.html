@@ -22,7 +22,7 @@
                     <div class="row gx-4">
                     <div class="col-auto">
                         <div class="avatar avatar-xl position-relative">
-                            <img src="../assets/img/bruce-mars.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                            <img src="../assets/img/Charactor-02.png" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
                         </div>
                     </div>
                     <div class="col-auto my-auto">
@@ -41,23 +41,17 @@
                     <hr class="horizontal gray-light my-4">
                     <ul class="list-group">
                         <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">사원 번호:</strong> <span th:text="${session.user.getId()}"></span></li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Tel:</strong> &nbsp; (44) 123 1234 123</li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Mobile:</strong> &nbsp; (44) 123 1234 123</li>
+                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Tel:</strong> &nbsp; <span th:text="${session.user.getOutline_tel()}"></span></li>
+                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Mobile:</strong> &nbsp; <span th:text="${session.user.getInline_tel()}"></span></li>
                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; <span th:text="${session.user.getEmail()}"></span> </li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Location:</strong> &nbsp;<span th:text="${session.user.getAddress().getAddress_name()}"></span></li>
+                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Location:</strong> &nbsp;<span th:text="${session.user.getAddress().getAddress_name()} + '&nbsp;' + ${session.user.getAddress().getRoad_address_name()}"></span></li>
                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">생일:</strong> &nbsp; <span th:text="${session.user.getBirthday()}"></span> </li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">입사일:</strong> &nbsp; (44) 123 1234 123</li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">연차:</strong>  <span th:text="${session.user.getVacation()}"></span>&nbsp;/ 180</li>
+                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">입사일:</strong> &nbsp; <span th:text="${session.user.getReg_date()}"></span></li>
+                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">연차:</strong> &nbsp; <span th:text="${session.user.getVacation()}"></span></li>
                         <li class="list-group-item border-0 ps-0 pb-0">
                             <strong class="text-dark text-sm">Social:</strong> &nbsp;
-                            <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:;">
-                                <i class="fab fa-facebook fa-lg"></i>
-                            </a>
-                            <a class="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:;">
-                                <i class="fab fa-twitter fa-lg"></i>
-                            </a>
-                            <a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:;">
-                                <i class="fab fa-instagram fa-lg"></i>
+                            <a class="" id="modal-github" href="#" target='_blank'>
+                                <i class="fa fa-github" aria-hidden="true"></i>
                             </a>
                         </li>
                     </ul>
@@ -133,56 +127,19 @@
                   <h6 class="mb-0">My Team</h6>
               </div>
               <div class="card-body p-3">
-                  <ul class="list-group">
+                  <ul class="list-group" th:each="team: ${teamMemberList}">
                       <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
                           <div class="avatar me-3">
-                              <img src="../assets/img/kal-visuals-square.jpg" alt="kal" class="border-radius-lg shadow">
+                              <img src="../assets/img/Charactor-01.png" alt="kal" class="border-radius-lg shadow">
                           </div>
                           <div class="d-flex align-items-start flex-column justify-content-center">
-                              <h6 class="mb-0 text-sm">Sophie B.</h6>
-                              <p class="mb-0 text-xs">Hi! I need more information..</p>
+                              <h6 class="mb-0 text-sm" th:text="${team.getMem_name()}">Sophie B.</h6>
+                              <p class="mb-0 text-xs" th:text="${team.getEmail()}">Hi! I need more information..</p>
                           </div>
-                          <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a>
-                      </li>
-                      <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                          <div class="avatar me-3">
-                              <img src="../assets/img/marie.jpg" alt="kal" class="border-radius-lg shadow">
-                          </div>
-                          <div class="d-flex align-items-start flex-column justify-content-center">
-                              <h6 class="mb-0 text-sm">Anne Marie</h6>
-                              <p class="mb-0 text-xs">Awesome work, can you..</p>
-                          </div>
-                          <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a>
-                      </li>
-                      <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                          <div class="avatar me-3">
-                              <img src="../assets/img/ivana-square.jpg" alt="kal" class="border-radius-lg shadow">
-                          </div>
-                          <div class="d-flex align-items-start flex-column justify-content-center">
-                              <h6 class="mb-0 text-sm">Ivanna</h6>
-                              <p class="mb-0 text-xs">About files I can..</p>
-                          </div>
-                          <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a>
-                      </li>
-                      <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                          <div class="avatar me-3">
-                              <img src="../assets/img/team-4.jpg" alt="kal" class="border-radius-lg shadow">
-                          </div>
-                          <div class="d-flex align-items-start flex-column justify-content-center">
-                              <h6 class="mb-0 text-sm">Peterson</h6>
-                              <p class="mb-0 text-xs">Have a great afternoon..</p>
-                          </div>
-                          <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a>
-                      </li>
-                      <li class="list-group-item border-0 d-flex align-items-center px-0">
-                          <div class="avatar me-3">
-                              <img src="../assets/img/team-3.jpg" alt="kal" class="border-radius-lg shadow">
-                          </div>
-                          <div class="d-flex align-items-start flex-column justify-content-center">
-                              <h6 class="mb-0 text-sm">Nick Daniel</h6>
-                              <p class="mb-0 text-xs">Hi! I need more information..</p>
-                          </div>
-                          <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a>
+<!--                          <div>-->
+<!--                          <span th:if="${team.getStatus() == 'online'}" class="badge badge-sm bg-gradient-success">Online</span>-->
+<!--                          <span th:if="${team.getStatus() == 'offline'}" class="badge badge-sm bg-gradient-danger">Offline</span> &lt;!&ndash; 출 퇴근 상태 &ndash;&gt;-->
+<!--                          </div>-->
                       </li>
                   </ul>
               </div>
