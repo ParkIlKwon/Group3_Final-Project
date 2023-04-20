@@ -5,6 +5,7 @@ import com.jpa.intra.domain.Member;
 import com.jpa.intra.repository.Member_Repository;
 import com.jpa.intra.service.ChatService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -63,5 +66,16 @@ public class ChatRoomController {
         model.addAttribute("curUserName",curUser.getMem_name());
         model.addAttribute("room", room);
         return "meeting/chatroom";
+    }
+
+    @PostMapping("/chat/checkpassword")
+    @ResponseBody
+    public ResponseEntity<?> checkRoomPwd(@RequestParam("room_id") String roomNum, @RequestParam("password") String reqPwd) {
+        boolean isValid = chatService.checkRoomPassword(Long.parseLong(roomNum), reqPwd);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("valid", isValid);
+
+        return ResponseEntity.ok(response);
     }
 }
