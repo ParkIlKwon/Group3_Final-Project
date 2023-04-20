@@ -242,168 +242,45 @@
                   <thead>
                   <tr>
                     <th class="ps-4 text-secondary text-xs font-weight-bolder">프로젝트명</th>
-                    <th class="ps-4 text-secondary text-xs font-weight-bolder">참조자</th>
+                    <th class="ps-4 text-secondary text-xs font-weight-bolder">담당자</th>
                     <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder">진행상태</th>
                     <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder">진행율</th>
                   </tr>
                   </thead>
-                  <tbody>
+                  <tbody th:each="t,status : ${tlist}" th:if="${status.index} &lt; 4">
                   <tr>
                     <td>
                       <div class="d-flex px-2 py-1">
                         <div>
-                          <img src="../assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
+<!--                          <img src="../assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">-->
                         </div>
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Soft UI XD Version</h6>
+                          <h6 class="mb-0 text-sm" th:text="${t.getBoardTitle()}">Soft UI XD Version</h6>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <div class="avatar-group mt-2">
-                        <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                          <img src="../assets/img/team-1.jpg" alt="team1">
-                        </a>
-                        <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                          <img src="../assets/img/team-2.jpg" alt="team2">
-                        </a>
-                        <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Alexander Smith">
-                          <img src="../assets/img/team-3.jpg" alt="team3">
-                        </a>
-                        <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                          <img src="../assets/img/team-4.jpg" alt="team4">
-                        </a>
-                      </div>
+<!--                      담당자-->
+                      <h6 class="mb-0 text-sm" th:text="${t.getResponsibleMemNum().getMem_name()}">Soft UI XD Version</h6>
                     </td>
                     <td class="align-middle text-center text-sm">
-                      <span class="text-xs font-weight-bold"> $14,000 </span>
+                      <span class="text-xs font-weight-bold" th:if="${t.getProgress().equals('IN_PROGRESS')}" th:text="'진행중'"> 진행중 </span>
+                      <span class="text-xs font-weight-bold" th:if="${t.getProgress().equals('TO_DO')}" th:text="'미완료'"> 진행중 </span>
+                      <span class="text-xs font-weight-bold" th:if="${t.getProgress().equals('DONE')}" th:text="'완료'"> 진행중 </span>
                     </td>
                     <td class="align-middle">
                       <div class="progress-wrapper w-75 mx-auto">
                         <div class="progress-info">
                           <div class="progress-percentage">
-                            <span class="text-xs font-weight-bold">60%</span>
+                            <span class="text-xs font-weight-bold" th:if="${t.getProgress().equals('IN_PROGRESS')}" th:text="'60%'">60%</span>
+                            <span class="text-xs font-weight-bold" th:if="${t.getProgress().equals('TO_DO')}" th:text="'10%'">60%</span>
+                            <span class="text-xs font-weight-bold" th:if="${t.getProgress().equals('DONE')}" th:text="'100%'">60%</span>
                           </div>
                         </div>
                         <div class="progress">
-                          <div class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div>
-                          <img src="../assets/img/small-logos/logo-atlassian.svg" class="avatar avatar-sm me-3" alt="atlassian">
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Add Progress Track</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="avatar-group mt-2">
-                        <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                          <img src="../assets/img/team-2.jpg" alt="team5">
-                        </a>
-                        <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                          <img src="../assets/img/team-4.jpg" alt="team6">
-                        </a>
-                      </div>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <span class="text-xs font-weight-bold"> $3,000 </span>
-                    </td>
-                    <td class="align-middle">
-                      <div class="progress-wrapper w-75 mx-auto">
-                        <div class="progress-info">
-                          <div class="progress-percentage">
-                            <span class="text-xs font-weight-bold">10%</span>
-                          </div>
-                        </div>
-                        <div class="progress">
-                          <div class="progress-bar bg-gradient-info w-10" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div>
-                          <img src="../assets/img/small-logos/logo-slack.svg" class="avatar avatar-sm me-3" alt="team7">
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Fix Platform Errors</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="avatar-group mt-2">
-                        <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                          <img src="../assets/img/team-3.jpg" alt="team8">
-                        </a>
-                        <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                          <img src="../assets/img/team-1.jpg" alt="team9">
-                        </a>
-                      </div>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <span class="text-xs font-weight-bold"> Not set </span>
-                    </td>
-                    <td class="align-middle">
-                      <div class="progress-wrapper w-75 mx-auto">
-                        <div class="progress-info">
-                          <div class="progress-percentage">
-                            <span class="text-xs font-weight-bold">100%</span>
-                          </div>
-                        </div>
-                        <div class="progress">
-                          <div class="progress-bar bg-gradient-success w-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div>
-                          <img src="../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm me-3" alt="spotify">
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Launch our Mobile App</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="avatar-group mt-2">
-                        <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                          <img src="../assets/img/team-4.jpg" alt="user1">
-                        </a>
-                        <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                          <img src="../assets/img/team-3.jpg" alt="user2">
-                        </a>
-                        <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Alexander Smith">
-                          <img src="../assets/img/team-4.jpg" alt="user3">
-                        </a>
-                        <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                          <img src="../assets/img/team-1.jpg" alt="user4">
-                        </a>
-                      </div>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <span class="text-xs font-weight-bold"> $20,500 </span>
-                    </td>
-                    <td class="align-middle">
-                      <div class="progress-wrapper w-75 mx-auto">
-                        <div class="progress-info">
-                          <div class="progress-percentage">
-                            <span class="text-xs font-weight-bold">100%</span>
-                          </div>
-                        </div>
-                        <div class="progress">
-                          <div class="progress-bar bg-gradient-success w-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                          <div class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" th:if="${t.getProgress().equals('IN_PROGRESS')}"></div>
+                          <div class="progress-bar bg-gradient-success w-10" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" th:if="${t.getProgress().equals('TO_DO')}"></div>
+                          <div class="progress-bar bg-gradient-secondary w-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" th:if="${t.getProgress().equals('DONE')}"></div>
                         </div>
                       </div>
                     </td>
