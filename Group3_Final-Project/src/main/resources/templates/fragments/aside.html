@@ -12,7 +12,7 @@
     </a>
   </div>
   <hr class="horizontal dark mt-0">
-  <div class="w-auto pb-5" id="sidenav-collapse-main">
+  <div class="w-auto pb-4" id="sidenav-collapse-main">
     <ul class="navbar-nav">
       <!-- Side_대시보드 -->
       <li class="nav-item">
@@ -87,7 +87,7 @@
       </a>
       </li>
       <!-- Side_Admin -->
-      <li class="nav-item">
+      <li class="nav-item" th:if="${session.user.getTeam().getTeam_name() eq '인사부'}">
         <a th:class="${page=='관리자'} ? 'nav-link active' : 'nav-link'" href="/admin">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="ni ni-chart-bar-32 fs-5"></i>
@@ -109,7 +109,8 @@
 
           <p>
             <span class="text-2xl font-weight-bold" th:text="${session.user.getMem_name()}"></span>
-              <img th:src="@{'/' + ${session.user.getMem_img()}}" class="userPic" style="height:60px; border-radius:50px; float: right">
+              <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FebIBwO%2FbtsbChJgCH7%2FEly9lMPigeUHuql3AAYS31%2Fimg.png" class="userPic" style="height:60px; border-radius:50px; float: right">
+<!--              <img th:src="@{'/' + ${session.user.getMem_img()}}" class="userPic" style="height:60px; border-radius:50px; float: right">-->
           </p>
           <p class="text-sm" th:text="${session.user.getTeam().getTeam_name()}"></p>
         <a href="/members/profile" class="btn btn-white btn-sm w-100 mb-0 text-md-center fw-bold">마이 페이지</a>
@@ -118,7 +119,7 @@
     <a class="btn bg-gradient-primary mt-3 w-100 text-md-center" href="/members/logout">LOGOUT</a>
   </div>
 <!-- footer -->
-  <div class="copyright text-center text-sm text-muted text-lg-start pt-3 ps-3">
+  <div class="copyright text-center text-sm text-muted text-lg-start pt-2 ps-3">
     © <script>
     document.write(new Date().getFullYear())
     function openPopup() {

@@ -171,26 +171,28 @@
                   <div class="row ms-3">
                   <div class="col-6 py-3 ps-0">
                     <div class="d-flex mb-2">
-                      <div class="icon icon-shape icon-xs bg-gradient-success text-center border-radius-sm">
+                      <div class="bg-gradient-success text-white text-center border-radius-sm pt-1 px-2">
                         <i class="ni ni-single-02 opacity-10" aria-hidden="true"></i>
                       </div>
                       <p class="text-xs mt-1 mb-0 ps-2 font-weight-bold">Online</p>
                     </div>
-                    <h4 class="font-weight-bolder">6</h4>
+                    <h4 class="font-weight-bolder dash-board-online-cnt" th:text="${onlinecnt}"></h4>
                     <div class="progress w-75">
-                      <div class="progress-bar bg-dark w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                      <!--<div class="progress-bar bg-dark w-60" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>-->
+                      <div class="progress-bar bg-dark dash-board-online-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                   <div class="col-6 py-3 ps-0">
                     <div class="d-flex mb-2">
-                      <div class="icon icon-shape icon-xs bg-gradient-warning text-center border-radius-sm">
+                      <div class="bg-gradient-warning text-white text-center border-radius-sm pt-1 px-2">
                         <i class="ni ni-single-02 opacity-10" aria-hidden="true"></i>
                       </div>
                       <p class="text-xs mt-1 mb-0 ps-2 font-weight-bold">Offline</p>
                     </div>
-                    <h4 class="font-weight-bolder">4</h4>
+                    <h4 class="font-weight-bolder dash-board-offline-cnt" th:text="${offlinecnt}"></h4>
                     <div class="progress w-75">
-                      <div class="progress-bar bg-dark w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                      <!--<div class="progress-bar bg-dark w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>-->
+                      <div class="progress-bar bg-dark dash-board-offline-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                 </div>
@@ -201,26 +203,28 @@
                 <div class="row ms-3">
                   <div class="col-6 py-3 ps-0">
                     <div class="d-flex mb-2">
-                      <div class="icon icon-shape icon-xs bg-gradient-info text-center border-radius-sm">
-                        <i class="ni ni-single-02 opacity-10" aria-hidden="true"></i>
+                      <div class="bg-gradient-info text-white text-center border-radius-sm pt-1 px-2">
+                        <i class="ni ni-bullet-list-67 opacity-10" aria-hidden="true"></i>
                       </div>
                       <p class="text-xs mt-1 mb-0 ps-2 font-weight-bold">완료</p>
                     </div>
-                    <h4 class="font-weight-bolder">2</h4>
+                    <h4 class="font-weight-bolder dash-board-done-cnt" th:text="${doneCnt}"></h4>
                     <div class="progress w-75">
-                      <div class="progress-bar bg-dark w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                      <!--<div class="progress-bar bg-dark w-40 dash-board-task-done-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>-->
+                      <div class="progress-bar bg-dark dash-board-task-done-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                   <div class="col-6 py-3 ps-0">
                     <div class="d-flex mb-2">
-                      <div class="icon icon-shape icon-xs bg-gradient-secondary text-center border-radius-sm">
-                        <i class="ni ni-single-02 opacity-10" aria-hidden="true"></i>
+                      <div class="bg-gradient-secondary text-white text-center border-radius-sm pt-1 px-2">
+                        <i class="ni ni-bullet-list-67 opacity-10" aria-hidden="true"></i>
                       </div>
                       <p class="text-xs mt-1 mb-0 ps-2 font-weight-bold">미완료</p>
                     </div>
-                    <h4 class="font-weight-bolder">3</h4>
+                    <h4 class="font-weight-bolder dash-board-in-pro-cnt" th:text="${inProgressCnt}"></h4>
                     <div class="progress w-75">
-                      <div class="progress-bar bg-dark w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                      <!--<div class="progress-bar bg-dark w-60 dash-board-task-in-pro-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>-->
+                      <div class="progress-bar bg-dark dash-board-task-in-pro-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                 </div>
@@ -336,6 +340,39 @@
 
                 $('#wthIcon').html(weathericonUrl);
               });
+
+
+      let doneBar=document.querySelector('.dash-board-task-done-bar');
+      let inProgressBar=document.querySelector('.dash-board-task-in-pro-bar');
+      let doneCnt=(document.querySelector('.dash-board-done-cnt').textContent)*1;
+      let inProgressCnt=(document.querySelector('.dash-board-in-pro-cnt').textContent)*1;
+
+      let onlineBar=document.querySelector('.dash-board-online-bar');
+      let offlineBar=document.querySelector('.dash-board-offline-bar');
+      let onlineCnt=(document.querySelector('.dash-board-online-cnt').textContent)*1;
+      let offlineCnt=(document.querySelector('.dash-board-offline-cnt').textContent)*1;
+
+      let total1=doneCnt+inProgressCnt;
+      let total2=onlineCnt+offlineCnt;
+
+      let ans1 = Math.round((doneCnt / total1) * 100);
+      let ans2 = Math.round((inProgressCnt / total1) * 100);
+      let ans3 = Math.round((onlineCnt / total2) * 100);
+      let ans4 = Math.round((offlineCnt / total2) * 100);
+
+      doneBar.setAttribute('aria-valuenow', ans1);
+      doneBar.style.width = ans1 + '%';
+      inProgressBar.setAttribute('aria-valuenow', ans2);
+      inProgressBar.style.width = ans2 + '%';
+
+      onlineBar.setAttribute('aria-valuenow', ans3);
+      onlineBar.style.width = ans3 + '%';
+      offlineBar.setAttribute('aria-valuenow', ans4);
+      offlineBar.style.width = ans4 + '%';
+
+
+
+
     });
 
 

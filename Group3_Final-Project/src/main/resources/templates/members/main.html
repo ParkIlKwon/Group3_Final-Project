@@ -34,8 +34,7 @@
                 <tr th:each="member:${memberList}">
                   <td>
                     <div class="d-flex px-2 py-1">
-<!--                        <img class="avatar avatar-sm me-3" th:src="@{'/' + ${member.getMem_img()}}">-->
-                      <img class="avatar avatar-sm me-3" src="../assets/img/Charactor-01.png">
+                        <img class="avatar avatar-sm me-3" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FebIBwO%2FbtsbChJgCH7%2FEly9lMPigeUHuql3AAYS31%2Fimg.png">
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="member-name mb-0 text-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" th:text="${member.getMem_name()}">이름</h6>   <!-- 이름 -->
                         <p class="text-xs text-secondary mb-0" th:text="${member.getEmail()}">이메일</p>  <!-- 이메일 -->

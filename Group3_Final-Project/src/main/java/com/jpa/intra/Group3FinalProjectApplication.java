@@ -26,4 +26,13 @@ public class Group3FinalProjectApplication {
     public String uploadPath(){
         return "c:/summernoteimage/";
     }
+
+    @Bean(name="pro") // 메일 이미지 업로드 경로 Bean
+    public String profilePath(){
+        return "c:/filestorage/";
+    }
+
+
+
+
 }

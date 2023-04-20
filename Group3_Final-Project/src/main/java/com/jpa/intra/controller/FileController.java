@@ -1,10 +1,12 @@
 package com.jpa.intra.controller;
 
 import com.jpa.intra.domain.FileEntity;
+import com.jpa.intra.domain.MailUploadFile;
 import com.jpa.intra.domain.Member;
 import com.jpa.intra.repository.File_Repository;
 import com.jpa.intra.service.FileService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,10 +30,18 @@ public class FileController {
 
         for (MultipartFile multipartFile : files) {
             fileService.uploadFile(multipartFile, request);
+
+
         }
 
         return "redirect:/moveDrive";
     }
+
+
+
+
+
+
 
     @GetMapping("/deleteFile")
     public String deleteFile(@RequestParam("path")String path) throws IOException{

@@ -43,9 +43,10 @@ public class init {
         for (int i = 0; i < 5; i++) {
             initService.makeMemberDummy2(i);
         }
-//         initService.makeTaskDummy();
+
         for(int i=0;i<4;i++) {
             initService.makeTaskDummy(i);
+            initService.makeTaskDummy2(i);
         }
     }
 
@@ -119,9 +120,12 @@ public class init {
 
             //테스트 5 번 더미 데이터 부터는 팀원들 이메일 넣어 봤습니다.
             String EmailArr[] = {"dlfrnjs51@naver.com" , "kimbj0117@gmail.com" , "rlatjddbs316@naver.com"
-                    ,"kimbj0117@gmail.com" , "2021620059@sdu.ac.kr"};
+                    ,"kimbj0117@gmail.com" , "jjooll@naver.com"};
             String name[] = { "박일권" , "김범진" , "김성윤" , "김범짐" , "이주혜"
             };
+            String gitLing[] = {"https://github.com/ParkIlKwon","https://github.com/BEOMJINI" , "https://github.com/jjuhye"
+           ,"https://github.com/sungyoonkim930316" ,"https://github.com/BEOMJINI" };
+        
 
             String outNumber[] = { "010-1443-1333","010-1953-1373","010-1553-1333","010-1443-1343","010-1443-1234"};
             String inNumber [] = {"1688" , "1234" , "3599" , "4958" , "9988"};
@@ -135,7 +139,6 @@ public class init {
             m.setStatus("offline");
             m.setBirthday("2023-04-0"+(i*3));
 
-
             m.setInline_tel(inNumber[i]);
             m.setOutline_tel(outNumber[i]);
 
@@ -144,7 +147,7 @@ public class init {
             String gender = i % 2 == 0 ? "남":"여";
             m.setGender(gender);
             m.setVacation(120);
-
+            m.setGitLink(gitLing[i]);
             m.setEmp_type(type[i]);
 
             String RandomAddress[] = {"경기도 시흥시"
@@ -243,7 +246,35 @@ public class init {
             else {
                 System.out.println("err");
             }
+        }
+        public void makeTaskDummy2(int idx) {
+            Random r=new Random();
+            int val=r.nextInt(2);
+            String[] titleList={"재직증명서 발급처리","보안 점검 공지 작성","화장실 변기 막힘 수리","신규 입사자 교육"};
+            String[] contentList={"발급 처리방법 안내","작업 일주일전 5/1에 공지 등록","화장실 공사 진행중 4/20~4/30","교육 담당자 지정 및 커리큘럼 준비"};
+            String[] progressList={"TO_DO","IN_PROGRESS","DONE"};
+            Member member1=memberService.findByMemName("이주혜");
+            Member member2=memberService.findByMemName("김범진");
+            if(member1!=null && member2!=null) {
+                System.out.println("둘 다 낫널");
+                BoardTask boardTask=new BoardTask();
+                boardTask.setBoardTitle(titleList[idx]);
+                boardTask.setBoardContent(contentList[idx]);
+                boardTask.setCreateDate("2023년 04월 24일");
+                boardTask.setUpdateDate(null);
+                boardTask.setBoardWriterObject(member2);
+                boardTask.setBoardWriter(member2.getMem_name());
+                boardTask.setResponsibleMemNum(member1);
+                boardTask.setTeamNum(member1.getTeam());
+                boardTask.setProgress(progressList[val]);
+                boardTask.setStartDate("2023년 04월 28일");
+                boardTask.setEndDate("2023년 05월 05일");
 
+                em.persist(boardTask);
+            }
+            else {
+                System.out.println("err");
+            }
         }
 
     }
