@@ -24,6 +24,10 @@ public class MemberDTO {
     
     private String address_road; //사용자 주소 (도로명)
 
+    private String innum;
+
+    private String outnum;
+
     private MultipartFile profileFile;
 
     private String birthday;
