@@ -31,6 +31,12 @@ public class MemberService {
         return m != null ? m : null ;
     }
 
+    public void Delete(Long uid){
+        aMemberRepository.Delete(uid);
+    }
+
+
+
     @Transactional
     public void Update(Member m){
         aMemberRepository.update(m); //리포지 >> 업데이트 로직

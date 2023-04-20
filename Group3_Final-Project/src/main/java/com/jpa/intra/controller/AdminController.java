@@ -62,4 +62,15 @@ public class AdminController {
         System.out.println("인증코드 : " + code);
         return code;
     }
+
+    @PostMapping("/deleteMember")
+    public String deleteMember(@RequestParam("id") String id){
+        Long uid = Long.parseLong(id);
+
+
+        return "admin/main";
+    }
+
+
+
 }

@@ -126,4 +126,7 @@ public class Member_Repository {
     }
 
 
+    public void Delete(Long uid) {
+        em.de
+    }
 }
