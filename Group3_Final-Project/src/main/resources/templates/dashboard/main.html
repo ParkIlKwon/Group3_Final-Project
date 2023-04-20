@@ -176,9 +176,9 @@
                       </div>
                       <p class="text-xs mt-1 mb-0 ps-2 font-weight-bold">Online</p>
                     </div>
-                    <h4 class="font-weight-bolder">6</h4>
+                    <h4 class="font-weight-bolder" th:text="${onlinecnt}"></h4>
                     <div class="progress w-75">
-                      <div class="progress-bar bg-dark w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                      <div class="progress-bar bg-dark w-60" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                   <div class="col-6 py-3 ps-0">
@@ -188,7 +188,7 @@
                       </div>
                       <p class="text-xs mt-1 mb-0 ps-2 font-weight-bold">Offline</p>
                     </div>
-                    <h4 class="font-weight-bolder">4</h4>
+                    <h4 class="font-weight-bolder" th:text="${offlinecnt}"></h4>
                     <div class="progress w-75">
                       <div class="progress-bar bg-dark w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
