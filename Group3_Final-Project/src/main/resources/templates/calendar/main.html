@@ -24,7 +24,7 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
-                <div class="card p-3" style="height: 850px">
+                <div class="card p-3">
                     <div class="card-header p-0">
                         <button type="button" class="btn bg-gradient-info p-2 mb-1" onclick="location.href='/projectCalendar'">프로젝트</button>
                         <button type="button" class="btn bg-gradient-success p-2 mb-1" onclick="">연차</button>
@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="card-body p-0">
-                        <section>
+<!--                        <section>-->
                             <div class="col" style="background-color: #ffffff;">
                                 <div id='external-events'>
                                     <div id='external-events-list'/>
@@ -60,7 +60,7 @@
                                         var calendar = new FullCalendar.Calendar(calendarEl, {
                                             initialView: 'dayGridMonth',
                                             droppable: true,
-
+                                            expandRows: true,
                                             editable: false, // 수정 가능?
                                             nowIndicator: true, // 현재 시간 마크
                                             dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
@@ -153,7 +153,7 @@
                                 </script>
                                 </div>
                             </div>
-                    </section>
+<!--                    </section>-->
                     </div>
                 </div>
             </div>
