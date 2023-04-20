@@ -120,16 +120,22 @@
             Member member = member_repository.findById(id);
             List<String> list = new ArrayList<>();
             if(member != null) {
-                list.add(String.valueOf(member.getId()));
-                list.add(member.getMem_id());
+                list.add(member.getMem_img());
                 list.add(member.getMem_name());
-                list.add(member.getGender());
                 list.add(member.getTeam().getTeam_name());
                 list.add(member.getEmp_type());
-                list.add(member.getEmail());
+                list.add(String.valueOf(member.getId()));
+//                list.add(member.getMem_id());
                 list.add(member.getInline_tel());
+                list.add(member.getOutline_tel());
+                list.add(member.getEmail());
+                list.add(member.getAddress().getAddress_name());
+                list.add(member.getAddress().getRoad_address_name());
                 list.add(String.valueOf(member.getBirthday()));
-                list.add(String.valueOf(member.getReg_date())) ;
+                list.add(member.getGender());
+                list.add(String.valueOf(member.getReg_date()));
+                list.add(String.valueOf(member.getVacation()));
+
                 return list;
             }
             return null;
