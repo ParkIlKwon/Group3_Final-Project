@@ -20,7 +20,7 @@ public class MailImageService {
 	@Autowired
 	MailUploadFile_Repository mailUploadFileRepository;
 	
-	private final Path rootLocation; // d:/image/
+	private final Path rootLocation;
 
 	public MailImageService(String uploadPath) {
 		this.rootLocation = Paths.get(uploadPath);
