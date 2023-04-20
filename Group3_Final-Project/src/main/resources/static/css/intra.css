@@ -127,3 +127,7 @@ section{
 }
 
 #autoMaker {margin-top:40px;}
+
+#sidenav-main::-webkit-scrollbar {
+    display: none;
+}

@@ -114,9 +114,9 @@
             </div>
             <div class="col fw-bold px-3 fs-6" style="line-height: 35px">
               <a class="truncate" th:each="t,status : ${tlist}" th:if="${status.index} &lt; 4">
-                <div th:text="${t.getBoardTitle()}"/>
+                <div class="truncate text-light fw-bold" th:text="${t.getBoardTitle()}"/>
               </a>
-              <div class="truncate" th:each="i : ${#numbers.sequence(1,4)}" th:text="${i}+'. 프로젝트'+${i}" onclick="location.href='#'"/>
+<!--              <div class="truncate" th:each="i : ${#numbers.sequence(1,4)}" th:text="${i}+'. 프로젝트'+${i}" onclick="location.href='#'"/>-->
             </div>
           </div>
         </div>
