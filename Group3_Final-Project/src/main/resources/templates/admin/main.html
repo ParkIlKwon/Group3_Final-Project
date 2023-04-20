@@ -78,7 +78,8 @@
                   </td>
                   <!-- 출 퇴근 현황 -->
                   <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm bg-gradient-success">Online</span>
+                    <span class="badge badge-sm bg-gradient-success" th:if="${member.getStatus()} =='online' ">Online</span>
+                    <span class="badge badge-sm bg-gradient-danger" th:if="${member.getStatus()} =='offline' ">Offline</span>
                   </td>
                   <!-- 사원정보 수정 : Modal -->
                   <td class="align-middle text-center text-sm">

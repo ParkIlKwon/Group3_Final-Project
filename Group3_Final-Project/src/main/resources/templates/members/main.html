@@ -48,16 +48,10 @@
                   </td>
 <!--                  생략 가능-->
                   <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm bg-gradient-success">Online</span> <!-- 출 퇴근 상태 -->
+                    <span class="badge badge-sm bg-gradient-success" th:if="${member.getStatus()} =='online' ">Online</span>
+                    <span class="badge badge-sm bg-gradient-danger" th:if="${member.getStatus()} =='offline' ">Offline</span>
                   </td>
-<!--                  <td class="align-middle text-center">-->
-<!--                    <span class="text-secondary text-xs font-weight-bold">23/04/18</span>-->
-<!--                  </td>-->
-<!--                  <td class="align-middle">-->
-<!--                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">-->
-<!--                      Edit-->
-<!--                    </a>-->
-<!--                  </td>-->
+
                 </tr>
 <!--                End 사원 정보 --->
                 </tbody>
