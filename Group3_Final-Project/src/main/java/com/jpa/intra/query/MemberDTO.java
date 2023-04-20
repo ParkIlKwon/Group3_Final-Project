@@ -15,6 +15,8 @@ public class MemberDTO {
 
     @NotEmpty
     private String pw; //사용자 비번
+    
+    private String pkid; // 사용자 고유번호
 
     private String name; // 사용자 이름
 

@@ -53,7 +53,7 @@ public class MenuController {
         //대시보드에 노출되는 프로젝트 목록
         List<BoardTask> tlist=boardService.findTasks();
         model.addAttribute("tlist", tlist);
-        return "/dashboard/main";
+        return "dashboard/main";
     }
 
     //공지 페이지 이동
@@ -122,7 +122,7 @@ public class MenuController {
         // 전체 사원 목록
         List<Member> memberList = member_repository.getAllMemberList();
         model.addAttribute("memberList",memberList);
-        return "/members/main";
+        return "members/main";
     }
 
     //결재 페이지 이동
@@ -139,21 +139,21 @@ public class MenuController {
         model.addAttribute("page", "결재");
         model.addAttribute("curUser",curUser);
 
-        return "/approval/main";
+        return "approval/main";
     }
 
     //관리자 페이지 이동
     @GetMapping("/moveAdmin")
     public String MoveAdmin(Model model){
         model.addAttribute("page", "관리자");
-        return "/admin/main"; //관리자 화면 구성후 링크 수정예정
+        return "admin/main"; //관리자 화면 구성후 링크 수정예정
 
     }
 
     @GetMapping("/sendMail")
     public String SendMail(){
 
-        return "/mail/mailForm";
+        return "mail/mailForm";
     }
 
 
