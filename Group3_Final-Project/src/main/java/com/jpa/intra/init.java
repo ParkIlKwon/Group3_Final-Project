@@ -43,10 +43,10 @@ public class init {
         for (int i = 0; i < 5; i++) {
             initService.makeMemberDummy2(i);
         }
-         //initService.makeTaskDummy();
-//        for(int i=0;i<4;i++) {
-//            initService.makeTaskDummy(i);
-//        }
+//         initService.makeTaskDummy();
+        for(int i=0;i<4;i++) {
+            initService.makeTaskDummy(i);
+        }
     }
 
     @Component
