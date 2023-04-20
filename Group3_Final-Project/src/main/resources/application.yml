@@ -2,13 +2,14 @@ spring:
   output:
     ansi:
       enabled: always
-
+  thymeleaf:
+    prefix: classpath:/templates/
 
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://database-intranetdb.cgydu6nogwyk.us-east-1.rds.amazonaws.com:3306/intranetDB?serverTimezone=UTC&useSSL=false
-    url: jdbc:mysql://localhost:3306/intranetDB?serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://database-intranetdb.cgydu6nogwyk.us-east-1.rds.amazonaws.com:3306/intranetDB?serverTimezone=UTC&useSSL=false
+    #url: jdbc:mysql://localhost:3306/intranetDB?serverTimezone=UTC&useSSL=false
     username: root
     password: root
 
@@ -34,7 +35,7 @@ logging:
     #org.hibernate.type: trace
 
 server:
-  port: 8084
+  port: 8086
   servlet:
     encoding:
       force-response: true
