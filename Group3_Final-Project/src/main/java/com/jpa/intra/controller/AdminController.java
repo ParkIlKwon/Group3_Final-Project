@@ -39,6 +39,14 @@ public class AdminController {
         return "admin/joinForm";
     }
 
+    //관리자_사원관리_사원수정 페이지
+    @GetMapping("/modifyMember")
+    public String modifyMember(Model model){
+        List<Member> memberList = member_repository.getAllMemberList();
+        model.addAttribute("memberList",memberList);
+        return "admin/modifyMember";
+    }
+
     @Autowired
     MailService registerMail;
     @PostMapping("/mailConfirm")
