@@ -123,6 +123,9 @@ public class init {
                     ,"kimbj0117@gmail.com" , "jjooll@naver.com"};
             String name[] = { "박일권" , "김범진" , "김성윤" , "김범짐" , "이주혜"
             };
+            String gitLing[] = {"https://github.com/ParkIlKwon","https://github.com/BEOMJINI" , "https://github.com/jjuhye"
+           ,"https://github.com/sungyoonkim930316" ,"https://github.com/BEOMJINI" };
+        
 
             String outNumber[] = { "010-1443-1333","010-1953-1373","010-1553-1333","010-1443-1343","010-1443-1234"};
             String inNumber [] = {"1688" , "1234" , "3599" , "4958" , "9988"};
@@ -144,7 +147,7 @@ public class init {
             String gender = i % 2 == 0 ? "남":"여";
             m.setGender(gender);
             m.setVacation(120);
-            m.setGitLink("https://github.com/ParkIlKwon/Group3_Final-Project");
+            m.setGitLink(gitLing[i]);
             m.setEmp_type(type[i]);
 
             String RandomAddress[] = {"경기도 시흥시"
