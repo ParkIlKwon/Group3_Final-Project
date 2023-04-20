@@ -44,6 +44,19 @@ public class MenuController {
         //페이지 이동시 (페이지제목/사이드바 active 변경을 위한 model)
         model.addAttribute("page", "Dashboard");
 
+        int onlinecnt = 0;
+        int offlinecnt = 0;
+        List<Member> list = member_repository.getAllMemberList();
+        for (Member m: list ) {
+            if(m.getStatus().equals("online")){
+                onlinecnt ++;
+            }else{
+                offlinecnt++;
+            }
+        }
+        //출근카운터 넘겨줌
+        model.addAttribute("onlinecnt",onlinecnt);
+        model.addAttribute("offlinecnt",offlinecnt);
         //대시보드에 노출되는 메일 목록
         List<Mail> mailList = mailService.findLogMailList();
         model.addAttribute("mailList",mailList);
@@ -53,6 +66,8 @@ public class MenuController {
         //대시보드에 노출되는 프로젝트 목록
         List<BoardTask> tlist=boardService.findTasks();
         model.addAttribute("tlist", tlist);
+
+
         return "dashboard/main";
     }
 
