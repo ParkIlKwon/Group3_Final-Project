@@ -46,6 +46,7 @@ public class init {
 
         for(int i=0;i<4;i++) {
             initService.makeTaskDummy(i);
+            initService.makeTaskDummy2(i);
         }
     }
 
@@ -243,7 +244,35 @@ public class init {
             else {
                 System.out.println("err");
             }
+        }
+        public void makeTaskDummy2(int idx) {
+            Random r=new Random();
+            int val=r.nextInt(2);
+            String[] titleList={"재직증명서 발급처리","보안 점검 공지 작성","화장실 변기 막힘 수리","신규 입사자 교육"};
+            String[] contentList={"발급 처리방법 안내","작업 일주일전 5/1에 공지 등록","화장실 공사 진행중 4/20~4/30","교육 담당자 지정 및 커리큘럼 준비"};
+            String[] progressList={"TO_DO","IN_PROGRESS","DONE"};
+            Member member1=memberService.findByMemName("이주혜");
+            Member member2=memberService.findByMemName("김범진");
+            if(member1!=null && member2!=null) {
+                System.out.println("둘 다 낫널");
+                BoardTask boardTask=new BoardTask();
+                boardTask.setBoardTitle(titleList[idx]);
+                boardTask.setBoardContent(contentList[idx]);
+                boardTask.setCreateDate("2023년 04월 24일");
+                boardTask.setUpdateDate(null);
+                boardTask.setBoardWriterObject(member2);
+                boardTask.setBoardWriter(member2.getMem_name());
+                boardTask.setResponsibleMemNum(member1);
+                boardTask.setTeamNum(member1.getTeam());
+                boardTask.setProgress(progressList[val]);
+                boardTask.setStartDate("2023년 04월 28일");
+                boardTask.setEndDate("2023년 05월 05일");
 
+                em.persist(boardTask);
+            }
+            else {
+                System.out.println("err");
+            }
         }
 
     }
