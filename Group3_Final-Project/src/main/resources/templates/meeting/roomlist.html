@@ -21,20 +21,18 @@
         let roomId;
 
         $(function(){
-            let $maxUserCnt = $("#maxUserCnt");
-            let $msgType = $("#msgType");
+            let $maxUserCnt=$("#maxUserCnt");
+            let $msgType=$("#msgType");
 
             // 모달창 열릴 때 이벤트 처리 => roomId 가져오기
-            $("#enterRoomModal").on("show.bs.modal", function (event) {
-                roomId = $(event.relatedTarget).data('id');
-                console.log("roomId: " + roomId);
-
+            $("#enterRoomModal").on("show.bs.modal", function(event) {
+                roomId=$(event.relatedTarget).data('id');
+                console.log("roomId: "+roomId);
             });
 
             $("#confirmPwdModal").on("show.bs.modal", function (e) {
-                roomId = $(e.relatedTarget).data('id');
-                console.log("roomId: " + roomId);
-
+                roomId=$(e.relatedTarget).data('id');
+                console.log("roomId: "+roomId);
             });
 
             // 채팅방 설정 시 비밀번호 확인
@@ -48,22 +46,18 @@
             })
         })
 
-
-
         // 채팅방 설정 시 비밀번호 확인 - keyup 펑션 활용
         function confirmPWD(){
             $("#confirmPwd").on("keyup", function(){
-                let $confirmPwd = $("#confirmPwd").val();
-                const $configRoomBtn = $("#configRoomBtn");
-                let $confirmLabel = $("#confirmLabel");
+                let $confirmPwd=$("#confirmPwd").val();
+                const $configRoomBtn=$("#configRoomBtn");
+                let $confirmLabel=$("#confirmLabel");
 
                 $.ajax({
-                    type : "post",
-                    url : "/chat/confirmPwd/"+roomId,
-                    data : {
-                        "roomPwd" : $confirmPwd
-                    },
-                    success : function(result){
+                    type:"post",
+                    url:"/chat/confirmPwd/"+roomId,
+                    data:{"roomPwd":$confirmPwd},
+                    success:function(result){
                         // console.log("동작완료")
 
                         // result 의 결과에 따라서 아래 내용 실행
@@ -74,21 +68,20 @@
 
                             $confirmLabel.html("<span id='confirm'>비밀번호 확인 완료</span>");
                             $("#confirm").css({
-                                "color" : "#0D6EFD",
-                                "font-weight" : "bold",
+                                "color":"#0D6EFD",
+                                "font-weight":"bold",
                             });
-
-                        }else{ // false 일때는
+                        }
+                        else{ // false 일때는
                             // $configRoomBtn 를 비활성화 상태로 만들고 비밀번호가 틀립니다 문구를 출력
                             $configRoomBtn.attr("class", "btn btn-primary disabled");
                             $configRoomBtn.attr("aria-disabled", true);
 
                             $confirmLabel.html("<span id='confirm'>비밀번호가 틀립니다</span>");
                             $("#confirm").css({
-                                "color" : "#FA3E3E",
-                                "font-weight" : "bold",
+                                "color":"#FA3E3E",
+                                "font-weight":"bold",
                             });
-
                         }
                     }
                 })
@@ -97,8 +90,8 @@
 
         // 채팅 인원 숫자만 정규식 체크
         function numberChk(){
-            let check = /^[0-9]+$/;
-            if (!check.test($("#maxUserCnt").val())) {
+            let check=/^[0-9]+$/;
+            if(!check.test($("#maxUserCnt").val())) {
                 alert("채팅 인원에는 숫자만 입력 가능합니다!!")
                 return false;
             }
