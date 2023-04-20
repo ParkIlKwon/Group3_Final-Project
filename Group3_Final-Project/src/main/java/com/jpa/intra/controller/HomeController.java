@@ -14,13 +14,8 @@ public class HomeController {
     private final imginit imginit;
 
     @RequestMapping("/")
-    public String home(/*Model model*/) {
-        //페이지 이동시 (페이지제목/사이드바 active/top메뉴 변경을 위한 model)
-//        model.addAttribute("page", "Dashboard"); //페이지 제목
-
-            imginit.run();
-
-
+    public String home() {
+        imginit.run();
         return "login";
     }
 }
