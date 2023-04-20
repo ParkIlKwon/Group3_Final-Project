@@ -51,7 +51,7 @@ public class FileController {
         model.addAttribute("page", "드라이브");
         model.addAttribute("fileList" , flist);
 
-        return "/drive/main";
+        return "drive/main";
     }
 
     @GetMapping("/downloadFile") //파일 다운로드 로직

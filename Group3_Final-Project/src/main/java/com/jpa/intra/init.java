@@ -5,6 +5,7 @@ import com.jpa.intra.domain.Mail;
 import com.jpa.intra.domain.Member;
 import com.jpa.intra.domain.Team;
 import com.jpa.intra.domain.board.BoardNotice;
+import com.jpa.intra.domain.board.BoardTask;
 import com.jpa.intra.service.MemberService;
 import com.jpa.intra.util.TeamConverter;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +44,9 @@ public class init {
             initService.makeMemberDummy2(i);
         }
          //initService.makeTaskDummy();
-
+        for(int i=0;i<4;i++) {
+            initService.makeTaskDummy(i);
+        }
     }
 
     @Component
@@ -208,6 +211,38 @@ public class init {
             mail2.setView(0);
 
             em.persist(mail2);
+
+        }
+
+        // project data samples
+        public void makeTaskDummy(int idx) {
+            Random r=new Random();
+            int val=r.nextInt(2);
+            String[] titleList={"강성고객 민원 확인 요청","사업자 양수양도건 확인 요청","포스설치 날짜 연기 요청","이벤트 쿠폰 발행 요청"};
+            String[] contentList={"확인해보고 잘 달래주다.","사업자등록번호 및 업주명 변경","디저트 39 수내점 포스설치가 6월로 연기되다.","식권매장 마일리지쿠폰 발행요청"};
+            String[] progressList={"TO_DO","IN_PROGRESS","DONE"};
+            Member member1=memberService.findByMemName("박일권");
+            Member member2=memberService.findByMemName("김성윤");
+            if(member1!=null && member2!=null) {
+                System.out.println("둘 다 낫널");
+                BoardTask boardTask=new BoardTask();
+                boardTask.setBoardTitle(titleList[idx]);
+                boardTask.setBoardContent(contentList[idx]);
+                boardTask.setCreateDate("2023년 04월 20일");
+                boardTask.setUpdateDate(null);
+                boardTask.setBoardWriterObject(member2);
+                boardTask.setBoardWriter(member2.getMem_name());
+                boardTask.setResponsibleMemNum(member1);
+                boardTask.setTeamNum(member1.getTeam());
+                boardTask.setProgress(progressList[val]);
+                boardTask.setStartDate("2023년 04월 20일");
+                boardTask.setEndDate("2023년 04월 27일");
+
+                em.persist(boardTask);
+            }
+            else {
+                System.out.println("err");
+            }
 
         }
 

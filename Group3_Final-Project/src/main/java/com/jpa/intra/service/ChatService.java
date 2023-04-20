@@ -23,4 +23,11 @@ public class ChatService {
     public List<ChatRoom> findRooms() {return cChatRepository.findAllChatRoom();}
 
     public ChatRoom findRoomByRoomId(Long roomId) {return cChatRepository.findRoomByRoomId(roomId);}
+
+    public boolean checkRoomPassword(Long roomId, String reqPwd) {
+        ChatRoom room = findRoomByRoomId(roomId);
+        String realPwd = room.getRoomPwd();
+
+        return realPwd.equals(reqPwd);
+    }
 }

@@ -28,6 +28,7 @@ public class Member {
     LocalDate reg_date;
 
     private String email; //멤버 이메일
+    private String gitLink;
 
     private String inline_tel; // 사내 전화번호
     private String outline_tel; //멤버 전화번호

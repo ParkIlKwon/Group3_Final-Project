@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller //model 을 지정 , view를 반환 시켜주는 컨트롤러 역활
@@ -41,11 +42,42 @@ public class AdminController {
 
     //관리자_사원관리_사원수정 페이지
     @GetMapping("/modifyMember")
-    public String modifyMember(Model model){
+    public String modifyMember(Model model , @RequestParam("uid")String uid ){
         List<Member> memberList = member_repository.getAllMemberList();
+
         model.addAttribute("memberList",memberList);
+        Member mem  = new Member();
+
+        for (Member m : memberList) {
+            if(m.getId().toString().equals(uid)){
+                mem = m;
+            }
+        }
+
+        System.out.println(mem.getMem_name());
+        model.addAttribute("member" , mem);
         return "admin/modifyMember";
     }
+
+
+    @PostMapping ("/modifyMember")
+    public String modifyMembers(Model model ,@Valid MemberDTO dto){
+        Long uid = Long.parseLong(dto.getPkid()) ;
+        Member m = member_repository.findById(uid);
+       m.setMem_name(dto.getName());
+       m.setEmail(dto.getMemail());
+       m.setMem_id(dto.getId());
+       m.setMem_pw(dto.getPw());
+       memberService.Update(m);
+
+
+        return "redirect:/moveDashboard";
+    }
+
+
+
+
+
 
     @Autowired
     MailService registerMail;
@@ -70,4 +102,18 @@ public class AdminController {
         System.out.println("인증코드 : " + code);
         return code;
     }
+
+    @PostMapping("/deleteMember")
+    public String deleteMember(@RequestParam("id") String id){
+        Long uid = Long.parseLong(id);
+        memberService.Delete(uid);
+
+        return "admin/main";
+    }
+
+
+
+
+
+
 }

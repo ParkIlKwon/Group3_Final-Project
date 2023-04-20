@@ -255,10 +255,10 @@
         popup = window.open("/mail/mailForm",'새 메일', 'width=1040px,height=900px,scrollbars=yes');
     }
     function popReplyMail() {
-        let test = document.getElementById('read-sender-name').value;
+        // let test = document.getElementById('read-sender-name').value;
         // alert(test);
         // alert($('#read-title').text());
-        let email = $('#read-sender-email').text();
+        let email = $('#read-sender-email').text().substring(8);
         popup =window.open("/mail/reply?reply="+email,'새 메일', 'width=1040px,height=900px,scrollbars=yes');
     }
 

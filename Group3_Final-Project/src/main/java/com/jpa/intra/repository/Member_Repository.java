@@ -48,10 +48,15 @@ public class Member_Repository {
 
 
     public void update(Member m) { //업데이트 문
-        em.createQuery("UPDATE Member m SET m.mem_id = :id, m.mem_pw = :pw, m.status = :status WHERE m.id = :memberId")
+        em.createQuery("UPDATE Member m SET m.mem_id = :id, m.mem_pw = :pw, m.status = :status" +
+                        ", m.birthday = :birthday , m.address = :address , m.email = :email, m.mem_img = :profile   WHERE m.id = :memberId")
                 .setParameter("id", m.getMem_id())
                 .setParameter("pw", m.getMem_pw())
                 .setParameter("status", m.getStatus())
+                .setParameter("birthday",m.getBirthday())
+                .setParameter("address",m.getAddress())
+                .setParameter("email",m.getEmail())
+                .setParameter("profile",m.getMem_img())
                 .setParameter("memberId", m.getId())
                 .executeUpdate();
     }
@@ -125,5 +130,10 @@ public class Member_Repository {
         }
     }
 
-
+    public void Delete(Long uid) {
+        Member m = em.find(Member.class, uid);
+        System.out.println(uid);
+        System.out.println(m.getMem_name());
+        em.remove(m);
+    }
 }

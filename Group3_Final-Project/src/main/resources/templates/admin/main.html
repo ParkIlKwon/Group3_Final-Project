@@ -83,11 +83,12 @@
                   </td>
                   <!-- 사원정보 수정 : Modal -->
                   <td class="align-middle text-center text-sm">
-                    <button class="btn bg-gradient-warning px-3 py-1 mb-0" onclick="/admin/modifyMember">수정</button>
+                    <button class="btn bg-gradient-warning px-3 py-1 mb-0" th:onclick="|location.href='@{/admin/modifyMember(uid=${member.getId()})}'|">수정</button>
                   </td>
                   <!-- 사원 삭제 -->
                   <td class="align-middle text-center text-sm">
-                    <button class="btn bg-gradient-danger px-3 py-1 mb-0">삭제</button>
+                    <button class="btn bg-gradient-danger px-3 py-1 mb-0" th:onclick="'deleteAction(\'' + ${member.getId()} + '\')'">삭제</button>
+
                   </td>
                 </tbody>
               </table>
@@ -120,4 +121,30 @@
   </div>
 </main>
 </body>
+
+
+<script>
+
+  function deleteAction(uid){
+
+    //let uid = document.querySelector('#memberId').value;
+    $.ajax({
+
+      type:"POST",
+      url:"/admin/deleteMember",
+      data:{
+        "id":uid
+      },
+      success : function (){
+        alert("사원정보 삭제완료");
+        window.location.reload();
+      }
+
+    })
+
+
+  }
+
+</script>
+
 </html>
