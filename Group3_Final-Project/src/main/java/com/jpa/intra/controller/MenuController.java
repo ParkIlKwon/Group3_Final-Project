@@ -67,6 +67,11 @@ public class MenuController {
         List<BoardTask> tlist=boardService.findTasks();
         model.addAttribute("tlist", tlist);
 
+        int doneCnt=boardService.countTaskDone(tlist);
+        int inProgressCnt=tlist.size()-doneCnt;
+        model.addAttribute("doneCnt",doneCnt);
+        model.addAttribute("inProgressCnt",inProgressCnt);
+
 
         return "dashboard/main";
     }

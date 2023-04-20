@@ -133,4 +133,12 @@ public class BoardService {
         return bBoardRepository.findByTeamName(teamName);
     }
 
+    public int countTaskDone(List<BoardTask> tlist) {
+        int doneCnt=0;
+        for(int i=0;i<tlist.size();i++) {
+            if(tlist.get(i).getProgress().equals("DONE")) doneCnt++;
+        }
+        return doneCnt;
+    }
+
 }
