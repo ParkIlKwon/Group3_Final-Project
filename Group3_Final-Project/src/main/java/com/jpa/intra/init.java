@@ -144,7 +144,7 @@ public class init {
             String gender = i % 2 == 0 ? "남":"여";
             m.setGender(gender);
             m.setVacation(120);
-
+            m.setGitLink("https://github.com/ParkIlKwon/Group3_Final-Project");
             m.setEmp_type(type[i]);
 
             String RandomAddress[] = {"경기도 시흥시"
