@@ -74,7 +74,7 @@ public class AdminController {
     @PostMapping("/deleteMember")
     public String deleteMember(@RequestParam("id") String id){
         Long uid = Long.parseLong(id);
-
+        memberService.Delete(uid);
 
         return "admin/main";
     }

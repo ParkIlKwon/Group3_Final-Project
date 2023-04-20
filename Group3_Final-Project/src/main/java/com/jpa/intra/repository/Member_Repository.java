@@ -125,8 +125,10 @@ public class Member_Repository {
         }
     }
 
-
     public void Delete(Long uid) {
-        em.de
+        Member m = em.find(Member.class, uid);
+        System.out.println(uid);
+        System.out.println(m.getMem_name());
+        em.remove(m);
     }
 }
