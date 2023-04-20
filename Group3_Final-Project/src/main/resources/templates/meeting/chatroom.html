@@ -44,6 +44,10 @@
             color: gray;
             font-style: italic;
         }
+        .chat-room-title {
+            display: flex;
+            justify-content: space-between;
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
@@ -51,14 +55,14 @@
 <body class="container">
 
 <div class="chat-room-title">
-    <h1 th:text="${room.getRoomName()}"></h1><br>
+    <h1 th:text="${room.getRoomName()}"></h1>
 </div>
-
+<br>
 <div id="messageArea">
 </div>
 
 <form id="messageForm" onsubmit="event.preventDefault(); sendMessage();">
-    <input type="text" id="messageInput" placeholder="Type your message...">
+    <input type="text" id="messageInput" placeholder="메세지를 작성하다...">
     <button>Send</button>
 </form>
 

@@ -21,4 +21,9 @@ public class Chat_Repository {
         return em.createQuery("SELECT c FROM ChatRoom c WHERE c.id = :roomId", ChatRoom.class)
                 .setParameter("roomId", roomId).getSingleResult();
     }
+
+    public void updateChatRoom(ChatRoom chatRoom) {
+        em.merge(chatRoom);
+    }
+
 }

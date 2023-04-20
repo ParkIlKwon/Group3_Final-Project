@@ -9,17 +9,6 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class ChatController {
-//    @GetMapping("/moveMeetingDetail")
-//    public String goChatRoom(HttpSession session, Model model){
-//        Member curUser=(Member)session.getAttribute("user");
-//        model.addAttribute("curUserName",curUser.getMem_name());
-//
-////        model.addAttribute("list", chatRepository.findAllRoom());
-////        model.addAttribute("user", "hey");
-////        log.info("SHOW ALL ChatList {}", chatRepository.findAllRoom());
-////        model.addAttribute("page", "회의");
-//        return "/meeting/chatroomclone";
-//    }
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
