@@ -23,7 +23,8 @@ public abstract class BoardCommon {
 
     private String boardTitle;
 
-    @Lob
+//    @Lob
+    @Column(columnDefinition = "TEXT")
     private String boardContent;
     private String createDate;
     private String updateDate;
