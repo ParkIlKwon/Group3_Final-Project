@@ -109,7 +109,7 @@
                   <div class="card-body pt-4 p-3 task-board-detail-task-reply-list" th:with="rplist=${rplist}">
                     <input type="hidden" class="mb-3 text-sm task-reply-current-board-number">
                     <a class="collapsed" data-bs-toggle="collapse" href="#reply-list-collapse" aria-expanded="false" onclick="toggleReplyList(event)">
-                      <i class="fas fa-angle-down me-2"></i>
+                    <i class="fas fa-angle-down me-2"></i>
                       댓글 목록
                     </a>
 
@@ -122,7 +122,7 @@
                             <input type="hidden" class="task-reply-update-date" th:value="${vo.updateDate}">
                             <h6 class="mb-3 text-sm task-reply-writer" th:text="${vo.replyWriter}"></h6>
                             <span class="mb-2 text-xs task-reply-small-element"><span class="text-dark font-weight-bold ms-sm-2 task-reply-content" th:text="${vo.replyContent}"></span></span>
-                            <span class="mb-2 text-xs task-reply-small-element"><span class="text-dark font-weight-bold ms-sm-2 task-reply-current-board" th:text="${vo.currentBoard.getId()}"></span></span>
+                            <!--<span class="mb-2 text-xs task-reply-small-element"><span class="text-dark font-weight-bold ms-sm-2 task-reply-current-board" th:text="${vo.currentBoard.getId()}"></span></span>-->
                           </div>
                           <div class="ms-auto text-end">
                             <a class="btn btn-link text-danger text-gradient px-3 mb-0 delete-board-task" href="/deletethisreply"><i class="far fa-trash-alt me-2"></i>Delete</a>
@@ -188,12 +188,12 @@
     // if(curRpList!=null) console.log("컬알피리스트 : "+curRpList);
 
 
-    if(replyListEnabled==false) replyListEnabled = !replyListEnabled;
-    var replyListCollapse = document.querySelector("#reply-list-collapse");
-    if (replyListCollapse.classList.contains("show")) {
-      toggleReplyList();
-    }
-    
+    // if(replyListEnabled==false) replyListEnabled = !replyListEnabled;
+    // var replyListCollapse = document.querySelector("#reply-list-collapse");
+    // if (replyListCollapse.classList.contains("show")) {
+    //   toggleReplyList();
+    // }
+
 
 
     //업무진행도 작성
@@ -300,22 +300,35 @@
   });
 
   //댓글 관련 함수
+  // function toggleReplyList(event) {
+  //   event.preventDefault();
+  //   var boardNumber = document.querySelector('.task-reply-current-board-number').value;
+  //   console.log(boardNumber);
+  //
+  //   // 각 댓글 항목을 반복하며, 게시물 번호와 일치하지 않는 항목은 숨기기
+  //   var replyList = document.querySelectorAll('.task-board-detail-task-reply-list-section');
+  //   replyList.forEach(function(reply) {
+  //     var replyBoardNumber = reply.querySelector('.task-reply-current-board').innerText;
+  //     if (replyBoardNumber !== boardNumber) {
+  //       reply.style.display = replyListEnabled ? 'none' : 'block';
+  //     }
+  //   });
+  //
+  //   replyListEnabled = !replyListEnabled;
+  // }
+
   function toggleReplyList(event) {
     event.preventDefault();
     var boardNumber = document.querySelector('.task-reply-current-board-number').value;
-    console.log(boardNumber);
-
-    // 각 댓글 항목을 반복하며, 게시물 번호와 일치하지 않는 항목은 숨기기
-    var replyList = document.querySelectorAll('.task-board-detail-task-reply-list-section');
-    replyList.forEach(function(reply) {
-      var replyBoardNumber = reply.querySelector('.task-reply-current-board').innerText;
-      if (replyBoardNumber !== boardNumber) {
-        reply.style.display = replyListEnabled ? 'none' : 'block';
-      }
-    });
-
-    replyListEnabled = !replyListEnabled;
+    var replyList = document.getElementById("reply-list-collapse");
+    var isExpanded = replyList.classList.contains("show");
+    if (isExpanded) {
+      replyList.classList.remove("show");
+    } else {
+      replyList.classList.add("show");
+    }
   }
+
 
 
 </script>
