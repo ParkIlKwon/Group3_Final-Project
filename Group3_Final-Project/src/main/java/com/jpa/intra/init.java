@@ -120,7 +120,7 @@ public class init {
 
             //테스트 5 번 더미 데이터 부터는 팀원들 이메일 넣어 봤습니다.
             String EmailArr[] = {"dlfrnjs51@naver.com" , "kimbj0117@gmail.com" , "rlatjddbs316@naver.com"
-                    ,"kimbj0117@gmail.com" , "2021620059@sdu.ac.kr"};
+                    ,"kimbj0117@gmail.com" , "jjooll@naver.com"};
             String name[] = { "박일권" , "김범진" , "김성윤" , "김범짐" , "이주혜"
             };
 
@@ -135,7 +135,6 @@ public class init {
             m.setMem_name(name[i]);
             m.setStatus("offline");
             m.setBirthday("2023-04-0"+(i*3));
-
 
             m.setInline_tel(inNumber[i]);
             m.setOutline_tel(outNumber[i]);
