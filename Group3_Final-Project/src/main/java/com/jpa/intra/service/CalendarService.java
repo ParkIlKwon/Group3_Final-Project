@@ -46,6 +46,16 @@ public class CalendarService {
         event.put("color","skyblue");
         eventList.add(event);
 
+
+        event = new HashMap<String,Object>();
+        event.put("title","(연차)");
+        event.put("start",m.getVacationStart());
+        event.put("end",m.getVacationEnd());
+        event.put("color","gray");
+
+
+
+
         return eventList;
     }
 

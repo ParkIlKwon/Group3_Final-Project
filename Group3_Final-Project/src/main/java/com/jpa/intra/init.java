@@ -35,8 +35,8 @@ public class init {
         Random ran = new Random();
 
         for (int i = 0; i < 5; i++) {
-            int num = ran.nextInt(6);
-            initService.makeMemberDummy(num);
+
+            initService.makeMemberDummy(i);
         }
 
         for (int i = 0; i < 5; i++) {
@@ -56,12 +56,15 @@ public class init {
 
 
         public void makeMemberDummy(int num) {
-            String TeamArr[] = {"영업부", "인사부", "기획부",
+            String TeamArr[] = {"인사부", "영업부", "기획부",
                     "관리부", "회계부", "총무부"};
             String EmailArr[] = {"@naver.com","@hanmail.net"
                     ,"@gmail.com","@kakao.com","@outlook.com"
                     ,"@nate.com"};
-            String HP[] = {};
+
+            String outNumber[] = { "010-9856-0002","010-2076-6580","010-9475-3696","010-3689-2378","010-1737-1234"};
+            String inNumber [] = {"5588" , "3399" , "4985" , "2200" , "3073"};
+
             String type [] = {"사원","주임","팀장","과장","전무","사장"};
 
             Team t = new Team();
@@ -69,6 +72,11 @@ public class init {
             em.persist(t);
 
             Member m = new Member();
+
+            m.setInline_tel(inNumber[num]);
+            m.setOutline_tel(outNumber[num]);
+
+
             String userID = "test" + index;
             m.setMem_id(userID);
             m.setMem_pw("321");
@@ -77,7 +85,7 @@ public class init {
             m.setEmail(userID + EmailArr[num]);
             String gender = num % 2 == 0 ? "남":"여";
             m.setGender(gender);
-            m.setVacation(180);
+            m.setVacation(120);
             m.setBirthday("2023-04-0"+num);
             m.setEmp_type(type[num]);
 
@@ -112,8 +120,8 @@ public class init {
             String name[] = { "박일권" , "김범진" , "김성윤" , "김범짐" , "이주혜"
             };
 
-            String number[] = { "010-1443-1333","010-1953-1373","010-1553-1333","010-1443-1343","010-1443-1234"};
-
+            String outNumber[] = { "010-1443-1333","010-1953-1373","010-1553-1333","010-1443-1343","010-1443-1234"};
+            String inNumber [] = {"1688" , "1234" , "3599" , "4958" , "9988"};
             String type [] = {"사원","주임","팀장","과장","전무","사장"};
 
             Member m = new Member();
@@ -125,14 +133,14 @@ public class init {
             m.setBirthday("2023-04-0"+(i*3));
 
 
-            m.setInline_tel(number[i]);
-            m.setOutline_tel("1544");
+            m.setInline_tel(inNumber[i]);
+            m.setOutline_tel(outNumber[i]);
 
 
             m.setEmail(EmailArr[i]);
             String gender = i % 2 == 0 ? "남":"여";
             m.setGender(gender);
-            m.setVacation(180);
+            m.setVacation(120);
 
             m.setEmp_type(type[i]);
 
@@ -175,7 +183,7 @@ public class init {
 //        //메일 더미
         public void mailDummy(){
             Mail mail = new Mail();
-            mail.setBody("<p>제목: 휴가 신청 관련 안내</p><p>안녕하세요,</p><p>저는 인사팀 입니다. 휴가 신청에 관한 안내를 드리려고 합니다.</p><p>회사 내규에 따라 휴가 신청은 온라인 시스템을 통해 진행되어야 합니다. 휴가를 신청하실 때에는 아래의 절차에 따라 주시기 바랍니다.</p><ol><li><p>휴가 신청 기간: 휴가 신청은 휴가 출발일 기준으로 최소 3일 전에 신청해야 합니다. 급박한 사유가 있는 경우에 한하여 휴가 출발 전 <br>3일 이내에도 휴가 신청이 가능하나, 미리 인사팀과 협의가 필요합니다.</p></li><li><p>휴가 신청 방법: 휴가 신청은 회사 내부 포털 시스템의 휴가 신청 페이지에서 작성한 양식에 따라 진행됩니다. <br>양식을 작성하고 제출하신 후, 인사팀에서 신청 내용을 확인하고 승인 여부를 통보해드립니다.</p></li><li><p>휴가 신청의 예외 사항: 휴가 신청 중 특정 휴가 예외 사항(예: 육아 휴가, 병가 등)이 있는 경우에는 별도의 절차와 <br>서류 제출이 필요할 수 있으니, 미리 인사팀에 문의하여 필요한 조치를 취해주시기 바랍니다.</p></li></ol><p>더불어, 휴가 기간 동안의 근무 및 조직 업무 배정 등에 관한 안내는 휴가 승인 후 개별적으로 안내드릴 예정입니다.</p><p>자세한 내용 및 궁금한 사항이 있는 경우, 인사팀으로 문의해주시기 바랍니다.</p><p>감사합니다.</p>");
+            mail.setBody("<p>제목: 휴가 신청 관련 안내</p><p>안녕하세요,</p><p>저는 인사팀 김범진입니다. 휴가 신청에 관한 안내를 드리려고 합니다.</p><p>회사 내규에 따라 휴가 신청은 온라인 시스템을 통해 진행되어야 합니다. 휴가를 신청하실 때에는 아래의 절차에 따라 주시기 바랍니다.</p><ol><li><p>휴가 신청 기간: 휴가 신청은 휴가 출발일 기준으로 최소 3일 전에 신청해야 합니다. 급박한 사유가 있는 경우에 한하여 휴가 출발 전 <br>3일 이내에도 휴가 신청이 가능하나, 미리 인사팀과 협의가 필요합니다.</p></li><li><p>휴가 신청 방법: 휴가 신청은 회사 내부 포털 시스템의 휴가 신청 페이지에서 작성한 양식에 따라 진행됩니다. <br>양식을 작성하고 제출하신 후, 인사팀에서 신청 내용을 확인하고 승인 여부를 통보해드립니다.</p></li><li><p>휴가 신청의 예외 사항: 휴가 신청 중 특정 휴가 예외 사항(예: 육아 휴가, 병가 등)이 있는 경우에는 별도의 절차와 <br>서류 제출이 필요할 수 있으니, 미리 인사팀에 문의하여 필요한 조치를 취해주시기 바랍니다.</p></li></ol><p>더불어, 휴가 기간 동안의 근무 및 조직 업무 배정 등에 관한 안내는 휴가 승인 후 개별적으로 안내드릴 예정입니다.</p><p>자세한 내용 및 궁금한 사항이 있는 경우, 인사팀으로 문의해주시기 바랍니다.</p><p>감사합니다.</p>");
 //          mail.setBody("안녕하세요 ");
             mail.setReceiver("dlfrnjs51@naver.com");
             String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
