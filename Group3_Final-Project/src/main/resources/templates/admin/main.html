@@ -25,8 +25,8 @@
                 <thead>
                 <tr class="text-center">
                   <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">이름</th>
-                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">연락처</th>
-                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">회사번호</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">내선번호</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">휴대폰번호</th>
                   <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">이메일</th>
                   <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">부서/직급</th>
                   <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">출근현황</th>
@@ -35,7 +35,7 @@
                 </tr>
                 </thead>
 
-                <tbody>
+                <tbody text-center>
                 <tr th:each="member:${memberList}" class="text-center">
                   <td>
                     <div class="d-flex px-2 py-1">
@@ -78,8 +78,8 @@
                   </td>
                   <!-- 출 퇴근 현황 -->
                   <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm bg-gradient-success" th:if="${member.getStatus()} =='online' ">Online</span>
-                    <span class="badge badge-sm bg-gradient-danger" th:if="${member.getStatus()} =='offline' ">Offline</span>
+                    <span th:if="${member.getStatus() == 'online'}" class="badge badge-sm bg-gradient-success">Online</span>
+                    <span th:if="${member.getStatus() == 'offline'}" class="badge badge-sm bg-gradient-danger">Offline</span>
                   </td>
                   <!-- 사원정보 수정 : Modal -->
                   <td class="align-middle text-center text-sm">
