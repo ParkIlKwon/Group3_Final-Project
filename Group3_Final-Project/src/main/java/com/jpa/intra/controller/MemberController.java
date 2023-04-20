@@ -137,7 +137,7 @@
                 list.add(member.getGender());
                 list.add(String.valueOf(member.getReg_date()));
                 list.add(String.valueOf(member.getVacation()));
-
+                list.add(member.getGitLink());
                 return list;
             }
             return null;

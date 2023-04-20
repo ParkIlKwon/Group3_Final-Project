@@ -50,7 +50,7 @@
                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">연차:</strong> &nbsp; <span th:text="${session.user.getVacation()}"></span></li>
                         <li class="list-group-item border-0 ps-0 pb-0">
                             <strong class="text-dark text-sm">Social:</strong> &nbsp;
-                            <a class="" id="modal-github" href="#" target='_blank'>
+                            <a class="" id="modal-github" th:href="${session.user.getGitLink()}" target='_blank'>
                                 <i class="fa fa-github" aria-hidden="true"></i>
                             </a>
                         </li>
