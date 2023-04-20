@@ -120,14 +120,17 @@
         <tr th:each="room : ${crlist}">
             <span class="hidden" th:id="${room.roomName}"></span>
             <td th:if="${room.secretChk=='Y'}">
-                <a href="#enterRoomModal" data-bs-toggle="modal" data-bs-target="#enterRoomModal" th:data-id="${room.id}">[[${room.roomName}]]</a>
+                <a href="#enterRoomModal" data-bs-toggle="modal" data-bs-target="#enterRoomModal" th:data-id="${room.id}" th:data-pwd="${room.roomPwd}">[[${room.roomName}]]</a>
             </td>
             <td th:if="${room.secretChk=='N'}">
                 <a th:href="@{/chat/room(roomId=${room.id})}" th:roomId="${room.id}">[[${room.roomName}]]</a>
             </td>
             <td>
                         <span th:if="${room.secretChk=='Y'}">
-                            🔒︎
+                            🔒
+                        </span>
+                        <span th:if="${room.secretChk=='N'}">
+                            🔓
                         </span>
             </td>
             <td>
@@ -140,7 +143,6 @@
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#roomModal">회의방 생성</button>
 </div>
 
-<!-- 기본 부트스트랩 모달로 채팅방 생성 모달을 만들어주세요 -->
 <div class="modal fade" id="roomModal" tabindex="-1" role="dialog" aria-labelledby="roomModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -180,23 +182,20 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">회의방 비밀번호를 입력하다</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="mb-3">
                     <label for="roomName" class="col-form-label">회의방 비밀번호</label>
+                    <input class="enter-modal-answer-password" type="hidden">
+                    <input class="enter-modal-room-number" type="hidden">
                     <div class="input-group">
-                        <input type="password" name="roomPwd" id="enterPwd" class="form-control" data-toggle="password">
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fa fa-eye"></i></span>
-                        </div>
+                        <input type="password" name="roomPwd" id="enterPwd" class="form-control enter-modal-scanner-password" data-toggle="password">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="enterRoom()">입장하다</button>
+                    <button type="button" class="btn btn-primary" id="enterRoomButton">입장하다</button>
                 </div>
-                <!--                </form>-->
             </div>
         </div>
     </div>
@@ -232,6 +231,55 @@
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             }
         })
+    }
+
+    document.getElementById('enterRoomButton').addEventListener('click', enterRoom);
+
+    document.addEventListener('DOMContentLoaded', function() {
+        let enterRoomModal=document.getElementById('enterRoomModal');
+        enterRoomModal.addEventListener('show.bs.modal', function(event) {
+            let button=event.relatedTarget;
+            let roomId=button.getAttribute('data-id');
+            let roomPwd=button.getAttribute('data-pwd');
+
+            console.log("방 번호: "+roomId);
+            console.log("비번 : "+roomPwd);
+
+            let realPwd=document.querySelector('.enter-modal-answer-password');
+            realPwd.value="";
+            realPwd.value=roomPwd;
+
+            let roomNum=document.querySelector('.enter-modal-room-number');
+            roomNum.value="";
+            roomNum.value=roomId;
+        });
+    });
+
+    function enterRoom() {
+        let realPwd=document.querySelector('.enter-modal-answer-password').value;
+        let reqPwd=document.querySelector('.enter-modal-scanner-password').value;
+        let roomNum=document.querySelector('.enter-modal-room-number').value;
+
+        $.ajax({
+            url: "/chat/checkpassword",
+            type: "POST",
+            data: {
+                room_id: roomNum,
+                password: reqPwd
+            },
+            success: function(response) {
+                console.log("successed");
+                if (response.valid) {
+                    location.href = "/chat/room?roomId=" + roomNum;
+                } else {
+                    alert("비밀번호가 일치하지 않습니다.");
+                }
+            },
+            error: function(request, status, error) {
+                alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        });
+
     }
 
 
