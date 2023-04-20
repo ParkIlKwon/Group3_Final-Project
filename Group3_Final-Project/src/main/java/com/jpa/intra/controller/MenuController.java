@@ -111,7 +111,7 @@ public class MenuController {
                 (String) session.getAttribute("log"));
         model.addAttribute("fileList" , flist);
 
-        return "/drive/main";
+        return "drive/main";
 
     }
 
