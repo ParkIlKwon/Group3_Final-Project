@@ -5,23 +5,14 @@ import com.jpa.intra.domain.Mail;
 import com.jpa.intra.domain.Member;
 import com.jpa.intra.domain.Team;
 import com.jpa.intra.domain.board.BoardNotice;
-import com.jpa.intra.domain.board.BoardTask;
-import com.jpa.intra.query.BoardTaskDTO;
-import com.jpa.intra.service.FileService;
 import com.jpa.intra.service.MemberService;
 import com.jpa.intra.util.TeamConverter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
@@ -185,6 +176,7 @@ public class init {
         public void mailDummy(){
             Mail mail = new Mail();
             mail.setBody("<p>제목: 휴가 신청 관련 안내</p><p>안녕하세요,</p><p>저는 인사팀 입니다. 휴가 신청에 관한 안내를 드리려고 합니다.</p><p>회사 내규에 따라 휴가 신청은 온라인 시스템을 통해 진행되어야 합니다. 휴가를 신청하실 때에는 아래의 절차에 따라 주시기 바랍니다.</p><ol><li><p>휴가 신청 기간: 휴가 신청은 휴가 출발일 기준으로 최소 3일 전에 신청해야 합니다. 급박한 사유가 있는 경우에 한하여 휴가 출발 전 <br>3일 이내에도 휴가 신청이 가능하나, 미리 인사팀과 협의가 필요합니다.</p></li><li><p>휴가 신청 방법: 휴가 신청은 회사 내부 포털 시스템의 휴가 신청 페이지에서 작성한 양식에 따라 진행됩니다. <br>양식을 작성하고 제출하신 후, 인사팀에서 신청 내용을 확인하고 승인 여부를 통보해드립니다.</p></li><li><p>휴가 신청의 예외 사항: 휴가 신청 중 특정 휴가 예외 사항(예: 육아 휴가, 병가 등)이 있는 경우에는 별도의 절차와 <br>서류 제출이 필요할 수 있으니, 미리 인사팀에 문의하여 필요한 조치를 취해주시기 바랍니다.</p></li></ol><p>더불어, 휴가 기간 동안의 근무 및 조직 업무 배정 등에 관한 안내는 휴가 승인 후 개별적으로 안내드릴 예정입니다.</p><p>자세한 내용 및 궁금한 사항이 있는 경우, 인사팀으로 문의해주시기 바랍니다.</p><p>감사합니다.</p>");
+//          mail.setBody("안녕하세요 ");
             mail.setReceiver("dlfrnjs51@naver.com");
             String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
             mail.setSendDate(formatDate);
@@ -198,6 +190,7 @@ public class init {
 
             Mail mail2 = new Mail();
             mail2.setBody("<p>제목: 회사 프로젝트 업데이트 및 협력 요청</p><p>안녕하세요,</p><p>저는 회사 프로젝트 팀의 매니저입니다. 저희 프로젝트가 진행 중인데, 몇 가지 업데이트와 협력에 관해 알려드리려고 합니다.</p><p>우선, 프로젝트 진행 상황에 대해 간략히 알려드리겠습니다. 현재 프로젝트는 일정에 따라 원활하게 진행되고 있습니다. <br>하지만 몇 가지 이슈가 발생하여 추가적인 조치가 필요하게 되었습니다. 이에 대한 대응을 아래와 같이 안내드립니다.</p><ol><li><p>예산 조정: 프로젝트 예산을 검토한 결과, 몇 가지 예상치 못한 비용이 발생하여 예산 조정이 필요합니다. <br>관련 부서와 협력하여 빠른 시일 내에 예산 조정을 완료하도록 부탁드립니다.</p></li><li><p>리소스 할당: 몇몇 팀이 다른 프로젝트에 참여하게 되어 현재 프로젝트에 필요한 리소스가 부족한 상황입니다. 협력 부탁드리며, <br>다양한 팀 간 협력을 강화하여 프로젝트의 원활한 진행을 도와주세요.</p></li><li><p>일정 조정: 프로젝트 일정이 약간 변경되어 업무 계획을 조정해야 할 필요가 있습니다. 관련 팀과 일정 조율을 통해 적절한 조치를 <br>취하도록 부탁드립니다.</p></li></ol><p>더불어, 프로젝트에 대한 진행 상황 및 이슈에 대한 정기 보고를 강화하고자 합니다. 모두가 함께 협력하여 프로젝트를 성공적으로 <br>마무리하기 위해 노력해주시기 바랍니다.</p><p>감사합니다.</p>\n");
+//            mail2.setBody("안녕하세요 ");
             mail2.setReceiver("kimbj0117@gmail.com");
             mail2.setSendDate(formatDate);
             mail2.setSender("test5");
