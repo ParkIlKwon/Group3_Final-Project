@@ -57,7 +57,7 @@ public class FileController {
         Member m = (Member) session.getAttribute("user");
 
         List<FileEntity> flist = fileRepository.findFilelistByTeamName(m.getTeam().getTeam_name());
-
+        //팀별로 드라이브 파일 리스트를 불러옴 .
         model.addAttribute("page", "드라이브");
         model.addAttribute("fileList" , flist);
 
