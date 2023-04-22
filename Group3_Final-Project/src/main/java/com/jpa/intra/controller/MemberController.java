@@ -72,14 +72,6 @@
             return "redirect:/moveDashboard"; //홈 페이지로 리디렉션.
         }
 
-      /*  @GetMapping("/login")
-        public String LoginForm(Model model){
-
-            model.addAttribute("memberDTO",new MemberDTO());
-            //memberDTO 형식으로 생성자 만들어서 보내줌 .
-            return "pages/loginForm";
-        }
-*/
         @GetMapping("/logout")
         public String Logout(HttpServletRequest request){
             HttpSession session = request.getSession();
@@ -92,7 +84,7 @@
         public String login(@RequestParam("id") String id,
                             @RequestParam("pw") String pw,
                             HttpServletRequest request) {
-            System.out.println(id + pw);
+
             HttpSession session = request.getSession();
             Member m = service.Login(id,pw);
 
