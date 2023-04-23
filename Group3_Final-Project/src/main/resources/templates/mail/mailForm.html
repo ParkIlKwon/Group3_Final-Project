@@ -306,26 +306,44 @@
 
 
 
+<!--<style>-->
+<!--    .testChild {-->
+<!--        margin-top: 10px; /* 상단 마진 설정 */-->
+<!--        padding: 10px; /* 패딩 설정 */-->
+<!--        background-color: #f0f0f0; /* 배경색 설정 */-->
+<!--        border: 1px solid #ccc; /* 테두리 설정 */-->
+<!--        border-radius: 5px; /* 둥근 테두리 설정 */-->
+<!--        display: flex; /* 내부 요소를 가로로 배치 */-->
+<!--        align-items: center; /* 내부 요소를 수직 가운데 정렬 */-->
+<!--    }-->
+
+<!--    .testChild .testadd {-->
+<!--        margin-left: auto; /* 오른쪽 여백 설정 */-->
+<!--    }-->
+
+<!--    .testChild button {-->
+<!--        margin-right: 5px; /* 버튼 간의 오른쪽 여백 설정 */-->
+<!--    }-->
+
+<!--    .testChild i {-->
+<!--        margin-right: 5px; /* 아이콘 간의 오른쪽 여백 설정 */-->
+<!--    }-->
+<!--</style>-->
+
 <style>
-    .testChild {
-        margin-top: 10px; /* 상단 마진 설정 */
-        padding: 10px; /* 패딩 설정 */
-        background-color: #f0f0f0; /* 배경색 설정 */
-        border: 1px solid #ccc; /* 테두리 설정 */
-        border-radius: 5px; /* 둥근 테두리 설정 */
-        display: flex; /* 내부 요소를 가로로 배치 */
-        align-items: center; /* 내부 요소를 수직 가운데 정렬 */
+    /* .test 요소의 스타일 */
+    .test {
+        display: flex;
+        flex-wrap: wrap;
     }
-
-    .testChild .testadd {
-        margin-left: auto; /* 오른쪽 여백 설정 */
+    /* .test 요소의 자식 div 요소(.out)의 스타일 */
+    .out {
+        margin: 5px;
+        padding: 10px;
+        border: 1px solid #000;
     }
-
-    .testChild button {
-        margin-right: 5px; /* 버튼 간의 오른쪽 여백 설정 */
-    }
-
-    .testChild i {
-        margin-right: 5px; /* 아이콘 간의 오른쪽 여백 설정 */
+    /* 수정/삭제 버튼의 스타일 */
+    .out button {
+        margin-top: 5px;
     }
 </style>
