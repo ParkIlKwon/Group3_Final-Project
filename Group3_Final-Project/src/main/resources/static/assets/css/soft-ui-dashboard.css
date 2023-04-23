@@ -93,7 +93,7 @@ body {
   font-weight: var(--bs-body-font-weight);
   line-height: var(--bs-body-line-height);
   color: var(--bs-body-color);
-  text-align: var(--bs-body-text-align);
+  /*text-align: var(--bs-body-text-align);*/
   background-color: var(--bs-body-bg);
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -1603,9 +1603,9 @@ progress {
 }
 
 @media (min-width: 992px) {
-  .col-lg {
-    flex: 1 0 0%;
-  }
+  /*.col-lg {*/
+  /*  flex: 1 0 0%;*/
+  /*}*/
 
   .row-cols-lg-auto>* {
     flex: 0 0 auto;
@@ -3008,7 +3008,7 @@ textarea.form-control-lg {
 }
 
 .form-check-input:focus {
-  border-color: none;
+  /*border-color: none;*/
   outline: 0;
   box-shadow: none;
 }
@@ -3449,7 +3449,7 @@ textarea.form-control.is-valid {
 
 .was-validated .form-control-color:valid,
 .form-control-color.is-valid {
-  width: calc(3rem + unset);
+  /*width: calc(3rem + unset);*/
 }
 
 .was-validated .form-check-input:valid,
@@ -3559,7 +3559,7 @@ textarea.form-control.is-invalid {
 
 .was-validated .form-control-color:invalid,
 .form-control-color.is-invalid {
-  width: calc(3rem + unset);
+  /*width: calc(3rem + unset);*/
 }
 
 .was-validated .form-check-input:invalid,
@@ -3598,7 +3598,7 @@ textarea.form-control.is-invalid {
 .btn {
   --bs-btn-padding-x: 1.5rem;
   --bs-btn-padding-y: 0.75rem;
-  --bs-btn-font-family: ;
+  /*--bs-btn-font-family: ;*/
   --bs-btn-font-size: 0.75rem;
   --bs-btn-font-weight: 700;
   --bs-btn-line-height: 1.4;
@@ -4430,7 +4430,7 @@ fieldset:disabled .btn {
   --bs-dropdown-color: #dee2e6;
   --bs-dropdown-bg: #343a40;
   --bs-dropdown-border-color: transparent;
-  --bs-dropdown-box-shadow: ;
+  /*--bs-dropdown-box-shadow: ;*/
   --bs-dropdown-link-color: #dee2e6;
   --bs-dropdown-link-hover-color: #fff;
   --bs-dropdown-divider-bg: transparent;
@@ -4751,7 +4751,7 @@ fieldset:disabled .btn {
 .navbar-nav {
   --bs-nav-link-padding-x: 0;
   --bs-nav-link-padding-y: 0.5rem;
-  --bs-nav-link-font-weight: ;
+  /*--bs-nav-link-font-weight: ;*/
   --bs-nav-link-color: var(--bs-navbar-color);
   --bs-nav-link-hover-color: var(--bs-navbar-hover-color);
   --bs-nav-link-disabled-color: var(--bs-navbar-disabled-color);
@@ -5195,9 +5195,9 @@ fieldset:disabled .btn {
   --bs-card-cap-padding-y: 0.5rem;
   --bs-card-cap-padding-x: 1rem;
   --bs-card-cap-bg: #fff;
-  --bs-card-cap-color: ;
-  --bs-card-height: ;
-  --bs-card-color: ;
+  /*--bs-card-cap-color: ;*/
+  /*--bs-card-height: ;*/
+  /*--bs-card-color: ;*/
   --bs-card-bg: #fff;
   --bs-card-img-overlay-padding: 1rem;
   --bs-card-group-margin: 0.75rem;
@@ -22760,8 +22760,8 @@ html {
 
   .navbar-vertical.navbar-expand-sm .lavalamp-object {
     width: calc(100% - 1rem) !important;
-    background: theme-color("primary");
-    color: color-yiq(#cb0c9f);
+    /*background: theme-color("primary");*/
+    /*color: color-yiq(#cb0c9f);*/
     margin-right: 0.5rem;
     margin-left: 0.5rem;
     padding-left: 1rem;
@@ -22860,8 +22860,8 @@ html {
 
   .navbar-vertical.navbar-expand-md .lavalamp-object {
     width: calc(100% - 1rem) !important;
-    background: theme-color("primary");
-    color: color-yiq(#cb0c9f);
+    /*background: theme-color("primary");*/
+    /*color: color-yiq(#cb0c9f);*/
     margin-right: 0.5rem;
     margin-left: 0.5rem;
     padding-left: 1rem;
