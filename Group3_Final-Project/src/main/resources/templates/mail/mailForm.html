@@ -5,7 +5,7 @@
 <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>-->
 <script src="/js/summernote/summernote-lite.js"></script>
 <script src="/js/summernote/lang/summernote-ko-KR.js"></script>
-<script src="mention.js" type="text/javascript"></script>
+<script src="mail-form-input-address.js" ></script>
 <link href="/css/summernote/summernote-lite.css" rel="stylesheet">
 <body class="g-sidenav-show  bg-gray-100" onunload="closePage()">
 <!--   사이드 : aside -->
@@ -76,11 +76,24 @@
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <!--                        <h6 class="mb-0 text-sm">John Michael</h6>   &lt;!&ndash; 보낸 이  &ndash;&gt;-->
                                                     <!--                        <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>  &lt;!&ndash; 이메일 &ndash;&gt;-->
-                                                    <div>받는 이 <input class="mail-address form-control" name="receiver" style="width: 490% !important;"
-                                                                     required type="email" th:if="${reply != null}" th:value="${reply}">
-                                                        <input class="mail-address form-control" name="receiver" style="width: 490% !important;"
-                                                               required type="email" th:if="${reply == null}"></div>
 
+                                                    <div>
+                                                        <div><strong>test</strong></div>
+                                                        <div>
+                                                            <div>
+                                                                <input placeholder="test"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="test">
+                                                    <div>받는 이 <input class="mail-address form-control" name="receiver" style="width: 490% !important;"
+                                                                     required type="email" th:if="${reply != null}" th:value="${reply}" list="all-mail-address">
+                                                        <input class="mail-address form-control" name="receiver" style="width: 490% !important;"
+                                                               required type="email" th:if="${reply == null}" list="all-mail-address"></div>
+                                                        <datalist id="all-mail-address">
+                                                            <option th:each="address : ${allMailAddress}" th:value="${address.getKey()}" th:label="${address.getValue()}"></option>
+                                                        </datalist>
+                                                    </div>
                                                     <div>제목 <input class="form-control" name="title" required style="width: 490% !important;"
                                                                    type="text"></div>
                                                 </div>
@@ -191,8 +204,12 @@
         window.opener.parent.location.reload();
     }
 
-
-
+    // window.onload = function () {
+    //     document.querySelector('.mail-address').addEventListener('keydown', () => {
+    //         alert('test');
+    //     });
+    //
+    // }
 </script>
 
 

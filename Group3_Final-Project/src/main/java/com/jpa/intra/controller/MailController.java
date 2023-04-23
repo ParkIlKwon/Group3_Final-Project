@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -45,6 +47,8 @@ public class MailController {
 //        model.addAttribute("mailList",mailList);
 //        model.addAttribute("page", "메일");
 
+        Map<String,String> allMailAddress = new HashMap<>(mailService.getAllMailAddress());
+        model.addAttribute("allMailAddress",allMailAddress);
         return "mail/mailForm";
     }
 

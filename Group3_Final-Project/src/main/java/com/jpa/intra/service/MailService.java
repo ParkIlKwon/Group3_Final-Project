@@ -3,6 +3,7 @@ package com.jpa.intra.service;
 import com.jpa.intra.domain.Mail;
 import com.jpa.intra.domain.Member;
 import com.jpa.intra.repository.Mail_Repository;
+import com.jpa.intra.repository.Member_Repository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
@@ -17,8 +18,9 @@ import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 @Service
@@ -27,6 +29,7 @@ import java.util.Random;
 public class MailService{
 
     private final Mail_Repository mail_repository;
+    private final Member_Repository member_repository;
     private final HttpServletRequest request;
 
     @Autowired
@@ -131,7 +134,14 @@ public class MailService{
         mail_repository.updateMailView(mailId, receiver);
     }
 
-
+    public Map<String,String> getAllMailAddress(){
+        Map<String,String> mailAddress = new HashMap<>();
+        List<Member> memberList = member_repository.getAllMemberList();
+        for (Member member : memberList) {
+            mailAddress.put(member.getEmail(), member.getMem_name());
+        }
+        return mailAddress;
+    }
 
 
 
