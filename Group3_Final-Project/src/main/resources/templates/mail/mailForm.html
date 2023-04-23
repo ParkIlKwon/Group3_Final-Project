@@ -5,7 +5,6 @@
 <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>-->
 <script src="/js/summernote/summernote-lite.js"></script>
 <script src="/js/summernote/lang/summernote-ko-KR.js"></script>
-<script src="mail-form-input-address.js" ></script>
 <link href="/css/summernote/summernote-lite.css" rel="stylesheet">
 <body class="g-sidenav-show  bg-gray-100" onunload="closePage()">
 <!--   사이드 : aside -->
@@ -85,7 +84,8 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="test">
+                                                    <div class="test" style="display: flex; flex-wrap: wrap">
+                                                    </div>
                                                     <div>받는 이 <input class="mail-address form-control" name="receiver" style="width: 490% !important;"
                                                                      required type="email" th:if="${reply != null}" th:value="${reply}" list="all-mail-address">
                                                         <input class="mail-address form-control" name="receiver" style="width: 490% !important;"
@@ -93,7 +93,7 @@
                                                         <datalist id="all-mail-address">
                                                             <option th:each="address : ${allMailAddress}" th:value="${address.getKey()}" th:label="${address.getValue()}"></option>
                                                         </datalist>
-                                                    </div>
+
                                                     <div>제목 <input class="form-control" name="title" required style="width: 490% !important;"
                                                                    type="text"></div>
                                                 </div>
@@ -198,6 +198,89 @@
         sendButton.addEventListener('click',()=>{
            window.opener.parent.location.reload();
         });
+
+        let inputValue = '';
+        document.querySelector('.mail-address').addEventListener('keydown', function(event) {
+
+    if (event.keyCode === 32 || event.keyCode === 13) { // Check for space (32) or enter (13) key
+
+        event.preventDefault(); // Prevent default behavior of space or enter key
+
+        inputValue = event.target.value.trim(); // Update the input value variable with the current input value
+        if (inputValue !== '') { // Check if input value is not empty
+            const testDiv = document.querySelector('.test'); // Get the div.test element
+            // const testChildDiv = document.createElement('div'); // Create a new div element for div.testChild
+            // testChildDiv.className = 'testChild'; // Set the class name of the new div element
+            // // testChildDiv.textContent = inputValue; // Set the text content of the new div element to the input value
+            //
+            // // Create div.testadd element
+            // const testAddDiv = document.createElement('div');
+            // testAddDiv.className = 'testadd';
+            //
+            // // Create three buttons
+            // for (let i = 1; i <= 3; i++) {
+            //     const button = document.createElement('button');
+            //     button.textContent = inputValue + i;
+            //     testAddDiv.appendChild(button);
+            // }
+            //
+            // // Append testAddDiv to testChildDiv
+            // testChildDiv.appendChild(testAddDiv);
+            //
+            // testDiv.appendChild(testChildDiv); // Append the new div element to div.test
+            // 새로운 div 요소 생성
+            var newDiv = document.createElement('div');
+            var index = testDiv.childElementCount + 1; // 현재 .test 요소의 자식 요소 개수 + 1을 인덱스로 사용
+            newDiv.id = 'out' + index; // id 속성 설정
+            newDiv.innerHTML = '<div id="in' + index + '">' + inputValue + '</div><button onclick="editText(' + index + ')">수정</button><button onclick="deleteDiv(' + index + ')">삭제</button>'; // 내용 설정
+            testDiv.appendChild(newDiv); // .test 요소에 새로운 div 요소 추가
+
+            event.target.value = ''; // Clear the input value
+        }
+    }
+});
+        // document.querySelector('.mail-address').addEventListener('input', function(event) {
+        //     inputValue = event.target.value; // Update the input value variable with the current input value
+        // });
+        //
+        // document.querySelector('.testChild button:nth-child(2)').addEventListener('click', function() {
+        //     let newText = '새로운 텍스트'; // 수정할 텍스트 입력
+        //     document.querySelector('.testChildDiv').textContent = newText;
+        // });
+        //
+        // // 세 번째 버튼 클릭 시 testChildDiv 삭제
+        // document.querySelector('.testChild button:nth-child(3)').addEventListener('click', function() {
+        //     let testChildDiv = document.querySelector('.testChildDiv');
+        //     // testChildDiv.parentNode.removeChild(testChildDiv);
+        //     testChildDiv.remove();
+        // });
+
+    }
+
+    // 수정 버튼 클릭 시 호출되는 함수
+    function editText(index) {
+        // var input = prompt('수정할 텍스트를 입력하세요.'); // 사용자로부터 수정할 텍스트 입력 받음
+        //
+        // if (input !== null) { // 입력 값이 null이 아닐 경우
+        //     var inDiv = document.getElementById('in' + index); // 수정할 div 요소 선택
+        //     inDiv.textContent = input; // 텍스트 수정
+        // }
+
+        var inDiv = document.getElementById('in' + index); // 수정할 div 요소 선택
+        var input = document.createElement('input'); // input 태그 생성
+        input.type = 'text'; // input 태그의 type을 text로 설정
+        input.value = inDiv.textContent; // 수정할 텍스트를 input 태그의 값으로 설정
+        input.addEventListener('blur', function() {
+            // input 태그가 focus를 잃었을 때(포커스가 해제되었을 때) 호출되는 이벤트 리스너
+            inDiv.textContent = input.value; // input 태그의 값으로 텍스트 수정
+            input.parentNode.removeChild(input); // input 태그 삭제
+        });
+    }
+
+    // 삭제 버튼 클릭 시 호출되는 함수
+    function deleteDiv(index) {
+        var outDiv = document.getElementById('out' + index); // 삭제할 div 요소 선택
+        outDiv.parentNode.removeChild(outDiv); // 부모 노드로부터 div 요소 삭제
     }
 
     function closePage() {
@@ -223,3 +306,26 @@
 
 
 
+<style>
+    .testChild {
+        margin-top: 10px; /* 상단 마진 설정 */
+        padding: 10px; /* 패딩 설정 */
+        background-color: #f0f0f0; /* 배경색 설정 */
+        border: 1px solid #ccc; /* 테두리 설정 */
+        border-radius: 5px; /* 둥근 테두리 설정 */
+        display: flex; /* 내부 요소를 가로로 배치 */
+        align-items: center; /* 내부 요소를 수직 가운데 정렬 */
+    }
+
+    .testChild .testadd {
+        margin-left: auto; /* 오른쪽 여백 설정 */
+    }
+
+    .testChild button {
+        margin-right: 5px; /* 버튼 간의 오른쪽 여백 설정 */
+    }
+
+    .testChild i {
+        margin-right: 5px; /* 아이콘 간의 오른쪽 여백 설정 */
+    }
+</style>
