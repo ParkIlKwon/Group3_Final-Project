@@ -128,6 +128,35 @@ section{
 
 #autoMaker {margin-top:40px;}
 
+/* aside 스크롤바 숨김 */
 #sidenav-main::-webkit-scrollbar {
     display: none;
+}
+
+.out-receiver-address {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-indent: 1em;
+    font-size: small;
+    border-radius: 10px;
+    background-color: aliceblue;
+}
+
+.mail-address-edit-button {
+    background-color: aliceblue;
+    border: none;
+}
+
+.mail-address-delete-button {
+    background-color: aliceblue;
+    border: none;
+}
+
+.mail-address-edit-input {
+    background-color: aliceblue;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    text-indent: 1em;
 }
