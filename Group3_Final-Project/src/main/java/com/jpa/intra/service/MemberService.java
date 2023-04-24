@@ -4,7 +4,6 @@ import com.jpa.intra.domain.Member;
 import com.jpa.intra.domain.Team;
 import com.jpa.intra.repository.Member_Repository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -69,4 +68,6 @@ public class MemberService {
     public Member findByMemName(String memName) {
         return aMemberRepository.findByMemName(memName);
     }
+
+
 }
