@@ -119,7 +119,7 @@
                 list.add(member.getTeam().getTeam_name());
                 list.add(member.getEmp_type());
                 list.add(String.valueOf(member.getId()));
-//                list.add(member.getMem_id());
+
                 list.add(member.getInline_tel());
                 list.add(member.getOutline_tel());
                 list.add(member.getEmail());
