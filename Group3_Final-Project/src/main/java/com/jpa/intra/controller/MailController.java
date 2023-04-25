@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,24 +55,23 @@ public class MailController {
 
     private final MailSendService mailSendService;
     @PostMapping("/mailForm")
-    public String SendMail(MailDTO m, HttpServletRequest request, @RequestParam("testValue")String[] values, Model model){
+    public String SendMail(MailDTO m, HttpServletRequest request, @RequestParam("receiverList")String[] values, @RequestParam("teamList")String[] team, Model model){
         Map<String,String> allMailAddress = new HashMap<>(mailService.getAllMailAddress());
         model.addAttribute("allMailAddress",allMailAddress);
         HttpSession session = request.getSession();
+        String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
 //        String newBody = m.getBody().replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
         //텍스트 에어리어는 화딱지 나게 태그를 따로 제거해줘야함.
         for (String value : values) {
 
-
-            String newBody = m.getBody();
-            LocalDateTime now = LocalDateTime.now();
+//            String newBody = m.getBody();
+//            LocalDateTime now = LocalDateTime.now();
 
             Mail resMail = new Mail();
             resMail.setTitle(m.getTitle()); //제목
-            resMail.setBody(newBody); //내용
+            resMail.setBody(m.getBody()); //내용
 //        resMail.setSendDate(now.toString()); //현재 날짜 (2023-04-11T12:22:08.845386100)
-            String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
             resMail.setSendDate(formatDate);
             resMail.setView(0); //열람여부 0 -> false , 1 -> true
 
@@ -87,6 +87,35 @@ public class MailController {
             //상황에 맡게 DTO로 가공한 메일 객체를 재 삽입.
             mailSendService.sendMail(resMail);
 
+        }
+
+        for(String teamName : team){
+            List<String> teamMailList = new ArrayList<>();
+            if(teamName.substring(1) != null) {
+                teamMailList = mailService.getTeamMailAddress(teamName.substring(1));
+
+                for (String s : teamMailList) {
+                    Mail resMail = new Mail();
+                    resMail.setTitle(m.getTitle()); //제목
+                    resMail.setBody(m.getBody()); //내용
+//        resMail.setSendDate(now.toString()); //현재 날짜 (2023-04-11T12:22:08.845386100)
+                    resMail.setSendDate(formatDate);
+                    resMail.setView(0); //열람여부 0 -> false , 1 -> true
+
+                    resMail.setSender((String) session.getAttribute("log")); //보내는 사람 id (현재 로그인된 사람 불러옴)
+                    //String type to Object
+                    // 로그인 멤버 : 세션 user 참조
+                    Member member = (Member) session.getAttribute("user");
+                    resMail.setSender_name(member.getMem_name()); // 보내는사람 이름
+                    resMail.setSender_email(member.getEmail()); // 보내는사람 이메일
+//            resMail.setReceiver(m.getReceiver()); //받는사람 이메일
+                    resMail.setReceiver(s);
+
+                    //상황에 맡게 DTO로 가공한 메일 객체를 재 삽입.
+                    mailSendService.sendMail(resMail);
+
+                }
+            }
         }
 //        return "redirect:/mail/mailForm";
             return "mail/mailForm";
