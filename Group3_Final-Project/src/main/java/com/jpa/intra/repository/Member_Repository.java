@@ -1,7 +1,6 @@
 package com.jpa.intra.repository;
 
 import com.jpa.intra.domain.Member;
-import com.jpa.intra.domain.Team;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -136,4 +135,5 @@ public class Member_Repository {
         System.out.println(m.getMem_name());
         em.remove(m);
     }
+
 }

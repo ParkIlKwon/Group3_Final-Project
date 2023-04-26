@@ -5,7 +5,6 @@
 <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>-->
 <script src="/js/summernote/summernote-lite.js"></script>
 <script src="/js/summernote/lang/summernote-ko-KR.js"></script>
-<script src="mention.js" type="text/javascript"></script>
 <link href="/css/summernote/summernote-lite.css" rel="stylesheet">
 <body class="g-sidenav-show  bg-gray-100" onunload="closePage()">
 <!--   사이드 : aside -->
@@ -76,11 +75,25 @@
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <!--                        <h6 class="mb-0 text-sm">John Michael</h6>   &lt;!&ndash; 보낸 이  &ndash;&gt;-->
                                                     <!--                        <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>  &lt;!&ndash; 이메일 &ndash;&gt;-->
-                                                    <div>받는 이 <input class="mail-address form-control" name="receiver" style="width: 490% !important;"
-                                                                     required type="email" th:if="${reply != null}" th:value="${reply}">
-                                                        <input class="mail-address form-control" name="receiver" style="width: 490% !important;"
-                                                               required type="email" th:if="${reply == null}"></div>
 
+<!--                                                    <div>-->
+<!--                                                        <div><strong>test</strong></div>-->
+<!--                                                        <div>-->
+<!--                                                            <div>-->
+<!--                                                                <input placeholder="test"/>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+                                                    <div class="test" style="display: flex; flex-wrap: wrap">
+                                                    </div>
+                                                    <div>받는 이 <input class="mail-address form-control" name="receiver" style="width: 490% !important;"
+                                                                     type="email" th:if="${reply != null}" th:value="${reply}" list="all-mail-address">
+                                                        <input class="mail-address form-control" name="receiver" style="width: 490% !important;"
+                                                               type="email" th:if="${reply == null}" list="all-mail-address"></div>
+                                                        <datalist id="all-mail-address">
+                                                            <option th:each="address : ${allMailAddress}" th:value="${address.getKey()}" th:label="${address.getValue()}"></option>
+                                                        </datalist>
+                                                    <input type="hidden" name="testValue" id="testValue">
                                                     <div>제목 <input class="form-control" name="title" required style="width: 490% !important;"
                                                                    type="text"></div>
                                                 </div>
@@ -89,7 +102,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <textarea id="summernote" name="body"></textarea>
+                                            <textarea id="summernote" name="body" style="display: flex; flex-wrap: wrap"></textarea>
 
                                             <!--                                        메일 내용 -->
                                         </td>
@@ -185,14 +198,151 @@
         sendButton.addEventListener('click',()=>{
            window.opener.parent.location.reload();
         });
+
+        let inputValue = '';
+        document.querySelector('.mail-address').addEventListener('keydown', function(event) {
+
+    if (event.keyCode === 32 || event.keyCode === 13) { // Check for space (32) or enter (13) key
+
+        event.preventDefault(); // Prevent default behavior of space or enter key
+
+        inputValue = event.target.value.trim(); // Update the input value variable with the current input value
+        if (inputValue !== '') { // Check if input value is not empty
+            const testDiv = document.querySelector('.test'); // Get the div.test element
+            // const testChildDiv = document.createElement('div'); // Create a new div element for div.testChild
+            // testChildDiv.className = 'testChild'; // Set the class name of the new div element
+            // // testChildDiv.textContent = inputValue; // Set the text content of the new div element to the input value
+            //
+            // // Create div.testadd element
+            // const testAddDiv = document.createElement('div');
+            // testAddDiv.className = 'testadd';
+            //
+            // // Create three buttons
+            // for (let i = 1; i <= 3; i++) {
+            //     const button = document.createElement('button');
+            //     button.textContent = inputValue + i;
+            //     testAddDiv.appendChild(button);
+            // }
+            //
+            // // Append testAddDiv to testChildDiv
+            // testChildDiv.appendChild(testAddDiv);
+            //
+            // testDiv.appendChild(testChildDiv); // Append the new div element to div.test
+            // 새로운 div 요소 생성
+            var newDiv = document.createElement('div');
+            var index = testDiv.childElementCount + 1; // 현재 .test 요소의 자식 요소 개수 + 1을 인덱스로 사용
+            newDiv.id = 'out-' + index; // id 속성 설정
+            // newDiv.style.display='flex';
+            newDiv.className = 'out-receiver-address me-2 pe-2';
+            newDiv.innerHTML = '<div id="in-' + index + '" class="receiver-address">' + inputValue + '</div><button onclick="editText(' + index + ')" class="mail-address-edit-button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button><button onclick="deleteDiv(' + index + ')" class="mail-address-delete-button"><i class="fa fa-times" aria-hidden="true"></i></button>'; // 내용 설정
+            testDiv.appendChild(newDiv); // .test 요소에 새로운 div 요소 추가
+
+            event.target.value = ''; // Clear the input value
+        }
+    }
+});
+        // document.querySelector('.mail-address').addEventListener('input', function(event) {
+        //     inputValue = event.target.value; // Update the input value variable with the current input value
+        // });
+        //
+        // document.querySelector('.testChild button:nth-child(2)').addEventListener('click', function() {
+        //     let newText = '새로운 텍스트'; // 수정할 텍스트 입력
+        //     document.querySelector('.testChildDiv').textContent = newText;
+        // });
+        //
+        // // 세 번째 버튼 클릭 시 testChildDiv 삭제
+        // document.querySelector('.testChild button:nth-child(3)').addEventListener('click', function() {
+        //     let testChildDiv = document.querySelector('.testChildDiv');
+        //     // testChildDiv.parentNode.removeChild(testChildDiv);
+        //     testChildDiv.remove();
+        // });
+
+        document.getElementById("mailForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // 폼 제출 기본 동작 방지
+            let mailAddress = document.querySelector(".mail-address").value.trim();
+            let testValues = document.getElementsByClassName("receiver-address"); // 클래스명이 "test"인 요소들을 가져옴
+            let testValueArray = []; // 값을 저장할 배열
+
+
+            // email 입력값과 "test" 클래스를 가진 요소들의 값을 확인
+            if (mailAddress === "" && testValues.length === 0) {
+                // event.preventDefault(); // 폼 제출 기본 동작 방지
+                alert("이메일과 테스트 값은 필수 입력 항목입니다."); // 경고 메시지 표시
+                // if (emailValue === "") {
+                //     document.getElementById("emailField").focus(); // email 입력 필드에 포커스
+                // }
+                document.querySelector(".mail-address").focus();
+            } else {
+                if(mailAddress !== "") {
+                    testValueArray.push(mailAddress);
+                }
+                // document.getElementById("mailForm").submit();
+
+                // for (let i = 0; i < testValues.length; i++){
+                //     document.querySelector(".mail-address").value = '';
+                //     document.querySelector(".mail-address").value = testValues[i].value;
+                //     document.getElementById("mailForm").submit();
+                // }
+
+                    // 클래스명이 "test"인 요소들의 텍스트 값을 배열에 추가
+                for (let i = 0; i < testValues.length; i++) {
+                    testValueArray.push(testValues[i].textContent);
+                }
+                // for(let i=0; i<testValueArray.length; i++){
+                //     document.querySelector(".mail-address").value = "";
+                //     document.querySelector(".mail-address").value = testValueArray[i];
+                //     document.getElementById("mailForm").submit();
+                // }
+                // 폼 데이터에 값을 설정하고 폼 제출
+                document.getElementById("testValue").value = testValueArray.join(","); // 값을 쉼표로 구분하여 문자열로 설정
+                document.getElementById("mailForm").submit(); // 폼 제출
+
+                // window.close();
+            }
+        });
+
+    }
+
+    // 수정 버튼 클릭 시 호출되는 함수
+    function editText(index) {
+        // var input = prompt('수정할 텍스트를 입력하세요.'); // 사용자로부터 수정할 텍스트 입력 받음
+        //
+        // if (input !== null) { // 입력 값이 null이 아닐 경우
+        //     var inDiv = document.getElementById('in' + index); // 수정할 div 요소 선택
+        //     inDiv.textContent = input; // 텍스트 수정
+        // }
+        let outDiv = document.getElementById('out-' + index);
+        var inDiv = document.getElementById('in-' + index); // 수정할 div 요소 선택
+        var input = document.createElement('input'); // input 태그 생성
+        input.type = 'text'; // input 태그의 type을 text로 설정
+        input.value = inDiv.textContent; // 수정할 텍스트를 input 태그의 값으로 설정
+        input.className = "mail-address-edit-input";
+        outDiv.innerHTML='';
+        outDiv.append(input);
+        input.addEventListener('blur', function() {
+            // input 태그가 focus를 잃었을 때(포커스가 해제되었을 때) 호출되는 이벤트 리스너
+            // inDiv.textContent = input.value; // input 태그의 값으로 텍스트 수정
+            input.parentNode.removeChild(input); // input 태그 삭제
+            outDiv.innerHTML = '<div id="in-' + index + '" class="receiver-address">' + input.value + '</div><button onclick="editText(' + index + ')" class="mail-address-edit-button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button><button onclick="deleteDiv(' + index + ')" class="mail-address-delete-button"><i class="fa fa-times" aria-hidden="true"></i></button>';
+        });
+    }
+
+    // 삭제 버튼 클릭 시 호출되는 함수
+    function deleteDiv(index) {
+        var outDiv = document.getElementById('out-' + index); // 삭제할 div 요소 선택
+        outDiv.parentNode.removeChild(outDiv); // 부모 노드로부터 div 요소 삭제
     }
 
     function closePage() {
         window.opener.parent.location.reload();
     }
 
-
-
+    // window.onload = function () {
+    //     document.querySelector('.mail-address').addEventListener('keydown', () => {
+    //         alert('test');
+    //     });
+    //
+    // }
 </script>
 
 
@@ -206,3 +356,45 @@
 
 
 
+<!--<style>-->
+<!--    .testChild {-->
+<!--        margin-top: 10px; /* 상단 마진 설정 */-->
+<!--        padding: 10px; /* 패딩 설정 */-->
+<!--        background-color: #f0f0f0; /* 배경색 설정 */-->
+<!--        border: 1px solid #ccc; /* 테두리 설정 */-->
+<!--        border-radius: 5px; /* 둥근 테두리 설정 */-->
+<!--        display: flex; /* 내부 요소를 가로로 배치 */-->
+<!--        align-items: center; /* 내부 요소를 수직 가운데 정렬 */-->
+<!--    }-->
+
+<!--    .testChild .testadd {-->
+<!--        margin-left: auto; /* 오른쪽 여백 설정 */-->
+<!--    }-->
+
+<!--    .testChild button {-->
+<!--        margin-right: 5px; /* 버튼 간의 오른쪽 여백 설정 */-->
+<!--    }-->
+
+<!--    .testChild i {-->
+<!--        margin-right: 5px; /* 아이콘 간의 오른쪽 여백 설정 */-->
+<!--    }-->
+<!--</style>-->
+
+<style>
+    /* .test 요소의 스타일 */
+    .test {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    /* .test 요소의 자식 div 요소(.out)의 스타일 */
+    .out- {
+        display: flex;
+        margin: 5px;
+        padding: 10px;
+        border: 1px solid #000;
+    }
+    /* 수정/삭제 버튼의 스타일 */
+    .out button {
+        margin-top: 5px;
+    }
+</style>
