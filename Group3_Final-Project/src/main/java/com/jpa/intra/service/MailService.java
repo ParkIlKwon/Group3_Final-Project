@@ -18,10 +18,7 @@ import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -143,7 +140,16 @@ public class MailService{
         return mailAddress;
     }
 
-
+    public List<String> getTeamMailAddress(String teamName){
+        List<String> teamMailList = new ArrayList<>();
+        List<Member> memberList = member_repository.getAllMemberList();
+        for (Member member : memberList) {
+            if(member.getTeam().getTeam_name().equals(teamName)){
+                teamMailList.add(member.getEmail());
+            }
+        }
+        return teamMailList;
+    }
 
 
 
