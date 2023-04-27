@@ -133,6 +133,7 @@ section{
     display: none;
 }
 
+/* 메일 폼 메일 주소 입력 */
 .out-receiver-address {
     display: flex;
     justify-content: center;
@@ -155,6 +156,35 @@ section{
 
 .mail-address-edit-input {
     background-color: aliceblue;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    text-indent: 1em;
+}
+
+/* 메일 폼 팀 주소 입력 */
+.out-team-address {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-indent: 1em;
+    font-size: small;
+    border-radius: 10px;
+    background-color: cornsilk;
+}
+
+.team-address-edit-button {
+    background-color: cornsilk;
+    border: none;
+}
+
+.team-address-delete-button {
+    background-color: cornsilk;
+    border: none;
+}
+
+.team-address-edit-input {
+    background-color: cornsilk;
     border: none;
     outline: none;
     border-radius: 10px;
