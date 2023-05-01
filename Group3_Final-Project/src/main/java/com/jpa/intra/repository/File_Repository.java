@@ -47,21 +47,7 @@ public class File_Repository {
 
     }
 
-//    @Override
-//    public void delete(Long articleId) {
-//        em.createQuery("delete from Article a where a.id = :id")
-//                .setParameter("id", articleId)
-//                .executeUpdate();
-//        em.clear();
-//    }
 
-
-//
-//    public List<BoardTask> findBoardTaskById(String id){
-//        return em.createQuery("select t from BoardTask t where t.boardWriter = :id")
-//                .setParameter("id",id)
-//                .getResultList();
-//    }
 
 
 }
