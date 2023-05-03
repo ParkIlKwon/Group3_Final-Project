@@ -60,10 +60,7 @@
             m.setGender(getmember.getGender());
             m.setEmail(getmember.getMemail());
 
-
-
             Team t = tc.convert("1");
-
 
             fileService.uploadProfileImage(getmember.getProfileFile(),m);
 
@@ -197,7 +194,7 @@
         @ResponseBody
         public String findMemberPw(@RequestParam("memberId")String memberId, @RequestParam("email")String email){
             service.rePassword(memberId, email);
-            return "비밀번호가 초기화 됬습니다.";
+            return "비밀번호가 초기화됐습니다.";
         }
 
 

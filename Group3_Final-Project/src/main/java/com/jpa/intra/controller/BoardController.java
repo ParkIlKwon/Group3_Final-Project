@@ -377,12 +377,6 @@ public class BoardController {
             approvedMail.setSender_email(approver.getEmail());
             approvedMail.setReceiver(requestor.getEmail());
 
-            System.out.println(approvedMail.getBody());
-            System.out.println(approvedMail.getSender());
-            System.out.println(approvedMail.getSender_email());
-            System.out.println(approvedMail.getSender_name());
-            System.out.println(approvedMail.getReceiver());
-
             mailSendService.sendMail(approvedMail);
         }
         else if(boardApproval.getApprovalType().equals("OVERTIME")) {
@@ -405,7 +399,7 @@ public class BoardController {
 
             approvedMail.setTitle(requestor.getMem_name()+"님의 연장근무 신청 결재안이 승인되다.");
             approvedMail.setBody("안녕하세요 "+requestor.getMem_name()+"님,<br><br>인사 담당자 "+approver.getMem_name()+"입니다. 먼저, 귀하께서 요청하신 추가근무 신청에 대한 결재 결과를 안내드리게 되어 기쁩니다. <br>"+requestor.getMem_name()+"님이 요청하신 추가근무 신청 결재가 승인되었음을 알려드립니다.<br><br>요청하신 추가근무 기간은 "+startDate+"부터 "+endDate+"까지이며, 해당 기간동안, 퇴근 시간으로부터 "+endTime+"까지의 추가근무가 승인되었습니다. 승인에 따라, 추가근무 기간동안 귀하에게 "+bonusAllowance+"원의 추가수당이 매일 지급됨을 알려드립니다. <br><br>마지막으로, 추가 근무 기간 동안 성실히 업무를 수행해주시길 부탁드리며, 회사의 발전과 성장에 기여하는데 있어 더욱 중요한 역할을 담당하시리라 믿습니다. <br>귀하의 헌신적인 노력과 성실함에 대해 깊이 감사드리며, 앞으로도 지속적인 발전과 성공을 기원하겠습니다. 또한, 필요한 사항이 있으시면 언제든지 연락주시기 바랍니다. 감사합니다.<br><br>인사 담당자 "+approver.getMem_name()+" 드림");
-//            approvedMail.setBody("안녕하세요 ");
+
             approvedMail.setSendDate(formattedDate);
             approvedMail.setView(0);
             approvedMail.setSender(approver.getMem_id());

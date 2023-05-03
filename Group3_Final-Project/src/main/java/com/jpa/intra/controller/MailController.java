@@ -30,9 +30,9 @@ public class MailController {
 
     @GetMapping("/main")
     public String mailMain(Model model){
-//        List<Mail> mailList = new ArrayList<>();
-//        mailList = mailRepository.findAllMailList();
-//        model.addAttribute("mailList",mailList);
+//      List<Mail> mailList = new ArrayList<>();
+//      mailList = mailRepository.findAllMailList();
+//      model.addAttribute("mailList",mailList);
         model.addAttribute("page", "메일");
         List<Mail> mailList = mailService.findLogMailList();
         model.addAttribute("mailList",mailList);
@@ -41,12 +41,6 @@ public class MailController {
 
     @GetMapping("/mailForm")
     public String mailForm(Model model){
-
-//        List<Mail> mailList = new ArrayList<>();
-//        mailList = mailRepository.findAllMailList();
-//        System.out.println(mailList.size() +"사이즈");
-//        model.addAttribute("mailList",mailList);
-//        model.addAttribute("page", "메일");
 
         Map<String,String> allMailAddress = new HashMap<>(mailService.getAllMailAddress());
         model.addAttribute("allMailAddress",allMailAddress);
@@ -117,20 +111,10 @@ public class MailController {
                 }
             }
         }
-//        return "redirect:/mail/mailForm";
+
             return "mail/mailForm";
     }
 
-
-//    @GetMapping("/read/{id}")
-//    public String readMail(Model model, @PathVariable Long id){
-//        List<Mail> mailList = new ArrayList<>();
-//        mailList = mailRepository.findAllMailList();
-//        model.addAttribute("mailList",mailList);
-//        Mail mail = mailRepository.findById(id);
-//        model.addAttribute("mail",mail);
-//        return "mail/main";
-//    }
 
     @PostMapping("/read")
     @ResponseBody
