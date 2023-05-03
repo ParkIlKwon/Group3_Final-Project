@@ -33,6 +33,12 @@ public class FileService {
 
     private final File_Repository fileRepository;
 
+    public String fileToStringTest(File file){
+
+
+    }
+
+
     @Transactional
     public Long uploadFile(MultipartFile files, HttpServletRequest request) throws IOException {
         String fileDir = "C:\\Storage\\";
