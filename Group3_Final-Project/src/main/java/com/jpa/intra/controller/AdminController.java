@@ -75,10 +75,6 @@ public class AdminController {
     }
 
 
-
-
-
-
     @Autowired
     MailService registerMail;
     @PostMapping("/mailConfirm")
